@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageHighFunctioningIntervention from "@/assets/blog-high-functioning-alcoholic-intervention.jpg";
 import blogImageOverdoseSafetyPlan from "@/assets/blog-overdose-safety-plan-for-families.jpg";
 import blogImage72Hours from "@/assets/blog-72-hours-after-crisis.jpg";
 import blogImageSoberButStillMiserable from "@/assets/blog-sober-but-still-miserable-dry-drunk.jpg";
@@ -150,6 +151,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "high-functioning-alcoholic-intervention",
+    title: "The Intervention Nobody Thinks They Need: Getting Through to the High-Functioning Alcoholic",
+    date: "September 9, 2026",
+    image: blogImageHighFunctioningIntervention,
+    imageAlt: "A well-dressed man in his early forties standing in a dimly lit home wine cellar at night holding a glass of red wine, looking away with a weary expression",
+    excerpt: "A high-functioning alcoholic intervention is different. Interventionist Matt Brown explains why the job, the money, and the good manners make it harder — and how families break through.",
+    category: "Intervention"
+  },
   {
     id: "overdose-safety-plan-for-families",
     title: "Keeping Them Alive Long Enough to Get Well: The Overdose Safety Plan Every Family Needs",
