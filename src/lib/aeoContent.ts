@@ -1444,4 +1444,25 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "high-functioning-alcoholic-intervention": {
+    eyebrow: "Article answer",
+    title: "Can you do an intervention on a high-functioning alcoholic?",
+    answer:
+      "Yes \u2014 and it is often the most effective time to do one. A high-functioning alcoholic intervention is a structured, planned conversation for someone whose drinking is severe but whose job, income, and reputation are still intact. You are not fighting chaos; you are fighting competence, which is why it has to be planned rather than improvised.",
+    bullets: [
+      "Drop the word 'alcoholic' and describe specific behavior you witnessed, with dates \u2014 evidence beats labels.",
+      "Never compare them to worse drinkers; they will win that comparison and change the subject.",
+      "Solve every logistical objection in advance: coverage at work, the license, the carpool. Any hole becomes their exit.",
+    ],
+    nextSteps: [
+      "Start a written log of what you observe, with dates, so you cannot talk yourself out of it.",
+      "Stop covering with the office, the school, and the in-laws.",
+      "Talk to a professional interventionist before you talk to your loved one.",
+    ],
+    links: [
+      { label: "What to Expect When You Call an Interventionist", href: "/blog/what-to-expect-when-you-call-an-interventionist" },
+      { label: "How to Choose an Interventionist", href: "/blog/how-to-choose-an-interventionist" },
+      { label: "When Addiction Hides Behind a Functioning Life", href: "/blog/functional-addiction-hiding" },
+    ],
+  },
 };
