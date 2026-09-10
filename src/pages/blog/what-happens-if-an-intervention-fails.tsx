@@ -165,8 +165,8 @@ const WhatHappensIfAnInterventionFails = () => {
 
           <p>
             Dad holds the line. Mom holds it for six days. Then an 11 p.m. call comes, he sounds terrible, and she hears herself say, &ldquo;Just this once.&rdquo; I don&rsquo;t judge her &mdash; my own mother did it for me. But I want families to see it coming. These are some of the most common{" "}
-            <Link to="/blog/intervention-mistakes-families-make" className="text-primary hover:underline">
-              intervention mistakes families make
+            <Link to="/blog/when-someone-says-no-intervention" className="text-primary hover:underline">
+              patterns I see when someone says no
             </Link>
             .
           </p>

@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageInterventionFails from "@/assets/blog-what-happens-if-an-intervention-fails.jpg";
 import blogImageHighFunctioningIntervention from "@/assets/blog-high-functioning-alcoholic-intervention.jpg";
 import blogImageOverdoseSafetyPlan from "@/assets/blog-overdose-safety-plan-for-families.jpg";
 import blogImage72Hours from "@/assets/blog-72-hours-after-crisis.jpg";
@@ -151,6 +152,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "what-happens-if-an-intervention-fails",
+    title: "When They Say No: What Happens If an Intervention Fails",
+    date: "September 10, 2026",
+    image: blogImageInterventionFails,
+    imageAlt: "A man in his thirties walking away from a suburban living room toward a pickup truck at dusk, seen from behind through an open front door while two adults sit inside",
+    excerpt: "What happens if an intervention fails and your loved one says no? Matt Brown explains why a \u201cno\u201d is rarely the end \u2014 and what families do next.",
+    category: "Intervention"
+  },
   {
     id: "high-functioning-alcoholic-intervention",
     title: "The Intervention Nobody Thinks They Need: Getting Through to the High-Functioning Alcoholic",
