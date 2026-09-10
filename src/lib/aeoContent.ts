@@ -1465,4 +1465,25 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "When Addiction Hides Behind a Functioning Life", href: "/blog/functional-addiction-hiding" },
     ],
   },
+  "what-happens-if-an-intervention-fails": {
+    eyebrow: "Article answer",
+    title: "What happens if an intervention fails?",
+    answer:
+      "When someone refuses treatment at an intervention, the family moves to the second half of the plan: the boundaries agreed on beforehand. The intervention shifts from an invitation to a consequence, and treatment stays arranged and available. Many people who walk out accept help within days or weeks once the old rescues are gone.",
+    bullets: [
+      "A refusal is information, not a verdict \u2014 it means not yet.",
+      "The most common way an intervention truly fails is the family quietly returning to the old deal.",
+      "Keep contact open through one designated spokesperson while the rescues stay stopped.",
+    ],
+    nextSteps: [
+      "Hold every boundary the family agreed on, together and without lectures.",
+      "Keep the bed, the coverage, and the travel plan ready rather than dismantling them.",
+      "Keep meeting weekly as a family, with interventionist follow-up support.",
+    ],
+    links: [
+      { label: "What to Expect When You Call an Interventionist", href: "/blog/what-to-expect-when-you-call-an-interventionist" },
+      { label: "When Someone Says No to an Intervention", href: "/blog/when-someone-says-no-intervention" },
+      { label: "Enabling vs. Supporting", href: "/enabling-vs-support" },
+    ],
+  },
 };
