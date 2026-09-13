@@ -78,7 +78,7 @@ const Footer = () => {
             <div className="flex flex-wrap justify-center gap-3">
               <a
                 href={SITE_PHONE_HREF}
-                className="inline-flex items-center gap-2 rounded-full border border-burgundy bg-burgundy px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-burgundy/90"
+                className="inline-flex items-center gap-2 rounded-full border border-burgundy bg-[#982e4a] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#7e263d]"
               >
                 <Phone className="h-4 w-4" />
                 Call {SITE_PHONE_DISPLAY}

@@ -54,7 +54,7 @@ const SocialShareButtons = ({
   const iconSize = size === "sm" ? "w-4 h-4" : "w-5 h-5";
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-2 min-w-0 max-w-full ${className}`}>
       <span className="text-sm font-medium text-muted-foreground mr-2">Share:</span>
       
       <Button

@@ -73,6 +73,7 @@ const NewsletterSignup = ({
       <div className="flex flex-col sm:flex-row gap-2">
         <Input
           type="email"
+          aria-label="Email address"
           placeholder="Enter your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -87,12 +88,12 @@ const NewsletterSignup = ({
           {status === "loading" ? (
             <>
               <div className="w-4 h-4 border-2 border-current border-t-transparent animate-spin rounded-full" />
-              <span className="ml-2 hidden sm:inline">Subscribing...</span>
+              <span className="ml-2 inline">Subscribing...</span>
             </>
           ) : (
             <>
               <Mail className="w-4 h-4" />
-              <span className="ml-2 hidden sm:inline">Get Updates</span>
+              <span className="ml-2 inline">Get Updates</span>
             </>
           )}
         </Button>
@@ -139,7 +140,7 @@ const NewsletterSignup = ({
     <div className={`${className}`}>
       {(title || description) && (
         <div className="mb-3">
-          {title && <h4 className="font-medium text-foreground mb-1">{title}</h4>}
+          {title && <h2 className="font-medium text-foreground mb-1">{title}</h2>}
           {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
       )}

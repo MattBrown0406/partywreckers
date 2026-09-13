@@ -3,27 +3,7 @@ import Footer, { SocialLinks } from "@/components/Footer";
 import { Mic, Heart, Users, Clock } from "lucide-react";
 import mattHeadshot from "@/assets/matt-headshot.jpg";
 import SEOHead from "@/components/SEOHead";
-import { PersonJsonLd, BreadcrumbJsonLd, FAQJsonLd, WebPageJsonLd } from "@/components/JsonLd";
-
-// AEO-optimized FAQs about Matt Brown
-const hostFAQs = [
-  {
-    question: "Who is Matt Brown from The Party Wreckers Podcast?",
-    answer: "Matt Brown is a professional interventionist with over 20 years of experience helping families navigate addiction crises. He hosts The Party Wreckers Podcast, where he provides practical guidance on intervention, enabling vs. supporting, setting boundaries, and family recovery."
-  },
-  {
-    question: "What is Matt Brown's experience with addiction intervention?",
-    answer: "Matt Brown has more than 20 years of frontline experience working with addiction, recovery, and families. He has guided hundreds of families through substance use disorder crises, combining clinical expertise with compassion and real-world practicality."
-  },
-  {
-    question: "How can I book Matt Brown for an intervention consultation?",
-    answer: "You can book a coaching session with Matt Brown by contacting him directly at matt@partywreckers.com for media inquiries, speaking engagements, or consultation requests."
-  },
-  {
-    question: "What is Matt Brown's approach to addiction treatment?",
-    answer: "Matt approaches addiction as a medical disease that demands accountability, structure, and compassion. He recognizes that lasting recovery often includes a spiritual component defined by meaning, connection, and responsibility rather than rigid ideology."
-  }
-];
+import { PersonJsonLd, BreadcrumbJsonLd, WebPageJsonLd } from "@/components/JsonLd";
 
 const Host = () => {
   return (
@@ -42,7 +22,6 @@ const Host = () => {
         about={["Matt Brown", "Addiction Intervention", "Family Recovery", "Recovery Coaching"]}
       />
       
-      <FAQJsonLd faqs={hostFAQs} />
       <BreadcrumbJsonLd items={[
         { name: "Home", url: "/" },
         { name: "Meet the Host", url: "/host" }
@@ -81,7 +60,7 @@ const Host = () => {
                 <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-center md:items-start">
                   <div className="flex-shrink-0 mt-0 sm:mt-4 md:mt-12">
                     <img 
-                      src={mattHeadshot} 
+                      src={mattHeadshot} width={1280} height={1920}
                       alt="Matt - Host of The Party Wreckers Podcast" 
                       className="w-40 sm:w-48 md:w-64 rounded-xl object-cover shadow-lg"
                     />

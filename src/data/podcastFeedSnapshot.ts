@@ -7,6 +7,249 @@ export const podcastFeedSnapshot = {
   "image": "https://storage.buzzsprout.com/bs609jqq9aucxqvig2xvs5z2fc0a?.jpg",
   "episodes": [
     {
+      "id": "Buzzsprout-19668105",
+      "title": "The Trauma Underneath the Addiction: What PTSD Actually Does to the Body (And Why Time Doesn't Heal It)",
+      "description": "We want to hear from you! Send us a question or comment. The hardest part of PTSD isn’t always the memory. It’s the way the body keeps acting like the danger is still happening and how that constant alarm can quietly steer someone toward alcohol, pills, or anything that makes the noise stop. We take...",
+      "pubDate": "Tue, 18 Aug 2026 17:00:00 -0700",
+      "duration": 1600,
+      "episodeNumber": 86,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19668105-the-trauma-underneath-the-addiction-what-ptsd-actually-does-to-the-body-and-why-time-doesn-t-heal-it.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19668105/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19668105/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19668105/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19668105/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19611591",
+      "title": "Bipolar Disorder and Addiction: Why It Takes 10 Years to Get the Right Diagnosis (And What Families Pay in the Meantime)",
+      "description": "We want to hear from you! Send us a question or comment. The average person with bipolar disorder waits eight to ten years for a correct diagnosis. In that window, wrong medications get prescribed, addiction takes hold, and families watch someone cycle through states they can't explain — wondering w...",
+      "pubDate": "Thu, 06 Aug 2026 16:00:00 -0700",
+      "duration": 1926,
+      "episodeNumber": 85,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19611591-bipolar-disorder-and-addiction-why-it-takes-10-years-to-get-the-right-diagnosis-and-what-families-pay-in-the-meantime.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19611591/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19611591/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19611591/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19611591/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19572976",
+      "title": "Undiagnosed ADHD and Addiction: Why the Brain Finds Its Own Fix (And What Families Need to Know)",
+      "description": "We want to hear from you! Send us a question or comment. ADHD doesn’t always look like bouncing off the walls. Sometimes it looks like a smart adult who can’t follow through, melts down over “small” criticism, and keeps getting called lazy, careless, or selfish until they start believing it. We open...",
+      "pubDate": "Wed, 29 Jul 2026 16:00:00 -0700",
+      "duration": 1961,
+      "episodeNumber": 84,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19572976-undiagnosed-adhd-and-addiction-why-the-brain-finds-its-own-fix-and-what-families-need-to-know.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19572976/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19572976/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19572976/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19572976/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19523122",
+      "title": "Anxiety and Addiction: Why Your Loved One's Nervous System Is Running on Empty",
+      "description": "We want to hear from you! Send us a question or comment. Anxiety can be loud, but it can also be invisible. Sometimes it looks like a person who’s “fine,” holds a job, shows up for everyone else, and still feels like something terrible is about to happen every waking hour. That constant bracing is e...",
+      "pubDate": "Mon, 20 Jul 2026 18:00:00 -0700",
+      "duration": 1496,
+      "episodeNumber": 83,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19523122-anxiety-and-addiction-why-your-loved-one-s-nervous-system-is-running-on-empty.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19523122/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19523122/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19523122/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19523122/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19421782",
+      "title": "Depression and Addiction: What Families Get Wrong About Self-Medication (And the Fix That Isn't)",
+      "description": "We want to hear from you! Send us a question or comment. Depression isn't sadness — and if someone you love is struggling with both depression and addiction, understanding the difference could change everything about how you try to help them. In this episode of the Party Wreckers podcast, addiction ...",
+      "pubDate": "Mon, 29 Jun 2026 18:00:00 -0700",
+      "duration": 1136,
+      "episodeNumber": 82,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19421782-depression-and-addiction-what-families-get-wrong-about-self-medication-and-the-fix-that-isn-t.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19421782/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19421782/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19421782/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19421782/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19388402",
+      "title": "When the Whole Family Needs to Recover: The System | The Roles We Play Series Finale",
+      "description": "We want to hear from you! Send us a question or comment. The phone call we get all the time doesn’t come during relapse. It shows up weeks after sobriety, when someone in the family says, almost angrily, “They’ve changed.” That’s the moment nobody warns you about: the system can fight improvement be...",
+      "pubDate": "Mon, 22 Jun 2026 21:00:00 -0700",
+      "duration": 883,
+      "episodeNumber": 81,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19388402-when-the-whole-family-needs-to-recover-the-system-the-roles-we-play-series-finale.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19388402/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19388402/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19388402/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19388402/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19340126",
+      "title": "The Comedian: Why the 'Funny One' in Your Family Might Be Hiding the Most",
+      "description": "We want to hear from you! Send us a question or comment. The funniest person in the family is often the one keeping everyone afloat and paying for it in silence. We’re talking about the “comedian” role that shows up when addiction moves into the home: the person who can read a room, break tension on...",
+      "pubDate": "Mon, 15 Jun 2026 04:00:00 -0700",
+      "duration": 648,
+      "episodeNumber": 80,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19340126-the-comedian-why-the-funny-one-in-your-family-might-be-hiding-the-most.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19340126/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19340126/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19340126/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19340126/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19282009",
+      "title": "The Ghost In The Family",
+      "description": "We want to hear from you! Send us a question or comment. In every family touched by addiction, there is someone who goes quiet. Not the one causing chaos, not the one holding everything together — the one who simply... disappeared. They stopped asking for things. Stopped making noise. Found a way to...",
+      "pubDate": "Tue, 02 Jun 2026 09:00:00 -0700",
+      "duration": 757,
+      "episodeNumber": 79,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19282009-the-ghost-in-the-family.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19282009/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19282009/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19282009/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19282009/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
+      "id": "Buzzsprout-19213408",
+      "title": "The Canary in the Coal Mine: What Your Addicted Loved One Has Been Trying to Tell You",
+      "description": "We want to hear from you! Send us a question or comment. Every family dealing with addiction has one. The one everyone calls The Problem. The Black Sheep. The Scapegoat. The one whose name gets spoken carefully at family gatherings, the one people whisper about, the one who — if you're being honest ...",
+      "pubDate": "Mon, 25 May 2026 04:00:00 -0700",
+      "duration": 670,
+      "episodeNumber": 78,
+      "audioUrl": "https://www.buzzsprout.com/1941777/episodes/19213408-the-canary-in-the-coal-mine-what-your-addicted-loved-one-has-been-trying-to-tell-you.mp3",
+      "transcripts": [
+        {
+          "url": "https://www.buzzsprout.com/1941777/19213408/transcript",
+          "type": "text/html"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19213408/transcript.json",
+          "type": "application/json"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19213408/transcript.srt",
+          "type": "application/x-subrip"
+        },
+        {
+          "url": "https://www.buzzsprout.com/1941777/19213408/transcript.vtt",
+          "type": "text/vtt"
+        }
+      ]
+    },
+    {
       "id": "Buzzsprout-19193489",
       "title": "The Good One: Why the \"Easy\" Child in an Addicted Family Is Hurting Too",
       "description": "We want to hear from you! Send us a question or comment. Every family touched by addiction has one — the person nobody worries about. They get good grades, or hold down a steady job, or keep the house running. They don't cause problems. They don't ask for much. While everything else is falling apart...",

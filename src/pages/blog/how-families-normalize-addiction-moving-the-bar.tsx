@@ -163,7 +163,7 @@ const HowFamiliesNormalizeAddiction = () => {
 
           <p>
             The other thing that moves the bar is exhaustion. Holding a standard costs energy. Every time you enforce one, there's a fight, and the fight costs you three days. Eventually you stop enforcing not because you changed your mind but because you're tired. Dropped standards are usually just unfunded standards. This is also where{" "}
-            <Link to="/blog/helping-turns-harmful-enabling" className="text-primary hover:underline">
+            <Link to="/blog/helping-vs-enabling" className="text-primary hover:underline">
               enabling looks like love from the inside
             </Link>
             .
@@ -286,8 +286,8 @@ const HowFamiliesNormalizeAddiction = () => {
             <h3 className="text-xl font-bold mb-4">Related Articles</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/blog/helping-turns-harmful-enabling" className="text-primary hover:underline">
-                  When Helping Turns Harmful: How Enabling Develops Without Intent
+                <Link to="/blog/helping-vs-enabling" className="text-primary hover:underline">
+                  Helping vs. Enabling: The Fine Line Families Struggle to See
                 </Link>
               </li>
               <li>

@@ -1,3 +1,4 @@
+import mattHeadshot from "@/assets/matt-headshot.jpg";
 import { Helmet } from "react-helmet";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -88,7 +89,7 @@ export const PersonJsonLd = () => {
     "jobTitle": "Professional Interventionist",
     "description": "An experienced interventionist with over 20 years helping families navigate addiction and recovery.",
     "url": `${SITE_URL}/host`,
-    "image": `${SITE_URL}/assets/matt-headshot.jpg`,
+    "image": new URL(mattHeadshot, SITE_URL).href,
     "email": "matt@partywreckers.com",
     "knowsAbout": [
       "Addiction Intervention",
@@ -387,17 +388,9 @@ export const ExpertiseJsonLd = () => {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Matt Brown",
-    "hasCredential": [
-      {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "Professional Certification",
-        "name": "Certified Intervention Professional"
-      }
-    ],
     "hasOccupation": {
       "@type": "Occupation",
       "name": "Addiction Interventionist",
-      "occupationalCategory": "21-1011.00",
       "description": "Professional interventionist specializing in helping families navigate addiction crises"
     }
   };

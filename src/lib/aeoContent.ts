@@ -849,7 +849,7 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       "If you're the family member, watch the pattern under inconvenience — that's where the truth lives.",
     ],
     links: [
-      { label: "Making Amends in Recovery", href: "/blog/making-amends-recovery" },
+      { label: "Making Amends in Recovery", href: "/blog/making-amends-in-recovery" },
       { label: "Rebuilding Trust in Recovery: Families", href: "/blog/rebuilding-trust-in-recovery-families" },
       { label: "Why Apologies Don't Equal Change", href: "/blog/apologies-dont-equal-change" },
     ],
@@ -933,7 +933,7 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       "Say one true sentence out loud — to them, or to someone safe.",
     ],
     links: [
-      { label: "Stop Waiting for Rock Bottom", href: "/blog/stop-waiting-rock-bottom" },
+      { label: "Stop Waiting for Rock Bottom", href: "/blog/stop-waiting-for-rock-bottom" },
       { label: "What Families Can Do Right Now", href: "/blog/families-can-do-right-now" },
       { label: "When to Consider an Intervention", href: "/blog/when-to-consider-intervention" },
     ],
@@ -1103,7 +1103,7 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       "Pick one small standard and fund it, knowing it may cost a fight.",
     ],
     links: [
-      { label: "When Helping Turns Harmful: How Enabling Develops", href: "/blog/helping-turns-harmful-enabling" },
+      { label: "Helping vs. Enabling: The Fine Line Families Struggle to See", href: "/blog/helping-vs-enabling" },
       { label: "Enabling vs. Supporting: Where the Line Is", href: "/blog/enabling-vs-supporting-boundaries" },
       { label: "What to Expect When You Call an Interventionist", href: "/blog/what-to-expect-when-you-call-an-interventionist" },
     ],
@@ -1250,7 +1250,7 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       "Get outside support — Al-Anon for family, a sponsor or counselor for the person in recovery.",
     ],
     links: [
-      { label: "Living Amends: What Recovery Asks After Sorry", href: "/blog/living-amends-recovery" },
+      { label: "Living Amends: What Recovery Asks After Sorry", href: "/blog/living-amends-what-recovery-asks-after-sorry" },
       { label: "Coming Home From Rehab", href: "/blog/coming-home-from-rehab-what-families-arent-prepared-for" },
       { label: "They Got Sober. So Why Are You Still Angry?", href: "/blog/still-angry-after-loved-one-gets-sober" },
     ],

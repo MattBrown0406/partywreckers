@@ -83,7 +83,7 @@ const BlogCarousel = () => {
             {selectedArticle.title}
           </h3>
           <p className="pointer-events-auto mt-2 text-sm font-medium text-primary">
-            <Link to={`/blog/${selectedArticle.id}`} className="hover:underline">
+            <Link to={`/blog/${selectedArticle.id}`} className="inline-flex min-h-6 items-center hover:underline">
               Read the full article
             </Link>
           </p>
@@ -112,7 +112,7 @@ const BlogCarousel = () => {
               <button
                 key={article.id}
                 onClick={() => emblaApi?.scrollTo(index)}
-                className={`h-2 w-2 rounded-full transition-colors ${
+                className={`h-6 w-6 rounded-full border-8 border-background transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary ${
                   index === selectedIndex ? "bg-white" : "bg-white/40"
                 }`}
                 aria-label={`Go to article ${index + 1}`}

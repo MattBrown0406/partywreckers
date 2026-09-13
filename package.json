@@ -7,8 +7,10 @@
     "dev": "vite",
     "podcast:generate": "node scripts/generate-podcast-snapshot.mjs",
     "seo:generate": "node scripts/generate-seo-artifacts.mjs",
-    "build": "npm run seo:generate && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
-    "build:dev": "npm run seo:generate && vite build --mode development && vite build --mode development --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "seo:validate": "node scripts/validate-seo.mjs",
+    "test:podcast": "node scripts/test-podcast-snapshot.mjs",
+    "build": "npm run podcast:generate && npm run seo:generate && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && npm run seo:validate",
+    "build:dev": "npm run seo:generate && vite build --mode development && vite build --mode development --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && npm run seo:validate",
     "lint": "eslint .",
     "preview": "vite preview"
   },

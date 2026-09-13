@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CalendarCheck, Headphones, Mail, Mic2, Phone, Play, ShieldAlert } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "@/assets/party-wreckers-logo-2026.png";
+import logoSmall from "@/assets/party-wreckers-logo-512.webp";
+import logo from "@/assets/party-wreckers-logo-2026.webp";
 import soberHelplineLogo from "@/assets/sober-helpline-logo.png";
 import ThemePlayer from "@/components/ThemePlayer";
 import TrackedExternalLink from "@/components/TrackedExternalLink";
@@ -36,7 +37,7 @@ const HeroSection = () => {
               ctaLabel="Hero Sober Helpline banner"
               className="inline-flex items-center gap-3 rounded-full border border-slate-400/30 bg-slate-900/50 px-4 py-2 text-sm font-semibold text-slate-100 transition-colors hover:border-slate-300 hover:bg-slate-800/60"
             >
-              <img src={soberHelplineLogo} alt="Sober Helpline logo" className="h-7 w-7 rounded-sm" />
+              <img src={soberHelplineLogo} width={28} height={28} alt="Sober Helpline logo" className="h-7 w-7 rounded-sm" />
               Free Monday Family Squares support
             </TrackedExternalLink>
             <div className="flex flex-wrap items-center justify-center gap-2 text-xs uppercase text-white/65">
@@ -55,7 +56,7 @@ const HeroSection = () => {
 
               <h1 className="sr-only">The Party Wreckers Podcast - Addiction, Intervention & Recovery</h1>
               <img
-                src={logo}
+                src={logo} width={1024} height={1024} srcSet={`${logoSmall} 512w, ${logo} 1024w`} sizes="(max-width: 540px) calc(100vw - 32px), 496px" {...{ fetchpriority: "high" }}
                 alt="The Party Wreckers Podcast logo featuring bold typography"
                 className="mx-auto h-auto w-full max-w-[31rem] lg:mx-0"
               />

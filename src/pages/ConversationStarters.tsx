@@ -39,7 +39,7 @@ const ConversationStarters = () => {
       <main className="min-h-screen bg-background pt-20 sm:pt-24 print:pt-0">
         {/* Print-only header */}
         <div className="hidden print:block print:mb-8">
-          <h1 className="text-3xl font-bold text-center mb-2">Conversation Starters for Families</h1>
+          <h2 className="text-3xl font-bold text-center mb-2">Conversation Starters for Families</h2>
           <p className="text-center text-sm text-gray-600">The Party Wreckers Podcast • Family Resources</p>
         </div>
 

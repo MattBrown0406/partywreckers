@@ -132,7 +132,7 @@ const HopeIsAVerb = () => {
 
           <p>
             Here's the trap. Families tell themselves they're not sure it's "bad enough" to act. So they wait for a bigger sign — a DUI, a hospital visit, a job lost. But{" "}
-            <Link to="/blog/stop-waiting-rock-bottom" className="text-primary hover:underline">
+            <Link to="/blog/stop-waiting-for-rock-bottom" className="text-primary hover:underline">
               stop waiting for rock bottom
             </Link>
             : waiting for catastrophe isn't a plan. It's a gamble where your loved one is the chip on the table. Learning how to help a family member with addiction starts with accepting that you can move while things are still ambiguous.
@@ -246,7 +246,7 @@ const HopeIsAVerb = () => {
             <h3 className="text-xl font-bold mb-4">Related Articles</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/blog/stop-waiting-rock-bottom" className="text-primary hover:underline">
+                <Link to="/blog/stop-waiting-for-rock-bottom" className="text-primary hover:underline">
                   Stop Waiting for Rock Bottom
                 </Link>
               </li>

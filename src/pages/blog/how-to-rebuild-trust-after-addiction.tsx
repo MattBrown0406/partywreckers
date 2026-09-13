@@ -180,7 +180,7 @@ const RebuildTrustAfterAddiction = () => {
 
           <p>
             If you're stuck in that earlier chapter — the one where sobriety hasn't started yet and the lies are still coming — trust isn't the conversation to have. Getting help is. See{" "}
-            <Link to="/blog/living-amends-recovery" className="text-primary hover:underline">
+            <Link to="/blog/living-amends-what-recovery-asks-after-sorry" className="text-primary hover:underline">
               living amends
             </Link>{" "}
             for what recovery asks after sorry, or{" "}
@@ -226,7 +226,7 @@ const RebuildTrustAfterAddiction = () => {
             <h3 className="text-xl font-bold mb-4">Related Articles</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/blog/living-amends-recovery" className="text-primary hover:underline">
+                <Link to="/blog/living-amends-what-recovery-asks-after-sorry" className="text-primary hover:underline">
                   Living Amends: What Recovery Asks After Sorry
                 </Link>
               </li>

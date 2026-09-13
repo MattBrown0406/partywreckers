@@ -54,22 +54,22 @@ const HelpNow = () => {
                 If your home feels hijacked by addiction, this is the fastest path to something useful. Do not solve everything tonight. Just take the next clear step.
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
-                <Button size="xl" variant="hero" asChild>
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" size="xl" variant="hero" asChild>
                   <a href={SITE_PHONE_HREF}>
                     <Phone className="w-5 h-5" />
                     Call {SITE_PHONE_DISPLAY}
                   </a>
                 </Button>
-                <Button size="xl" variant="heroOutline" asChild>
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" size="xl" variant="heroOutline" asChild>
                   <TrackedExternalLink href={funnelLinks.familySquares} target="_blank" rel="noopener noreferrer" eventName="family_squares_click" ctaLabel="Help Now hero Family Squares">
                     <CalendarCheck className="w-5 h-5" />
                     Join the Free Family Squares Meeting
                   </TrackedExternalLink>
                 </Button>
-                <Button size="xl" variant="heroOutline" asChild>
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" size="xl" variant="heroOutline" asChild>
                   <TrackedExternalLink href={funnelLinks.freedomContact} target="_blank" rel="noopener noreferrer" eventName="get_answers_now_click" ctaLabel="Help Now hero Get Answers Now">Can't Wait? Get Answers Now</TrackedExternalLink>
                 </Button>
-                <Button size="xl" variant="heroOutline" asChild>
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" size="xl" variant="heroOutline" asChild>
                   <TrackedExternalLink href={funnelLinks.freedomReadiness} target="_blank" rel="noopener noreferrer" eventName="intervention_readiness_click" ctaLabel="Help Now hero Intervention Readiness">Check Intervention Readiness</TrackedExternalLink>
                 </Button>
               </div>
@@ -94,7 +94,7 @@ const HelpNow = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">If you are confused, scared, or second-guessing everything, start with the core education page.</p>
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button className="h-auto min-h-11 w-full whitespace-normal py-3" variant="outline" asChild>
                     <Link to="/start-here">Go to Start Here</Link>
                   </Button>
                 </CardContent>
@@ -106,7 +106,7 @@ const HelpNow = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">If your family is stuck and needs direction, use the decision page built to sort the next move.</p>
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button className="h-auto min-h-11 w-full whitespace-normal py-3" variant="outline" asChild>
                     <Link to="/next-step">Go to Next Step</Link>
                   </Button>
                 </CardContent>
@@ -118,7 +118,7 @@ const HelpNow = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">If the situation is escalating, the family is divided, or the same cycle keeps repeating, skip the guessing.</p>
-                  <Button className="w-full" asChild>
+                  <Button className="h-auto min-h-11 w-full whitespace-normal py-3" asChild>
                     <TrackedExternalLink href={funnelLinks.freedomContact} target="_blank" rel="noopener noreferrer" eventName="get_answers_now_click" ctaLabel="Help Now card Get Answers Now">Get Answers Now</TrackedExternalLink>
                   </Button>
                 </CardContent>
@@ -136,10 +136,10 @@ const HelpNow = () => {
                 <li>Focus on safety, clarity, and what you can control.</li>
                 <li>Pick one path: join Family Squares, get direct guidance now, or check intervention readiness.</li>
               </ol>
-              <div className="flex flex-col sm:flex-row gap-3 mt-8">
-                <Button asChild><TrackedExternalLink href={funnelLinks.familySquares} target="_blank" rel="noopener noreferrer" eventName="family_squares_click" ctaLabel="Help Now 10-minute Family Squares">Join Family Squares</TrackedExternalLink></Button>
-                <Button variant="outline" asChild><TrackedExternalLink href={funnelLinks.freedomReadiness} target="_blank" rel="noopener noreferrer" eventName="intervention_readiness_click" ctaLabel="Help Now 10-minute Intervention Readiness">Check Intervention Readiness</TrackedExternalLink></Button>
-                <Button variant="outline" asChild><Link to="/family-resources">Use Family Resources</Link></Button>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-8">
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" asChild><TrackedExternalLink href={funnelLinks.familySquares} target="_blank" rel="noopener noreferrer" eventName="family_squares_click" ctaLabel="Help Now 10-minute Family Squares">Join Family Squares</TrackedExternalLink></Button>
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" variant="outline" asChild><TrackedExternalLink href={funnelLinks.freedomReadiness} target="_blank" rel="noopener noreferrer" eventName="intervention_readiness_click" ctaLabel="Help Now 10-minute Intervention Readiness">Check Intervention Readiness</TrackedExternalLink></Button>
+                <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" variant="outline" asChild><Link to="/family-resources">Use Family Resources</Link></Button>
               </div>
             </div>
           </div>

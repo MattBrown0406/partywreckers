@@ -36,7 +36,7 @@ const EpisodeStarterPath = ({ episodes, compact = false }: EpisodeStarterPathPro
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
                 {episode && (
                   <div className="mt-4 border-t border-border pt-4">
-                    <p className="text-sm font-semibold leading-snug text-burgundy">{episode.title}</p>
+                    <p className="text-sm font-semibold leading-snug text-foreground">{episode.title}</p>
                     <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">
                       {episode.episodeNumber > 0 && <span>EP {episode.episodeNumber}</span>}
                       <span className="inline-flex items-center gap-1">

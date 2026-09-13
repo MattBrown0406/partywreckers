@@ -1,3 +1,8 @@
+import { podcastFeedSnapshot } from "@/data/podcastFeedSnapshot";
+
+const episodeCount = new Set(podcastFeedSnapshot.episodes.map((episode) => episode.id)).size;
+const latestRelease = new Date(podcastFeedSnapshot.episodes[0].pubDate).toISOString().slice(0, 10);
+
 export const advertiserFit = [
   "Ethical treatment providers",
   "Family support services",
@@ -48,8 +53,8 @@ export const sponsorPackages = [
 
 export const proofPoints = [
   {
-    label: "74 podcast episodes",
-    body: "A growing library of recovery, family, addiction, and intervention conversations with evergreen context.",
+    label: `${episodeCount} podcast episodes`,
+    body: `Feed library counted by unique episode ID; latest release ${latestRelease}. Episode numbering is not the library count.`,
   },
   {
     label: "High-intent audience",

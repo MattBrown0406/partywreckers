@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { writeFile, rename } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const RSS_URL = "https://feeds.buzzsprout.com/1941777.rss";
@@ -54,7 +54,8 @@ const parseTranscripts = (xml) => {
     .filter((transcript) => transcript.url);
 };
 
-const response = await fetch(RSS_URL);
+// Failure aborts publication and leaves the checked-in last valid snapshot intact.
+const response = await fetch(RSS_URL, { signal: AbortSignal.timeout(20000) });
 
 if (!response.ok) {
   throw new Error(`Buzzsprout RSS returned ${response.status}`);
@@ -90,10 +91,20 @@ const podcastInfo = {
   }),
 };
 
+if (!podcastInfo.episodes.length) throw new Error("Empty RSS: refusing to overwrite snapshot");
+const unique = new Map();
+for (const episode of podcastInfo.episodes) {
+  if (!episode.id || episode.id.startsWith("episode-") || !episode.title || !Number.isFinite(Date.parse(episode.pubDate)) || Date.parse(episode.pubDate) > Date.now() || !/^https:\/\//.test(episode.audioUrl)) {
+    throw new Error("Invalid RSS episode: refusing to overwrite snapshot");
+  }
+  if (!unique.has(episode.id)) unique.set(episode.id, episode);
+}
+podcastInfo.episodes = [...unique.values()].sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate) || a.id.localeCompare(b.id));
 const file = `import type { PodcastInfo } from "@/hooks/usePodcastFeed";
 
 export const podcastFeedSnapshot = ${JSON.stringify(podcastInfo, null, 2)} satisfies PodcastInfo;
 `;
 
-await writeFile(OUTPUT_PATH, file, "utf8");
+await writeFile(`${OUTPUT_PATH}.tmp`, file, "utf8");
+await rename(`${OUTPUT_PATH}.tmp`, OUTPUT_PATH);
 console.log(`Generated ${podcastInfo.episodes.length} podcast episodes at ${OUTPUT_PATH}`);

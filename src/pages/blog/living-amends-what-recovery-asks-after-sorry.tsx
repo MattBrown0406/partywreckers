@@ -136,7 +136,7 @@ const LivingAmendsRecovery = () => {
 
           <p>
             Step Nine in the recovery world talks about{" "}
-            <Link to="/blog/making-amends-recovery" className="text-primary hover:underline">
+            <Link to="/blog/making-amends-in-recovery" className="text-primary hover:underline">
               making amends
             </Link>{" "}
             "wherever possible," but it doesn't say the work ends with the conversation. For a lot of harm — broken trust, missed years, money lost, promises broken — there's no single sentence that repairs it. The repair happens in pattern, not in speech.
@@ -250,7 +250,7 @@ const LivingAmendsRecovery = () => {
             <h3 className="text-xl font-bold mb-4">Related Articles</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/blog/making-amends-recovery" className="text-primary hover:underline">
+                <Link to="/blog/making-amends-in-recovery" className="text-primary hover:underline">
                   Making Amends in Recovery
                 </Link>
               </li>

@@ -14,7 +14,7 @@ const template = fs
   .readFileSync(indexHtmlPath, "utf8")
   .replace(/\s*<title>.*?<\/title>/s, "");
 
-for (const route of routes) {
+for (const route of [...routes, "/funnel-report", "/404"]) {
   const { appHtml, headTags, htmlAttributes, bodyAttributes } = render(route);
   const html = template
     .replace("<html lang=\"en\">", `<html lang="en"${htmlAttributes ? ` ${htmlAttributes}` : ""}>`)
@@ -25,6 +25,7 @@ for (const route of routes) {
   const outputDir = route === "/" ? distDir : path.join(distDir, route.slice(1));
   fs.mkdirSync(outputDir, { recursive: true });
   fs.writeFileSync(path.join(outputDir, "index.html"), html);
+  if (route !== "/") fs.writeFileSync(path.join(distDir, `${route.slice(1)}.html`), html);
 }
 
 console.log(`Prerendered ${routes.length} routes.`);

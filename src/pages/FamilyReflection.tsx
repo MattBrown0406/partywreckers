@@ -171,7 +171,7 @@ const FamilyReflection = () => {
 
         {/* Print Header */}
         <div className="hidden print:block p-8 text-center border-b">
-          <h1 className="text-3xl font-bold mb-2">"What Have We Tried Already?"</h1>
+          <h2 className="text-3xl font-bold mb-2">"What Have We Tried Already?"</h2>
           <p className="text-lg">Family Reflection Guide — The Party Wreckers Podcast</p>
         </div>
 

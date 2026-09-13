@@ -48,7 +48,7 @@ const CTASection = () => {
 
           <div className="mt-8 rounded-lg border border-burgundy/30 bg-burgundy/5 p-5 text-center sm:flex sm:items-center sm:justify-between sm:text-left">
             <div>
-              <p className="text-sm font-semibold uppercase text-burgundy">Talk to someone now</p>
+              <p className="text-sm font-semibold uppercase text-foreground">Talk to someone now</p>
               <p className="mt-1 text-base text-foreground">Call the Party Wreckers helpline — a real human, not a menu.</p>
             </div>
             <Button variant="hero" size="xl" asChild className="mt-4 sm:mt-0">

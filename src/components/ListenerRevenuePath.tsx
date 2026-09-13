@@ -59,7 +59,7 @@ const ListenerRevenuePath = ({
             const Icon = step.icon;
 
             return (
-              <Card key={step.title} className="border-border bg-card/95">
+              <Card key={step.title} className="min-w-0 border-border bg-card/95">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-xl">
                     <Icon className="h-5 w-5 text-primary" />
@@ -68,7 +68,7 @@ const ListenerRevenuePath = ({
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-sm leading-relaxed text-muted-foreground">{step.body}</p>
-                  <Button className="w-full" asChild>
+                  <Button className="h-auto min-h-11 w-full whitespace-normal py-3 [&_svg]:shrink-0" asChild>
                     <TrackedExternalLink href={step.href} target="_blank" rel="noopener noreferrer" eventName={step.eventName} ctaLabel={`Listener revenue path ${step.cta}`}>
                       {step.cta}
                       <ArrowRight className="h-4 w-4" />

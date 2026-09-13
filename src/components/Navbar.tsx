@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logo from "@/assets/party-wreckers-logo-2026.png";
+import logo from "@/assets/party-wreckers-logo-512.webp";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
 
 const SpotifyIcon = () => (
@@ -91,7 +91,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src={logo} 
+              src={logo} width={512} height={512}
               alt="The Party Wreckers Podcast" 
               className="h-12 sm:h-14 w-auto"
             />

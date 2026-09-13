@@ -172,7 +172,7 @@ const FearInventory = () => {
 
         {/* Print Header */}
         <div className="hidden print:block p-8 text-center border-b">
-          <h1 className="text-3xl font-bold mb-2">"What Are We Afraid Will Happen?"</h1>
+          <h2 className="text-3xl font-bold mb-2">"What Are We Afraid Will Happen?"</h2>
           <p className="text-lg">Family Fear Inventory — The Party Wreckers Podcast</p>
         </div>
 
