@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageTeenAddictionFamily from "@/assets/blog-teen-addiction-whole-family.jpg";
 import blogImageInterventionFails from "@/assets/blog-what-happens-if-an-intervention-fails.jpg";
 import blogImageHighFunctioningIntervention from "@/assets/blog-high-functioning-alcoholic-intervention.jpg";
 import blogImageOverdoseSafetyPlan from "@/assets/blog-overdose-safety-plan-for-families.jpg";
@@ -152,6 +153,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "how-teen-addiction-affects-the-family",
+    title: "When the Addict Is Still a Kid: How Teen Addiction Affects the Whole Family",
+    date: "September 13, 2026",
+    image: blogImageTeenAddictionFamily,
+    imageAlt: "Two worried parents sitting apart at a kitchen table late at night with an empty chair between them",
+    excerpt: "How teen addiction affects the family: the fear, the fights between parents, the siblings who go quiet, and what to do when the person in trouble is still a kid.",
+    category: "Family Support"
+  },
   {
     id: "what-happens-if-an-intervention-fails",
     title: "When They Say No: What Happens If an Intervention Fails",

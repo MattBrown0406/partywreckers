@@ -1486,4 +1486,25 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Enabling vs. Supporting", href: "/enabling-vs-support" },
     ],
   },
+  "how-teen-addiction-affects-the-family": {
+    eyebrow: "Article answer",
+    title: "How does teen addiction affect the whole family?",
+    answer:
+      "Teen addiction reorganizes the entire household. Parents split into strict and lenient camps and start fighting each other, siblings go quiet and disappear from the center of the family, and shame keeps everyone from asking for help. Because parents stay legally responsible for a minor, they cannot detach \u2014 which makes early, unified action the most important move.",
+    bullets: [
+      "The most predictable effect is that the parents turn on each other instead of the addiction.",
+      "Siblings become invisible; the one who seems fine is usually the one to watch.",
+      "Shame, not lack of love, is what keeps families silent for years.",
+    ],
+    nextSteps: [
+      "Get an assessment from a clinician who specializes in adolescents.",
+      "Agree on one plan as parents before confronting the teen.",
+      "Protect regular, ordinary time with the other kids \u2014 especially in crisis weeks.",
+    ],
+    links: [
+      { label: "The Child Who Grew Up Too Fast", href: "/blog/parentified-child-addiction-family" },
+      { label: "What to Expect When You Call an Interventionist", href: "/blog/what-to-expect-when-you-call-an-interventionist" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
 };
