@@ -257,7 +257,7 @@ const TeenAddictionWholeFamily = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/blog/family-roles-in-addiction" className="text-primary hover:underline">
+                <Link to="/blog/family-roles-in-addiction-hero-scapegoat-lost-child" className="text-primary hover:underline">
                   The Roles Every Family Hands Out
                 </Link>
               </li>
