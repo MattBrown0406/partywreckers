@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageChildAddictionFault from "@/assets/blog-is-my-childs-addiction-my-fault.jpg";
 import blogImageTeenAddictionFamily from "@/assets/blog-teen-addiction-whole-family.jpg";
 import blogImageInterventionFails from "@/assets/blog-what-happens-if-an-intervention-fails.jpg";
 import blogImageHighFunctioningIntervention from "@/assets/blog-high-functioning-alcoholic-intervention.jpg";
@@ -153,6 +154,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "is-my-childs-addiction-my-fault",
+    title: "Is My Child's Addiction My Fault? What I Tell Every Parent Who Asks Me That",
+    date: "September 14, 2026",
+    image: blogImageChildAddictionFault,
+    imageAlt: "A mother in her sixties sitting alone on the edge of a bed at dawn, hands clasped, looking down in thought",
+    excerpt: "Is my child's addiction my fault? An interventionist with 23 years sober explains where parent guilt comes from, why it keeps families stuck, and what to do instead.",
+    category: "Family Support"
+  },
   {
     id: "how-teen-addiction-affects-the-family",
     title: "When the Addict Is Still a Kid: How Teen Addiction Affects the Whole Family",
