@@ -1507,4 +1507,25 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "is-my-childs-addiction-my-fault": {
+    eyebrow: "Article answer",
+    title: "Is my child's addiction my fault?",
+    answer:
+      "No. Addiction comes from a mix of genetics, brain chemistry, environment, timing, and choices that no single parent controls. Mistakes don't manufacture addiction. Parent guilt feels like accountability but works like anesthesia \u2014 it makes a parent easy to move, and it quietly removes the consequences that help a child get well.",
+    bullets: [
+      "Guilt usually comes from magnified mistakes, a need to feel in control, and an outdated culture of family blame.",
+      "You are responsible for your behavior from here forward, not for your child's disease.",
+      "Real amends are made once and clearly \u2014 not repeated monthly with money attached.",
+    ],
+    nextSteps: [
+      "Say the question out loud to one safe person who isn't your addicted child.",
+      "Write two lists: what you did, and what addiction did.",
+      "Keep boundaries in place even while apologizing for the past.",
+    ],
+    links: [
+      { label: "The Family Secret: How Addiction Teaches Everyone to Stop Talking", href: "/blog/family-secret-addiction-silence" },
+      { label: "What Making Amends in Recovery Actually Looks Like", href: "/blog/making-amends-in-recovery" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
 };
