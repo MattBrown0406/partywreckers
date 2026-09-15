@@ -156,6 +156,15 @@ export interface BlogArticle {
 
 export const blogArticles: BlogArticle[] = [
   {
+    id: "addiction-in-blended-families",
+    title: "\"Not My Kid, But My Problem\": How Addiction in Blended Families Splits the House",
+    date: "September 15, 2026",
+    image: blogImageBlendedFamilies,
+    imageAlt: "A stepfather standing in a kitchen doorway with arms crossed while his wife stands apart at the counter late at night",
+    excerpt: "Addiction in blended families hits stepparents, biological parents, and two households at once. Why it's harder, and the smallest agreement that closes the back door.",
+    category: "Family Support"
+  },
+  {
     id: "is-my-childs-addiction-my-fault",
     title: "Is My Child's Addiction My Fault? What I Tell Every Parent Who Asks Me That",
     date: "September 14, 2026",
