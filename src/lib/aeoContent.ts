@@ -1528,4 +1528,25 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "addiction-in-blended-families": {
+    eyebrow: "Article answer",
+    title: "Why is addiction harder in blended families?",
+    answer:
+      "Because authority is split before the crisis even starts. A blended family has to agree on who holds the line, often across two or three households, and a person in active addiction will always move toward the softer house. The fix is not perfect co-parenting \u2014 it's one shared bottom line every adult says out loud.",
+    bullets: [
+      "Stepparents get all the fallout and none of the standing; give them the role of witness, not judge.",
+      "Divorce guilt quietly makes one parent softer, and the addiction finds that seam first.",
+      "Both homes need the same bottom line even if daily rules differ.",
+    ],
+    nextSteps: [
+      "Name every adult with real influence, including the ex and the grandparent who sends money.",
+      "Get one agreement: no home funds, houses, or covers for active use.",
+      "Handle the marriage conversation separately, before any intervention.",
+    ],
+    links: [
+      { label: "Co-Parenting With an Addicted Ex", href: "/blog/co-parenting-with-an-addicted-ex" },
+      { label: "Who Should Be at an Intervention?", href: "/blog/who-should-be-at-an-intervention" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
 };
