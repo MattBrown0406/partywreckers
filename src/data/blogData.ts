@@ -157,6 +157,15 @@ export interface BlogArticle {
 
 export const blogArticles: BlogArticle[] = [
   {
+    id: "giving-money-to-an-addicted-loved-one",
+    title: "The Loan That Was Never a Loan: Why Families Keep Giving Money to an Addicted Loved One",
+    date: "September 17, 2026",
+    image: blogImageGivingMoney,
+    imageAlt: "A man in his fifties sitting alone at a kitchen table at night with a checkbook, an envelope, and his phone in front of him",
+    excerpt: "Giving money to an addicted loved one feels like help, but it funds the problem. Why families keep paying, what the money really buys, and how to stop.",
+    category: "Family Support"
+  },
+  {
     id: "addiction-in-blended-families",
     title: "\"Not My Kid, But My Problem\": How Addiction in Blended Families Splits the House",
     date: "September 15, 2026",
