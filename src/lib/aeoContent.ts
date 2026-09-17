@@ -1507,6 +1507,27 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "giving-money-to-an-addicted-loved-one": {
+    eyebrow: "Article answer",
+    title: "Should you give money to an addicted loved one?",
+    answer:
+      "No. Even when the cash goes to a legitimate bill, it frees up their own money for using and removes the consequences that push someone toward treatment. Families pay out of fear, not generosity, and calling it a \u201Cloan\u201D hides what's really happening. Stop funding the addiction while staying fully available to the recovery.",
+    bullets: [
+      "Requests arrive as late-night emergencies so the decision gets made in fear, not clarity.",
+      "Paying a real bill still subsidizes the addiction \u2014 it's math, not a character flaw.",
+      "Most families can't say how much they've given, and the total is usually shocking.",
+    ],
+    nextSteps: [
+      "Decide your policy before the phone rings, and write it down with your spouse.",
+      "No cash ever; pay a verified provider directly, only when tied to treatment.",
+      "Say it once: \u201CI love you, and I won't give you money. I will help you get help.\u201D",
+    ],
+    links: [
+      { label: "Enabling Addiction: How Families Unknowingly Fuel It", href: "/blog/enabling-addiction-families" },
+      { label: "Enabling vs. Supporting: Where the Boundary Goes", href: "/blog/enabling-vs-supporting-boundaries" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
   "is-my-childs-addiction-my-fault": {
     eyebrow: "Article answer",
     title: "Is my child's addiction my fault?",
