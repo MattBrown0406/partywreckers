@@ -1507,6 +1507,27 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "covering-for-an-addicted-loved-one": {
+    eyebrow: "Article answer",
+    title: "What does covering for an addicted loved one do?",
+    answer:
+      "Covering means absorbing or hiding the consequences of someone's drinking or drug use so other people don't see them \u2014 lying to employers, making excuses, paying fines, cleaning up evidence. The intent is protection, but the effect is insulation, and insulation is exactly what addiction needs to keep going. You stop by letting consequences land while staying emotionally present.",
+    bullets: [
+      "Families cover out of fear, shame by association, and hope that this time is the last time.",
+      "Absorbing consequences teaches the addicted person their behavior has no cost.",
+      "The secret reorganizes your life: monitoring who knows what, rehearsing explanations, dreading the phone.",
+    ],
+    nextSteps: [
+      "Stop making the calls \u2014 if they miss work, work finds out.",
+      "Tell the truth in plain, brief sentences to family and friends.",
+      "Say once what you won't do: \u201CI won't lie for you, but I'll help you get help.\u201D",
+    ],
+    links: [
+      { label: "Enabling Addiction: How Families Unknowingly Fuel It", href: "/blog/family-support-enabling" },
+      { label: "The Rescuer Trap", href: "/blog/rescuer-trap-enabling-addiction-families" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
   "giving-money-to-an-addicted-loved-one": {
     eyebrow: "Article answer",
     title: "Should you give money to an addicted loved one?",

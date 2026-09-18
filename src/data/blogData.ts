@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageCoveringForLovedOne from "@/assets/blog-covering-for-an-addicted-loved-one.jpg";
 import blogImageGivingMoney from "@/assets/blog-giving-money-to-an-addicted-loved-one.jpg";
 import blogImageBlendedFamilies from "@/assets/blog-addiction-in-blended-families.jpg";
 import blogImageChildAddictionFault from "@/assets/blog-is-my-childs-addiction-my-fault.jpg";
@@ -156,6 +157,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "covering-for-an-addicted-loved-one",
+    title: "The Lies We Tell for the People We Love: Why Covering for an Addicted Loved One Keeps Everyone Sick",
+    date: "September 18, 2026",
+    image: blogImageCoveringForLovedOne,
+    imageAlt: "A woman in her fifties standing alone in a dim hallway at night, phone to her ear, making a call for someone else",
+    excerpt: "Covering for an addicted loved one feels like loyalty, but it quietly keeps the addiction running. Why families lie for the person they love, and how to stop.",
+    category: "Family Support"
+  },
   {
     id: "giving-money-to-an-addicted-loved-one",
     title: "The Loan That Was Never a Loan: Why Families Keep Giving Money to an Addicted Loved One",
