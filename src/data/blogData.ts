@@ -1,6 +1,7 @@
 // Blog post data for routing and index page
 import blogImageCoveringForLovedOne from "@/assets/blog-covering-for-an-addicted-loved-one.jpg";
 import blogImageGivingMoney from "@/assets/blog-giving-money-to-an-addicted-loved-one.jpg";
+import blogImageMonitoringLovedOne from "@/assets/blog-monitoring-an-addicted-loved-one.jpg";
 import blogImageBlendedFamilies from "@/assets/blog-addiction-in-blended-families.jpg";
 import blogImageChildAddictionFault from "@/assets/blog-is-my-childs-addiction-my-fault.jpg";
 import blogImageTeenAddictionFamily from "@/assets/blog-teen-addiction-whole-family.jpg";
@@ -157,6 +158,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "monitoring-an-addicted-loved-one",
+    title: "Monitoring an Addicted Loved One: Why Counting Their Pills Is Costing You Your Life",
+    date: "September 19, 2026",
+    image: blogImageMonitoringLovedOne,
+    imageAlt: "A woman in her late fifties sitting alone on the edge of a bed at night holding a prescription bottle and her phone",
+    excerpt: "Counting pills, checking phones, searching rooms. Why monitoring an addicted loved one keeps families stuck, and what to do with that energy instead.",
+    category: "Family Support"
+  },
   {
     id: "covering-for-an-addicted-loved-one",
     title: "The Lies We Tell for the People We Love: Why Covering for an Addicted Loved One Keeps Everyone Sick",
