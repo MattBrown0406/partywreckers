@@ -1528,6 +1528,27 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "monitoring-an-addicted-loved-one": {
+    eyebrow: "Article answer",
+    title: "Does monitoring an addicted loved one work?",
+    answer:
+      "No. Counting pills, checking phones, and searching rooms almost never stops the using \u2014 it teaches the person to hide better and moves responsibility for the addiction onto the family. The only time to look is an immediate safety emergency. Otherwise, trade watching for planning: name your limits, learn your treatment options, and get your own life back.",
+    bullets: [
+      "Monitoring is fear management, not safety \u2014 it confirms what you already know.",
+      "Being watched gave me anger to drink at and let me stop feeling responsible.",
+      "Home drug testing is easy to beat and creates constant conflict.",
+    ],
+    nextSteps: [
+      "Tell them you've been checking and that you're stopping, out loud.",
+      "Replace \u201CDid they use today?\u201D with \u201CWhat is my plan?\u201D in writing.",
+      "Talk to a professional about treatment options before the next crisis.",
+    ],
+    links: [
+      { label: "The Family on Constant Alert", href: "/blog/family-constant-alert" },
+      { label: "Enabling vs. Supporting: Where the Boundary Goes", href: "/blog/enabling-vs-supporting-boundaries" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
   "giving-money-to-an-addicted-loved-one": {
     eyebrow: "Article answer",
     title: "Should you give money to an addicted loved one?",
