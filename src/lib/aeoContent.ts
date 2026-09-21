@@ -1528,6 +1528,27 @@ export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
       { label: "Family Addiction Help", href: "/family-addiction-help" },
     ],
   },
+  "first-year-of-sobriety-year-of-firsts": {
+    eyebrow: "Article answer",
+    title: "Why is the first year of sobriety so hard?",
+    answer:
+      "Because it is a year of firsts. First holiday, first wedding, first funeral, first empty Friday night \u2014 all done without the coping tool the person leaned on for years. It is not weakness, it is inexperience. Families help most by asking what would make each event easier, agreeing on an exit, and not turning the sober person into the main event.",
+    bullets: [
+      "The hardest firsts are tied to strong emotion \u2014 celebration and grief both.",
+      "Boredom has ended more sobriety than any wedding ever did.",
+      "A relapse at a first-year event is information, not the end of recovery.",
+    ],
+    nextSteps: [
+      "A week before the event, ask: what would make this easier for you?",
+      "Agree ahead of time that leaving early is allowed, with no explanation.",
+      "Hand them something sparkling before the toast so they are not caught out.",
+    ],
+    links: [
+      { label: "The First Year Nobody Warned Me About", href: "/blog/first-year-sobriety-what-to-expect" },
+      { label: "What to Do After a Relapse: The First 24 Hours", href: "/blog/what-to-do-after-a-relapse-first-24-hours" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
   "monitoring-an-addicted-loved-one": {
     eyebrow: "Article answer",
     title: "Does monitoring an addicted loved one work?",

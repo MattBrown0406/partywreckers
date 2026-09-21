@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageYearOfFirsts from "@/assets/blog-first-year-sobriety-year-of-firsts.jpg";
 import blogImageCoveringForLovedOne from "@/assets/blog-covering-for-an-addicted-loved-one.jpg";
 import blogImageGivingMoney from "@/assets/blog-giving-money-to-an-addicted-loved-one.jpg";
 import blogImageMonitoringLovedOne from "@/assets/blog-monitoring-an-addicted-loved-one.jpg";
@@ -158,6 +159,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "first-year-of-sobriety-year-of-firsts",
+    title: "The Year of Firsts: Getting Through the First Year of Sobriety One Awkward Event at a Time",
+    date: "September 21, 2026",
+    image: blogImageYearOfFirsts,
+    imageAlt: "A man in his early thirties standing at the edge of a wedding reception holding a glass of sparkling water while other guests raise a toast",
+    excerpt: "First holiday, first wedding, first funeral without a drink. Why the first year of sobriety is a year of firsts, and how families can help someone get through them.",
+    category: "Family Support"
+  },
   {
     id: "monitoring-an-addicted-loved-one",
     title: "Monitoring an Addicted Loved One: Why Counting Their Pills Is Costing You Your Life",
