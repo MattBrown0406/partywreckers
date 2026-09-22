@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageForgivingAddictRecovery from "@/assets/blog-forgiving-an-addict-in-recovery.jpg";
 import blogImageYearOfFirsts from "@/assets/blog-first-year-sobriety-year-of-firsts.jpg";
 import blogImageCoveringForLovedOne from "@/assets/blog-covering-for-an-addicted-loved-one.jpg";
 import blogImageGivingMoney from "@/assets/blog-giving-money-to-an-addicted-loved-one.jpg";
