@@ -1,4 +1,5 @@
 // Blog post data for routing and index page
+import blogImageForgivingAddictRecovery from "@/assets/blog-forgiving-an-addict-in-recovery.jpg";
 import blogImageYearOfFirsts from "@/assets/blog-first-year-sobriety-year-of-firsts.jpg";
 import blogImageCoveringForLovedOne from "@/assets/blog-covering-for-an-addicted-loved-one.jpg";
 import blogImageGivingMoney from "@/assets/blog-giving-money-to-an-addicted-loved-one.jpg";
@@ -159,6 +160,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "forgiving-an-addict-in-recovery",
+    title: "Do I Have to Forgive Them? The Truth About Forgiving an Addict in Recovery",
+    date: "September 22, 2026",
+    image: blogImageForgivingAddictRecovery,
+    imageAlt: "A woman and a man in their late forties sitting across a kitchen table in morning light having an honest conversation",
+    excerpt: "Your loved one got sober and everyone expects you to forgive them. What forgiving an addict in recovery really takes, and what it doesn't.",
+    category: "Family Support"
+  },
   {
     id: "first-year-of-sobriety-year-of-firsts",
     title: "The Year of Firsts: Getting Through the First Year of Sobriety One Awkward Event at a Time",

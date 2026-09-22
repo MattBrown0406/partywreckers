@@ -319,6 +319,27 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "forgiving-an-addict-in-recovery": {
+    eyebrow: "Article answer",
+    title: "Do you have to forgive an addict in recovery?",
+    answer:
+      "No. Forgiveness is not a reward owed to someone for getting sober, and a healthy recovery does not depend on it. Forgiveness happens inside you, on your timeline. It is not the same as trust, it is not forgetting, and it does not mean what happened was okay.",
+    bullets: [
+      "Trust is an earned track record; forgiveness is an internal release. Keep them separate.",
+      "\"I'm glad you're sober and I'm still hurt\" is a complete, fair sentence.",
+      "Forgiveness rushed under pressure is the forgiveness that turns to rage after a relapse.",
+    ],
+    nextSteps: [
+      "Name the specific injuries instead of the whole blur of years.",
+      "Get your own support: Al-Anon, a therapist, or a family coaching call.",
+      "Watch for six months of consistent behavior, not one heartfelt apology.",
+    ],
+    links: [
+      { label: "How to Rebuild Trust After Addiction", href: "/blog/how-to-rebuild-trust-after-addiction" },
+      { label: "What Making Amends in Recovery Actually Looks Like", href: "/blog/making-amends-in-recovery" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
   "overdose-safety-plan-for-families": {
     eyebrow: "Article answer",
     title: "What is an overdose safety plan for families?",
