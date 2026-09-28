@@ -1,3 +1,4 @@
+import blogImageCallAndSayNo from "@/assets/blog-you-can-call-and-still-say-no.jpg";
 // Blog post data for routing and index page
 import blogImageForgivingAddictRecovery from "@/assets/blog-forgiving-an-addict-in-recovery.jpg";
 import blogImageYearOfFirsts from "@/assets/blog-first-year-sobriety-year-of-firsts.jpg";
@@ -160,6 +161,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "you-can-call-and-still-say-no",
+    title: "You Can Call and Still Say No: Why Asking for Help Isn't a Commitment",
+    date: "September 27, 2026",
+    image: blogImageCallAndSayNo,
+    imageAlt: "A woman in her early fifties sitting alone at a kitchen table in morning light, holding a phone and hesitating before making a call",
+    excerpt: "Worried that calling an interventionist means you're locked into an intervention? What actually happens when you reach out for help, and why information is not obligation.",
+    category: "Family Support"
+  },
   {
     id: "forgiving-an-addict-in-recovery",
     title: "Do I Have to Forgive Them? The Truth About Forgiving an Addict in Recovery",

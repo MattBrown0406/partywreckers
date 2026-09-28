@@ -319,6 +319,27 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "you-can-call-and-still-say-no": {
+    eyebrow: "Article answer",
+    title: "Does calling an interventionist mean you have to do an intervention?",
+    answer:
+      "No. Calling an interventionist, a treatment center, or a helpline is a conversation, not a contract. You gather information about your options and decide, on your own timeline, whether anything is right for your family. Nothing happens with your loved one because you asked a question.",
+    bullets: [
+      "A first call is mostly you talking and the interventionist listening.",
+      "Many families call three or four times over months before taking a next step.",
+      "You don't need the whole plan figured out before you're allowed to ask.",
+    ],
+    nextSteps: [
+      "Make one 15-minute call and simply ask what your options look like.",
+      "Write down what has actually happened over the last month.",
+      "Tell one person in your life what's going on, out loud.",
+    ],
+    links: [
+      { label: "What to Expect When You Call an Interventionist", href: "/blog/what-to-expect-when-you-call-an-interventionist" },
+      { label: "How to Choose an Interventionist", href: "/blog/how-to-choose-an-interventionist" },
+      { label: "Family Addiction Help", href: "/family-addiction-help" },
+    ],
+  },
   "forgiving-an-addict-in-recovery": {
     eyebrow: "Article answer",
     title: "Do you have to forgive an addict in recovery?",
