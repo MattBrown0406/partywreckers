@@ -319,6 +319,28 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "intervention-after-failed-rehab": {
+    eyebrow: "Article answer",
+    title: "Can an intervention after failed rehab still work?",
+    answer:
+      "Yes. A history of treatment doesn't disqualify anyone from getting well. An intervention after failed rehab works when the plan actually changes: the level of care, the family's role, and the follow-through after discharge.",
+    bullets: [
+      "\"Failed\" usually means leaving early, no aftercare, or going home to the same environment.",
+      "Prior treatment is often an asset: they already know the language of recovery.",
+      "Multiple attempts usually call for longer, more structured care plus sober living.",
+      "The family needs its own support and boundaries this time, too.",
+    ],
+    nextSteps: [
+      "Write down what happened during each past treatment stay.",
+      "Find a family support group like Al-Anon or a family recovery program.",
+      "Talk to a professional who can look at the whole history.",
+    ],
+    links: [
+      { label: "Do Interventions Actually Work?", href: "/blog/do-interventions-actually-work-success-rates" },
+      { label: "What Happens If an Intervention Fails", href: "/blog/what-happens-if-an-intervention-fails" },
+      { label: "Talk to an Interventionist", href: "https://freedominterventions.com", external: true },
+    ],
+  },
   "you-can-call-and-still-say-no": {
     eyebrow: "Article answer",
     title: "Does calling an interventionist mean you have to do an intervention?",

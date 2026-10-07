@@ -1,3 +1,4 @@
+import blogImageFailedRehab from "@/assets/blog-intervention-after-failed-rehab.jpg";
 import blogImageCallAndSayNo from "@/assets/blog-you-can-call-and-still-say-no.jpg";
 // Blog post data for routing and index page
 import blogImageForgivingAddictRecovery from "@/assets/blog-forgiving-an-addict-in-recovery.jpg";
@@ -161,6 +162,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "intervention-after-failed-rehab",
+    title: "They've Been to Rehab Five Times. Can an Intervention After Failed Rehab Still Work?",
+    date: "October 7, 2026",
+    image: blogImageFailedRehab,
+    imageAlt: "A weary couple in their late fifties and sixties sitting at a dining table beside a tall stack of old treatment discharge papers",
+    excerpt: "Been to rehab five times? An intervention after failed rehab can still work when the plan, the family's role, and the follow-through actually change.",
+    category: "Family Support"
+  },
   {
     id: "you-can-call-and-still-say-no",
     title: "You Can Call and Still Say No: Why Asking for Help Isn't a Commitment",
