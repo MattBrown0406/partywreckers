@@ -319,6 +319,28 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "long-distance-intervention": {
+    eyebrow: "Article answer",
+    title: "Can you do an intervention when family lives far away?",
+    answer:
+      "Yes. A long-distance intervention works when most of the preparation happens remotely and the key conversation happens in person whenever possible. Distance changes the logistics, not the purpose: one plan, one voice, and a treatment bed ready to go.",
+    bullets: [
+      "Planning, education, and letter rehearsal all work well on video.",
+      "Two or three trusted people in the room is usually enough.",
+      "Others can join by video, letter, or a short recorded message.",
+      "Don't let the nearby relative carry everything alone.",
+    ],
+    nextSteps: [
+      "Pick one coordinator and one location.",
+      "Hold a family video call to share what everyone has seen.",
+      "Line up treatment before anyone books a flight.",
+    ],
+    links: [
+      { label: "Who Should Be at an Intervention?", href: "/blog/who-should-be-at-an-intervention" },
+      { label: "How to Choose an Interventionist", href: "/blog/how-to-choose-an-interventionist" },
+      { label: "Talk to an Interventionist", href: "https://freedominterventions.com", external: true },
+    ],
+  },
   "intervention-after-failed-rehab": {
     eyebrow: "Article answer",
     title: "Can an intervention after failed rehab still work?",
