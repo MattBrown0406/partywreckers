@@ -1,3 +1,4 @@
+import blogImageLongDistance from "@/assets/blog-long-distance-intervention.jpg";
 import blogImageFailedRehab from "@/assets/blog-intervention-after-failed-rehab.jpg";
 import blogImageCallAndSayNo from "@/assets/blog-you-can-call-and-still-say-no.jpg";
 // Blog post data for routing and index page
@@ -162,6 +163,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "long-distance-intervention",
+    title: "My Family Lives in Four Time Zones. Can a Long-Distance Intervention Still Work?",
+    date: "October 8, 2026",
+    image: blogImageLongDistance,
+    imageAlt: "A woman in her fifties at a home desk on an evening video call with several adult family members",
+    excerpt: "Family scattered across states? A long-distance intervention can still work when prep happens on video and the key conversation happens in person.",
+    category: "Family Support"
+  },
   {
     id: "intervention-after-failed-rehab",
     title: "They've Been to Rehab Five Times. Can an Intervention After Failed Rehab Still Work?",
