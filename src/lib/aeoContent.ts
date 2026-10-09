@@ -319,6 +319,28 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "intervention-objections-ill-go-monday": {
+    eyebrow: "Article answer",
+    title: "What are the most common intervention objections?",
+    answer:
+      "Most intervention objections fall into five buckets: timing, self-sufficiency, minimizing, logistics, and anger. They sound like reasons, but they're usually fear. Families do best by solving logistics in advance, staying specific and calm, and having a treatment bed ready the same day.",
+    bullets: [
+      "“I’ll go Monday” usually means the window of willingness closes before Monday.",
+      "Solve job, kids, pets, and bills before the conversation starts.",
+      "Answer “I can quit on my own” with the track record, not an argument.",
+      "Specific moments beat labels; let anger land without matching it.",
+    ],
+    nextSteps: [
+      "Write down every excuse you’ve heard.",
+      "Choose one or two people to respond to objections.",
+      "Agree on bottom lines as a family before the day.",
+    ],
+    links: [
+      { label: "What Happens If an Intervention Fails?", href: "/blog/what-happens-if-an-intervention-fails" },
+      { label: "When Someone Says No", href: "/blog/when-someone-says-no-intervention" },
+      { label: "Talk to an Interventionist", href: "https://freedominterventions.com", external: true },
+    ],
+  },
   "long-distance-intervention": {
     eyebrow: "Article answer",
     title: "Can you do an intervention when family lives far away?",
