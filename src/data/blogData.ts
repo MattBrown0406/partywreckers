@@ -1,3 +1,4 @@
+import blogImageObjectionsMonday from "@/assets/blog-intervention-objections-ill-go-monday.jpg";
 import blogImageLongDistance from "@/assets/blog-long-distance-intervention.jpg";
 import blogImageFailedRehab from "@/assets/blog-intervention-after-failed-rehab.jpg";
 import blogImageCallAndSayNo from "@/assets/blog-you-can-call-and-still-say-no.jpg";
@@ -163,6 +164,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "intervention-objections-ill-go-monday",
+    title: "“I’ll Go Monday”: The Intervention Objections I Hear Every Week (And What I Say Back)",
+    date: "October 9, 2026",
+    image: blogImageObjectionsMonday,
+    imageAlt: "A man in his early thirties on a living room couch looking down while his parents sit across from him listening calmly",
+    excerpt: "“I’ll go Monday.” “I can quit on my own.” The most common intervention objections, what’s underneath them, and what families can say back.",
+    category: "Family Support"
+  },
   {
     id: "long-distance-intervention",
     title: "My Family Lives in Four Time Zones. Can a Long-Distance Intervention Still Work?",
