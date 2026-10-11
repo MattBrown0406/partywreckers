@@ -319,6 +319,28 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "how-to-talk-to-kids-about-a-parent-in-rehab": {
+    eyebrow: "Article answer",
+    title: "How do you talk to kids about a parent in rehab?",
+    answer:
+      "Tell them the truth at their level. Kids handle honest, age-appropriate explanations far better than silence. The core message never changes: Mom or Dad is sick, they're getting help, and it is not your fault.",
+    bullets: [
+      "Ages 3 to 6: short, concrete, and focused on routine.",
+      "Ages 7 to 12: name addiction and explain it as a sickness.",
+      "Teens: use real words, invite questions, and talk about family risk.",
+      "Never lie, trash the parent, promise a cure, or ask kids to keep secrets.",
+    ],
+    nextSteps: [
+      "Tell them: it's not your fault, you're not alone, you'll be taken care of.",
+      "Ask the treatment center about calls, visits, and family weekends.",
+      "Keep home routines steady and look into Alateen or kids' groups.",
+    ],
+    links: [
+      { label: "The Parentified Child", href: "/blog/parentified-child-addiction-family" },
+      { label: "Coming Home From Rehab", href: "/blog/coming-home-from-rehab-what-families-arent-prepared-for" },
+      { label: "Talk to an Interventionist", href: "https://freedominterventions.com", external: true },
+    ],
+  },
   "intervention-objections-ill-go-monday": {
     eyebrow: "Article answer",
     title: "What are the most common intervention objections?",
