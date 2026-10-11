@@ -1,3 +1,4 @@
+import blogImageTalkToKids from "@/assets/blog-talk-to-kids-parent-in-rehab.jpg";
 import blogImageObjectionsMonday from "@/assets/blog-intervention-objections-ill-go-monday.jpg";
 import blogImageLongDistance from "@/assets/blog-long-distance-intervention.jpg";
 import blogImageFailedRehab from "@/assets/blog-intervention-after-failed-rehab.jpg";
@@ -164,6 +165,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "how-to-talk-to-kids-about-a-parent-in-rehab",
+    title: "How to Talk to Kids About a Parent in Rehab: What I Tell Every Family",
+    date: "October 11, 2026",
+    image: blogImageTalkToKids,
+    imageAlt: "A mother in her late thirties sitting alone at a kitchen table at dusk with a mug and a handwritten note, a stuffed rabbit resting on the chair beside her",
+    excerpt: "Not sure how to talk to kids about a parent in rehab? What to say at every age, what never to say, and the three things every kid needs to hear.",
+    category: "Family Support"
+  },
   {
     id: "intervention-objections-ill-go-monday",
     title: "“I’ll Go Monday”: The Intervention Objections I Hear Every Week (And What I Say Back)",
