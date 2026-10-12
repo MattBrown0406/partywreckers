@@ -1,3 +1,4 @@
+import blogImageGenerational from "@/assets/blog-generational-addiction.jpg";
 import blogImageTalkToKids from "@/assets/blog-talk-to-kids-parent-in-rehab.jpg";
 import blogImageObjectionsMonday from "@/assets/blog-intervention-objections-ill-go-monday.jpg";
 import blogImageLongDistance from "@/assets/blog-long-distance-intervention.jpg";
@@ -165,6 +166,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "generational-addiction-breaking-the-cycle",
+    title: "Generational Addiction: The Family Inheritance Nobody Asked For (And How to Break the Cycle)",
+    date: "October 12, 2026",
+    image: blogImageGenerational,
+    imageAlt: "A man in his late thirties and his father in his seventies sitting at a kitchen table having a quiet, honest conversation over coffee",
+    excerpt: "Addiction runs in your family? How generational addiction gets passed down through biology, behavior, and silence, and the steps families take to break the cycle.",
+    category: "Family Support"
+  },
   {
     id: "how-to-talk-to-kids-about-a-parent-in-rehab",
     title: "How to Talk to Kids About a Parent in Rehab: What I Tell Every Family",

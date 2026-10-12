@@ -319,6 +319,28 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "generational-addiction-breaking-the-cycle": {
+    eyebrow: "Article answer",
+    title: "How do you break the cycle of generational addiction?",
+    answer:
+      "Generational addiction gets passed down through biology, behavior, and silence. You break the cycle by changing what the family does: naming the pattern, talking openly with the next generation, getting the person struggling into real help, and getting support for yourself.",
+    bullets: [
+      "Genes account for roughly half of addiction risk; the other half you can influence.",
+      "Kids learn what adults do, not what they say.",
+      "Family silence is the channel most families ignore.",
+      "A family history raises risk but doesn't seal anyone's fate.",
+    ],
+    nextSteps: [
+      "Write down your family tree and mark where addiction shows up.",
+      "Tell your kids the truth at their level.",
+      "Act on the person who is struggling now; don't wait for them to grow out of it.",
+    ],
+    links: [
+      { label: "Family Roles in Addiction", href: "/blog/family-roles-in-addiction-hero-scapegoat-lost-child" },
+      { label: "Adult Children of Addicts", href: "/blog/adult-children-of-addicts-patterns" },
+      { label: "Talk to an Interventionist", href: "https://freedominterventions.com", external: true },
+    ],
+  },
   "how-to-talk-to-kids-about-a-parent-in-rehab": {
     eyebrow: "Article answer",
     title: "How do you talk to kids about a parent in rehab?",
