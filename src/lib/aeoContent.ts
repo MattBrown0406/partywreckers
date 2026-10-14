@@ -319,6 +319,28 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "when-a-parent-gets-sober": {
+    eyebrow: "Article answer",
+    title: "Why don't adult children feel happy when a parent gets sober?",
+    answer:
+      "Because sobriety ends the drinking, not the history. Adult children spent years adapting to a parent's addiction, and those survival skills don't switch off when treatment starts. Relief, anger, grief, and distrust often arrive together, and all of them are normal.",
+    bullets: [
+      "Anger, grief, distrust, and numbness are the most common reactions.",
+      "Trust follows consistent actions over months, not words in one conversation.",
+      "Adult children deserve their own support, not just the parent.",
+      "Living amends repair more than any apology letter.",
+    ],
+    nextSteps: [
+      "Let trust come back in small, ordinary pieces.",
+      "Say what you need, even if it's distance.",
+      "Try Al-Anon, Nar-Anon, ACA, or a family-addiction therapist.",
+    ],
+    links: [
+      { label: "Living Amends", href: "/blog/living-amends-what-recovery-asks-after-sorry" },
+      { label: "Adult Children of Addicts", href: "/blog/adult-children-of-addicts-patterns" },
+      { label: "Talk to an Interventionist", href: "https://freedominterventions.com", external: true },
+    ],
+  },
   "generational-addiction-breaking-the-cycle": {
     eyebrow: "Article answer",
     title: "How do you break the cycle of generational addiction?",
