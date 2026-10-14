@@ -1,3 +1,4 @@
+import blogImageParentSober from "@/assets/blog-when-a-parent-gets-sober.jpg";
 import blogImageGenerational from "@/assets/blog-generational-addiction.jpg";
 import blogImageTalkToKids from "@/assets/blog-talk-to-kids-parent-in-rehab.jpg";
 import blogImageObjectionsMonday from "@/assets/blog-intervention-objections-ill-go-monday.jpg";
@@ -166,6 +167,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "when-a-parent-gets-sober",
+    title: "When a Parent Gets Sober: Why Their Kids Don't Always Throw a Party",
+    date: "October 14, 2026",
+    image: blogImageParentSober,
+    imageAlt: "A woman in her early thirties and her father in his sixties sitting apart on a porch bench with coffee, a cautious distance between them",
+    excerpt: "When a parent gets sober, adult children often feel anger or distrust instead of joy. Why that happens, and what actually helps both sides rebuild trust.",
+    category: "Family Support"
+  },
   {
     id: "generational-addiction-breaking-the-cycle",
     title: "Generational Addiction: The Family Inheritance Nobody Asked For (And How to Break the Cycle)",
