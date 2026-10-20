@@ -1,3 +1,4 @@
+import blogImageCrisisMode from "@/assets/blog-living-in-crisis-mode-with-an-addict.jpg";
 import blogImageParentSober from "@/assets/blog-when-a-parent-gets-sober.jpg";
 import blogImageGenerational from "@/assets/blog-generational-addiction.jpg";
 import blogImageTalkToKids from "@/assets/blog-talk-to-kids-parent-in-rehab.jpg";
@@ -167,6 +168,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "living-in-crisis-mode-with-an-addict",
+    title: "Always On Call: Living in Crisis Mode With an Addict (and How to Finally Get Out)",
+    date: "October 20, 2026",
+    image: blogImageCrisisMode,
+    imageAlt: "An exhausted adult couple at a kitchen table late at night, watching a phone and waiting for the next call",
+    excerpt: "Living in crisis mode with an addict? Interventionist Matt Brown explains why families get stuck putting out fires, and how to stop reacting and start planning.",
+    category: "Family Support"
+  },
   {
     id: "when-a-parent-gets-sober",
     title: "When a Parent Gets Sober: Why Their Kids Don't Always Throw a Party",
