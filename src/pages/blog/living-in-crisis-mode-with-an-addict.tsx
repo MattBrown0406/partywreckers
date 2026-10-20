@@ -29,7 +29,7 @@ const LivingInCrisisMode = () => (
     <BreadcrumbJsonLd items={[{ name: "Home", url: "/" }, { name: "Blog", url: "/blog" }, { name: "Living in Crisis Mode With an Addict", url: `/blog/${SLUG}` }]} />
     <FAQJsonLd faqs={faqs} />
     <Navbar />
-    <main className="container mx-auto px-4 py-8 max-w-4xl">
+    <main className="container mx-auto px-4 pt-24 pb-8 max-w-4xl">
       <Link to="/blog" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors mb-6"><ArrowLeft className="w-4 h-4 mr-2" />Back to Blog</Link>
       <header className="mb-8">
         <img src={blogImage} alt="An exhausted adult couple at a kitchen table late at night, watching a phone and waiting for the next call" className="w-full aspect-video object-cover rounded-lg mb-6" width={1344} height={768} />
