@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "living-in-crisis-mode-with-an-addict": {
+    eyebrow: "Article answer",
+    title: "How do you stop living in crisis mode with an addict?",
+    answer: "Decide ahead of time how you will respond, so the next phone call does not decide for you. Respond immediately to life or safety emergencies by calling 911; pause non-emergency requests, align the family, and use quiet stretches to plan and get support.",
+    bullets: [
+      "Overdose signs, suicidal statements, violence, medical crises, or a child in danger require immediate help.",
+      "Money and other non-safety requests can wait while you think.",
+      "Write a response before the next late-night call.",
+      "A planned intervention moves decisions out of panic and into preparation.",
+    ],
+    nextSteps: [
+      "Adopt a 24-hour pause for requests that are not true emergencies.",
+      "Agree as a family on what you will and will not do.",
+      "Get your own support and talk with an interventionist during a quiet week.",
+    ],
+    links: [
+      { label: "Enabling Addiction", href: "/blog/enabling-addiction-families" },
+      { label: "Intervention Readiness", href: "/intervention-readiness" },
+    ],
+  },
   "when-a-parent-gets-sober": {
     eyebrow: "Article answer",
     title: "Why don't adult children feel happy when a parent gets sober?",

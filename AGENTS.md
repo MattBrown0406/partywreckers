@@ -1,0 +1,2 @@
+# Project rules
+- Blog articles use individual pages and the existing shared article components, with matching entries in blog data, answer summaries, sitemap, and prerender routes so readers and crawlers can discover complete articles.
