@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "boredom-in-early-sobriety": {
+    eyebrow: "Article answer",
+    title: "How do you deal with boredom in early sobriety?",
+    answer: "Plan for your risky hours, fill time with people instead of just activities, and give yourself permission to enjoy small things again. Boredom is common in early recovery because addiction took up so much time, and it can be a quiet relapse trigger if those hours stay empty.",
+    bullets: [
+      "Addiction filled the calendar; sobriety leaves hours with no structure.",
+      "Boredom is often a cover for loneliness, restlessness, discomfort, hunger or fatigue.",
+      "Empty, unstructured time gives cravings room to negotiate.",
+      "Families help most by inviting, not managing.",
+    ],
+    nextSteps: [
+      "Write down your old drinking or using hours and put something specific in them.",
+      "Plan the weekend before it arrives, with people in it.",
+      "If boredom turns into isolation or old using friends, have a calm, honest conversation.",
+    ],
+    links: [
+      { label: "Nobody Warned Me About the Boredom", href: "/blog/nobody-warned-me-about-the-boredom" },
+      { label: "First Year of Sobriety", href: "/blog/first-year-sobriety-what-to-expect" },
+    ],
+  },
   "living-in-crisis-mode-with-an-addict": {
     eyebrow: "Article answer",
     title: "How do you stop living in crisis mode with an addict?",
