@@ -1,3 +1,4 @@
+import blogImageBoredomEarly from "@/assets/blog-boredom-in-early-sobriety.jpg";
 import blogImageCrisisMode from "@/assets/blog-living-in-crisis-mode-with-an-addict.jpg";
 import blogImageParentSober from "@/assets/blog-when-a-parent-gets-sober.jpg";
 import blogImageGenerational from "@/assets/blog-generational-addiction.jpg";
@@ -168,6 +169,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "boredom-in-early-sobriety",
+    title: "Boredom in Early Sobriety: What Do I Do With All This Time Now?",
+    date: "October 21, 2026",
+    image: blogImageBoredomEarly,
+    imageAlt: "A man in his early thirties sitting alone in his parked car in a grocery store parking lot on a quiet Saturday afternoon",
+    excerpt: "Boredom in early sobriety is a quiet relapse trigger. Interventionist Matt Brown shares why sober time feels empty and what to do with it, for you and your family.",
+    category: "Recovery"
+  },
   {
     id: "living-in-crisis-mode-with-an-addict",
     title: "Always On Call: Living in Crisis Mode With an Addict (and How to Finally Get Out)",
