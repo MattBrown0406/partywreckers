@@ -1,3 +1,4 @@
+import blogImageRelapseWarnings from "@/assets/blog-relapse-warning-signs.jpg";
 import blogImageBoredomEarly from "@/assets/blog-boredom-in-early-sobriety.jpg";
 import blogImageCrisisMode from "@/assets/blog-living-in-crisis-mode-with-an-addict.jpg";
 import blogImageParentSober from "@/assets/blog-when-a-parent-gets-sober.jpg";
@@ -169,6 +170,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "relapse-warning-signs",
+    title: "Relapse Warning Signs: The Drink Is the Last Thing That Happens",
+    date: "October 22, 2026",
+    image: blogImageRelapseWarnings,
+    imageAlt: "A young adult man sitting at his kitchen table, thoughtfully holding his phone before calling a recovery support person",
+    excerpt: "Relapse warning signs show up weeks before the first drink. Interventionist Matt Brown shares the early signs to watch for and what to do when you spot them.",
+    category: "Recovery"
+  },
   {
     id: "boredom-in-early-sobriety",
     title: "Boredom in Early Sobriety: What Do I Do With All This Time Now?",

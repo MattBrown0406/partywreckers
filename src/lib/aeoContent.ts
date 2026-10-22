@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "relapse-warning-signs": {
+    eyebrow: "Article answer",
+    title: "What are the earliest relapse warning signs?",
+    answer: "Early relapse warning signs are emotional and behavioral: pulling away from recovery supports, isolation, irritability, poor sleep, and romanticizing past use. A new cluster of changes deserves a calm conversation before any return to drinking or using; one sign alone is not a verdict.",
+    bullets: [
+      "Recovery routines and self-care may slip before thoughts of using appear.",
+      "Bargaining, nostalgia, and secrecy can signal growing risk.",
+      "Families can notice changes without becoming the whole support system.",
+      "A passing thought about drinking is not itself a relapse.",
+    ],
+    nextSteps: [
+      "Describe specific changes calmly, ask how they are doing, and listen.",
+      "Reconnect with a sponsor, counselor, meeting, or sober friend.",
+      "Get family support and plan who to call if the situation escalates.",
+    ],
+    links: [
+      { label: "What to Do After a Relapse", href: "/blog/what-to-do-after-a-relapse-first-24-hours" },
+      { label: "Recovery Roadmap", href: "/blog/recovery-roadmap" },
+    ],
+  },
   "boredom-in-early-sobriety": {
     eyebrow: "Article answer",
     title: "How do you deal with boredom in early sobriety?",
