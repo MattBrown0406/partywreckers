@@ -1,3 +1,4 @@
+import blogImageEmotionsEarly from "@/assets/blog-emotions-in-early-sobriety.jpg";
 import blogImageRelapseWarnings from "@/assets/blog-relapse-warning-signs.jpg";
 import blogImageBoredomEarly from "@/assets/blog-boredom-in-early-sobriety.jpg";
 import blogImageCrisisMode from "@/assets/blog-living-in-crisis-mode-with-an-addict.jpg";
@@ -170,6 +171,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "emotions-in-early-sobriety",
+    title: "Emotions in Early Sobriety: Why I Cried in the Cereal Aisle at Four Months Sober",
+    date: "October 23, 2026",
+    image: blogImageEmotionsEarly,
+    imageAlt: "A young adult man holding a cereal box in a grocery store aisle, tearful as a memory brings up emotions in early sobriety",
+    excerpt: "Emotions in early sobriety can feel overwhelming. Interventionist Matt Brown explains why feelings hit so hard after getting sober and how to ride them out.",
+    category: "Recovery"
+  },
   {
     id: "relapse-warning-signs",
     title: "Relapse Warning Signs: The Drink Is the Last Thing That Happens",
