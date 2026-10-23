@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "emotions-in-early-sobriety": {
+    eyebrow: "Article answer",
+    title: "Why do emotions feel so intense in early sobriety?",
+    answer: "The substance that numbed feelings is gone, and the brain is still adjusting. Unprocessed grief, anger, anxiety, and shame can surface alongside unexpected joy. Name feelings, talk with someone safe, and maintain sleep, meals, movement, and recovery support; severe or persistent symptoms deserve professional care.",
+    bullets: [
+      "Emotional swings can accompany early recovery and post-acute withdrawal.",
+      "HALT checks whether you are Hungry, Angry, Lonely, or Tired.",
+      "Families can listen and stay steady without absorbing every feeling.",
+      "Big feelings do not excuse cruelty or remove the need for boundaries.",
+    ],
+    nextSteps: [
+      "Call a sponsor, counselor, or trusted recovery friend instead of keeping feelings secret.",
+      "Keep regular meals, sleep, and movement, and consider therapy alongside recovery support.",
+      "For emotional crisis or thoughts of self-harm in the U.S., call or text 988.",
+    ],
+    links: [
+      { label: "First Year of Sobriety", href: "/blog/first-year-sobriety-what-to-expect" },
+      { label: "Relapse Warning Signs", href: "/blog/relapse-warning-signs" },
+    ],
+  },
   "relapse-warning-signs": {
     eyebrow: "Article answer",
     title: "What are the earliest relapse warning signs?",
