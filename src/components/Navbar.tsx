@@ -98,7 +98,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-4 text-sm">
+          <div className="hidden lg:flex items-center gap-4 text-sm">
             {navLinks.map((link) => (
               link.href.startsWith("/") && !link.href.includes("#") ? (
                 <Link
@@ -202,7 +202,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile: call + menu buttons */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <a
               href={SITE_PHONE_HREF}
               className="inline-flex items-center gap-1.5 rounded-full border border-burgundy/40 bg-burgundy/10 px-3 py-1.5 text-sm font-semibold text-burgundy transition-colors hover:bg-burgundy hover:text-white"
@@ -215,6 +215,8 @@ const Navbar = () => {
               className="p-2 text-foreground"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -223,7 +225,7 @@ const Navbar = () => {
 
         {/* Mobile nav */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div id="mobile-navigation" className="lg:hidden max-h-[calc(100dvh-5rem)] overflow-y-auto py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 link.href.startsWith("/") && !link.href.includes("#") ? (

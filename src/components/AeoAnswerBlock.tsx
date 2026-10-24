@@ -43,7 +43,7 @@ const AeoAnswerBlock = ({ content, className = "" }: AeoAnswerBlockProps) => (
 
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         {content.links.map((link) => (
-          <Button key={`${link.label}-${link.href}`} variant="outline" asChild>
+          <Button key={`${link.label}-${link.href}`} variant="outline" className="h-auto min-h-10 whitespace-normal break-words py-2 text-center" asChild>
             {link.external ? (
               <TrackedExternalLink
                 href={link.href}

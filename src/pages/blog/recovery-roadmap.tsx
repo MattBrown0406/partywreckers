@@ -28,7 +28,7 @@ const RecoveryRoadmap = () => {
             "@type": "Article",
             "headline": articleTitle,
             "description": "Matt Brown explains why he built the Recovery Roadmap — a free, stage-based action plan giving families of people with addiction specific steps instead of generic advice.",
-            "image": "https://partywreckers.com/blog-recovery-roadmap.jpg",
+            "image": new URL(blogImage, "https://partywreckers.com").href,
             "author": {
               "@type": "Person",
               "name": "Matt Brown",

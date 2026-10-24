@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
-import { BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { blogArticles } from "@/data/blogData";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import BlogConversionPanel from "@/components/BlogConversionPanel";
@@ -26,23 +26,6 @@ const BlogIndex = () => {
         ]}
       />
 
-      <FAQJsonLd
-        faqs={[
-          {
-            question: "What topics does the Party Wreckers blog cover?",
-            answer: "Our blog covers addiction, family dynamics, enabling vs. supporting, boundaries, intervention strategies, recovery resources, and practical advice for families affected by substance use."
-          },
-          {
-            question: "Who writes the Party Wreckers blog?",
-            answer: "The blog is written by Matt Brown, a certified interventionist with over 20 years of experience helping families navigate addiction and recovery."
-          },
-          {
-            question: "How often are new blog posts published?",
-            answer: "We publish new blog posts regularly, focusing on practical, actionable advice for families dealing with addiction-related challenges."
-          }
-        ]}
-      />
-      
       <Navbar />
       
       <main className="container px-4 pt-24 sm:pt-32 pb-12 sm:pb-16">
@@ -61,7 +44,7 @@ const BlogIndex = () => {
             compact
             sponsor={false}
             title="Start with the source guides"
-            description="The blog is the library. These pages are the answer-first routes that should earn links, show up in answer engines, and move families toward the right next step."
+            description="Looking for a starting point? Explore these guides to family support, intervention readiness, and recovery resources."
           />
         </div>
         
@@ -86,9 +69,9 @@ const BlogIndex = () => {
                 <CardContent className="p-4 sm:p-6 flex-1 flex flex-col">
                   <div className="flex-1">
                     <p className="text-xs sm:text-sm text-muted-foreground mb-2">{article.date}</p>
-                    <h3 className="font-semibold text-base sm:text-lg text-foreground mb-2 sm:mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+                    <h2 className="font-semibold text-base sm:text-lg text-foreground mb-2 sm:mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-200">
                       {article.title}
-                    </h3>
+                    </h2>
                     <p className="text-sm text-muted-foreground line-clamp-3">
                       {article.excerpt}
                     </p>

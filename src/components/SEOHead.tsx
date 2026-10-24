@@ -77,6 +77,8 @@ const SEOHead = ({
       ? trimToLength(matchedBlogPost?.excerpt || description || FALLBACK_DESCRIPTION)
       : description || FALLBACK_DESCRIPTION);
 
+  const socialImageUrl = new URL(ogImage, SITE_URL).href;
+
   const resolvedOgType = normalizedPath.startsWith("/blog/") ? "article" : ogType;
 
   return (
@@ -95,9 +97,9 @@ const SEOHead = ({
       <meta property="og:description" content={pageDescription} />
       <meta property="og:type" content={resolvedOgType} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image" content={socialImageUrl} />
+      {socialImageUrl === DEFAULT_OG_IMAGE && <meta property="og:image:width" content="1200" />}
+      {socialImageUrl === DEFAULT_OG_IMAGE && <meta property="og:image:height" content="630" />}
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:locale" content="en_US" />
 
@@ -118,7 +120,7 @@ const SEOHead = ({
       <meta name="twitter:creator" content="@MattBrownIntervention" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={pageDescription} />
-      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image" content={socialImageUrl} />
 
       {children}
     </Helmet>

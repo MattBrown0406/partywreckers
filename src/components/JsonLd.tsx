@@ -51,9 +51,6 @@ export const OrganizationJsonLd = () => {
     "description": "A podcast helping families navigate addiction, intervention, and recovery.",
     "email": "matt@partywreckers.com",
     "sameAs": [
-      "https://www.tiktok.com/@mattbrowninterventionist",
-      "https://www.instagram.com/mattbrowninterventionist/",
-      "https://www.facebook.com/mbrownsober",
       "https://www.youtube.com/@ThePartyWreckers",
       "https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917",
       "https://open.spotify.com/show/4YJLvnFuZr5EkcGs9b47fn"
@@ -103,8 +100,7 @@ export const PersonJsonLd = () => {
     "sameAs": [
       "https://www.tiktok.com/@mattbrowninterventionist",
       "https://www.instagram.com/mattbrowninterventionist/",
-      "https://www.facebook.com/mbrownsober",
-      "https://www.youtube.com/@ThePartyWreckers"
+      "https://www.facebook.com/mbrownsober"
     ],
     "worksFor": {
       "@type": "Organization",
@@ -121,7 +117,7 @@ export const PersonJsonLd = () => {
   );
 };
 
-// WebSite Schema with SearchAction for Sitelinks Search Box
+// WebSite identity. Do not advertise a search URL until it filters results.
 export const WebsiteJsonLd = () => {
   const websiteSchema = {
     "@context": "https://schema.org",
@@ -132,14 +128,6 @@ export const WebsiteJsonLd = () => {
     "publisher": {
       "@type": "Organization",
       "name": SITE_NAME
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${SITE_URL}/episodes?search={search_term_string}`
-      },
-      "query-input": "required name=search_term_string"
     }
   };
 
@@ -219,7 +207,7 @@ export const ArticleJsonLd = ({
     "@type": "Article",
     "headline": title,
     "description": description,
-    "image": image,
+    "image": new URL(image, SITE_URL).href,
     "datePublished": datePublished,
     "dateModified": dateModified || datePublished,
     "author": {

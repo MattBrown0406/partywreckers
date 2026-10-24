@@ -1,5 +1,6 @@
 import AeoAnswerBlock from "@/components/AeoAnswerBlock";
 import FaqSection from "@/components/FaqSection";
+import RelatedArticles from "@/components/RelatedArticles";
 import Footer from "@/components/Footer";
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, MedicalWebPageJsonLd, WebPageJsonLd } from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
@@ -118,6 +119,11 @@ const EnablingVsSupport = () => (
       </section>
 
       <FaqSection faqs={coreFaqs.enablingVsSupport} />
+      <RelatedArticles slugs={[
+        "covering-for-an-addicted-loved-one",
+        "effort-vs-change-addiction",
+        "enabling-fear-household",
+      ]} />
     </main>
 
     <Footer />

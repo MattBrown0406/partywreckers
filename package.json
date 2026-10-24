@@ -7,7 +7,7 @@
     "dev": "vite",
     "podcast:generate": "node scripts/generate-podcast-snapshot.mjs",
     "seo:generate": "node scripts/generate-seo-artifacts.mjs",
-    "seo:validate": "node scripts/validate-seo.mjs",
+    "seo:validate": "node scripts/validate-seo.mjs && node scripts/test-seo-regressions.mjs",
     "test:podcast": "node scripts/test-podcast-snapshot.mjs",
     "build": "npm run podcast:generate && npm run seo:generate && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && npm run seo:validate",
     "build:dev": "npm run seo:generate && vite build --mode development && vite build --mode development --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && npm run seo:validate",

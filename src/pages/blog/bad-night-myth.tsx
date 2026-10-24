@@ -28,7 +28,7 @@ const BadNightMyth = () => {
             "@type": "Article",
             "headline": articleTitle,
             "description": "Why families get trapped evaluating isolated incidents instead of recognizing escalating addiction patterns, and how shifting from event-based to pattern-based thinking changes everything.",
-            "image": "https://partywreckers.com/blog-bad-night-myth.jpg",
+            "image": new URL(blogImage, "https://partywreckers.com").href,
             "author": {
               "@type": "Person",
               "name": "Matt Brown",

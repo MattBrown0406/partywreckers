@@ -233,6 +233,7 @@ const Episodes = () => {
                           variant="default"
                           size="icon"
                           className="w-16 h-16 rounded-full flex-shrink-0 shadow-lg"
+                          aria-label={`${playingId === latestEpisode.id ? "Pause" : "Play"}: ${latestEpisode.title}`}
                           onClick={() => handlePlay(latestEpisode.id, latestEpisode.audioUrl)}
                         >
                           {playingId === latestEpisode.id ? (
@@ -310,6 +311,7 @@ const Episodes = () => {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                     <Input
                       type="text"
+                      aria-label="Search episodes"
                       placeholder="Search episodes by topic, fear, family pattern, or question..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -406,6 +408,7 @@ const Episodes = () => {
                               variant="default"
                               size="icon"
                               className="h-12 w-12 rounded-full"
+                              aria-label={`${playingId === episode.id ? "Pause" : "Play"}: ${episode.title}`}
                               onClick={() => handlePlay(episode.id, episode.audioUrl)}
                             >
                               {playingId === episode.id ? (

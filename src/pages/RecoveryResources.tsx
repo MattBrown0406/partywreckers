@@ -1,3 +1,4 @@
+import RelatedArticles from "@/components/RelatedArticles";
 import Footer from "@/components/Footer";
 import { BreadcrumbJsonLd, CollectionPageJsonLd, WebPageJsonLd } from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
@@ -150,6 +151,11 @@ const RecoveryResources = () => (
           </div>
         </div>
       </section>
+      <RelatedArticles slugs={[
+        "forgiving-an-addict-in-recovery",
+        "the-day-i-stopped-performing-sobriety",
+        "closest-i-came-to-drinking-again",
+      ]} />
     </main>
 
     <Footer />

@@ -45,7 +45,7 @@ const GrandparentsRaisingGrandchildrenAddiction = () => {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: "When Grandparents Become Parents Again: Raising Grandchildren Because of Addiction",
-    image: [blogImage],
+    image: [new URL(blogImage, "https://partywreckers.com").href],
     datePublished: "2026-07-14",
     author: { "@type": "Person", name: "Matt Brown" },
     publisher: { "@type": "Organization", name: "The Party Wreckers Podcast" },

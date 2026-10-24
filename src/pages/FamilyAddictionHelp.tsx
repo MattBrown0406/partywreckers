@@ -1,5 +1,6 @@
 import AeoAnswerBlock from "@/components/AeoAnswerBlock";
 import FaqSection from "@/components/FaqSection";
+import RelatedArticles from "@/components/RelatedArticles";
 import Footer from "@/components/Footer";
 import { BreadcrumbJsonLd, FAQJsonLd, MedicalWebPageJsonLd, WebPageJsonLd } from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
@@ -133,6 +134,11 @@ const FamilyAddictionHelp = () => (
         faqs={coreFaqs.familyAddictionHelp}
         description="Short answers for the questions families ask before they are ready to call someone."
       />
+      <RelatedArticles slugs={[
+        "addiction-in-blended-families",
+        "ambiguous-loss-addiction-family-grief",
+        "how-addiction-changes-family-holidays",
+      ]} />
     </main>
 
     <Footer />

@@ -1,5 +1,6 @@
 import AeoAnswerBlock from "@/components/AeoAnswerBlock";
 import FaqSection from "@/components/FaqSection";
+import RelatedArticles from "@/components/RelatedArticles";
 import Footer from "@/components/Footer";
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, MedicalWebPageJsonLd, WebPageJsonLd } from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
@@ -117,6 +118,11 @@ const InterventionReadiness = () => (
       </section>
 
       <FaqSection faqs={coreFaqs.interventionReadiness} />
+      <RelatedArticles slugs={[
+        "long-distance-intervention",
+        "you-can-call-and-still-say-no",
+        "intervention-objections-ill-go-monday",
+      ]} />
     </main>
 
     <Footer />

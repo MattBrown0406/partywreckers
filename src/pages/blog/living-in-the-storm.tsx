@@ -28,7 +28,7 @@ const LivingInTheStorm = () => {
             "@type": "Article",
             "headline": articleTitle,
             "description": "What families truly experience when a loved one is in active addiction — the erosion of normal, enabling dynamics, compassion fatigue, and pathways to support.",
-            "image": "https://partywreckers.com/blog-living-in-the-storm.jpg",
+            "image": new URL(blogImageLivingInTheStorm, "https://partywreckers.com").href,
             "author": {
               "@type": "Person",
               "name": "Matt Brown",

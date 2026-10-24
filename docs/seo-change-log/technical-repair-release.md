@@ -1,6 +1,14 @@
 # Technical SEO repair release record
 
-## Status
+## October 24, 2026 verification addendum
+
+This document records the original repair cohort, not the current route total. A fresh production crawl on October 24, 2026 found **182 public sitemap URLs: 159 articles and 23 other pages**, all with readable initial HTML and self-canonicals. The 164/141 counts below describe the earlier source snapshot.
+
+The live `/funnel-report` has initial noindex HTML, and unknown blog URLs render the existing NotFound view after JavaScript runs. These observations confirm those individual repairs are present; they do not establish a historical publication timestamp or certify the entire earlier release. Unknown URLs still return HTTP 200 with homepage initial HTML, and `www.partywreckers.com` remains unreachable. The real HTTP-404 and www DNS/TLS/redirect requirements below are still open hosting gates.
+
+The October 24 review branch adds contextual discovery links, schema/image corrections and responsive navigation/answer-link repairs. It is **not published** by this addendum. Do not start observation cooldowns for those changes until their public read-back is verified after approved deployment.
+
+## Status (original repair record)
 
 Source repair pass prepared from `12efca7356167506131341944c07737ee308b338`. Publication is pending; a GitHub push is not a live release. No protected AGENTS files, cron jobs, backend/auth/payment functions or other brands were modified.
 
