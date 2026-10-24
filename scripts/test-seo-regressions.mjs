@@ -3,7 +3,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 // Run after prerender. An optional output directory also permits baseline regression checks.
-const dist = path.resolve(process.argv[2] || "dist");
+// Ignore npm passthrough flags and their values (e.g. `npm run build:dev -- --config foo.ts`)
+// so they are never mistaken for the dist path.
+const args = process.argv.slice(2);
+const distArg = args.find(
+  a => !a.startsWith("-") && !/\.(ts|js|json|mjs|cjs)$/.test(a),
+);
+const dist = path.resolve(distArg || "dist");
 const { routes } = JSON.parse(fs.readFileSync(path.join(dist, "prerender-routes.json"), "utf8"));
 const read = route => fs.readFileSync(path.join(dist, route, "index.html"), "utf8");
 const titles = new Set();
