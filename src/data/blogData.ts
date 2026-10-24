@@ -1,3 +1,4 @@
+import blogImageSoberParty from "@/assets/blog-how-to-go-to-a-party-sober.jpg";
 import blogImageEmotionsEarly from "@/assets/blog-emotions-in-early-sobriety.jpg";
 import blogImageRelapseWarnings from "@/assets/blog-relapse-warning-signs.jpg";
 import blogImageBoredomEarly from "@/assets/blog-boredom-in-early-sobriety.jpg";
@@ -171,6 +172,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "how-to-go-to-a-party-sober",
+    title: "The First Party I Went to Sober: How to Go to a Party Sober Without Losing Your Mind",
+    date: "October 24, 2026",
+    image: blogImageSoberParty,
+    imageAlt: "A young adult man holding sparkling water and car keys near the doorway of an adults-only Halloween gathering",
+    excerpt: "Halloween's coming. Matt Brown, 22 years sober, shares how to go to a party sober in early recovery: when to skip it, what to hold, and when to leave.",
+    category: "Recovery"
+  },
   {
     id: "emotions-in-early-sobriety",
     title: "Emotions in Early Sobriety: Why I Cried in the Cereal Aisle at Four Months Sober",
