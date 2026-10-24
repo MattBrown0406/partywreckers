@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "how-to-go-to-a-party-sober": {
+    eyebrow: "Article answer",
+    title: "How do you go to a party sober in early recovery?",
+    answer: "Decide whether the event supports your recovery before saying yes. If you go, arrange your own exit, bring a sober buddy, set a leave time, eat first, and stay connected to your sponsor. Hold a non-alcoholic drink and leave as soon as you start bargaining about drinking.",
+    bullets: [
+      "Skip drinking-centered events or gatherings with people you used with when they put recovery at risk.",
+      "A short 'No thanks, I'm good' is enough; you do not owe an explanation.",
+      "Non-alcoholic beer can trigger cravings for some people; discuss it with your sponsor or counselor.",
+      "Leaving early is protecting recovery, not failing a test.",
+    ],
+    nextSteps: [
+      "Plan your ride, sober buddy, leave time, and sponsor check-ins before leaving home.",
+      "Choose a non-alcoholic drink and practice a brief response to drink offers.",
+      "Families can offer alcohol-free options and respect a loved one's choice to skip or leave.",
+    ],
+    links: [
+      { label: "Relapse Warning Signs", href: "/blog/relapse-warning-signs" },
+      { label: "How Addiction Changes Family Holidays", href: "/blog/how-addiction-changes-family-holidays" },
+    ],
+  },
   "emotions-in-early-sobriety": {
     eyebrow: "Article answer",
     title: "Why do emotions feel so intense in early sobriety?",
