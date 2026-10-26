@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "documenting-a-loved-ones-addiction": {
+    eyebrow: "Article answer",
+    title: "Why should families document a loved one's addiction?",
+    answer: "A simple, private, dated record of what you see and what happens cuts through denial, fuzzy memory, and false hope. Note dates, specific behaviors, consequences, and your own reactions in five minutes or less, keep it secure, and read it back after a few weeks to see the pattern clearly.",
+    bullets: [
+      "Memory bends toward hope; one good week can erase a terrible month unless it is written down.",
+      "A dated entry ends 'that's not what happened' debates without an argument.",
+      "A record gives interventionists, treatment centers, and therapists real answers about patterns.",
+      "Write down what crosses your path; do not go hunting, and never use it as ammunition in a fight.",
+    ],
+    nextSteps: [
+      "Start tonight with one honest, dated line describing what you saw or heard.",
+      "After two or three weeks, read the record in one sitting and circle what repeats.",
+      "Bring the record to your first call with a professional; if someone is in danger now, call 911 instead.",
+    ],
+    links: [
+      { label: "What to Say at an Intervention", href: "/blog/what-to-say-at-an-intervention" },
+      { label: "Monitoring an Addicted Loved One", href: "/blog/monitoring-an-addicted-loved-one" },
+    ],
+  },
   "how-to-go-to-a-party-sober": {
     eyebrow: "Article answer",
     title: "How do you go to a party sober in early recovery?",
