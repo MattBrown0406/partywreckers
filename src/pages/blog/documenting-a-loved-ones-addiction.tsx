@@ -97,7 +97,7 @@ const DocumentingALovedOnesAddiction = () => (
         <p>And if you're ready to talk to someone about your family's situation, <a href="https://freedominterventions.com/contact" target="_blank" rel="noopener noreferrer" className={linkClass}>reach out to an interventionist at FreedomInterventions.com</a>. You don't have to do this alone.</p>
         <h3 className={h3}>Related Reading</h3>
         <ul className="list-disc pl-6 space-y-2">
-          <li><Link to="/blog/what-to-say-at-an-intervention" className={linkClass}>What to Say at an Intervention: Writing a Letter That Lands</Link></li>
+          <li><Link to="/blog/what-to-say-at-an-intervention" className={linkClass}>What to Say at an Intervention: Scripts & Steps That Actually Work</Link></li>
           <li><Link to="/blog/monitoring-an-addicted-loved-one" className={linkClass}>Monitoring an Addicted Loved One: Counting Pills</Link></li>
         </ul>
       </section>

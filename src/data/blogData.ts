@@ -174,6 +174,15 @@ export interface BlogArticle {
 
 export const blogArticles: BlogArticle[] = [
   {
+    id: "documenting-a-loved-ones-addiction",
+    title: "The Spiral Notebook: Why Documenting a Loved One's Addiction Is the Most Underrated Thing You Can Do Tonight",
+    date: "October 26, 2026",
+    image: blogImageDocumentingAddiction,
+    imageAlt: "A woman in her fifties writing in a green spiral notebook at her kitchen table late at night by warm lamplight",
+    excerpt: "Documenting a loved one's addiction cuts through denial, fuzzy memory, and false hope. Interventionist Matt Brown explains what to write down and how to start tonight.",
+    category: "Family"
+  },
+  {
     id: "how-to-go-to-a-party-sober",
     title: "The First Party I Went to Sober: How to Go to a Party Sober Without Losing Your Mind",
     date: "October 24, 2026",
