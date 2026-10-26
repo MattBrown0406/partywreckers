@@ -1,3 +1,4 @@
+import blogImageDocumentingAddiction from "@/assets/blog-documenting-a-loved-ones-addiction.jpg";
 import blogImageSoberParty from "@/assets/blog-how-to-go-to-a-party-sober.jpg";
 import blogImageEmotionsEarly from "@/assets/blog-emotions-in-early-sobriety.jpg";
 import blogImageRelapseWarnings from "@/assets/blog-relapse-warning-signs.jpg";
