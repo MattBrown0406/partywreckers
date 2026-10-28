@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "addiction-intervention-before-the-holidays": {
+    eyebrow: "Article answer",
+    title: "Should we do an addiction intervention before the holidays or wait until January?",
+    answer: "For many families, a planned intervention before the holidays is better than waiting. The season brings more alcohol, stress, travel, and risk, and \"after the holidays\" often becomes another year. Plan it on purpose with a professional, never as a dinner-table confrontation.",
+    bullets: [
+      "Addiction does not take the holidays off; the calendar becomes another excuse to wait.",
+      "Holiday weeks often bring arrests, blowups, disappearances, and overdoses.",
+      "Travel and open emotions can help a planned intervention bring the whole family together.",
+      "If you wait, wait on purpose: pick a real January date and have the plan ready.",
+    ],
+    nextSteps: [
+      "Have one honest conversation with the family members who care most.",
+      "Talk to an interventionist and check treatment and insurance details in November.",
+      "Set boundaries for the season and keep naloxone in the house if opioids are involved.",
+    ],
+    links: [
+      { label: "How Addiction Changes Family Holidays", href: "/blog/how-addiction-changes-family-holidays" },
+      { label: "The Intervention Objections I Hear Every Week", href: "/blog/intervention-objections-ill-go-monday" },
+    ],
+  },
   "documenting-a-loved-ones-addiction": {
     eyebrow: "Article answer",
     title: "Why should families document a loved one's addiction?",
