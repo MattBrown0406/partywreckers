@@ -1,3 +1,4 @@
+import blogImageBeforeHolidays from "@/assets/blog-intervention-before-the-holidays.jpg";
 import blogImageDocumentingAddiction from "@/assets/blog-documenting-a-loved-ones-addiction.jpg";
 import blogImageSoberParty from "@/assets/blog-how-to-go-to-a-party-sober.jpg";
 import blogImageEmotionsEarly from "@/assets/blog-emotions-in-early-sobriety.jpg";
@@ -173,6 +174,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "addiction-intervention-before-the-holidays",
+    title: "\"We'll Deal With It After the Holidays\": The Case for an Addiction Intervention Before the Holidays",
+    date: "October 28, 2026",
+    image: blogImageBeforeHolidays,
+    imageAlt: "A worried woman in her late forties sitting alone at a dining table with her phone as autumn turns toward the holidays",
+    excerpt: "Thinking \"we'll deal with it after the holidays\"? Interventionist Matt Brown on why waiting costs families and what you can do before the holidays begin.",
+    category: "Intervention"
+  },
   {
     id: "documenting-a-loved-ones-addiction",
     title: "The Spiral Notebook: Why Documenting a Loved One's Addiction Is the Most Underrated Thing You Can Do Tonight",
