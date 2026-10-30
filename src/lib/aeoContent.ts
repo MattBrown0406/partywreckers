@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "how-to-pay-for-addiction-treatment": {
+    eyebrow: "Article answer",
+    title: "How do you pay for addiction treatment before your loved one says yes?",
+    answer: "Most health plans, including employer plans, marketplace plans, and Medicaid, cover at least some addiction treatment. Call the number on the back of the insurance card, ask about levels of care, prior authorization, deductibles, and out-of-network benefits, and shortlist two or three programs before a crisis hits. A yes has a shelf life.",
+    bullets: [
+      "Addiction treatment is health care; parity rules give you more leverage than you think.",
+      "Write down the date, the representative's name, and the call reference number.",
+      "Without insurance, check Medicaid, SAMHSA's helpline (1-800-662-4357), FindTreatment.gov, and sliding-scale programs.",
+      "Avoid anyone promising free treatment or travel, or who won't name the facility.",
+    ],
+    nextSteps: [
+      "Photograph the front and back of the insurance card.",
+      "Call the insurer and work through the six questions in this article.",
+      "Shortlist two or three programs and keep everything in one note on your phone.",
+    ],
+    links: [
+      { label: "You Said Yes to Getting Help — Here's What Happens Next", href: "/blog/you-said-yes-intervention" },
+      { label: "When It's Time to Call a Professional Interventionist", href: "/blog/stop-waiting-for-a-sign-when-to-call-professional-interventionist" },
+    ],
+  },
   "addiction-intervention-before-the-holidays": {
     eyebrow: "Article answer",
     title: "Should we do an addiction intervention before the holidays or wait until January?",
