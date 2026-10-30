@@ -1,3 +1,4 @@
+import blogImagePayForTreatment from "@/assets/blog-how-to-pay-for-addiction-treatment.jpg";
 import blogImageBeforeHolidays from "@/assets/blog-intervention-before-the-holidays.jpg";
 import blogImageDocumentingAddiction from "@/assets/blog-documenting-a-loved-ones-addiction.jpg";
 import blogImageSoberParty from "@/assets/blog-how-to-go-to-a-party-sober.jpg";
@@ -174,6 +175,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "how-to-pay-for-addiction-treatment",
+    title: "The Hold Music Problem: How to Pay for Addiction Treatment Before Your Family Needs It",
+    date: "October 30, 2026",
+    image: blogImagePayForTreatment,
+    imageAlt: "A woman in her early fifties on the phone at her kitchen table at night with an insurance card and notepad in front of her",
+    excerpt: "A yes has a shelf life. Interventionist Matt Brown on the insurance questions to ask and low-cost options to line up before your loved one says yes to treatment.",
+    category: "Family"
+  },
   {
     id: "addiction-intervention-before-the-holidays",
     title: "\"We'll Deal With It After the Holidays\": The Case for an Addiction Intervention Before the Holidays",
