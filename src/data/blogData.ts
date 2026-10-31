@@ -1,3 +1,4 @@
+import blogImageMorningAfter from "@/assets/blog-morning-after-drinking-episode.jpg";
 import blogImagePayForTreatment from "@/assets/blog-how-to-pay-for-addiction-treatment.jpg";
 import blogImageBeforeHolidays from "@/assets/blog-intervention-before-the-holidays.jpg";
 import blogImageDocumentingAddiction from "@/assets/blog-documenting-a-loved-ones-addiction.jpg";
@@ -175,6 +176,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "what-to-do-after-a-loved-ones-drinking-episode",
+    title: "The Morning After Halloween: What to Do After a Loved One's Drinking Episode",
+    date: "October 31, 2026",
+    image: blogImageMorningAfter,
+    imageAlt: "A worried woman in her late forties sitting alone at her kitchen table in early morning light with a cold cup of coffee and autumn leaves on the table",
+    excerpt: "The morning after a loved one's drinking episode, most families clean up and go quiet. Interventionist Matt Brown shares what to do instead, step by step.",
+    category: "Family"
+  },
   {
     id: "how-to-pay-for-addiction-treatment",
     title: "The Hold Music Problem: How to Pay for Addiction Treatment Before Your Family Needs It",
