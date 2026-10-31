@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "what-to-do-after-a-loved-ones-drinking-episode": {
+    eyebrow: "Article answer",
+    title: "What should you do after a loved one's drinking episode?",
+    answer: "Make sure everyone is safe first, then refuse to pretend it didn't happen. Wait until your loved one is sober and you're calm, usually within 24 to 48 hours, and name what happened in three short sentences: what you saw, how it affected you, and what you're going to do. Silence teaches them that every bad night gets cleaned up and forgotten.",
+    bullets: [
+      "Call 911 if they can't be woken, have slow or irregular breathing, or are vomiting while barely conscious.",
+      "Don't clean up consequences that belong to them: calling in sick for them, paying for damage, or covering the story.",
+      "Never confront someone while they're drunk; talk within a day or two, calm and specific.",
+      "Tell at least one person who can help, and jot down the date and what happened while it's fresh.",
+    ],
+    nextSteps: [
+      "Pick one cleanup task you normally do and simply don't do it this time.",
+      "Prepare your three sentences: what you saw, how it affected you, what you'll do.",
+      "Make one call this week to an interventionist, counselor, or Al-Anon group.",
+    ],
+    links: [
+      { label: "Documenting a Loved One's Addiction: The Spiral Notebook", href: "/blog/documenting-a-loved-ones-addiction" },
+      { label: "When It's Time to Call a Professional Interventionist", href: "/blog/stop-waiting-for-a-sign-when-to-call-professional-interventionist" },
+    ],
+  },
   "how-to-pay-for-addiction-treatment": {
     eyebrow: "Article answer",
     title: "How do you pay for addiction treatment before your loved one says yes?",
