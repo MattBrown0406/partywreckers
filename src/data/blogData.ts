@@ -1,3 +1,4 @@
+import blogImageResentment from "@/assets/blog-resentment-in-recovery.jpg";
 import blogImageMorningAfter from "@/assets/blog-morning-after-drinking-episode.jpg";
 import blogImagePayForTreatment from "@/assets/blog-how-to-pay-for-addiction-treatment.jpg";
 import blogImageBeforeHolidays from "@/assets/blog-intervention-before-the-holidays.jpg";
@@ -176,6 +177,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "resentment-in-recovery",
+    title: "Resentment in Recovery: The List I Didn't Want to Write",
+    date: "November 1, 2026",
+    image: blogImageResentment,
+    imageAlt: "A young adult man writing on a yellow legal pad at a kitchen table while an older adult sponsor listens",
+    excerpt: "Resentment in recovery nearly cost me my sobriety. Interventionist Matt Brown shares the list he didn't want to write and what letting go really looked like.",
+    category: "Recovery"
+  },
   {
     id: "what-to-do-after-a-loved-ones-drinking-episode",
     title: "The Morning After Halloween: What to Do After a Loved One's Drinking Episode",
