@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "resentment-in-recovery": {
+    eyebrow: "Article answer",
+    title: "How do you let go of resentment in recovery?",
+    answer: "Resentment means re-feeling an old hurt, keeping you in the emotional state that drinking or using used to numb. Letting go starts with writing it down, looking honestly at your own part without blaming yourself for harm you did not deserve, and sharing it with a sponsor, counselor, or trusted person. It is a gradual process, not forced forgiveness.",
+    bullets: [
+      "Resentment can show up as sarcasm, silence, scorekeeping, and replaying arguments.",
+      "Unaddressed anger can contribute to relapse before cravings become obvious.",
+      "Writing and sharing the list can loosen its grip; forgiveness has no imposed timeline.",
+      "Families need their own support and do not have to absorb unfair resentment.",
+    ],
+    nextSteps: [
+      "Write what happened, what it threatened in you, and how you have carried it.",
+      "Talk honestly with a sponsor, counselor, or trusted person.",
+      "Seek your own support through Al-Anon, a family program, or a therapist.",
+    ],
+    links: [
+      { label: "Relapse Starts Before the Drink", href: "/blog/relapse-warning-signs" },
+      { label: "Making Amends in Recovery", href: "/blog/making-amends-in-recovery" },
+    ],
+  },
   "what-to-do-after-a-loved-ones-drinking-episode": {
     eyebrow: "Article answer",
     title: "What should you do after a loved one's drinking episode?",
