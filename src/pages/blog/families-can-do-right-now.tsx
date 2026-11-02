@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-families-can-do-right-now.jpg";
@@ -91,6 +92,8 @@ const FamiliesCanDoRightNow = () => {
           url="https://partywreckers.com/blog/families-can-do-right-now"
           title="You're Not Powerless: What Families Can Do RIGHT NOW When a Loved One Is Addicted"
         />
+
+        <ArticleAnswerSummary slug="families-can-do-right-now" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>

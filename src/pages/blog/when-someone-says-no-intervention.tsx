@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-when-someone-says-no-intervention.jpg";
@@ -95,6 +96,8 @@ const WhenSomeoneSaysNoIntervention = () => {
         </div>
 
         <SocialShareButtons title="When They Say No: What Happens After an Intervention Doesn't Go as Planned" />
+
+        <ArticleAnswerSummary slug="when-someone-says-no-intervention" />
 
         <div className="prose prose-lg max-w-none">
           <p className="text-xl text-muted-foreground leading-relaxed">

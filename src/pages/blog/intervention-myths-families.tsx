@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-intervention-myths.jpg";
@@ -92,6 +93,8 @@ const InterventionMythsFamilies = () => {
           />
           <SocialShareButtons title="7 Intervention Myths That Keep Families Stuck (And What's Actually True)" />
         </header>
+
+        <ArticleAnswerSummary slug="intervention-myths-families" />
 
         <div className="prose prose-lg max-w-none" itemProp="articleBody">
           <p className="text-xl text-muted-foreground leading-relaxed">

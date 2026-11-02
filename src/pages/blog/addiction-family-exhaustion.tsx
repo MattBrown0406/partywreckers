@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageAddictionFamilyExhaustion from "@/assets/blog-addiction-family-exhaustion.jpg";
 
@@ -39,6 +40,8 @@ const AddictionFamilyExhaustion = () => {
             Why You're Exhausted — And It's Not Just the Drinking
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="addiction-family-exhaustion" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>

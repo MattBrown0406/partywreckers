@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-trauma-addiction-families.jpg";
@@ -88,6 +89,8 @@ const TraumaAndAddictionFamilies = () => {
           url="https://partywreckers.com/blog/trauma-and-addiction-families"
           title="The Trauma Connection: Why Your Loved One's Addiction Isn't the Whole Story"
         />
+
+        <ArticleAnswerSummary slug="trauma-and-addiction-families" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <div className="prose prose-lg max-w-none text-foreground/90 space-y-6">

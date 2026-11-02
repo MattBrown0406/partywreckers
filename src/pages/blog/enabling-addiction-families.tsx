@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import BlogConversionPanel from "@/components/BlogConversionPanel";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-enabling-addiction-families.jpg";
@@ -115,6 +116,8 @@ const EnablingAddictionFamilies = () => {
             <SocialShareButtons title="Are You Helping or Enabling? How Families Accidentally Fuel Addiction" />
           </div>
         </header>
+
+        <ArticleAnswerSummary slug="enabling-addiction-families" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>

@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-self-medication-trap.jpg";
@@ -99,6 +100,8 @@ const SelfMedicationTrap = () => {
             url="https://partywreckers.com/blog/self-medication-trap"
             title="When Drinking Wasn't the Real Problem: The Self-Medication Trap Families Miss"
           />
+
+          <ArticleAnswerSummary slug="self-medication-trap" />
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none text-foreground/90 space-y-6 mt-8">

@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-tough-love-addiction.jpg";
 
@@ -133,6 +134,8 @@ const ToughLoveAddictionFamilies = () => {
           </header>
 
           <SocialShareButtons title="Tough Love Isn't What You Think — And I've Got the Bruises to Prove It" />
+
+          <ArticleAnswerSummary slug="tough-love-addiction-families" />
 
           {/* Article Body */}
           <div className="prose prose-lg dark:prose-invert max-w-none">
