@@ -29,6 +29,8 @@ export const READINESS_EVENTS = ["intervention_readiness_click"] as const;
 
 export const SPONSOR_EVENTS = ["sponsor_impression", "sponsor_click"] as const;
 
+export const QUIZ_EVENTS = ["quiz_started", "quiz_completed"] as const;
+
 /**
  * Events the public tracker endpoint accepts from browsers. Form submissions are NOT in
  * this list: they're recorded server-side by the form functions themselves, so the
@@ -42,6 +44,8 @@ export const BROWSER_TRACKABLE_EVENTS = new Set<string>([
   "podcast_platform_click",
   "aeo_answer_cta_click",
   "aeo_source_cta_click",
+  // Family check-in quiz at /family-check-in (metadata: the result id only, never answers).
+  ...QUIZ_EVENTS,
 ]);
 
 /** Recorded server-side by send-contact-email: the site's north-star metric. */

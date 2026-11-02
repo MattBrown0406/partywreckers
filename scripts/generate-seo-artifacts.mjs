@@ -44,6 +44,8 @@ const priorities = new Map([
   ["/start-here", "0.95"],
   ["/get-help", "0.95"],
   ["/ask-matt", "0.9"],
+  ["/first-72-hours", "0.9"],
+  ["/family-check-in", "0.85"],
   ["/from-party-wreckers", "0.95"],
   ["/family-resources", "0.9"],
   ["/family-addiction-help", "0.95"],

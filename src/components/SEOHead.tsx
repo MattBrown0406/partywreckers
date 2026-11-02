@@ -25,6 +25,8 @@ const ROUTE_DESCRIPTIONS: Record<string, string> = {
   "/": "The Party Wreckers Podcast with Matt Brown — real conversations about addiction, intervention, and recovery. Helping families find hope and practical guidance.",
   "/get-help": "Worried about a loved one's drinking or drug use? Tell Matt Brown, a professional interventionist in long-term recovery, what's going on and get a personal reply.",
   "/ask-matt": "Send Matt Brown, a professional interventionist, your question about a loved one's addiction. Type or record it, stay anonymous, and hear it answered on the podcast.",
+  "/first-72-hours": "A free, printable checklist for families after an overdose, arrest, ER visit, or relapse: safety first, the first conversation, what not to do, and the next 72 hours.",
+  "/family-check-in": "Eight quick questions for families worried about a loved one's drinking or drug use, with a plain-language result, what to read next, and the right next step.",
   "/episodes": "Browse every episode of The Party Wreckers Podcast. Solo episodes, interviews, Q&A, and case studies on addiction, intervention, and family recovery.",
   "/blog": "Articles on addiction, intervention, family recovery, and the stories behind the podcast. Written by Matt Brown, professional interventionist.",
   "/family-resources": "Free resources for families dealing with a loved one's addiction: reflection exercises, fear inventories, conversation guides, and more.",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T23:11:47.750Z",
+  "generatedAt": "2026-11-02T23:22:10.683Z",
   "routes": [
     "/",
     "/advertise",
@@ -261,9 +261,11 @@
     "/episodes/you-dont-need-proof-you-need-patterns",
     "/episodes/your-kid-called-from-jail-your-wallet-doesnt-have-to",
     "/family-addiction-help",
+    "/family-check-in",
     "/family-reflection",
     "/family-resources",
     "/fear-inventory",
+    "/first-72-hours",
     "/from-party-wreckers",
     "/get-help",
     "/glossary",
