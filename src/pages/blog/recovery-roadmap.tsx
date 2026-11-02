@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-recovery-roadmap.jpg";
 
@@ -114,6 +115,8 @@ const RecoveryRoadmap = () => {
 
         {/* Social Share */}
         <SocialShareButtons url={articleUrl} title={articleTitle} />
+
+        <ArticleAnswerSummary slug="recovery-roadmap" />
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none text-foreground/90 space-y-6 mt-8">

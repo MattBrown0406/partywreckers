@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import BlogConversionPanel from "@/components/BlogConversionPanel";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-when-to-consider-intervention.jpg";
@@ -116,6 +117,10 @@ const WhenToConsiderIntervention = () => {
                 title="When to Stop Waiting and Consider an Intervention"
               />
             </header>
+
+            <div className="not-prose">
+              <ArticleAnswerSummary slug="when-to-consider-intervention" />
+            </div>
 
             <div className="space-y-6 text-muted-foreground">
               <p className="text-lg font-medium text-foreground">

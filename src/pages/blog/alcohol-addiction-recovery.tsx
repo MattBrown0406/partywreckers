@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImageAlcoholAddictionRecovery from "@/assets/blog-alcohol-addiction-recovery.jpg";
@@ -85,6 +86,8 @@ const AlcoholAddictionRecovery = () => {
           url="https://partywreckers.com/blog/alcohol-addiction-recovery"
           title="Alcohol Addiction Recovery: Signs, Stages & How to Get Help"
         />
+
+        <ArticleAnswerSummary slug="alcohol-addiction-recovery" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <div className="prose prose-lg max-w-none text-foreground/90 space-y-6">

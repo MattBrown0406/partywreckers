@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-anxiety-addiction-loop.jpg";
@@ -101,6 +102,8 @@ const AnxietyAddictionLoopFamilies = () => {
             title="The Anxiety-Addiction Loop: Why Your Loved One Can't Just 'Calm Down and Stop'"
             url="https://partywreckers.com/blog/anxiety-addiction-loop-families"
           />
+
+          <ArticleAnswerSummary slug="anxiety-addiction-loop-families" />
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed space-y-6">

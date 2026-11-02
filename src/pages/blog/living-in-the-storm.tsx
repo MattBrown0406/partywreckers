@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageLivingInTheStorm from "@/assets/blog-living-in-the-storm.jpg";
 
@@ -110,6 +111,8 @@ const LivingInTheStorm = () => {
         </header>
 
         <SocialShareButtons url={articleUrl} title={articleTitle} />
+
+        <ArticleAnswerSummary slug="living-in-the-storm" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p className="text-xl leading-relaxed font-medium">

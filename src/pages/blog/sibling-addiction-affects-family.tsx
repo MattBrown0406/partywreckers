@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-sibling-addiction-family.jpg";
@@ -103,6 +104,8 @@ const SiblingAddictionAffectsFamily = () => {
             title="The Forgotten Ones: How a Sibling's Addiction Quietly Breaks the Rest of the Family"
           />
         </div>
+
+        <ArticleAnswerSummary slug="sibling-addiction-affects-family" />
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none text-foreground">

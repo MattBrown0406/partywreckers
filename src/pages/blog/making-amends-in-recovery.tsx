@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImageMakingAmends from "@/assets/blog-making-amends-recovery.jpg";
@@ -89,6 +90,8 @@ const MakingAmendsInRecovery = () => {
           url="https://partywreckers.com/blog/making-amends-in-recovery"
           title="Why Making Amends Changed My Life More Than Getting Sober Did"
         />
+
+        <ArticleAnswerSummary slug="making-amends-in-recovery" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>

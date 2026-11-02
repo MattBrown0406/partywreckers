@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import BlogConversionPanel from "@/components/BlogConversionPanel";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-stop-waiting-rock-bottom.jpg";
@@ -96,6 +97,8 @@ const StopWaitingForRockBottom = () => {
           url="https://partywreckers.com/blog/stop-waiting-for-rock-bottom"
           title="Stop Waiting for Rock Bottom: What You Can Do Right Now to Help a Loved One with Addiction"
         />
+
+        <ArticleAnswerSummary slug="stop-waiting-for-rock-bottom" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>

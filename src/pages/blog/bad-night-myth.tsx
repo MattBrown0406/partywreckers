@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-bad-night-myth.jpg";
 
@@ -110,6 +111,8 @@ const BadNightMyth = () => {
         </header>
 
         <SocialShareButtons url={articleUrl} title={articleTitle} />
+
+        <ArticleAnswerSummary slug="bad-night-myth" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p className="text-xl leading-relaxed font-medium">

@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-shame-addiction.jpg";
@@ -97,6 +98,8 @@ const ShameAndAddiction = () => {
             title="Why Shame Doesn't Sober Up an Addict — It Just Drives the Using Underground"
             url="https://partywreckers.com/blog/shame-and-addiction"
           />
+
+          <ArticleAnswerSummary slug="shame-and-addiction" />
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed space-y-6">

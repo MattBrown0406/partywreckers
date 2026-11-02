@@ -4,6 +4,7 @@ import BlogConversionPanel from "@/components/BlogConversionPanel";
 import SEOHead from "@/components/SEOHead";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-signs-loved-one-needs-help.jpg";
@@ -90,6 +91,8 @@ const SignsLovedOneNeedsHelpWithAlcohol = () => {
         </header>
 
         <SocialShareButtons url={articleUrl} title={articleTitle} />
+
+        <ArticleAnswerSummary slug="signs-loved-one-needs-help-with-alcohol" />
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none text-foreground/90 leading-relaxed space-y-6">

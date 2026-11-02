@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-treatment-options-guide.jpg";
@@ -95,6 +96,8 @@ const AddictionTreatmentOptionsGuide = () => {
           url="https://partywreckers.com/blog/addiction-treatment-options-guide"
           title="Understanding Addiction Treatment Options: A Family's Guide to Choosing the Right Level of Care"
         />
+
+        <ArticleAnswerSummary slug="addiction-treatment-options-guide" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>

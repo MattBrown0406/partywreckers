@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-you-said-yes-intervention.jpg";
@@ -88,6 +89,8 @@ const YouSaidYesIntervention = () => {
           />
           <SocialShareButtons title="You Said Yes to Getting Help — Here's What Happens Next" />
         </header>
+
+        <ArticleAnswerSummary slug="you-said-yes-intervention" />
 
         <div className="prose prose-lg max-w-none" itemProp="articleBody">
           <p className="text-xl text-muted-foreground leading-relaxed">

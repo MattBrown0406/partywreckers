@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-intervention-what-to-say.jpg";
@@ -80,6 +81,8 @@ const WhatToSayAtAnIntervention = () => {
             What to Say at an Intervention: Scripts and Steps That Actually Work
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="what-to-say-at-an-intervention" />
 
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
           <p>
