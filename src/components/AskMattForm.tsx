@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import HoneypotField from "@/components/HoneypotField";
-import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
+import TurnstileWidget, { type TurnstileHandle } from "@/components/TurnstileWidget";
 import VoiceRecorder from "@/components/VoiceRecorder";
 import { currentSourcePath, submitForm } from "@/lib/formSubmit";
 import { LISTENER_QUESTION_TOPICS, recordingToBase64, type VoiceRecording } from "@/lib/listenerQuestions";
@@ -69,9 +69,8 @@ const AskMattForm = () => {
     }
 
     const token = (await turnstileRef.current?.getToken()) ?? null;
-    if (isTurnstileEnabled && !token) {
-      return fail("The verification check didn't finish. Please try again in a moment.");
-    }
+    // No token (e.g. Cloudflare blocked by an ad blocker or network): send anyway. The
+    // server accepts it under tighter limits rather than locking a family out.
 
     const email = form.email.trim();
     const result = await submitForm("submit-listener-question", {

@@ -102,6 +102,7 @@ serve(async (req) => {
     // North-star metric: one row per family request, with context but no personal details.
     // Reserved before sending (so bursts can't slip past the limits), released on failure.
     const reservation = await reserveSubmission(supabase, eventName, ipHash, {
+      verification: turnstile,
       perVisitor: MAX_REQUESTS_PER_VISITOR_PER_HOUR,
       siteWide: MAX_REQUESTS_SITE_WIDE_PER_HOUR,
       sourcePath: options.sourcePath,

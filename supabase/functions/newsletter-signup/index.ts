@@ -173,6 +173,7 @@ serve(async (req) => {
     const turnstile = await verifyTurnstile(req, body.turnstile_token, ["newsletter"]);
     const ipHash = await hashClientIp(req);
     const reservation = await reserveSubmission(supabase, NEWSLETTER_SIGNUP_EVENT, ipHash, {
+      verification: turnstile,
       perVisitor: MAX_SIGNUPS_PER_VISITOR_PER_HOUR,
       siteWide: MAX_SIGNUPS_SITE_WIDE_PER_HOUR,
       ctaLabel: source,

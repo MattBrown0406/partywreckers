@@ -3,7 +3,7 @@ import { AlertCircle, CheckCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import HoneypotField from "@/components/HoneypotField";
-import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
+import TurnstileWidget, { type TurnstileHandle } from "@/components/TurnstileWidget";
 import { submitForm } from "@/lib/formSubmit";
 import { cn } from "@/lib/utils";
 import type { QuizResultId } from "@/lib/familyCheckIn";
@@ -54,11 +54,8 @@ const LeadMagnetSignup = ({
 
     setStatus("loading");
     const token = (await turnstileRef.current?.getToken()) ?? null;
-    if (isTurnstileEnabled && !token) {
-      setStatus("error");
-      setMessage("The verification check didn't finish. Please try again.");
-      return;
-    }
+    // No token (e.g. Cloudflare blocked by an ad blocker or network): send anyway. The
+    // server accepts it under tighter limits rather than locking a family out.
 
     const result = await submitForm<{ confirmation_required?: boolean; email_sent?: boolean }>("newsletter-signup", {
       email: trimmed,

@@ -59,9 +59,10 @@ serve(async (req) => {
     if (!resendApiKey) throw new Error("RESEND_API_KEY is not configured");
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
-    await verifyTurnstile(req, body.turnstile_token, ["advertise"]);
+    const turnstile = await verifyTurnstile(req, body.turnstile_token, ["advertise"]);
     const ipHash = await hashClientIp(req);
     const reservation = await reserveSubmission(supabase, ADVERTISER_INQUIRY_EVENT, ipHash, {
+      verification: turnstile,
       perVisitor: MAX_INQUIRIES_PER_VISITOR_PER_HOUR,
       siteWide: MAX_INQUIRIES_SITE_WIDE_PER_HOUR,
       sourcePath,

@@ -141,6 +141,14 @@ const HelpNow = () => {
                 <li>Focus on safety, clarity, and what you can control.</li>
                 <li>Pick one path: join Family Squares, get direct guidance now, or check intervention readiness.</li>
               </ol>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button variant="outline" asChild>
+                  <Link to="/first-72-hours">Open the First 72 Hours checklist</Link>
+                </Button>
+                <Button variant="ghost" asChild>
+                  <Link to="/family-check-in">Not sure how serious it is? Take the 2-minute check-in</Link>
+                </Button>
+              </div>
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-8">
                 <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" asChild><TrackedExternalLink href={funnelLinks.familySquares} target="_blank" rel="noopener noreferrer" eventName="family_squares_click" ctaLabel="Help Now 10-minute Family Squares">Join Family Squares</TrackedExternalLink></Button>
                 <Button className="h-auto min-h-11 min-w-0 max-w-full whitespace-normal py-3 [&_svg]:shrink-0" variant="outline" asChild><TrackedExternalLink href={funnelLinks.freedomReadiness} target="_blank" rel="noopener noreferrer" eventName="intervention_readiness_click" ctaLabel="Help Now 10-minute Intervention Readiness">Check Intervention Readiness</TrackedExternalLink></Button>

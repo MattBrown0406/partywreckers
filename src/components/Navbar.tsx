@@ -49,6 +49,8 @@ const mattLinks = [
 ];
 
 const guideLinks = [
+  { label: "Family Check-In (2-min quiz)", href: "/family-check-in" },
+  { label: "First 72 Hours Checklist", href: "/first-72-hours" },
   { label: "Family Addiction Help", href: "/family-addiction-help" },
   { label: "Intervention Readiness", href: "/intervention-readiness" },
   { label: "Enabling vs Support", href: "/enabling-vs-support" },

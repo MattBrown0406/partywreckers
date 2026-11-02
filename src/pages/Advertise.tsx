@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import HoneypotField from "@/components/HoneypotField";
-import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
+import TurnstileWidget, { type TurnstileHandle } from "@/components/TurnstileWidget";
 import { submitForm } from "@/lib/formSubmit";
 import { coreFaqs, primaryAeoAnswers } from "@/lib/aeoContent";
 import { trackPartyWreckersEvent } from "@/lib/funnelTracking";
@@ -92,13 +92,7 @@ const Advertise = () => {
     });
 
     setErrorMessage("");
-    const verificationFailed = () => {
-      setStatus("error");
-      setErrorMessage("The verification check didn't finish. Please try again.");
-    };
-
     const token = (await turnstileRef.current?.getToken()) ?? null;
-    if (isTurnstileEnabled && !token) return verificationFailed();
 
     const sourcePath = `${window.location.pathname}${window.location.search}`;
     const result = await submitForm("send-advertiser-inquiry", {
@@ -125,7 +119,6 @@ const Advertise = () => {
       // Server problem: fall back to the plain contact email so the lead isn't lost.
       // Bot-check tokens are single-use, so wait for a fresh one first.
       const fallbackToken = (await turnstileRef.current?.getToken()) ?? null;
-      if (isTurnstileEnabled && !fallbackToken) return verificationFailed();
       const fallback = await submitForm("send-contact-email", {
         name: form.name,
         email: form.email,

@@ -93,6 +93,12 @@ const Footer = () => {
               <Link to="/next-step" className="rounded-full border border-primary/30 px-4 py-2 text-sm text-foreground hover:border-primary hover:text-primary transition-colors">
                 Find My Next Step
               </Link>
+              <Link to="/family-check-in" className="rounded-full border border-primary/30 px-4 py-2 text-sm text-foreground hover:border-primary hover:text-primary transition-colors">
+                Family Check-In
+              </Link>
+              <Link to="/first-72-hours" className="rounded-full border border-primary/30 px-4 py-2 text-sm text-foreground hover:border-primary hover:text-primary transition-colors">
+                First 72 Hours Checklist
+              </Link>
               <Link to="/from-party-wreckers" className="rounded-full border border-primary/30 px-4 py-2 text-sm text-foreground hover:border-primary hover:text-primary transition-colors">
                 Listener Path
               </Link>

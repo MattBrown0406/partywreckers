@@ -271,6 +271,7 @@ export const handleListenerQuestion = async (req: Request, deps: HandlerDeps): P
     const ipHash = await hashClientIp(req);
     // Context only: never the question text, name or email.
     const reservation = await reserveSubmission(supabase, LISTENER_QUESTION_EVENT, ipHash, {
+      verification: turnstile,
       perVisitor: MAX_PER_VISITOR_PER_HOUR,
       siteWide: MAX_SITE_WIDE_PER_HOUR,
       sourcePath: input.sourcePath,

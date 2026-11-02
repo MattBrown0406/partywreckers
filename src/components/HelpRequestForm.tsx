@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import HoneypotField from "@/components/HoneypotField";
 import BookCallButton from "@/components/BookCallButton";
-import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
+import TurnstileWidget, { type TurnstileHandle } from "@/components/TurnstileWidget";
 import { currentSourcePath, submitForm } from "@/lib/formSubmit";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
 
@@ -84,11 +84,8 @@ const HelpRequestForm = ({ kind, sourceArticle, messagePlaceholder, idPrefix = k
     setErrorMessage("");
 
     const token = (await turnstileRef.current?.getToken()) ?? null;
-    if (isTurnstileEnabled && !token) {
-      setStatus("error");
-      setErrorMessage(`The verification check didn't finish. Please try again, or call ${SITE_PHONE_DISPLAY}.`);
-      return;
-    }
+    // No token (e.g. Cloudflare blocked by an ad blocker or network): send anyway. The
+    // server accepts it under tighter limits rather than locking a family out.
 
     const result = await submitForm("send-contact-email", {
       name: form.name.trim(),

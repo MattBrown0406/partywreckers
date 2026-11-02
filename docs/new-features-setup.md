@@ -12,8 +12,12 @@ public and go in `.env` (or the Lovable environment settings); a rebuild picks t
 2. Put the **site key** in `.env`: `VITE_TURNSTILE_SITE_KEY=0x...` and rebuild.
 3. Set the **secret key** as a Supabase secret: `TURNSTILE_SECRET_KEY`.
 
-Order matters: set the site key first, deploy, then add the secret. If the secret
-is set while the site key isn't, every form submission is rejected.
+Once the secret is set, a submission with a valid token goes through normally and a
+forged or reused token is rejected. A submission with **no** token (the visitor's
+browser couldn't load Cloudflare, e.g. an ad blocker or a school/office network) is
+still accepted so families are never locked out, but only 2 per visitor and 10
+site-wide per hour, and it never triggers an auto-reply. Set the site key first anyway:
+until it's live, every visitor falls into that tighter tokenless bucket.
 
 Always on, no setup needed: a hidden "honeypot" field that catches simple bots, and a
 limit of 5 submissions per hour per visitor on each form, plus a site-wide hourly cap.

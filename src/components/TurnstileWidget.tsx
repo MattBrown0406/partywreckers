@@ -62,9 +62,22 @@ const TurnstileWidget = forwardRef<TurnstileHandle, TurnstileWidgetProps>(({ act
   const tokenRef = useRef<string | null>(null);
   const waitersRef = useRef<Array<(token: string | null) => void>>([]);
 
+  // Set when Cloudflare's script can't load or the widget errors: getToken then answers
+  // immediately instead of making the visitor wait for the timeout.
+  const failedRef = useRef(false);
+
+  const fail = () => {
+    failedRef.current = true;
+    tokenRef.current = null;
+    const waiters = waitersRef.current;
+    waitersRef.current = [];
+    waiters.forEach((resolve) => resolve(null));
+  };
+
   const settle = (token: string | null) => {
     tokenRef.current = token;
     if (!token) return;
+    failedRef.current = false;
     const waiters = waitersRef.current;
     waitersRef.current = [];
     waiters.forEach((resolve) => resolve(token));
@@ -74,6 +87,7 @@ const TurnstileWidget = forwardRef<TurnstileHandle, TurnstileWidgetProps>(({ act
     getToken: () => {
       if (!SITE_KEY) return Promise.resolve(null);
       if (tokenRef.current) return Promise.resolve(tokenRef.current);
+      if (failedRef.current) return Promise.resolve(null);
       return new Promise((resolve) => {
         waitersRef.current.push(resolve);
         setTimeout(() => {
@@ -102,10 +116,10 @@ const TurnstileWidget = forwardRef<TurnstileHandle, TurnstileWidgetProps>(({ act
           appearance: "interaction-only",
           callback: (token: string) => settle(token),
           "expired-callback": () => settle(null),
-          "error-callback": () => settle(null),
+          "error-callback": () => fail(),
         });
       })
-      .catch(() => settle(null));
+      .catch(() => fail());
 
     return () => {
       cancelled = true;

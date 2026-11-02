@@ -25,26 +25,30 @@ export const hashClientIp = async (req: Request) => {
   return Array.from(new Uint8Array(digest).slice(0, 16), (byte) => byte.toString(16).padStart(2, "0")).join("");
 };
 
+export type TurnstileOutcome = "verified" | "skipped" | "unavailable" | "missing";
+
 /**
  * Verify a Turnstile token.
  * - "skipped": TURNSTILE_SECRET_KEY isn't set yet, so forms keep working before setup.
- * - "unavailable": Cloudflare couldn't be reached; allowed so a family's message isn't
- *   lost (rate limits and the honeypot still apply).
+ * - "unavailable": Cloudflare's verify API couldn't be reached from the server.
+ * - "missing": no token at all. That happens to real families when Cloudflare's script
+ *   is blocked (ad/privacy blockers, office or school networks), so it's accepted, but
+ *   reserveSubmission then applies much tighter limits and no auto-reply is sent.
  * - "verified": Cloudflare confirmed a real visitor on one of `expectedActions`.
- * Throws a 400 for a missing, invalid, reused or wrong-form token.
+ * Throws a 400 for a token that is present but invalid, reused or from another form.
  */
 export const verifyTurnstile = async (
   req: Request,
   token: unknown,
   expectedActions: string[],
-): Promise<"verified" | "skipped" | "unavailable"> => {
+): Promise<TurnstileOutcome> => {
   const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
   if (!secret) return "skipped";
+  if (typeof token !== "string" || !token) return "missing";
 
   const reject = () => {
     throw new BadRequestError("Please complete the verification check and try again.");
   };
-  if (typeof token !== "string" || !token) reject();
 
   const form = new FormData();
   form.append("secret", secret);
@@ -80,7 +84,13 @@ export const verifyTurnstile = async (
 export const isHoneypotFilled = (body: Record<string, unknown>) =>
   typeof body.website === "string" && body.website.trim() !== "";
 
+/** Limits for submissions that arrive with no Turnstile token while Turnstile is on. */
+const UNVERIFIED_PER_VISITOR = 2;
+const UNVERIFIED_SITE_WIDE = 10;
+
 interface ReservationOptions {
+  /** The verifyTurnstile result; "missing" gets the tighter unverified limits. */
+  verification?: TurnstileOutcome;
   /** Max accepted submissions per visitor within the window. */
   perVisitor: number;
   /** Max accepted submissions site-wide within the window: a backstop if IPs are spoofed. */
@@ -109,13 +119,14 @@ export const reserveSubmission = async (
   options: ReservationOptions,
 ) => {
   const windowMinutes = options.windowMinutes ?? 60;
+  const unverified = options.verification === "missing";
   const { data, error } = await supabase
     .from("party_wreckers_funnel_events")
     .insert({
       event_name: eventName,
       source_path: options.sourcePath ?? null,
       cta_label: options.ctaLabel ?? null,
-      metadata: { ...(options.metadata ?? {}), ip_hash: ipHash },
+      metadata: { ...(options.metadata ?? {}), ip_hash: ipHash, ...(unverified ? { unverified: true } : {}) },
     })
     .select("id")
     .single();
@@ -131,22 +142,35 @@ export const reserveSubmission = async (
   };
 
   const since = new Date(Date.now() - windowMinutes * 60 * 1000).toISOString();
-  const countSince = (forVisitor: boolean) => {
+  const countSince = (scope: "visitor" | "site" | "unverified") => {
     let query = supabase
       .from("party_wreckers_funnel_events")
       .select("id", { count: "exact", head: true })
       .eq("event_name", eventName)
       .gte("created_at", since);
-    if (forVisitor) query = query.eq("metadata->>ip_hash", ipHash);
+    if (scope === "visitor") query = query.eq("metadata->>ip_hash", ipHash);
+    if (scope === "unverified") query = query.eq("metadata->>unverified", "true");
     return query;
   };
 
-  const [visitor, site] = await Promise.all([countSince(true), countSince(false)]);
-  if (visitor.error || site.error) {
-    console.error(`[reserve ${eventName}] count failed:`, visitor.error?.message || site.error?.message);
+  const [visitor, site, unverifiedSite] = await Promise.all([
+    countSince("visitor"),
+    countSince("site"),
+    unverified ? countSince("unverified") : Promise.resolve({ count: 0, error: null }),
+  ]);
+  if (visitor.error || site.error || unverifiedSite.error) {
+    console.error(
+      `[reserve ${eventName}] count failed:`,
+      visitor.error?.message || site.error?.message || unverifiedSite.error?.message,
+    );
     return { release };
   }
-  if ((visitor.count || 0) > options.perVisitor || (site.count || 0) > options.siteWide) {
+  const perVisitorLimit = unverified ? Math.min(options.perVisitor, UNVERIFIED_PER_VISITOR) : options.perVisitor;
+  if (
+    (visitor.count || 0) > perVisitorLimit ||
+    (site.count || 0) > options.siteWide ||
+    (unverified && (unverifiedSite.count || 0) > UNVERIFIED_SITE_WIDE)
+  ) {
     await release();
     throw new RateLimitError(TOO_MANY);
   }
