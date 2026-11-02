@@ -16,6 +16,10 @@ import AdvertiserMediaStrip from "@/components/AdvertiserMediaStrip";
 import SponsorPlacement from "@/components/SponsorPlacement";
 import ListenerRevenuePath from "@/components/ListenerRevenuePath";
 import SourcePageLinks from "@/components/SourcePageLinks";
+import FollowButtons from "@/components/FollowButtons";
+import FollowPrompt from "@/components/FollowPrompt";
+import ListenerReviews from "@/components/ListenerReviews";
+import { usePostListenPrompt } from "@/hooks/usePostListenPrompt";
 import { getEpisodeSearchText, topicFilters } from "@/lib/episodeGuides";
 import { episodePath, withEpisodeSlugs, type EpisodeWithSlug } from "@/lib/episodes";
 
@@ -95,6 +99,7 @@ const Episodes = () => {
   const [transcriptEpisode, setTranscriptEpisode] = useState<(EpisodeWithSlug & { category: Category }) | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const followPrompt = usePostListenPrompt();
 
   const categorizedEpisodes = useMemo(() => {
     if (!data?.episodes) return [];
@@ -141,6 +146,7 @@ const Episodes = () => {
     const audio = audioRef.current;
     if (audio) {
       audio.onended = null;
+      audio.ontimeupdate = null;
       audio.pause();
     }
     audioRef.current = null;
@@ -153,7 +159,7 @@ const Episodes = () => {
     audioRef.current = null;
   }, []);
 
-  const handlePlay = (episodeId: string, audioUrl: string) => {
+  const handlePlay = (episodeId: string, audioUrl: string, slug: string, feedDuration: number) => {
     if (playingId === episodeId) {
       stopAudio();
       return;
@@ -162,7 +168,11 @@ const Episodes = () => {
     stopAudio();
     const audio = new Audio(audioUrl);
     audioRef.current = audio;
+    audio.ontimeupdate = () => {
+      followPrompt.reportProgress(slug, audio.currentTime, audio.duration, feedDuration);
+    };
     audio.onended = () => {
+      followPrompt.reportEnded(slug);
       if (audioRef.current === audio) stopAudio();
     };
     setPlayingId(episodeId);
@@ -176,7 +186,7 @@ const Episodes = () => {
   const episodeFAQs = [
     {
       question: "Where can I listen to The Party Wreckers Podcast?",
-      answer: "The Party Wreckers Podcast is available on all major podcast platforms including Apple Podcasts, Spotify, Amazon Music, YouTube, and directly on our website. New episodes are released weekly."
+      answer: "The Party Wreckers Podcast is available on all major podcast platforms including Apple Podcasts, Spotify, Amazon Music, YouTube, and directly on our website."
     },
     {
       question: "What topics does The Party Wreckers Podcast cover?",
@@ -184,7 +194,7 @@ const Episodes = () => {
     },
     {
       question: "How often are new episodes released?",
-      answer: "New episodes of The Party Wreckers Podcast are released weekly. Subscribe on your favorite podcast platform to get notified when new episodes are available."
+      answer: "New episodes of The Party Wreckers Podcast are released regularly. Follow the show on your podcast app to get each one as it comes out."
     }
   ];
 
@@ -215,6 +225,7 @@ const Episodes = () => {
               <p className="text-muted-foreground text-lg">
                 Real conversations about addiction, intervention, family chaos, and what actually helps when the same patterns keep repeating.
               </p>
+              <FollowButtons placement="episodes_header" align="center" className="mt-8" />
             </div>
           </div>
         </section>
@@ -252,7 +263,7 @@ const Episodes = () => {
                           size="icon"
                           className="w-16 h-16 rounded-full flex-shrink-0 shadow-lg"
                           aria-label={`${playingId === latestEpisode.id ? "Pause" : "Play"}: ${latestEpisode.title}`}
-                          onClick={() => handlePlay(latestEpisode.id, latestEpisode.audioUrl)}
+                          onClick={() => handlePlay(latestEpisode.id, latestEpisode.audioUrl, latestEpisode.slug, latestEpisode.duration)}
                         >
                           {playingId === latestEpisode.id ? (
                             <Pause className="w-7 h-7" />
@@ -310,6 +321,8 @@ const Episodes = () => {
                     </div>
                   </article>
                 </div>
+
+                <ListenerReviews placement="episodes_rate_strip" layout="inline" className="mb-12" />
 
                 <div className="mb-12">
                   <SponsorPlacement placement="episodes" title="Sponsor spot" />
@@ -429,7 +442,7 @@ const Episodes = () => {
                               size="icon"
                               className="h-12 w-12 rounded-full"
                               aria-label={`${playingId === episode.id ? "Pause" : "Play"}: ${episode.title}`}
-                              onClick={() => handlePlay(episode.id, episode.audioUrl)}
+                              onClick={() => handlePlay(episode.id, episode.audioUrl, episode.slug, episode.duration)}
                             >
                               {playingId === episode.id ? (
                                 <Pause className="h-5 w-5" />
@@ -505,6 +518,12 @@ const Episodes = () => {
           slug={transcriptEpisode?.slug}
         />
       </main>
+      <FollowPrompt
+        open={followPrompt.open}
+        onDismiss={followPrompt.dismiss}
+        placement="episodes_page_prompt"
+        metadata={{ episode: followPrompt.episodeKey ?? undefined }}
+      />
       <Footer />
     </div>
   );

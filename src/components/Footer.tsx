@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NewsletterSignup from "./NewsletterSignup";
 import ArticleHelpSection from "./ArticleHelpSection";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
+import { PODCAST_PLATFORM_URLS } from "@/lib/podcastPlatforms";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -40,7 +41,7 @@ export const SocialLinks = ({ size = "default" }: { size?: "default" | "small" }
       <Facebook className={size === "small" ? "w-4 h-4" : "w-4 h-4 sm:w-5 sm:h-5"} />
     </a>
     <a
-      href="https://www.youtube.com/@ThePartyWreckers"
+      href={PODCAST_PLATFORM_URLS.youtube}
       target="_blank"
       rel="noopener noreferrer"
       className={`${size === "small" ? "w-8 h-8 sm:w-9 sm:h-9" : "w-9 h-9 sm:w-10 sm:h-10"} rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors`}
@@ -61,7 +62,7 @@ const Footer = () => {
           {/* Newsletter Signup */}
           <div className="w-full max-w-md">
             <NewsletterSignup 
-              title="Get weekly guidance for families dealing with addiction"
+              title="Get guidance for families dealing with addiction"
               description="Practical insight, steadier thinking, and honest help for families who are tired of feeling stuck"
               variant="inline"
             />

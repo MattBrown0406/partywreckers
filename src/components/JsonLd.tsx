@@ -2,6 +2,7 @@ import mattHeadshot from "@/assets/matt-headshot.jpg";
 import { toIsoDate } from "@/lib/dates";
 import { Helmet } from "react-helmet";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
+import { PODCAST_PLATFORM_URLS } from "@/lib/podcastPlatforms";
 
 const OG_IMAGE = DEFAULT_OG_IMAGE;
 
@@ -52,9 +53,9 @@ export const OrganizationJsonLd = () => {
     "description": "A podcast helping families navigate addiction, intervention, and recovery.",
     "email": "matt@partywreckers.com",
     "sameAs": [
-      "https://www.youtube.com/@ThePartyWreckers",
-      "https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917",
-      "https://open.spotify.com/show/4YJLvnFuZr5EkcGs9b47fn"
+      PODCAST_PLATFORM_URLS.youtube,
+      PODCAST_PLATFORM_URLS.apple,
+      PODCAST_PLATFORM_URLS.spotify,
     ],
     "founder": {
       "@type": "Person",
