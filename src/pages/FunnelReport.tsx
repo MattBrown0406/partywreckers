@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
-import { BarChart3, CalendarDays, CheckSquare, ClipboardList, Download, DollarSign, FileText, Lock, Mail, Plus, Printer, RefreshCw, Save, Trash2, Upload } from "lucide-react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { FunctionsHttpError, type Session } from "@supabase/supabase-js";
+import { safeGetItem, safeRemoveItem, safeSetItem } from "@/lib/safeStorage";
+import { ArrowDownRight, ArrowUpRight, BarChart3, CalendarDays, CheckSquare, ClipboardList, Download, DollarSign, FileText, HeartHandshake, KeyRound, Lock, LogOut, Mail, MailCheck, Minus, Plus, Printer, RefreshCw, Save, Trash2, Upload } from "lucide-react";
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -11,8 +12,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 
+interface NorthStarData {
+  this_week: number;
+  last_week: number;
+  /** Monday-start weeks (YYYY-MM-DD), oldest to newest, normally 12 of them. */
+  weekly: Array<{ week_start: string; count: number }>;
+  /** Top articles/pages that help requests came from, last 30 days. */
+  by_source: Array<{ name: string; count: number }>;
+}
+
 interface FunnelReportData {
+  /** Includes help_requests and page_views from newer versions of the report function. */
   totals: Record<string, number>;
+  north_star?: NorthStarData;
+  top_viewed_pages?: Array<{ name: string; count: number }>;
   by_event: Array<{ name: string; count: number }>;
   top_pages: Array<{ name: string; count: number }>;
   top_destinations: Array<{ name: string; count: number }>;
@@ -149,51 +162,165 @@ const weeklyFunnelRhythm = [
 ];
 
 const FunnelReport = () => {
-  const [secret, setSecret] = useState(() =>
-    safeGetItem(reportTokenKey) || "",
-  );
+  // Nothing here reads storage or window during render: the page is prerendered, so the
+  // saved access key and the auth session are picked up in an effect after hydration.
+  const [session, setSession] = useState<Session | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [signInState, setSignInState] = useState<"idle" | "sending" | "sent">("idle");
+  const [signInMessage, setSignInMessage] = useState<string | null>(null);
+  const [useAccessKey, setUseAccessKey] = useState(false);
+  const [secret, setSecret] = useState("");
+  const [hasSavedKey, setHasSavedKey] = useState(false);
   const [data, setData] = useState<FunnelReportData | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [reportError, setReportError] = useState<string | null>(null);
   const [prospects, setProspects] = useState<SponsorProspect[]>([]);
   const [prospectStatus, setProspectStatus] = useState<"idle" | "loading" | "saving" | "error">("idle");
+  const [prospectError, setProspectError] = useState<string | null>(null);
   const [inventoryMonth, setInventoryMonth] = useState(getCurrentSponsorMonth);
   const [targetForm, setTargetForm] = useState(emptyTargetForm);
   const [csvInput, setCsvInput] = useState("");
+  const autoLoadedUserRef = useRef<string | null>(null);
 
-  const loadReport = async () => {
-    setStatus("loading");
-    if (typeof window !== "undefined") {
-      safeSetItem(reportTokenKey, secret);
+  const accessKey = useAccessKey ? secret.trim() : "";
+  const canAuthorize = Boolean(session) || Boolean(accessKey);
+  // Signed-in requests carry the user's JWT automatically; the legacy key is only sent
+  // when the owner has chosen "Use access key instead".
+  const accessHeaders = (): Record<string, string> => (accessKey ? { "x-report-secret": accessKey } : {});
+
+  const runReportLoad = useCallback(
+    async (headers: Record<string, string>, context: { signedIn: boolean; usingKey: boolean }) => {
+      setStatus("loading");
+      setReportError(null);
+
+      const { data: report, error } = await supabase.functions.invoke("party-wreckers-funnel-report", { headers });
+
+      if (error) {
+        setStatus("error");
+        setReportError(
+          describeAccessError(error, context) ||
+            "Could not load the report. Try again, and confirm the backend function is deployed.",
+        );
+        return;
+      }
+
+      setData(report as FunnelReportData);
+      setStatus("idle");
+    },
+    [],
+  );
+
+  useEffect(() => {
+    const savedKey = safeGetItem(reportTokenKey);
+    if (savedKey) {
+      setSecret(savedKey);
+      setHasSavedKey(true);
     }
 
-    const { data: report, error } = await supabase.functions.invoke("party-wreckers-funnel-report", {
-      headers: {
-        "x-report-secret": secret,
+    const linkError = readAuthLinkError();
+    if (linkError) setSignInMessage(linkError);
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, nextSession) => {
+      setSession(nextSession);
+      setAuthChecked(true);
+
+      if (event === "SIGNED_OUT") {
+        autoLoadedUserRef.current = null;
+        setData(null);
+        setProspects([]);
+        return;
+      }
+
+      // Load the report once per signed-in user. Deferred because supabase-js holds its
+      // auth lock while this callback runs, and invoke() needs that lock to read the token.
+      const userId = nextSession?.user.id;
+      if (userId && autoLoadedUserRef.current !== userId) {
+        autoLoadedUserRef.current = userId;
+        setSignInState("idle");
+        setSignInMessage(null);
+        setTimeout(() => void runReportLoad({}, { signedIn: true, usingKey: false }), 0);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [runReportLoad]);
+
+  const loadReport = async () => {
+    if (accessKey) {
+      safeSetItem(reportTokenKey, accessKey);
+      setHasSavedKey(true);
+    }
+    await runReportLoad(accessHeaders(), { signedIn: Boolean(session), usingKey: Boolean(accessKey) });
+  };
+
+  const sendSignInLink = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const address = email.trim();
+    if (!address || typeof window === "undefined") return;
+
+    setSignInState("sending");
+    setSignInMessage(null);
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email: address,
+      options: {
+        emailRedirectTo: `${window.location.origin}/funnel-report`,
+        shouldCreateUser: false,
       },
     });
 
     if (error) {
-      setStatus("error");
+      setSignInState("idle");
+      setSignInMessage(describeSignInError(error));
       return;
     }
 
-    setData(report as FunnelReportData);
+    setSignInState("sent");
+  };
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    // If the server can't be reached, still end the session on this device.
+    if (error) await supabase.auth.signOut({ scope: "local" });
+    autoLoadedUserRef.current = null;
+    setSession(null);
+    setData(null);
+    setProspects([]);
     setStatus("idle");
+    setReportError(null);
+    setProspectStatus("idle");
+    setProspectError(null);
+  };
+
+  const forgetAccessKey = () => {
+    safeRemoveItem(reportTokenKey);
+    setHasSavedKey(false);
+    setSecret("");
+  };
+
+  const failProspects = (error: unknown) => {
+    setProspectStatus("error");
+    setProspectError(
+      describeAccessError(error, { signedIn: Boolean(session), usingKey: Boolean(accessKey) }) ||
+        "Could not load or save sponsor prospects. Try again, and confirm the backend function is deployed.",
+    );
   };
 
   const loadProspects = async () => {
     setProspectStatus("loading");
+    setProspectError(null);
     const { data: result, error } = await supabase.functions.invoke("party-wreckers-advertiser-admin", {
-      headers: {
-        "x-report-secret": secret,
-      },
+      headers: accessHeaders(),
       body: {
         action: "list",
       },
     });
 
     if (error) {
-      setProspectStatus("error");
+      failProspects(error);
       return;
     }
 
@@ -219,10 +346,9 @@ const FunnelReport = () => {
 
   const saveProspect = async (prospect: SponsorProspect) => {
     setProspectStatus("saving");
+    setProspectError(null);
     const { data: result, error } = await supabase.functions.invoke("party-wreckers-advertiser-admin", {
-      headers: {
-        "x-report-secret": secret,
-      },
+      headers: accessHeaders(),
       body: {
         action: "update",
         id: prospect.id,
@@ -232,7 +358,7 @@ const FunnelReport = () => {
     });
 
     if (error) {
-      setProspectStatus("error");
+      failProspects(error);
       return;
     }
 
@@ -245,11 +371,10 @@ const FunnelReport = () => {
   const createTarget = async () => {
     if (!targetForm.company && !targetForm.email) return;
     setProspectStatus("saving");
+    setProspectError(null);
 
     const { data: result, error } = await supabase.functions.invoke("party-wreckers-advertiser-admin", {
-      headers: {
-        "x-report-secret": secret,
-      },
+      headers: accessHeaders(),
       body: {
         action: "create",
         prospect: {
@@ -267,7 +392,7 @@ const FunnelReport = () => {
     });
 
     if (error) {
-      setProspectStatus("error");
+      failProspects(error);
       return;
     }
 
@@ -280,11 +405,10 @@ const FunnelReport = () => {
     const importedProspects = parseSponsorCsv(csvInput);
     if (!importedProspects.length) return;
     setProspectStatus("saving");
+    setProspectError(null);
 
     const { data: result, error } = await supabase.functions.invoke("party-wreckers-advertiser-admin", {
-      headers: {
-        "x-report-secret": secret,
-      },
+      headers: accessHeaders(),
       body: {
         action: "bulk_create",
         prospects: importedProspects,
@@ -292,7 +416,7 @@ const FunnelReport = () => {
     });
 
     if (error) {
-      setProspectStatus("error");
+      failProspects(error);
       return;
     }
 
@@ -303,10 +427,9 @@ const FunnelReport = () => {
 
   const deleteProspect = async (prospect: SponsorProspect) => {
     setProspectStatus("saving");
+    setProspectError(null);
     const { error } = await supabase.functions.invoke("party-wreckers-advertiser-admin", {
-      headers: {
-        "x-report-secret": secret,
-      },
+      headers: accessHeaders(),
       body: {
         action: "delete",
         id: prospect.id,
@@ -314,7 +437,7 @@ const FunnelReport = () => {
     });
 
     if (error) {
-      setProspectStatus("error");
+      failProspects(error);
       return;
     }
 
@@ -373,25 +496,56 @@ const FunnelReport = () => {
                 <p className="text-muted-foreground mt-2">Last 30 days of listener paths, sponsor intent, and revenue-intent clicks.</p>
               </div>
 
-              <div className="flex gap-2">
-                <Input
-                  type="password"
-                  placeholder="Report secret"
-                  value={secret}
-                  onChange={(event) => setSecret(event.target.value)}
-                  className="w-52"
-                />
-                <Button onClick={loadReport} disabled={status === "loading" || !secret}>
-                  {status === "loading" ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
-                  Load
-                </Button>
-              </div>
+              {(session || (data && accessKey)) && (
+                <div className="flex flex-col gap-2 sm:items-end">
+                  {session && (
+                    <p className="text-sm text-muted-foreground">
+                      Signed in as <span className="font-medium text-foreground">{session.user.email}</span>
+                    </p>
+                  )}
+                  <div className="flex gap-2">
+                    <Button onClick={loadReport} disabled={status === "loading"}>
+                      <RefreshCw className={`h-4 w-4 ${status === "loading" ? "animate-spin" : ""}`} />
+                      Refresh report
+                    </Button>
+                    {session && (
+                      <Button variant="outline" onClick={signOut}>
+                        <LogOut className="h-4 w-4" />
+                        Sign out
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {status === "error" && (
-              <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive mb-6">
-                Could not load the report. Check the report secret and confirm the Lovable backend function is deployed.
+            {status === "error" && reportError && (
+              <div role="alert" className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive mb-6">
+                {reportError}
               </div>
+            )}
+
+            {!session && !data && (
+              <AdminSignInPanel
+                authChecked={authChecked}
+                email={email}
+                onEmailChange={setEmail}
+                signInState={signInState}
+                signInMessage={signInMessage}
+                onSubmit={sendSignInLink}
+                onUseDifferentEmail={() => {
+                  setSignInState("idle");
+                  setSignInMessage(null);
+                }}
+                useAccessKey={useAccessKey}
+                onToggleAccessKey={() => setUseAccessKey((current) => !current)}
+                secret={secret}
+                onSecretChange={setSecret}
+                hasSavedKey={hasSavedKey}
+                onForgetKey={forgetAccessKey}
+                onLoadWithKey={loadReport}
+                isLoading={status === "loading"}
+              />
             )}
 
             <Card className="mb-6 border-border bg-card">
@@ -418,6 +572,8 @@ const FunnelReport = () => {
 
             {data ? (
               <div className="space-y-6">
+                {data.north_star && <NorthStarSection northStar={data.north_star} />}
+
                 <div className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="font-semibold text-foreground">Sponsor report export</p>
@@ -442,19 +598,20 @@ const FunnelReport = () => {
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-5">
-                  {Object.entries(data.totals).map(([label, value]) => (
+                  {orderTotals(data.totals).map(([label, value]) => (
                     <Card key={label} className="border-border bg-card">
                       <CardContent className="p-5">
                         <p className="text-xs uppercase tracking-widest text-muted-foreground">{label.replace(/_/g, " ")}</p>
-                        <p className="text-3xl font-semibold text-foreground mt-2">
-                          {label === "sponsor_click_through_rate" ? formatPercent(Number(value)) : value}
+                        <p className="text-3xl font-semibold tabular-nums text-foreground mt-2">
+                          {formatTotal(label, value)}
                         </p>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
 
-                <div className="grid gap-6 lg:grid-cols-3">
+                <div className={`grid gap-6 ${data.top_viewed_pages ? "md:grid-cols-2 xl:grid-cols-4" : "lg:grid-cols-3"}`}>
+                  {data.top_viewed_pages && <ReportList title="Most Viewed Pages" items={data.top_viewed_pages} />}
                   <ReportList title="Events" items={data.by_event} />
                   <ReportList title="Top Pages" items={data.top_pages} />
                   <ReportList title="Top Destinations" items={data.top_destinations} />
@@ -481,16 +638,16 @@ const FunnelReport = () => {
                         <CardTitle>Sponsor Prospects</CardTitle>
                         <p className="mt-1 text-sm text-muted-foreground">Track advertiser inquiries, notes, status, and next actions.</p>
                       </div>
-                      <Button variant="outline" onClick={loadProspects} disabled={prospectStatus === "loading" || !secret}>
+                      <Button variant="outline" onClick={loadProspects} disabled={prospectStatus === "loading" || !canAuthorize}>
                         <RefreshCw className={`h-4 w-4 ${prospectStatus === "loading" ? "animate-spin" : ""}`} />
                         Load Prospects
                       </Button>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    {prospectStatus === "error" && (
-                      <div className="mb-4 rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-                        Could not load or save sponsor prospects. Check the report secret and Lovable backend function.
+                    {prospectStatus === "error" && prospectError && (
+                      <div role="alert" className="mb-4 rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
+                        {prospectError}
                       </div>
                     )}
 
@@ -650,7 +807,7 @@ const FunnelReport = () => {
                             onChange={(event) => setTargetForm({ ...targetForm, message: event.target.value })}
                             className="min-h-[90px]"
                           />
-                          <Button onClick={createTarget} disabled={prospectStatus === "saving" || !secret || (!targetForm.company && !targetForm.email)}>
+                          <Button onClick={createTarget} disabled={prospectStatus === "saving" || !canAuthorize || (!targetForm.company && !targetForm.email)}>
                             <Plus className="h-4 w-4" />
                             Add Target
                           </Button>
@@ -671,7 +828,7 @@ const FunnelReport = () => {
                             onChange={(event) => setCsvInput(event.target.value)}
                             className="min-h-[150px] font-mono text-xs"
                           />
-                          <Button variant="outline" onClick={importTargets} disabled={prospectStatus === "saving" || !secret || !csvInput.trim()}>
+                          <Button variant="outline" onClick={importTargets} disabled={prospectStatus === "saving" || !canAuthorize || !csvInput.trim()}>
                             <Upload className="h-4 w-4" />
                             Import Targets
                           </Button>
@@ -714,8 +871,12 @@ const FunnelReport = () => {
               </div>
             ) : (
               <Card className="border-border bg-card">
-                <CardContent className="p-8 text-center text-muted-foreground">
-                  Enter the report secret to load Party Wreckers funnel data.
+                <CardContent className="p-8 text-center text-muted-foreground" aria-live="polite">
+                  {status === "loading"
+                    ? "Loading the report…"
+                    : session
+                      ? "The report isn't loaded yet. Use Refresh report to try again."
+                      : "Sign in above to load Party Wreckers funnel data."}
                 </CardContent>
               </Card>
             )}
@@ -725,6 +886,257 @@ const FunnelReport = () => {
 
       <Footer />
     </div>
+  );
+};
+
+const AdminSignInPanel = ({
+  authChecked,
+  email,
+  onEmailChange,
+  signInState,
+  signInMessage,
+  onSubmit,
+  onUseDifferentEmail,
+  useAccessKey,
+  onToggleAccessKey,
+  secret,
+  onSecretChange,
+  hasSavedKey,
+  onForgetKey,
+  onLoadWithKey,
+  isLoading,
+}: {
+  authChecked: boolean;
+  email: string;
+  onEmailChange: (value: string) => void;
+  signInState: "idle" | "sending" | "sent";
+  signInMessage: string | null;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onUseDifferentEmail: () => void;
+  useAccessKey: boolean;
+  onToggleAccessKey: () => void;
+  secret: string;
+  onSecretChange: (value: string) => void;
+  hasSavedKey: boolean;
+  onForgetKey: () => void;
+  onLoadWithKey: () => void;
+  isLoading: boolean;
+}) => (
+  <Card className="mb-6 border-primary/30 bg-card">
+    <CardHeader>
+      <CardTitle className="flex items-center gap-2">
+        <Lock className="h-5 w-5 text-primary" />
+        Admin sign-in
+      </CardTitle>
+      <p className="text-sm text-muted-foreground">
+        We&apos;ll email you a one-time sign-in link. Only addresses on the admin list can open this report.
+      </p>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      {!authChecked ? (
+        <p className="text-sm text-muted-foreground" aria-live="polite">
+          Checking whether you&apos;re already signed in…
+        </p>
+      ) : signInState === "sent" ? (
+        <div className="rounded-lg border border-primary/20 bg-primary/10 p-4" role="status">
+          <p className="flex items-center gap-2 font-semibold text-foreground">
+            <MailCheck className="h-5 w-5 text-primary" />
+            Check your email
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            We sent a sign-in link to <span className="font-medium text-foreground">{email.trim()}</span>. Open it on
+            this device and you&apos;ll come straight back here, signed in.
+          </p>
+          <Button variant="link" className="mt-1 h-auto px-0" onClick={onUseDifferentEmail}>
+            Use a different email
+          </Button>
+        </div>
+      ) : (
+        <form onSubmit={onSubmit} className="flex max-w-xl flex-col gap-2 sm:flex-row">
+          <label htmlFor="admin-email" className="sr-only">
+            Admin email
+          </label>
+          <Input
+            id="admin-email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            required
+            value={email}
+            onChange={(event) => onEmailChange(event.target.value)}
+            className="sm:flex-1"
+          />
+          <Button type="submit" disabled={signInState === "sending" || !email.trim()}>
+            {signInState === "sending" ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Mail className="h-4 w-4" />}
+            Email me a sign-in link
+          </Button>
+        </form>
+      )}
+
+      {signInMessage && (
+        <p role="alert" className="text-sm text-destructive">
+          {signInMessage}
+        </p>
+      )}
+
+      <div className="border-t border-border pt-3">
+        <button
+          type="button"
+          onClick={onToggleAccessKey}
+          aria-expanded={useAccessKey}
+          aria-controls="access-key-form"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          <KeyRound className="h-3.5 w-3.5" />
+          {useAccessKey ? "Hide access key" : "Use access key instead"}
+        </button>
+
+        {useAccessKey && (
+          <form
+            id="access-key-form"
+            className="mt-3 flex max-w-xl flex-col gap-2 sm:flex-row sm:items-center"
+            onSubmit={(event) => {
+              event.preventDefault();
+              onLoadWithKey();
+            }}
+          >
+            <label htmlFor="report-access-key" className="sr-only">
+              Access key
+            </label>
+            <Input
+              id="report-access-key"
+              type="password"
+              autoComplete="off"
+              placeholder="Access key"
+              value={secret}
+              onChange={(event) => onSecretChange(event.target.value)}
+              className="sm:w-60"
+            />
+            <Button type="submit" variant="outline" disabled={isLoading || !secret.trim()}>
+              {isLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
+              Load with key
+            </Button>
+            {hasSavedKey && (
+              <Button type="button" variant="ghost" size="sm" onClick={onForgetKey}>
+                Forget saved key
+              </Button>
+            )}
+          </form>
+        )}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const NorthStarSection = ({ northStar }: { northStar: NorthStarData }) => {
+  const weekly = Array.isArray(northStar.weekly) ? northStar.weekly : [];
+  const sources = Array.isArray(northStar.by_source) ? northStar.by_source : [];
+  const thisWeek = toCount(northStar.this_week);
+  const lastWeek = toCount(northStar.last_week);
+  const change = describeWeekChange(thisWeek, lastWeek);
+  const maxWeekly = Math.max(1, ...weekly.map((week) => toCount(week.count)));
+  const maxSource = Math.max(1, ...sources.map((source) => toCount(source.count)));
+  const ChangeIcon = change.direction === "up" ? ArrowUpRight : change.direction === "down" ? ArrowDownRight : Minus;
+
+  return (
+    <section aria-labelledby="north-star-title">
+      <Card className="border-primary/30 bg-card">
+        <CardHeader>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">North star</p>
+          <CardTitle id="north-star-title" className="flex items-center gap-2 text-2xl">
+            <HeartHandshake className="h-6 w-6 text-primary" />
+            Families asking for help
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">Help requests sent through the site each week</p>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-6 lg:grid-cols-[13rem_minmax(0,1fr)_17rem]">
+            <div className="rounded-lg border border-border bg-background p-4">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">This week</p>
+              <p className="mt-1 text-5xl font-semibold tabular-nums text-foreground">{formatCount(thisWeek)}</p>
+              <p className={`mt-2 flex items-start gap-1 text-sm font-medium ${change.className}`}>
+                <ChangeIcon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>{change.text}</span>
+              </p>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Last week: <span className="font-semibold tabular-nums text-foreground">{formatCount(lastWeek)}</span>
+              </p>
+              <p className="mt-3 text-xs text-muted-foreground">Weeks start Monday (Pacific time). This week is still in progress.</p>
+            </div>
+
+            <figure className="min-w-0">
+              <figcaption className="text-sm font-semibold text-foreground">Last {weekly.length || 12} weeks</figcaption>
+              {weekly.length ? (
+                <ol className="mt-3 flex h-52 items-stretch gap-1 sm:gap-2" aria-label="Help requests per week, oldest to newest">
+                  {weekly.map((week, index) => {
+                    const count = toCount(week.count);
+                    const isCurrent = index === weekly.length - 1;
+                    const height = count > 0 ? Math.max((count / maxWeekly) * 100, 3) : 0;
+                    // Below xl there isn't room for 12 dates, so label every other week, always including this week.
+                    const isAlternateLabel = (weekly.length - 1 - index) % 2 === 1;
+                    return (
+                      <li key={week.week_start || index} className="flex min-w-0 flex-1 flex-col">
+                        <span className="sr-only">
+                          Week of {formatWeekStart(week.week_start, true)}: {count} help {count === 1 ? "request" : "requests"}
+                          {isCurrent ? " (this week, in progress)" : ""}
+                        </span>
+                        <div className="flex flex-1 flex-col justify-end pt-5" aria-hidden="true">
+                          <div
+                            className={`relative w-full rounded-t ${isCurrent ? "bg-primary" : "bg-primary/45"}`}
+                            style={{ height: `${height}%` }}
+                          >
+                            <span className="absolute inset-x-0 -top-5 text-center text-xs font-semibold tabular-nums text-foreground">
+                              {formatCount(count)}
+                            </span>
+                          </div>
+                        </div>
+                        <span
+                          aria-hidden="true"
+                          className={`mt-1.5 flex justify-center whitespace-nowrap border-t border-border pt-1 text-[10px] sm:text-[11px] ${
+                            isCurrent ? "font-semibold text-foreground" : "text-muted-foreground"
+                          }`}
+                        >
+                          <span className={isAlternateLabel ? "invisible xl:visible" : ""}>{formatWeekStart(week.week_start)}</span>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ) : (
+                <p className="mt-3 text-sm text-muted-foreground">No weekly data yet.</p>
+              )}
+            </figure>
+
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-foreground">Top sources</p>
+              <p className="text-xs text-muted-foreground">Articles and pages, last 30 days</p>
+              {sources.length ? (
+                <ol className="mt-3 space-y-3">
+                  {sources.map((source) => {
+                    const count = toCount(source.count);
+                    return (
+                      <li key={source.name}>
+                        <div className="flex items-baseline justify-between gap-3 text-sm">
+                          <span className="truncate text-muted-foreground" title={source.name}>
+                            {source.name}
+                          </span>
+                          <span className="font-semibold tabular-nums text-foreground">{formatCount(count)}</span>
+                        </div>
+                        <div className="mt-1 h-1.5 rounded-full bg-secondary" aria-hidden="true">
+                          <div className="h-full rounded-full bg-primary/60" style={{ width: `${(count / maxSource) * 100}%` }} />
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ) : (
+                <p className="mt-3 text-sm text-muted-foreground">No help requests in the last 30 days yet.</p>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
   );
 };
 
@@ -1059,6 +1471,88 @@ const escapeCsv = (value: string) => {
 };
 
 const formatPercent = (rate: number | undefined) => `${((rate || 0) * 100).toFixed(1)}%`;
+
+/** Plain-language message for a 401/403 from an admin function, or null for other errors. */
+const describeAccessError = (error: unknown, context: { signedIn: boolean; usingKey: boolean }) => {
+  const response = error instanceof FunctionsHttpError ? (error.context as Response | undefined) : undefined;
+  const status = response?.status;
+  if (status === 403) {
+    return "This email isn't on the admin list. Sign out and use an admin email, or ask the site owner to add you.";
+  }
+  if (status === 401) {
+    if (context.usingKey && !context.signedIn) return "That access key wasn't accepted. Check it, or sign in with your email instead.";
+    if (context.signedIn) return "Your sign-in wasn't accepted. Sign out, then sign in again.";
+    return "Sign in to view this report.";
+  }
+  return null;
+};
+
+const describeSignInError = (error: { status?: number; code?: string; message?: string }) => {
+  if (error.status === 429 || error.code === "over_email_send_rate_limit") {
+    return "Too many sign-in emails were requested. Wait a minute, then try again.";
+  }
+  // With shouldCreateUser off, an address with no account is refused ("Signups not allowed for otp").
+  if (error.status === 400 || error.status === 422 || error.code === "otp_disabled") {
+    return "We couldn't send a sign-in link to that address. Use the email on the admin list.";
+  }
+  return "We couldn't send the sign-in email. Check your connection and try again.";
+};
+
+/** If a magic link was expired or already used, Supabase redirects back with error params. */
+const readAuthLinkError = () => {
+  if (typeof window === "undefined") return null;
+  const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const searchParams = new URLSearchParams(window.location.search);
+  const hasError = ["error", "error_code", "error_description"].some((key) => params.has(key) || searchParams.has(key));
+  if (!hasError) return null;
+  window.history.replaceState(window.history.state, "", window.location.pathname);
+  return "That sign-in link is invalid or has expired. Request a new one below.";
+};
+
+const leadingTotals = ["help_requests", "page_views", "events"];
+
+/** Help requests, page views and total events first, then the rest in the order the report sends them. */
+const orderTotals = (totals: Record<string, number>) => {
+  const entries = Object.entries(totals || {});
+  return [
+    ...leadingTotals.flatMap((key) => entries.filter(([label]) => label === key)),
+    ...entries.filter(([label]) => !leadingTotals.includes(label)),
+  ];
+};
+
+const formatTotal = (label: string, value: unknown) => {
+  if (label === "sponsor_click_through_rate") return formatPercent(Number(value));
+  if (typeof value !== "number" || !Number.isFinite(value)) return "–";
+  return value.toLocaleString("en-US");
+};
+
+const toCount = (value: unknown) => (typeof value === "number" && Number.isFinite(value) ? value : 0);
+
+const formatCount = (value: number) => value.toLocaleString("en-US");
+
+const describeWeekChange = (thisWeek: number, lastWeek: number) => {
+  const diff = thisWeek - lastWeek;
+  if (diff === 0) {
+    return { direction: "flat" as const, text: "Same as last week", className: "text-muted-foreground" };
+  }
+  const amount = `${formatCount(Math.abs(diff))} ${Math.abs(diff) === 1 ? "request" : "requests"}`;
+  const percent = lastWeek > 0 ? ` (${diff > 0 ? "+" : "−"}${Math.round((Math.abs(diff) / lastWeek) * 100)}%)` : "";
+  return diff > 0
+    ? { direction: "up" as const, text: `Up ${amount}${percent} vs last week`, className: "text-emerald-700" }
+    : { direction: "down" as const, text: `Down ${amount}${percent} vs last week`, className: "text-destructive" };
+};
+
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "2026-10-05" -> "Oct 5" (or "Oct 5, 2026"). Parsed by hand so no time zone can shift the day. */
+const formatWeekStart = (weekStart: string, withYear = false) => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(weekStart || "");
+  if (!match) return weekStart || "";
+  const month = monthNames[Number(match[2]) - 1];
+  if (!month) return weekStart;
+  const label = `${month} ${Number(match[3])}`;
+  return withYear ? `${label}, ${match[1]}` : label;
+};
 
 const buildSponsorPrintHtml = (data: FunnelReportData) => {
   const sponsorRows = [
