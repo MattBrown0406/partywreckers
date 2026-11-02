@@ -1,11 +1,16 @@
 // Spam and abuse protection for the public form endpoints:
 // - Cloudflare Turnstile verification (enforced once TURNSTILE_SECRET_KEY is set)
-// - a per-visitor rate limit, using a salted hash of the IP (no raw IPs are stored)
+// - rate limits per visitor (salted hash of the IP, no raw IPs stored) and site-wide
 // - a server-side record of each accepted submission in party_wreckers_funnel_events,
 //   which is also what the reports count (e.g. the weekly help-request north star).
 import type { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { BadRequestError, RateLimitError } from "./http.ts";
 
+/**
+ * Best available client IP. cf-connecting-ip is set by Cloudflare in front of Supabase
+ * and can't be forged by the caller; the other headers may be client-influenced, which
+ * is why the site-wide cap in reserveSubmission exists as an unspoofable backstop.
+ */
 const clientIp = (req: Request) =>
   req.headers.get("cf-connecting-ip") ||
   req.headers.get("x-real-ip") ||
@@ -14,30 +19,40 @@ const clientIp = (req: Request) =>
 
 /** Salted SHA-256 of the caller's IP, so rate limits work without storing the address. */
 export const hashClientIp = async (req: Request) => {
-  const salt = Deno.env.get("RATE_LIMIT_SALT") || Deno.env.get("SUPABASE_URL") || "party-wreckers";
+  // The salt must be secret, or hashed IPv4 addresses could be brute-forced back.
+  const salt = Deno.env.get("RATE_LIMIT_SALT") || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${salt}:${clientIp(req)}`));
   return Array.from(new Uint8Array(digest).slice(0, 16), (byte) => byte.toString(16).padStart(2, "0")).join("");
 };
 
 /**
- * Verify a Turnstile token. Skipped (allowed) while TURNSTILE_SECRET_KEY is unset, so
- * forms keep working until both the site key and the secret are configured.
+ * Verify a Turnstile token.
+ * - "skipped": TURNSTILE_SECRET_KEY isn't set yet, so forms keep working before setup.
+ * - "unavailable": Cloudflare couldn't be reached; allowed so a family's message isn't
+ *   lost (rate limits and the honeypot still apply).
+ * - "verified": Cloudflare confirmed a real visitor on one of `expectedActions`.
+ * Throws a 400 for a missing, invalid, reused or wrong-form token.
  */
-export const verifyTurnstile = async (req: Request, token: unknown) => {
+export const verifyTurnstile = async (
+  req: Request,
+  token: unknown,
+  expectedActions: string[],
+): Promise<"verified" | "skipped" | "unavailable"> => {
   const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
-  if (!secret) return;
+  if (!secret) return "skipped";
 
-  if (typeof token !== "string" || !token) {
+  const reject = () => {
     throw new BadRequestError("Please complete the verification check and try again.");
-  }
+  };
+  if (typeof token !== "string" || !token) reject();
 
   const form = new FormData();
   form.append("secret", secret);
-  form.append("response", token);
+  form.append("response", token as string);
   const ip = clientIp(req);
   if (ip !== "unknown") form.append("remoteip", ip);
 
-  let outcome: { success?: boolean; "error-codes"?: string[] } = {};
+  let outcome: { success?: boolean; action?: string; "error-codes"?: string[] } = {};
   try {
     const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
@@ -46,61 +61,94 @@ export const verifyTurnstile = async (req: Request, token: unknown) => {
     });
     outcome = await response.json();
   } catch (error) {
-    // Don't lose a family's message because Cloudflare had a hiccup: the rate limit
-    // and honeypot still apply.
     console.error("[turnstile] verification request failed:", error instanceof Error ? error.message : error);
-    return;
+    return "unavailable";
   }
 
   if (!outcome.success) {
     console.warn("[turnstile] rejected:", outcome["error-codes"]);
-    throw new BadRequestError("Please complete the verification check and try again.");
+    reject();
   }
+  if (outcome.action && !expectedActions.includes(outcome.action)) {
+    console.warn("[turnstile] token minted for another form:", outcome.action);
+    reject();
+  }
+  return "verified";
 };
 
 /** Hidden "website" field: people never fill it in, simple bots do. */
 export const isHoneypotFilled = (body: Record<string, unknown>) =>
   typeof body.website === "string" && body.website.trim() !== "";
 
+interface ReservationOptions {
+  /** Max accepted submissions per visitor within the window. */
+  perVisitor: number;
+  /** Max accepted submissions site-wide within the window: a backstop if IPs are spoofed. */
+  siteWide: number;
+  windowMinutes?: number;
+  sourcePath?: string | null;
+  ctaLabel?: string | null;
+  /** Context only: never names, emails or message text. */
+  metadata?: Record<string, unknown>;
+}
+
+const TOO_MANY = "Too many submissions. Please wait a little while and try again.";
+
 /**
- * Throw RateLimitError when this visitor already has `max` accepted submissions of
- * `eventName` within the last `windowMinutes`. Fails open on a database error.
+ * Record the submission FIRST, then count. Counting before inserting let a burst of
+ * parallel requests all see a count of zero and all get through; with the row already
+ * in place, every request in a burst sees the others. If the visitor (or the whole site)
+ * is over the limit, the row is removed and a 429 is thrown. Call `release()` if the
+ * submission then fails (e.g. the email can't be sent) so it isn't counted.
+ * Fails open on database errors so a family's message is never blocked by an outage.
  */
-export const enforceRateLimit = async (
+export const reserveSubmission = async (
   supabase: SupabaseClient,
   eventName: string,
   ipHash: string,
-  max: number,
-  windowMinutes = 60,
+  options: ReservationOptions,
 ) => {
-  const since = new Date(Date.now() - windowMinutes * 60 * 1000).toISOString();
-  const { count, error } = await supabase
+  const windowMinutes = options.windowMinutes ?? 60;
+  const { data, error } = await supabase
     .from("party_wreckers_funnel_events")
-    .select("id", { count: "exact", head: true })
-    .eq("event_name", eventName)
-    .eq("metadata->>ip_hash", ipHash)
-    .gte("created_at", since);
+    .insert({
+      event_name: eventName,
+      source_path: options.sourcePath ?? null,
+      cta_label: options.ctaLabel ?? null,
+      metadata: { ...(options.metadata ?? {}), ip_hash: ipHash },
+    })
+    .select("id")
+    .single();
 
-  if (error) {
-    console.error("[rate-limit] count failed:", error.message);
-    return;
+  if (error || !data) {
+    console.error(`[reserve ${eventName}] insert failed:`, error?.message);
+    return { release: async () => {} };
   }
-  if ((count || 0) >= max) {
-    throw new RateLimitError("Too many submissions. Please wait a little while and try again.");
-  }
-};
 
-/** Record an accepted submission (never names, emails or messages, only context). */
-export const recordSubmission = async (
-  supabase: SupabaseClient,
-  eventName: string,
-  details: { sourcePath?: string | null; ctaLabel?: string | null; metadata?: Record<string, unknown> },
-) => {
-  const { error } = await supabase.from("party_wreckers_funnel_events").insert({
-    event_name: eventName,
-    source_path: details.sourcePath ?? null,
-    cta_label: details.ctaLabel ?? null,
-    metadata: details.metadata ?? {},
-  });
-  if (error) console.error(`[record ${eventName}] insert failed:`, error.message);
+  const release = async () => {
+    const { error: deleteError } = await supabase.from("party_wreckers_funnel_events").delete().eq("id", data.id);
+    if (deleteError) console.error(`[reserve ${eventName}] release failed:`, deleteError.message);
+  };
+
+  const since = new Date(Date.now() - windowMinutes * 60 * 1000).toISOString();
+  const countSince = (forVisitor: boolean) => {
+    let query = supabase
+      .from("party_wreckers_funnel_events")
+      .select("id", { count: "exact", head: true })
+      .eq("event_name", eventName)
+      .gte("created_at", since);
+    if (forVisitor) query = query.eq("metadata->>ip_hash", ipHash);
+    return query;
+  };
+
+  const [visitor, site] = await Promise.all([countSince(true), countSince(false)]);
+  if (visitor.error || site.error) {
+    console.error(`[reserve ${eventName}] count failed:`, visitor.error?.message || site.error?.message);
+    return { release };
+  }
+  if ((visitor.count || 0) > options.perVisitor || (site.count || 0) > options.siteWide) {
+    await release();
+    throw new RateLimitError(TOO_MANY);
+  }
+  return { release };
 };

@@ -11,10 +11,11 @@ import {
   requiredEmail,
   requiredString,
 } from "../_shared/http.ts";
-import { enforceRateLimit, hashClientIp, isHoneypotFilled, recordSubmission, verifyTurnstile } from "../_shared/abuse.ts";
+import { hashClientIp, isHoneypotFilled, reserveSubmission, verifyTurnstile } from "../_shared/abuse.ts";
 import { ADVERTISER_INQUIRY_EVENT } from "../_shared/funnel-events.ts";
 
-const MAX_INQUIRIES_PER_HOUR = 5;
+const MAX_INQUIRIES_PER_VISITOR_PER_HOUR = 5;
+const MAX_INQUIRIES_SITE_WIDE_PER_HOUR = 60;
 
 // Only these metadata keys may come from the public form. Admin-only keys such as
 // sponsor_slot_status, sold_amount or owner_added_target must never be settable here.
@@ -58,9 +59,15 @@ serve(async (req) => {
     if (!resendApiKey) throw new Error("RESEND_API_KEY is not configured");
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
-    await verifyTurnstile(req, body.turnstile_token);
+    await verifyTurnstile(req, body.turnstile_token, ["advertise"]);
     const ipHash = await hashClientIp(req);
-    await enforceRateLimit(supabase, ADVERTISER_INQUIRY_EVENT, ipHash, MAX_INQUIRIES_PER_HOUR);
+    const reservation = await reserveSubmission(supabase, ADVERTISER_INQUIRY_EVENT, ipHash, {
+      perVisitor: MAX_INQUIRIES_PER_VISITOR_PER_HOUR,
+      siteWide: MAX_INQUIRIES_SITE_WIDE_PER_HOUR,
+      sourcePath,
+      ctaLabel: packageInterest,
+      metadata: { form: "advertise", package_interest: packageInterest, inventory_interest: inventoryInterest },
+    });
 
     const { error: insertError } = await supabase.from("party_wreckers_advertiser_inquiries").insert({
       name,
@@ -75,7 +82,10 @@ serve(async (req) => {
       },
     });
 
-    if (insertError) throw insertError;
+    if (insertError) {
+      await reservation.release();
+      throw insertError;
+    }
 
     const emailResult = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -104,14 +114,11 @@ serve(async (req) => {
     });
 
     if (!emailResult.ok) {
+      // The inquiry row is saved, but the page falls back to send-contact-email, which
+      // records its own reservation, so don't count this attempt twice.
+      await reservation.release();
       throw new Error(`Failed to send sponsor email ${emailResult.status}: ${await emailResult.text()}`);
     }
-
-    await recordSubmission(supabase, ADVERTISER_INQUIRY_EVENT, {
-      sourcePath,
-      ctaLabel: packageInterest,
-      metadata: { form: "advertise", package_interest: packageInterest, inventory_interest: inventoryInterest, ip_hash: ipHash },
-    });
 
     return jsonResponse({ success: true });
   } catch (error) {

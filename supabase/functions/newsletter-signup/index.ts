@@ -10,20 +10,27 @@ import {
   readJsonObject,
   requiredEmail,
 } from "../_shared/http.ts";
-import { enforceRateLimit, hashClientIp, isHoneypotFilled, recordSubmission, verifyTurnstile } from "../_shared/abuse.ts";
+import { hashClientIp, isHoneypotFilled, reserveSubmission, verifyTurnstile } from "../_shared/abuse.ts";
 import { NEWSLETTER_SIGNUP_EVENT } from "../_shared/funnel-events.ts";
 
-const MAX_SIGNUPS_PER_HOUR = 5;
+const MAX_SIGNUPS_PER_VISITOR_PER_HOUR = 5;
+const MAX_SIGNUPS_SITE_WIDE_PER_HOUR = 120;
+
+type MailchimpOutcome = "added" | "already_listed" | "rejected" | "not_configured";
 
 /**
  * Add the subscriber to the Mailchimp audience as "pending", so Mailchimp sends its
  * confirmation email (double opt-in) and they're only mailed once they confirm.
- * Returns false when Mailchimp isn't configured.
+ * - "already_listed": the address is already in the audience (subscribed, pending or
+ *   unsubscribed). Mailchimp won't re-send a confirmation, so Matt is told instead.
+ * - "rejected": Mailchimp refused the address (e.g. it looks fake, or was permanently
+ *   deleted); the signup falls back to being emailed to Matt.
+ * Throws only for server/network problems.
  */
-const addToMailchimp = async (email: string, source: string) => {
+const addToMailchimp = async (email: string, source: string): Promise<MailchimpOutcome> => {
   const apiKey = Deno.env.get("MAILCHIMP_API_KEY");
   const audienceId = Deno.env.get("MAILCHIMP_AUDIENCE_ID");
-  if (!apiKey || !audienceId) return false;
+  if (!apiKey || !audienceId) return "not_configured";
 
   const dataCenter = apiKey.split("-")[1];
   if (!dataCenter) throw new Error("MAILCHIMP_API_KEY has no data center suffix (e.g. ...-us21)");
@@ -42,12 +49,14 @@ const addToMailchimp = async (email: string, source: string) => {
     signal: AbortSignal.timeout(10000),
   });
 
-  if (response.ok) return true;
+  if (response.ok) return "added";
 
   const problem = await response.json().catch(() => ({}));
-  // Already on the list (subscribed, pending or unsubscribed): nothing to do, and we
-  // don't tell the visitor whether an address is on the list.
-  if (response.status === 400 && problem?.title === "Member Exists") return true;
+  if (response.status === 400 && problem?.title === "Member Exists") return "already_listed";
+  if (response.status >= 400 && response.status < 500) {
+    console.warn("[newsletter-signup] Mailchimp rejected signup:", response.status, problem?.title, problem?.detail);
+    return "rejected";
+  }
   throw new Error(`Mailchimp error ${response.status}: ${problem?.title || ""} ${problem?.detail || ""}`);
 };
 
@@ -68,13 +77,25 @@ serve(async (req) => {
     if (!supabaseUrl || !serviceRoleKey) throw new Error("Supabase service role is not configured");
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    await verifyTurnstile(req, body.turnstile_token);
+    await verifyTurnstile(req, body.turnstile_token, ["newsletter"]);
     const ipHash = await hashClientIp(req);
-    await enforceRateLimit(supabase, NEWSLETTER_SIGNUP_EVENT, ipHash, MAX_SIGNUPS_PER_HOUR);
+    const reservation = await reserveSubmission(supabase, NEWSLETTER_SIGNUP_EVENT, ipHash, {
+      perVisitor: MAX_SIGNUPS_PER_VISITOR_PER_HOUR,
+      siteWide: MAX_SIGNUPS_SITE_WIDE_PER_HOUR,
+      ctaLabel: source,
+      metadata: { source },
+    });
 
-    const addedToList = await addToMailchimp(normalizedEmail, source);
+    let mailchimp: MailchimpOutcome;
+    try {
+      mailchimp = await addToMailchimp(normalizedEmail, source);
+    } catch (error) {
+      await reservation.release();
+      throw error;
+    }
+    const addedToList = mailchimp === "added";
 
-    // Without Mailchimp (or when NEWSLETTER_NOTIFY=true) keep emailing each signup to Matt.
+    // Unless Mailchimp took the signup cleanly (or NEWSLETTER_NOTIFY=true), email it to Matt.
     if (!addedToList || Deno.env.get("NEWSLETTER_NOTIFY") === "true") {
       const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
       const NEWSLETTER_FORWARD_TO = Deno.env.get("NEWSLETTER_FORWARD_TO") || "matt@freedominterventions.com";
@@ -95,20 +116,23 @@ serve(async (req) => {
             <h2>New Party Wreckers newsletter signup</h2>
             <p><strong>Email:</strong> ${escapeHtml(normalizedEmail)}</p>
             <p><strong>Source:</strong> ${escapeHtml(source)}</p>
-            <p><strong>Added to Mailchimp:</strong> ${addedToList ? "yes (pending confirmation)" : "no, Mailchimp isn't configured"}</p>
+            <p><strong>Mailchimp:</strong> ${
+              {
+                added: "added (pending their confirmation)",
+                already_listed: "already in the audience (may be unsubscribed); no new confirmation email was sent",
+                rejected: "Mailchimp rejected this address; add it by hand if it's real",
+                not_configured: "not configured",
+              }[mailchimp]
+            }</p>
           `,
         }),
       });
 
       if (!result.ok) {
+        if (!addedToList) await reservation.release();
         throw new Error(`Failed to forward signup ${result.status}: ${await result.text()}`);
       }
     }
-
-    await recordSubmission(supabase, NEWSLETTER_SIGNUP_EVENT, {
-      ctaLabel: source,
-      metadata: { source, mailchimp: addedToList, ip_hash: ipHash },
-    });
 
     await enqueueSpineEvent("lead_captured", {
       email: normalizedEmail,
