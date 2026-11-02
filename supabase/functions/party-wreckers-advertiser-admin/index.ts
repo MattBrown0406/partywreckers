@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAdmin } from "../_shared/admin-auth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,15 +18,8 @@ serve(async (req) => {
   }
 
   try {
-    const expectedSecret = Deno.env.get("PARTY_WRECKERS_REPORT_SECRET");
-    const providedSecret = req.headers.get("x-report-secret");
-
-    if (!expectedSecret || providedSecret !== expectedSecret) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const denied = await requireAdmin(req, "PARTY_WRECKERS_REPORT_SECRET");
+    if (denied) return denied;
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
