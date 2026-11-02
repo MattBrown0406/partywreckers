@@ -1,3 +1,5 @@
+import { PODCAST_PLATFORM_URLS } from "@/lib/podcastPlatforms";
+
 const partyWreckersTracking =
   "source=party_wreckers&utm_source=party_wreckers&utm_medium=referral&utm_campaign=party_wreckers_funnel";
 
@@ -9,10 +11,11 @@ const withTracking = (href: string, content?: string) => {
   return url.toString();
 };
 
+/** @deprecated Import from "@/lib/podcastPlatforms" instead. */
 export const podcastLinks = {
-  apple: "https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917",
-  spotify: "https://open.spotify.com/show/4YJLvnFuZr5EkcGs9b47fn?si=bde59f5f480c45a2",
-  youtube: "https://www.youtube.com/@ThePartyWreckers",
+  apple: PODCAST_PLATFORM_URLS.apple,
+  spotify: PODCAST_PLATFORM_URLS.spotify,
+  youtube: PODCAST_PLATFORM_URLS.youtube,
 };
 
 export const funnelLinks = {

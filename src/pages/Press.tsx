@@ -18,6 +18,7 @@ import {
   MessageSquare
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { NEUTRAL_PLATFORM_ORDER, PODCAST_PLATFORMS } from "@/lib/podcastPlatforms";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 // The 1024px PNG (2.3 MB) is only for the press-kit download; the page shows the 512px WebP.
 import logo from "@/assets/party-wreckers-logo-2026.png";
@@ -123,7 +124,7 @@ const Press = () => {
                   <h2 className="font-script text-4xl text-burgundy mb-6">About the Show</h2>
                   <div className="space-y-4 text-muted-foreground">
                     <p>
-                      <strong className="text-foreground">The Party Wreckers</strong> is a weekly podcast for families, loved ones, and professionals who are tired of watching addiction damage relationships while everybody keeps pretending the next conversation will somehow fix it.
+                      <strong className="text-foreground">The Party Wreckers</strong> is a podcast for families, loved ones, and professionals who are tired of watching addiction damage relationships while everybody keeps pretending the next conversation will somehow fix it.
                     </p>
                     <p>
                       Hosted by Matt Brown, a professional interventionist with more than 20 years in the field, the show tackles enabling, boundaries, relapse, treatment, intervention, and family recovery in plain language that people can actually use.
@@ -310,42 +311,13 @@ const Press = () => {
               </p>
               
               <div className="flex flex-wrap justify-center gap-4">
-                <Button variant="outline" asChild>
-                  <a
-                    href="https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Apple Podcasts
-                  </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <a
-                    href="https://open.spotify.com/show/4YJLvnFuZr5EkcGs9b47fn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Spotify
-                  </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <a
-                    href="https://www.youtube.com/@ThePartyWreckers"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    YouTube
-                  </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <a
-                    href="https://music.amazon.com/podcasts/b7bf2801-8447-4dfc-9857-aa41cd4cfc64/the-party-wreckers"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Amazon Music
-                  </a>
-                </Button>
+                {NEUTRAL_PLATFORM_ORDER.map((id) => (
+                  <Button key={id} variant="outline" asChild>
+                    <a href={PODCAST_PLATFORMS[id].url} target="_blank" rel="noopener noreferrer">
+                      {PODCAST_PLATFORMS[id].name}
+                    </a>
+                  </Button>
+                ))}
               </div>
             </div>
           </div>

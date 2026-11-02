@@ -10,13 +10,14 @@ import AdvertiserMediaStrip from "@/components/AdvertiserMediaStrip";
 import ListenerRevenuePath from "@/components/ListenerRevenuePath";
 import SourcePageLinks from "@/components/SourcePageLinks";
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
+import ListenerReviews from "@/components/ListenerReviews";
 import { podcastFeedSnapshot } from "@/data/podcastFeedSnapshot";
 
 // AEO-optimized FAQs for AI answer extraction
 const homepageFAQs = [
   {
     question: "What is The Party Wreckers Podcast about?",
-    answer: "The Party Wreckers Podcast is a weekly show for families, loved ones, and professionals navigating substance use disorders. Hosted by Matt Brown, a professional interventionist with 20+ years of experience, the podcast covers addiction, intervention strategies, enabling vs. supporting, setting boundaries, and family recovery."
+    answer: "The Party Wreckers Podcast is a show for families, loved ones, and professionals navigating substance use disorders. Hosted by Matt Brown, a professional interventionist with 20+ years of experience, the podcast covers addiction, intervention strategies, enabling vs. supporting, setting boundaries, and family recovery."
   },
   {
     question: "How can I help a family member with addiction?",
@@ -56,6 +57,7 @@ const Index = () => {
         <HeroSection />
         <SourcePageLinks />
         <EpisodeStarterPath episodes={podcastFeedSnapshot.episodes} />
+        <ListenerReviews placement="home_rate_strip" />
         <FamilyBridgeBanner />
         <section id="about">
           <AboutSection />

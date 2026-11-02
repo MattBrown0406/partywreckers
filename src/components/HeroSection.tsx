@@ -17,7 +17,8 @@ import logo from "@/assets/party-wreckers-logo-2026.webp";
 import soberHelplineLogo from "@/assets/sober-helpline-logo.png";
 import ThemePlayer from "@/components/ThemePlayer";
 import TrackedExternalLink from "@/components/TrackedExternalLink";
-import { usePodcastFeed } from "@/hooks/usePodcastFeed";
+import FollowButtons from "@/components/FollowButtons";
+import { formatDate, usePodcastFeed } from "@/hooks/usePodcastFeed";
 import { funnelLinks } from "@/lib/funnelLinks";
 import { episodePath, getEpisodeSlugs } from "@/lib/episodes";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
@@ -101,14 +102,14 @@ const ExcuseCycler = () => {
   );
 };
 
-const OnAirCard = () => (
+const OnAirCard = ({ latestDate }: { latestDate: string }) => (
   <div className="rounded-2xl border border-white/15 bg-black/45 p-4 shadow-2xl backdrop-blur-md sm:p-5">
     <div className="mb-3 flex items-center justify-between gap-3">
       <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
         <span className="hero-live-dot h-2 w-2 rounded-full bg-red-500" aria-hidden="true" />
         On air
       </span>
-      <span className="text-xs text-white/50">New episodes weekly</span>
+      {latestDate && <span className="text-xs text-white/50">Latest: {latestDate}</span>}
     </div>
     <div className="mb-4 flex h-12 items-end gap-[3px]" aria-hidden="true">
       {WAVE_BARS.map((bar, index) => (
@@ -120,6 +121,7 @@ const OnAirCard = () => (
       ))}
     </div>
     <ThemePlayer />
+    <FollowButtons variant="compact" tone="dark" placement="hero_on_air" className="mt-3 border-t border-white/10 pt-3" />
   </div>
 );
 
@@ -129,6 +131,7 @@ const HeroSection = () => {
   const episodeCount = podcastInfo?.episodes?.length || 75;
   const latestEpisode = podcastInfo?.episodes?.[0];
   const latestEpisodeTitle = latestEpisode?.title || "Latest episode";
+  const latestEpisodeDate = latestEpisode ? formatDate(latestEpisode.pubDate) : "";
   const latestEpisodeSlug = latestEpisode ? getEpisodeSlugs(podcastInfo.episodes).get(latestEpisode.id) : undefined;
 
   return (
@@ -266,7 +269,7 @@ const HeroSection = () => {
             {/* On-air card and latest episode */}
             <div className="lg:col-start-2 lg:row-start-2 lg:self-start">
               <div className="hero-rise relative z-20 mx-auto max-w-[23rem] lg:w-[76%] lg:max-w-none" style={rise(0.9)}>
-                <OnAirCard />
+                <OnAirCard latestDate={latestEpisodeDate} />
               </div>
 
               <Link

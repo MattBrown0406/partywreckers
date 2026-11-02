@@ -14,7 +14,7 @@ interface NewsletterSignupProps {
 }
 
 const NewsletterSignup = ({ 
-  title = "Get weekly guidance for families dealing with addiction",
+  title = "Get guidance for families dealing with addiction",
   description,
   variant = "inline",
   className = ""

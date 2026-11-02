@@ -6,12 +6,13 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { BreadcrumbJsonLd, PodcastEpisodeJsonLd } from "@/components/JsonLd";
 import TranscriptDialog from "@/components/TranscriptDialog";
-import TrackedExternalLink from "@/components/TrackedExternalLink";
+import FollowButtons from "@/components/FollowButtons";
+import FollowPrompt from "@/components/FollowPrompt";
 import EpisodeFunnelPanel from "@/components/EpisodeFunnelPanel";
 import { Button } from "@/components/ui/button";
 import { podcastFeedSnapshot } from "@/data/podcastFeedSnapshot";
 import { formatDate, formatDuration, usePodcastFeed, type Episode } from "@/hooks/usePodcastFeed";
-import { podcastLinks } from "@/lib/funnelLinks";
+import { usePostListenPrompt } from "@/hooks/usePostListenPrompt";
 import {
   cleanEpisodeDescription,
   episodePath,
@@ -22,13 +23,6 @@ import {
 } from "@/lib/episodes";
 import { useEpisodeTranscript } from "@/lib/episodeTranscripts";
 import NotFound from "./NotFound";
-
-const platforms = [
-  { name: "Apple Podcasts", url: podcastLinks.apple },
-  { name: "Spotify", url: podcastLinks.spotify },
-  { name: "YouTube", url: podcastLinks.youtube },
-  { name: "Amazon Music", url: "https://music.amazon.com/podcasts/b7bf2801-8447-4dfc-9857-aa41cd4cfc64/the-party-wreckers" },
-];
 
 const byNewest = (a: Episode, b: Episode) => Date.parse(b.pubDate) - Date.parse(a.pubDate) || a.id.localeCompare(b.id);
 
@@ -125,6 +119,7 @@ const EpisodeNavLink = ({ episode, direction }: { episode: EpisodeWithSlug; dire
 const EpisodePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const episodes = useEpisodeList();
+  const followPrompt = usePostListenPrompt();
   const index = episodes.findIndex((episode) => episode.slug === slug);
   if (index === -1) return <NotFound />;
 
@@ -208,25 +203,26 @@ const EpisodePage = () => {
               <Headphones className="h-5 w-5 text-primary" />
               Listen now
             </p>
-            <audio controls preload="none" src={episode.audioUrl} className="w-full">
+            <audio
+              controls
+              preload="none"
+              src={episode.audioUrl}
+              className="w-full"
+              onTimeUpdate={(event) =>
+                followPrompt.reportProgress(
+                  episode.slug,
+                  event.currentTarget.currentTime,
+                  event.currentTarget.duration,
+                  episode.duration,
+                )
+              }
+              onEnded={() => followPrompt.reportEnded(episode.slug)}
+            >
               Your browser can't play this audio. <a href={episode.audioUrl}>Download the episode</a>.
             </audio>
-            <div className="mt-4 flex flex-wrap items-center gap-2">
-              <span className="text-sm text-muted-foreground">Also on:</span>
-              {platforms.map((platform) => (
-                <TrackedExternalLink
-                  key={platform.name}
-                  href={platform.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  eventName="podcast_platform_click"
-                  ctaLabel={`Episode page ${platform.name}`}
-                  metadata={{ episode: episode.slug }}
-                  className="inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
-                >
-                  {platform.name}
-                </TrackedExternalLink>
-              ))}
+            <div className="mt-5 border-t border-primary/15 pt-4">
+              <p className="mb-3 text-sm text-muted-foreground">Follow the show so the next episode shows up in your app.</p>
+              <FollowButtons placement="episode_page" metadata={{ episode: episode.slug }} />
             </div>
           </section>
 
@@ -259,6 +255,12 @@ const EpisodePage = () => {
         </div>
       </main>
       <Footer />
+      <FollowPrompt
+        open={followPrompt.open}
+        onDismiss={followPrompt.dismiss}
+        placement="episode_page_prompt"
+        metadata={{ episode: followPrompt.episodeKey ?? episode.slug }}
+      />
     </div>
   );
 };
