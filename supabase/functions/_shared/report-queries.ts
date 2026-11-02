@@ -6,7 +6,9 @@ const MAX_ROWS = 50_000;
 /**
  * Funnel events since `since`, newest first. Pages with .range() because a single
  * request is capped at 1000 rows no matter what .limit() asks for, which silently
- * truncated every report total once traffic passed 1000 events a month.
+ * truncated every report total once traffic passed 1000 events a month. Pages are read
+ * oldest-first so events inserted while paging land after the last page instead of
+ * shifting rows across a page boundary (which would count one twice).
  */
 export const fetchFunnelEventsSince = async <T = Record<string, unknown>>(
   supabase: SupabaseClient,
@@ -19,8 +21,8 @@ export const fetchFunnelEventsSince = async <T = Record<string, unknown>>(
       .from("party_wreckers_funnel_events")
       .select("event_name, source_path, destination_url, cta_label, created_at, metadata")
       .gte("created_at", since)
-      .order("created_at", { ascending: false })
-      .order("id", { ascending: false })
+      .order("created_at", { ascending: true })
+      .order("id", { ascending: true })
       .range(from, from + PAGE_SIZE - 1);
 
     if (error) throw error;
@@ -28,7 +30,7 @@ export const fetchFunnelEventsSince = async <T = Record<string, unknown>>(
     if (!data || data.length < PAGE_SIZE) break;
   }
 
-  return rows;
+  return rows.reverse();
 };
 
 /**

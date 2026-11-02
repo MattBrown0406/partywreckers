@@ -52,7 +52,9 @@ export const requiredString = (body: Record<string, unknown>, field: string, max
   return value;
 };
 
-const EMAIL_PATTERN = /^[^\s@<>"'()[\]\\,;:]+@[^\s@<>"'()[\]\\,;:]+\.[^\s@<>"'()[\]\\,;:]+$/;
+// The local part allows apostrophes (o'brien@example.com); the value is always escaped
+// before it reaches HTML, so the pattern only needs to reject obviously malformed input.
+const EMAIL_PATTERN = /^[^\s@<>"\\,;:]+@[^\s@<>"'()[\]\\,;:]+\.[^\s@<>"'()[\]\\,;:]+$/;
 
 export const requiredEmail = (body: Record<string, unknown>, field = "email"): string => {
   const email = requiredString(body, field, 254).toLowerCase();

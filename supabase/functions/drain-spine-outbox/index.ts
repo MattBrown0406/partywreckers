@@ -9,6 +9,9 @@ const corsHeaders = {
 const MAX_ATTEMPTS = 6;
 const BATCH_SIZE = 50;
 const HUB_TIMEOUT_MS = 10_000;
+// Stop claiming new rows after this long so a run (worst case budget + one timeout)
+// always finishes well before the next 5-minute cron tick starts another one.
+const RUN_BUDGET_MS = 120_000;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -48,8 +51,10 @@ serve(async (req) => {
   }
 
   const results = { processed: 0, sent: 0, failed: 0, skipped: 0 };
+  const startedAt = Date.now();
 
   for (const row of rows ?? []) {
+    if (Date.now() - startedAt > RUN_BUDGET_MS) break;
     const attempts = (row.attempts ?? 0) + 1;
 
     // Claim the row before sending: the update only matches while the row still has

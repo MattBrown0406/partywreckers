@@ -17,7 +17,8 @@ const getStore = (kind: StorageKind): Storage | null => {
 export const safeGetItem = (key: string, kind: StorageKind = "localStorage"): string | null => {
   try {
     const store = getStore(kind);
-    if (store) return store.getItem(key);
+    const value = store?.getItem(key);
+    if (value !== null && value !== undefined) return value;
   } catch {
     // fall through to the in-memory copy
   }

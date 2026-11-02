@@ -7,7 +7,12 @@ const ScrollToTop = () => {
   useEffect(() => {
     if (hash) {
       // React Router doesn't scroll to #anchors, so do it once the new page has rendered.
-      const id = decodeURIComponent(hash.slice(1));
+      let id = hash.slice(1);
+      try {
+        id = decodeURIComponent(id);
+      } catch {
+        // Malformed escape such as "#100%": use the raw fragment instead of crashing.
+      }
       const frame = window.requestAnimationFrame(() => {
         const target = document.getElementById(id);
         if (target) {
