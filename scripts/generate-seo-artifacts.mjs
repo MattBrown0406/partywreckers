@@ -1,12 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { assignEpisodeSlugs, episodePath } from "../src/lib/episodeSlug.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const blogDataPath = path.join(projectRoot, "src", "data", "blogData.ts");
 const appPath = path.join(projectRoot, "src", "App.tsx");
+const podcastSnapshotPath = path.join(projectRoot, "src", "data", "podcastFeedSnapshot.ts");
 const publicDir = path.join(projectRoot, "public");
 const sitemapPath = path.join(publicDir, "sitemap.xml");
 const prerenderManifestPath = path.join(publicDir, "prerender-routes.json");
@@ -17,6 +19,11 @@ const blogData = fs.readFileSync(blogDataPath, "utf8");
 const appSource = fs.readFileSync(appPath, "utf8");
 
 const blogIds = Array.from(blogData.matchAll(/id:\s*"([^"]+)"/g)).map((match) => match[1]);
+const podcastSnapshotJson = fs
+  .readFileSync(podcastSnapshotPath, "utf8")
+  .match(/=\s*(\{[\s\S]*\})\s*satisfies\s+PodcastInfo/)?.[1];
+if (!podcastSnapshotJson) throw new Error("Could not parse src/data/podcastFeedSnapshot.ts");
+const episodeRoutes = [...assignEpisodeSlugs(JSON.parse(podcastSnapshotJson).episodes).values()].map(episodePath);
 const noIndexRoutes = new Set(["/funnel-report"]);
 
 const staticRoutes = Array.from(appSource.matchAll(/path="([^"]+)"/g))
@@ -28,6 +35,7 @@ const routeEntries = [
     "/",
     ...staticRoutes,
     ...blogIds.map((id) => `/blog/${id}`),
+    ...episodeRoutes,
   ]),
 ].sort((a, b) => a.localeCompare(b));
 
@@ -64,6 +72,7 @@ const changeFreqForRoute = (route) => {
 const priorityForRoute = (route) => {
   if (priorities.has(route)) return priorities.get(route);
   if (route.startsWith("/blog/")) return "0.7";
+  if (route.startsWith("/episodes/")) return "0.6";
   return "0.7";
 };
 
@@ -81,12 +90,12 @@ fs.writeFileSync(
     {
       generatedAt: new Date().toISOString(),
       routes: routeEntries,
-      note: "Use this manifest for prerender/SSR coverage of public marketing and blog routes.",
+      note: "Use this manifest for prerender/SSR coverage of public marketing, blog, and episode routes.",
     },
     null,
     2,
   ) + "\n",
 );
 
-console.log(`Generated sitemap with ${routeEntries.length} routes.`);
+console.log(`Generated sitemap with ${routeEntries.length} routes (${episodeRoutes.length} episode pages).`);
 console.log(`Generated prerender manifest at ${path.relative(projectRoot, prerenderManifestPath)}.`);

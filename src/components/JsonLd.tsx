@@ -309,6 +309,7 @@ export const PodcastEpisodeJsonLd = ({
   datePublished,
   duration,
   audioUrl,
+  url,
 }: {
   title: string;
   description: string;
@@ -316,13 +317,16 @@ export const PodcastEpisodeJsonLd = ({
   datePublished: string;
   duration: number;
   audioUrl: string;
+  /** Site-relative or absolute URL of the episode page. */
+  url?: string;
 }) => {
   const episodeSchema = {
     "@context": "https://schema.org",
     "@type": "PodcastEpisode",
     "name": title,
     "description": description,
-    "episodeNumber": episodeNumber,
+    ...(url ? { "url": new URL(url, SITE_URL).href } : {}),
+    ...(episodeNumber > 0 ? { "episodeNumber": episodeNumber } : {}),
     "datePublished": datePublished,
     "timeRequired": `PT${Math.floor(duration / 60)}M`,
     "associatedMedia": {

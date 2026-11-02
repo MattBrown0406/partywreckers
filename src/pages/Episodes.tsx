@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePodcastFeed, formatDuration, formatDate, Episode } from "@/hooks/usePodcastFeed";
@@ -16,6 +17,7 @@ import SponsorPlacement from "@/components/SponsorPlacement";
 import ListenerRevenuePath from "@/components/ListenerRevenuePath";
 import SourcePageLinks from "@/components/SourcePageLinks";
 import { getEpisodeSearchText, topicFilters } from "@/lib/episodeGuides";
+import { episodePath, withEpisodeSlugs, type EpisodeWithSlug } from "@/lib/episodes";
 
 type Category = "all" | "understanding" | "family" | "intervention" | "recovery";
 
@@ -90,13 +92,13 @@ const Episodes = () => {
   const [playingId, setPlayingId] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
-  const [transcriptEpisode, setTranscriptEpisode] = useState<(Episode & { category: Category }) | null>(null);
+  const [transcriptEpisode, setTranscriptEpisode] = useState<(EpisodeWithSlug & { category: Category }) | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
   const categorizedEpisodes = useMemo(() => {
     if (!data?.episodes) return [];
-    return data.episodes.map(episode => ({
+    return withEpisodeSlugs(data.episodes).map(episode => ({
       ...episode,
       category: getCategoryForEpisode(episode),
     }));
@@ -272,7 +274,9 @@ const Episodes = () => {
                           </div>
 
                           <h3 className="font-semibold text-xl text-burgundy mb-2">
-                            {latestEpisode.title}
+                            <Link to={episodePath(latestEpisode.slug)} className="transition-colors hover:text-burgundy/80 hover:underline">
+                              {latestEpisode.title}
+                            </Link>
                           </h3>
 
                           <div className="flex items-center gap-3 text-sm text-muted-foreground mb-3">
@@ -456,7 +460,9 @@ const Episodes = () => {
                             </div>
 
                             <h3 className="mb-2 font-semibold text-foreground transition-colors group-hover:text-burgundy">
-                              {episode.title}
+                              <Link to={episodePath(episode.slug)} className="hover:underline">
+                                {episode.title}
+                              </Link>
                             </h3>
 
                             <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
@@ -496,6 +502,7 @@ const Episodes = () => {
           onClose={() => setTranscriptEpisode(null)}
           episodeTitle={transcriptEpisode?.title || ""}
           transcripts={transcriptEpisode?.transcripts || []}
+          slug={transcriptEpisode?.slug}
         />
       </main>
       <Footer />

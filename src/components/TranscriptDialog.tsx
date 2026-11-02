@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,17 +9,16 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Loader2, FileText, Copy, Check } from "lucide-react";
 import { TranscriptInfo } from "@/hooks/usePodcastFeed";
-
-const redactContent = (text: string): string => {
-  return text.replace(/intervention\s*on\s*call/gi, "[redacted]")
-             .replace(/interventiononcall\.com/gi, "[redacted]");
-};
+import { loadLocalTranscript } from "@/lib/episodeTranscripts";
+import { sortTranscriptsByPreference, transcriptToText } from "@/lib/transcriptText";
 
 interface TranscriptDialogProps {
   isOpen: boolean;
   onClose: () => void;
   episodeTitle: string;
   transcripts: TranscriptInfo[];
+  /** Episode slug; when a build-time transcript file exists it is used instead of a network fetch. */
+  slug?: string;
 }
 
 const TranscriptDialog = ({
@@ -27,6 +26,7 @@ const TranscriptDialog = ({
   onClose,
   episodeTitle,
   transcripts,
+  slug,
 }: TranscriptDialogProps) => {
   const [content, setContentState] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,17 +37,7 @@ const TranscriptDialog = ({
   // response for a previously opened episode can't replace the current transcript.
   const requestIdRef = useRef(0);
 
-  useEffect(() => {
-    if (isOpen && transcripts.length > 0) {
-      fetchTranscript();
-    }
-    return () => {
-      requestIdRef.current += 1;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, transcripts]);
-
-  const fetchTranscript = async () => {
+  const fetchTranscript = useCallback(async () => {
     const requestId = ++requestIdRef.current;
     const isCurrent = () => requestIdRef.current === requestId;
     const setContent = (value: string) => {
@@ -57,23 +47,22 @@ const TranscriptDialog = ({
     setError(null);
     setContent("");
 
-    // Prefer HTML format, then SRT, then JSON
-    const preferredOrder = ["text/html", "application/x-subrip", "application/json"];
-    const sortedTranscripts = [...transcripts].sort((a, b) => {
-      const aIndex = preferredOrder.indexOf(a.type);
-      const bIndex = preferredOrder.indexOf(b.type);
-      return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-    });
-
-    const transcript = sortedTranscripts[0];
-    if (!transcript) {
-      setError("No transcript available");
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      // Use CORS proxy to fetch transcript
+      // Prefer the transcript downloaded at build time (no third-party proxy needed).
+      const localText = await loadLocalTranscript(slug).catch(() => undefined);
+      if (!isCurrent()) return;
+      if (localText) {
+        setContent(localText);
+        return;
+      }
+
+      // Fallback: fetch from the feed through a CORS proxy. Prefer HTML, then SRT, then JSON.
+      const transcript = sortTranscriptsByPreference(transcripts)[0];
+      if (!transcript) {
+        setError("No transcript available");
+        return;
+      }
+
       const response = await fetch(
         `https://corsproxy.io/?${encodeURIComponent(transcript.url)}`
       );
@@ -83,45 +72,7 @@ const TranscriptDialog = ({
 
       const text = await response.text();
       if (!isCurrent()) return;
-
-      // Parse based on format
-      if (transcript.type === "text/html") {
-        // Strip HTML tags but preserve structure
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
-        const cleanText = doc.body.textContent || text;
-        setContent(redactContent(cleanText));
-      } else if (transcript.type === "application/x-subrip") {
-        // Parse SRT format - remove timestamps and numbers
-        const cleanedSrt = text
-          .split("\n")
-          .filter((line) => {
-            // Remove line numbers and timestamps
-            if (/^\d+$/.test(line.trim())) return false;
-            if (/^\d{2}:\d{2}:\d{2}/.test(line.trim())) return false;
-            if (line.trim() === "") return false;
-            return true;
-          })
-          .join(" ")
-          .replace(/\s+/g, " ")
-          .trim();
-        setContent(redactContent(cleanedSrt));
-      } else if (transcript.type === "application/json") {
-        // Parse JSON transcript format
-        const json = JSON.parse(text);
-        if (Array.isArray(json)) {
-          const transcriptText = json
-            .map((segment: { text?: string; body?: string }) => segment.text || segment.body || "")
-            .join(" ");
-          setContent(redactContent(transcriptText));
-        } else if (json.text) {
-          setContent(redactContent(json.text));
-        } else {
-          setContent(JSON.stringify(json, null, 2));
-        }
-      } else {
-        setContent(redactContent(text));
-      }
+      setContent(transcriptToText(text, transcript.type));
     } catch (err) {
       if (!isCurrent()) return;
       console.error("Error fetching transcript:", err);
@@ -129,7 +80,16 @@ const TranscriptDialog = ({
     } finally {
       if (isCurrent()) setIsLoading(false);
     }
-  };
+  }, [slug, transcripts]);
+
+  useEffect(() => {
+    if (isOpen && (transcripts.length > 0 || slug)) {
+      fetchTranscript();
+    }
+    return () => {
+      requestIdRef.current += 1;
+    };
+  }, [isOpen, transcripts, slug, fetchTranscript]);
 
   const handleCopy = async () => {
     try {
