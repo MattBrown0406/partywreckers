@@ -3,7 +3,9 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 // Cloudflare Turnstile bot check for the public forms. Renders nothing until
 // VITE_TURNSTILE_SITE_KEY is set; the server only enforces it once
 // TURNSTILE_SECRET_KEY is set, so both halves can be switched on independently.
-const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+// Public site key (safe in code by design).
+const SITE_KEY =
+  (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) || "0x4AAAAAAFxMYExDYYJfQNmC";
 const SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 const TOKEN_WAIT_MS = 10_000;
 
