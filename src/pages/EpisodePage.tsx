@@ -9,6 +9,7 @@ import TranscriptDialog from "@/components/TranscriptDialog";
 import FollowButtons from "@/components/FollowButtons";
 import FollowPrompt from "@/components/FollowPrompt";
 import EpisodeFunnelPanel from "@/components/EpisodeFunnelPanel";
+import EpisodeListenerQuestions from "@/components/EpisodeListenerQuestions";
 import { Button } from "@/components/ui/button";
 import { podcastFeedSnapshot } from "@/data/podcastFeedSnapshot";
 import { formatDate, formatDuration, usePodcastFeed, type Episode } from "@/hooks/usePodcastFeed";
@@ -234,6 +235,8 @@ const EpisodePage = () => {
           )}
 
           <TranscriptSection key={episode.slug} episode={episode} />
+
+          <EpisodeListenerQuestions episodeSlug={episode.slug} />
         </article>
 
         <div className="mt-12">

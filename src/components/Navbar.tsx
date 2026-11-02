@@ -43,6 +43,7 @@ const navLinks: NavLink[] = [
 ];
 
 const mattLinks = [
+  { label: "Ask Matt a Question", href: "/ask-matt" },
   { label: "Meet the Host", href: "/host" },
   { label: "Press & Media Kit", href: "/press" },
 ];
