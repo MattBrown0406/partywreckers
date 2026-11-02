@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import HoneypotField from "@/components/HoneypotField";
+import BookCallButton from "@/components/BookCallButton";
 import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
 import { currentSourcePath, submitForm } from "@/lib/formSubmit";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
@@ -129,8 +130,9 @@ const HelpRequestForm = ({ kind, sourceArticle, messagePlaceholder, idPrefix = k
           He reads these personally and will get back to you as soon as he can. If things get worse in the meantime, call{" "}
           <a href={SITE_PHONE_HREF} className="font-medium text-primary underline">{SITE_PHONE_DISPLAY}</a>, or 911 if anyone is in danger.
         </p>
+        <BookCallButton placement={`after_${kind}_form`} label="Want to talk sooner? Book a time" size="sm" variant="secondary" className="mt-4" />
         {kind !== "sticky" && (
-          <Button variant="outline" size="sm" className="mt-4" onClick={() => setStatus("idle")}>
+          <Button variant="outline" size="sm" className="mt-4 ml-2" onClick={() => setStatus("idle")}>
             Send another message
           </Button>
         )}

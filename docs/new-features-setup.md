@@ -48,6 +48,15 @@ opt-in). They're tagged `partywreckers.com` and `source:<form>`. Until these are
 signups keep being emailed to `NEWSLETTER_FORWARD_TO` as before. To get both, set
 `NEWSLETTER_NOTIFY=true`.
 
+## Book a free call (self-serve scheduling)
+
+Set `VITE_BOOKING_URL` to your public booking page (Calendly, Cal.com, etc., must start
+with `https://`) in `.env` or Lovable's environment settings, then publish. "Book a free
+15-minute call" buttons then appear on `/get-help`, Help Now, the help section at the end
+of every article, and after a help request is sent. Clicks are recorded as
+`booking_click` (counted as a family lead in the reports). Until it's set, the buttons
+are hidden.
+
 ## Admin report login
 
 See `docs/admin-login.md` (`ADMIN_EMAILS`, Supabase Auth email sign-in and redirect URLs).

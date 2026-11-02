@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import HelpRequestForm from "@/components/HelpRequestForm";
+import BookCallButton from "@/components/BookCallButton";
 import { useCurrentArticle } from "@/lib/articleContext";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
 
@@ -32,6 +33,7 @@ const ArticleHelpSection = () => {
               </a>
               . If anyone is in immediate danger, call 911.
             </p>
+            <BookCallButton placement="article_help" size="default" className="mt-4" />
           </div>
           <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
             <HelpRequestForm

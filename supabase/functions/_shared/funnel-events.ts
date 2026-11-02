@@ -11,6 +11,7 @@ export const LISTENER_LEAD_EVENTS = [
   "intervention_readiness_click",
   "freedom_bridge_click",
   "openclaw_phone_click",
+  "booking_click",
 ] as const;
 
 /** Sponsors and advertisers showing buying intent. */

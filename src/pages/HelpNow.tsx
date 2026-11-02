@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TrackedExternalLink from "@/components/TrackedExternalLink";
 import { AlertTriangle, BookOpen, CalendarCheck, HeartHandshake, Phone, PhoneCall } from "lucide-react";
 import { Link } from "react-router-dom";
+import BookCallButton from "@/components/BookCallButton";
 import { primaryAeoAnswers } from "@/lib/aeoContent";
 import { funnelLinks } from "@/lib/funnelLinks";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
@@ -124,6 +125,7 @@ const HelpNow = () => {
                   <Button variant="outline" className="h-auto min-h-11 w-full whitespace-normal py-3" asChild>
                     <Link to="/get-help">Send Matt a message</Link>
                   </Button>
+                  <BookCallButton placement="help_now_card" size="default" className="h-auto min-h-11 w-full whitespace-normal py-3" />
                 </CardContent>
               </Card>
             </div>

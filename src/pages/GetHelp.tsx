@@ -4,8 +4,9 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import FaqSection from "@/components/FaqSection";
 import HelpRequestForm from "@/components/HelpRequestForm";
+import BookCallButton from "@/components/BookCallButton";
 import { BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
-import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
+import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF, isBookingEnabled } from "@/lib/site";
 
 const steps = [
   {
@@ -89,7 +90,17 @@ const GetHelp = () => (
               ))}
             </ol>
 
-            <div className="mt-8 rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+            {isBookingEnabled && (
+              <div className="mt-8 rounded-lg border border-primary/30 bg-primary/[0.06] p-4">
+                <p className="font-semibold text-foreground">Rather just talk it through?</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Pick a time that works for you. It's a free, no-pressure 15-minute call.
+                </p>
+                <BookCallButton placement="get_help_page" className="mt-3" />
+              </div>
+            )}
+
+            <div className="mt-4 rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
               <p>
                 Prefer to talk?{" "}
                 <a href={SITE_PHONE_HREF} className="inline-flex items-center gap-1 font-semibold text-primary underline">
