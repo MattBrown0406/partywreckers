@@ -72,7 +72,7 @@ serve(async (req) => {
             },
           };
         })
-        .filter((row) => row.email || row.company);
+        .filter((row: { email?: unknown; company?: unknown }) => row.email || row.company);
 
       if (!prospects.length) {
         return new Response(JSON.stringify({ error: "No valid prospects provided" }), {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T20:56:27.756Z",
+  "generatedAt": "2026-11-02T21:02:05.829Z",
   "routes": [
     "/",
     "/advertise",
@@ -264,6 +264,7 @@
     "/family-resources",
     "/fear-inventory",
     "/from-party-wreckers",
+    "/get-help",
     "/glossary",
     "/help-now",
     "/host",
