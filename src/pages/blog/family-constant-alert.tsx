@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageFamilyConstantAlert from "@/assets/blog-family-constant-alert.jpg";
 
@@ -41,6 +42,8 @@ const FamilyConstantAlert = () => {
             When Addiction Turns Family Life Into a Constant State of Alert
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="family-constant-alert" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageSupportingVsCarrying from "@/assets/blog-supporting-vs-carrying.jpg";
 
@@ -41,6 +42,8 @@ const SupportingVsCarrying = () => {
             The Difference Between Supporting Recovery and Carrying the Consequences
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="supporting-vs-carrying" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

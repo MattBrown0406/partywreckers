@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageEnablingSurvival from "@/assets/blog-enabling-survival.jpg";
 
@@ -41,6 +42,8 @@ const EnablingSurvival = () => {
             Enabling Isn't About Weakness—It's About Survival
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="enabling-survival" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

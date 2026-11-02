@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageMedicalDetox from "@/assets/blog-medical-detox.jpg";
 
@@ -41,6 +42,8 @@ const MedicalDetoxMatters = () => {
             Why Medical Detox Matters: The Serious Risks of Detoxing at Home Without Supervision
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="medical-detox-matters" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

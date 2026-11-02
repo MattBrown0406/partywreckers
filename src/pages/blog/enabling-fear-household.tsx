@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageEnablingFearHousehold from "@/assets/blog-enabling-fear-household.jpg";
 
@@ -41,6 +42,8 @@ const EnablingFearHousehold = () => {
             Enabling Isn't Weakness — It's What Happens When Fear Runs the Household
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="enabling-fear-household" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

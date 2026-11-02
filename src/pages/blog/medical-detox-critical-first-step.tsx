@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageMedicalDetoxImportance from "@/assets/blog-medical-detox-importance.jpg";
 
@@ -41,6 +42,8 @@ const MedicalDetoxCriticalFirstStep = () => {
             Why Medical Detox Is a Critical First Step in Addiction Treatment
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="medical-detox-critical-first-step" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

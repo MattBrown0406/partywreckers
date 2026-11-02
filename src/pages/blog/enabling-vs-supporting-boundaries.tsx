@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageEnablingVsSupporting from "@/assets/blog-enabling-vs-supporting.jpg";
 
@@ -41,6 +42,8 @@ const EnablingVsSupportingBoundaries = () => {
             Enabling vs Supporting—A Boundary Blueprint for Families
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="enabling-vs-supporting-boundaries" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

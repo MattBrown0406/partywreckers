@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageExerciseNutrition from "@/assets/blog-exercise-nutrition-recovery.jpg";
 
@@ -41,6 +42,8 @@ const ExerciseNutritionRecovery = () => {
             Rebuilding from the Inside Out: How Exercise and Nutrition Support Early Addiction Recovery
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="exercise-nutrition-recovery" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
