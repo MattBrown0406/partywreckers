@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "service-in-recovery": {
+    eyebrow: "Article answer",
+    title: "What is service in recovery, and why does it help people stay sober?",
+    answer: "Service in recovery means doing something useful for other people without being paid or praised, from making coffee to sponsoring someone. It works because it gives you a reason to show up that isn't about you, building accountability, connection, and self-respect through action rather than thinking. You can start on day one with simple jobs like setting up chairs or greeting people at the door.",
+    bullets: [
+      "Service gets you out of your own head and makes you part of something.",
+      "Simple jobs like coffee, chairs, and cleanup need no clean time at all.",
+      "Service becomes unhealthy when it turns into people-pleasing or avoidance.",
+      "For families, rescuing and covering is survival, not service; healthy service includes self-care.",
+    ],
+    nextSteps: [
+      "Find one small way to be of service this week, without waiting to feel ready.",
+      "Ask the person who makes the coffee at your meeting if they need help.",
+      "Families: get your own support through Al-Anon or a family program.",
+    ],
+    links: [
+      { label: "Why I Still Go to Meetings After 23 Years", href: "/blog/why-i-still-go-to-meetings-after-23-years-sober" },
+      { label: "Resentment in Recovery", href: "/blog/resentment-in-recovery" },
+    ],
+  },
   "resentment-in-recovery": {
     eyebrow: "Article answer",
     title: "How do you let go of resentment in recovery?",
