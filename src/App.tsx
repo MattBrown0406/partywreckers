@@ -21,6 +21,7 @@ import Press from "./pages/Press";
 import StartHere from "./pages/StartHere";
 import HelpNow from "./pages/HelpNow";
 import GetHelp from "./pages/GetHelp";
+import AskMatt from "./pages/AskMatt";
 import NextStep from "./pages/NextStep";
 import FromPartyWreckers from "./pages/FromPartyWreckers";
 import FamilyAddictionHelp from "./pages/FamilyAddictionHelp";
@@ -61,6 +62,7 @@ export const App = ({ Router = DefaultRouter }: AppProps) => (
           <Route path="/" element={<Index />} />
           <Route path="/help-now" element={<HelpNow />} />
           <Route path="/get-help" element={<GetHelp />} />
+          <Route path="/ask-matt" element={<AskMatt />} />
           <Route path="/from-party-wreckers" element={<FromPartyWreckers />} />
           <Route path="/start-here" element={<StartHere />} />
           <Route path="/next-step" element={<NextStep />} />

@@ -61,6 +61,45 @@ are hidden.
 
 See `docs/admin-login.md` (`ADMIN_EMAILS`, Supabase Auth email sign-in and redirect URLs).
 
+## Ask Matt (listener questions, typed and voice)
+
+`/ask-matt` lets listeners send a question for the podcast, typed and/or recorded (up to
+90 seconds in the browser). It's anonymous by default; a first name and an email are
+optional, and consent to be read or paraphrased on air is required.
+
+1. **Apply the migration** `supabase/migrations/20261102120000_listener_questions.sql`.
+   It creates the `party_wreckers_listener_questions` table (service role only, no public
+   access) and the private Storage bucket `listener-question-audio` (3 MB, audio types
+   only). It's safe to run more than once. If Lovable doesn't apply migrations pushed from
+   GitHub automatically, ask Lovable to run that migration (or paste it into the Supabase
+   SQL editor).
+2. **Deploy the functions** `submit-listener-question`, `get-answered-questions` and
+   `listener-questions-admin` (all `verify_jwt = false` in `supabase/config.toml`; the
+   admin one checks `ADMIN_EMAILS` / the report access key itself).
+3. Optional: `LISTENER_QUESTION_TO`, the address that gets each new question. Defaults to
+   `CONTACT_FORWARD_TO`, then `matt@freedominterventions.com`. Uses the existing
+   `RESEND_API_KEY`; Turnstile (action `ask_matt`), the honeypot and rate limits (5 per
+   visitor per hour, 60 site-wide) work the same as the other forms.
+
+Every question is emailed to Matt, with a 7-day link for voice questions. Nothing is lost
+before step 1: until the migration is applied, the email still arrives with the full
+question (and the recording attached to the email), with a note that it wasn't saved to
+the queue. The `listener_question_submitted` funnel event records only the topic, whether
+there was audio, and whether it was anonymous.
+
+**Publishing an answered question on its episode page.** On `/funnel-report` (signed in),
+open "Listener Questions", then for the question:
+
+1. set Status to **Answered** and pick the episode under "Answered in episode",
+2. write the **public wording** (an edited version with identifying details removed; the
+   listener's original text and recording are never published),
+3. tick **Show on site** and **Save**.
+
+It then appears (within about 5 minutes, the cache time) under "Recently answered on the
+show" on `/ask-matt` and, once `EpisodeListenerQuestions` is placed on the episode page,
+under "Listener questions answered in this episode". The first name is shown only if the
+listener gave one; otherwise "A listener". Delete removes the question and its recording.
+
 ## Lead-forwarding job (drain-spine-outbox)
 
 The function now only runs for callers holding a service-level key. The scheduled
@@ -89,7 +128,8 @@ Turnstile is the strongest protection, so set it up.
   intake form, or the form at the end of every article). It's recorded server-side,
   with the form, source article/page, urgency and relationship, but never names,
   emails or messages. It drives the "Families asking for help" chart on `/funnel-report`.
-- `newsletter_signup_submitted` and `advertiser_inquiry_submitted` are recorded the same way.
+- `newsletter_signup_submitted`, `advertiser_inquiry_submitted` and
+  `listener_question_submitted` ("Ask Matt") are recorded the same way.
 - Page views are the `party_wreckers_arrival` events the site already sends on every route change.
 - Both reports share the event definitions in `supabase/functions/_shared/funnel-events.ts`.
   "Revenue intent" = family lead clicks (Family Squares, Get Answers, readiness, Freedom
