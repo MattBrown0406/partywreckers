@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImagePatienceAloneFails from "@/assets/blog-patience-alone-fails.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const PatienceAloneFails = () => {
   return (
@@ -41,6 +42,8 @@ const PatienceAloneFails = () => {
             Why Families Are Told to "Just Be Patient"—and Why Patience Alone Rarely Fixes Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="patience-alone-fails" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

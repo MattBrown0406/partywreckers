@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageCommunicationAddiction from "@/assets/blog-communication-addiction-families.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const CommunicationAddictionFamilies = () => {
   return (
@@ -41,6 +42,8 @@ const CommunicationAddictionFamilies = () => {
             Why "We Just Need Better Communication" Misses the Point in Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="communication-addiction-families" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

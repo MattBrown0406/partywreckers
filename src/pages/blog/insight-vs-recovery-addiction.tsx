@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageInsightVsRecovery from "@/assets/blog-insight-vs-recovery.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const InsightVsRecoveryAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const InsightVsRecoveryAddiction = () => {
             Why Apologies, Insight, and Self-Awareness Don't Equal Recovery (No Matter How Convincing They Sound)
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="insight-vs-recovery-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

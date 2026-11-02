@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageAddictionLoopholes from "@/assets/blog-addiction-loopholes.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const AddictionLoopholes = () => {
   return (
@@ -41,6 +42,8 @@ const AddictionLoopholes = () => {
             Why Addiction Loves Loopholes—and How Families Accidentally Create Them
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="addiction-loopholes" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

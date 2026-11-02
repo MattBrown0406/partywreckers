@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageBusyNotRecovery from "@/assets/blog-busy-not-recovery.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const BusyNotRecovery = () => {
   return (
@@ -41,6 +42,8 @@ const BusyNotRecovery = () => {
             Why Being "Busy" Is Not the Same as Being in Recovery
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="busy-not-recovery" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

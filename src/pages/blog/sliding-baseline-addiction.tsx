@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageSlidingBaseline from "@/assets/blog-sliding-baseline-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const SlidingBaselineAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const SlidingBaselineAddiction = () => {
             Why "At Least It's Not As Bad" Is the Most Dangerous Sentence in Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="sliding-baseline-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

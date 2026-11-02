@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageComparisonTrapAddiction from "@/assets/blog-comparison-trap-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const ComparisonTrapMinimizingAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const ComparisonTrapMinimizingAddiction = () => {
             Why "At Least It's Not As Bad As Before" Is a Dangerous Comparison
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="comparison-trap-minimizing-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageFamilyQuestionsAddiction from "@/assets/blog-family-questions-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const FamilyQuestionsAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const FamilyQuestionsAddiction = () => {
             The Questions Families Are Really Asking About Addiction (And Honest Answers)
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="family-questions-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

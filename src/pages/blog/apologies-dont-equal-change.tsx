@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageApologiesDontEqualChange from "@/assets/blog-apologies-dont-equal-change.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const ApologiesDontEqualChange = () => {
   return (
@@ -41,6 +42,8 @@ const ApologiesDontEqualChange = () => {
             Why Apologies Don't Equal Change—and Why Families Keep Falling for Them
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="apologies-dont-equal-change" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

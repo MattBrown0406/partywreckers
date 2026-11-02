@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageAmbiguityClarity from "@/assets/blog-addiction-ambiguity-clarity.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const AddictionAmbiguityClarity = () => {
   return (
@@ -41,6 +42,8 @@ const AddictionAmbiguityClarity = () => {
             Why Addiction Thrives on Ambiguity—and Why Clear Rules Make Everyone Uncomfortable
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="addiction-ambiguity-clarity" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

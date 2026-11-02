@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageMinimizingAddiction from "@/assets/blog-minimizing-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const MinimizingAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const MinimizingAddiction = () => {
             "It's Not That Bad"… Until It Is: How Families Get Stuck Minimizing Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="minimizing-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
