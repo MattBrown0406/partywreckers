@@ -107,7 +107,7 @@ const Sponsors = () => {
                   <article key={sponsor.id} className="rounded-lg border border-border bg-background p-5">
                     <div className="mb-4 flex h-16 items-center justify-center rounded-lg bg-white p-3">
                       {sponsor.image ? (
-                        <img src={sponsor.image} alt={sponsor.imageAlt || sponsor.name} className="max-h-full max-w-full object-contain" />
+                        <img src={sponsor.image} alt={sponsor.imageAlt || sponsor.name} className="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
                       ) : (
                         <span className="font-semibold text-foreground">{sponsor.name}</span>
                       )}
@@ -332,8 +332,10 @@ const Sponsors = () => {
                         <div className="bg-white rounded-xl p-4 shadow-xl">
                           <img 
                             src={familybridgeLogo} 
-                            alt="FamilyBridge - Healing Starts with Connection" 
+                            alt="FamilyBridge - Healing Starts with Connection"
                             className="w-48 h-auto"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       </a>
@@ -476,8 +478,10 @@ const Sponsors = () => {
                         <div className="bg-[#3a5a40] rounded-xl p-6 shadow-xl">
                           <img 
                             src={betterhelpLogo} 
-                            alt="BetterHelp - You Deserve to Be Happy" 
+                            alt="BetterHelp - You Deserve to Be Happy"
                             className="w-64 h-auto"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       </a>

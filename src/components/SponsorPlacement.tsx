@@ -70,7 +70,7 @@ const SponsorPlacement = ({ sponsorId, placement, variant = "banner", title }: S
           <div className="flex items-center gap-3">
             {sponsor.image && (
               <div className="flex h-12 w-24 flex-shrink-0 items-center justify-center rounded-md bg-white p-2">
-                <img src={sponsor.image} alt={sponsor.imageAlt || sponsor.name} className="max-h-full max-w-full object-contain" />
+                <img src={sponsor.image} alt={sponsor.imageAlt || sponsor.name} className="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
               </div>
             )}
             <div>
@@ -100,7 +100,7 @@ const SponsorPlacement = ({ sponsorId, placement, variant = "banner", title }: S
       <div className="grid gap-5 md:grid-cols-[auto_1fr_auto] md:items-center">
         {sponsor.image && (
           <div className="flex h-16 w-36 items-center justify-center rounded-lg bg-white p-3">
-            <img src={sponsor.image} alt={sponsor.imageAlt || sponsor.name} className="max-h-full max-w-full object-contain" />
+            <img src={sponsor.image} alt={sponsor.imageAlt || sponsor.name} className="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
           </div>
         )}
         <div>

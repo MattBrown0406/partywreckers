@@ -167,8 +167,10 @@ const AboutSection = () => {
                 <div className="rounded-lg shadow-md flex-shrink-0 overflow-hidden">
                   <img 
                     src={soberHelplineLogo} 
-                    alt="Sober Helpline" 
+                    alt="Sober Helpline"
                     className="w-20 h-20"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div>
