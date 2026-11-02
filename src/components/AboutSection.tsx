@@ -12,7 +12,7 @@ const features = [
   { text: "Practical intervention and treatment insight", link: null },
   { text: "Free weekly family support via Zoom", link: null },
   { text: "Conversations rooted in real intervention work", link: null },
-  { text: "New episodes every week", link: null },
+  { text: "A growing library of 85+ episodes", link: null },
   { text: "Available on major podcast platforms", link: null },
   { text: "Expert guests without empty jargon", link: null },
   { text: "Tools families can use right away", link: null },

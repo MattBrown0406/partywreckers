@@ -256,7 +256,7 @@ const SoberButStillMiserable = () => {
               <Link to="/episodes" className="text-primary hover:underline">
                 The Party Wreckers podcast
               </Link>{" "}
-              \u2014 new episodes weekly for families walking through exactly this. Follow along, share it with the person in your family who needs it, and if you want help figuring out your next step,{" "}
+              \u2014 episodes for families walking through exactly this. Follow along, share it with the person in your family who needs it, and if you want help figuring out your next step,{" "}
               <a
                 href="https://freedominterventions.com"
                 target="_blank"

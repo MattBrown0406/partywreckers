@@ -199,7 +199,7 @@ const AdultChildAddictionParents = () => {
           </div>
 
           <p className="text-foreground font-medium italic mt-8">
-            If this article hit close to home, <Link to="/episodes" className="text-primary hover:text-primary/80">The Party Wreckers podcast</Link> goes deeper every week — real stories about addiction, families, and what actually helps. And if you're ready for help with your son or daughter, reach out at <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">FreedomInterventions.com</a>. The first conversation is just that — a conversation. You've waited long enough.
+            If this article hit close to home, <Link to="/episodes" className="text-primary hover:text-primary/80">The Party Wreckers podcast</Link> goes deeper — real stories about addiction, families, and what actually helps. And if you're ready for help with your son or daughter, reach out at <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">FreedomInterventions.com</a>. The first conversation is just that — a conversation. You've waited long enough.
           </p>
         </article>
 

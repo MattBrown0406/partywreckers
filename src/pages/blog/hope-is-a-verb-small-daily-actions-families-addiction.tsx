@@ -234,7 +234,7 @@ const HopeIsAVerb = () => {
           <div className="bg-muted/50 border border-border rounded-lg p-6 my-8">
             <h3 className="text-xl font-bold mb-2">Take the Next Step</h3>
             <p>
-              If you're carrying this alone, you don't have to. Listen to <strong>The Party Wreckers</strong> podcast for honest conversations about addiction, intervention, and family recovery. We say the real thing and we keep it human. Follow along for weekly episodes, and if you're ready to talk to someone, reach out at{" "}
+              If you're carrying this alone, you don't have to. Listen to <strong>The Party Wreckers</strong> podcast for honest conversations about addiction, intervention, and family recovery. We say the real thing and we keep it human. Follow along for new episodes, and if you're ready to talk to someone, reach out at{" "}
               <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 FreedomInterventions.com
               </a>

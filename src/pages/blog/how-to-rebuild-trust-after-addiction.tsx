@@ -214,7 +214,7 @@ const RebuildTrustAfterAddiction = () => {
           <div className="bg-muted/50 border border-border rounded-lg p-6 my-8">
             <h3 className="text-xl font-bold mb-2">You Don't Have to Figure This Out Alone</h3>
             <p>
-              If this hit home, come listen to <strong>The Party Wreckers</strong> podcast — new episodes weekly, real conversations about addiction, recovery, and the families caught in the middle. Follow along, share it with someone who needs it, and if your family is somewhere earlier in this story — still in the lying, still in the fear —{" "}
+              If this hit home, come listen to <strong>The Party Wreckers</strong> podcast — real conversations about addiction, recovery, and the families caught in the middle. Follow along, share it with someone who needs it, and if your family is somewhere earlier in this story — still in the lying, still in the fear —{" "}
               <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 talk with a professional interventionist at FreedomInterventions.com
               </a>

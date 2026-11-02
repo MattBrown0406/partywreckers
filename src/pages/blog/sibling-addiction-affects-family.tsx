@@ -252,7 +252,7 @@ const SiblingAddictionAffectsFamily = () => {
               If your family is living in the middle of this right now — if you're the parent trying to hold everything together, or the sibling who has been quietly hanging on — I'd encourage you to reach out. This is exactly what I do. Not just the intervention itself, but helping families understand what's actually happening and what to do about it.
             </p>
             <p>
-              Listen to <strong>The Party Wreckers podcast</strong> for real conversations about addiction, family, and what recovery actually looks like. New episodes every week.
+              Listen to <strong>The Party Wreckers podcast</strong> for real conversations about addiction, family, and what recovery actually looks like.
             </p>
             <p>
               And if you're ready to talk, visit{" "}

@@ -269,7 +269,7 @@ const InterventionWithoutAProfessional = () => {
               <Link to="/episodes" className="text-primary hover:underline">
                 The Party Wreckers podcast
               </Link>{" "}
-              goes deeper every week — real stories from the intervention world, for families who are done waiting. And if you honestly can't tell which list your family lands on, that's exactly the kind of call I take every week. Reach out through{" "}
+              goes deeper — real stories from the intervention world, for families who are done waiting. And if you honestly can't tell which list your family lands on, that's exactly the kind of call I take every week. Reach out through{" "}
               <a
                 href="https://freedominterventions.com"
                 target="_blank"

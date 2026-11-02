@@ -229,7 +229,7 @@ const AdultChildrenOfAddictsPatterns = () => {
             <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
               FreedomInterventions.com
             </a>
-            , or start listening to The Party Wreckers podcast wherever you get your podcasts. We're here every week, and you don't have to figure this out alone.
+            , or start listening to The Party Wreckers podcast wherever you get your podcasts. We're here, and you don't have to figure this out alone.
           </p>
 
           <h2>Frequently Asked Questions</h2>

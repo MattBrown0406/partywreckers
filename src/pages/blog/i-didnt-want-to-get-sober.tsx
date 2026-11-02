@@ -242,7 +242,7 @@ const IDidntWantToGetSober = () => {
           <div className="bg-muted/50 border border-border rounded-lg p-6 my-8">
             <h3 className="text-xl font-bold mb-2">Keep Going</h3>
             <p>
-              Listen to <strong>The Party Wreckers</strong> podcast for more honest conversations about addiction, intervention, and what recovery actually looks like from the inside. New episodes weekly. If your family is ready to stop waiting, reach out at{" "}
+              Listen to <strong>The Party Wreckers</strong> podcast for more honest conversations about addiction, intervention, and what recovery actually looks like from the inside. If your family is ready to stop waiting, reach out at{" "}
               <a
                 href="https://freedominterventions.com"
                 target="_blank"

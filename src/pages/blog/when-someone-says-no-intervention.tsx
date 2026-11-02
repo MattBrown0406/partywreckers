@@ -257,7 +257,7 @@ const WhenSomeoneSaysNoIntervention = () => {
               <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">FreedomInterventions.com</a>.
             </p>
             <p className="mb-0">
-              And if you want to hear more honest conversations about what intervention and recovery really look like, listen to <em>The Party Wreckers</em> podcast — available wherever you listen to podcasts. New episodes every week.
+              And if you want to hear more honest conversations about what intervention and recovery really look like, listen to <em>The Party Wreckers</em> podcast — available wherever you listen to podcasts.
             </p>
           </div>
 

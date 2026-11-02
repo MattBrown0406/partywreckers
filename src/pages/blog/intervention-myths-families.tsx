@@ -229,7 +229,7 @@ const InterventionMythsFamilies = () => {
             <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">
               FreedomInterventions.com
             </a>
-            . And if you want to hear more — the myths, the reality, the stories from inside the intervention room — listen to <em>The Party Wreckers</em> podcast. New episodes every week.
+            . And if you want to hear more — the myths, the reality, the stories from inside the intervention room — listen to <em>The Party Wreckers</em> podcast.
           </p>
 
           <h2>Frequently Asked Questions</h2>

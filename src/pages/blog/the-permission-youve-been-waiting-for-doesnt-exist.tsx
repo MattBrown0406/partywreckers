@@ -249,7 +249,7 @@ const ThePermissionYouveBeenWaitingForDoesntExist = () => {
           <div className="bg-muted/50 border border-border rounded-lg p-6 my-8">
             <h3 className="text-xl font-bold mb-2">Ready to Take the Next Step?</h3>
             <p>
-              If this resonated with you, listen to <strong>The Party Wreckers podcast</strong> — where I talk about intervention, addiction, and recovery in plain language, without judgment and without jargon. New episodes every week.
+              If this resonated with you, listen to <strong>The Party Wreckers podcast</strong> — where I talk about intervention, addiction, and recovery in plain language, without judgment and without jargon.
             </p>
             <p>
               You can also reach me directly at{" "}

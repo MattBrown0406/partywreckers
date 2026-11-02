@@ -93,7 +93,7 @@ const EmotionsInEarlySobriety = () => (
       <FaqSection title="Frequently Asked Questions About Emotions in Early Sobriety" faqs={faqs} />
       <section className="prose prose-lg max-w-none text-foreground/90 space-y-6 mt-10">
         <h2 className={h2}>Keep the Conversation Going</h2>
-        <p>If this one hit home, listen to <Link to="/episodes" className={linkClass}>The Party Wreckers podcast</Link> wherever you get your podcasts. We talk honestly about addiction, intervention, and the messy, beautiful work of recovery. Follow me, Matt Brown, for new episodes and stories every week.</p>
+        <p>If this one hit home, listen to <Link to="/episodes" className={linkClass}>The Party Wreckers podcast</Link> wherever you get your podcasts. We talk honestly about addiction, intervention, and the messy, beautiful work of recovery. Follow me, Matt Brown, for new episodes and stories.</p>
         <p>And if your family is stuck, or someone you love is struggling to stay sober, you don't have to figure it out alone. <a href="https://freedominterventions.com/contact" target="_blank" rel="noopener noreferrer" className={linkClass}>Reach out to my team at FreedomInterventions.com</a>. We've been wrecking the party of active addiction for more than 20 years, and we'd be glad to talk.</p>
         <p className="font-medium text-foreground">If you or someone you love is in emotional crisis or having thoughts of self-harm, call or text <a href="tel:988" className={linkClass}>988</a> to reach the 988 Suicide &amp; Crisis Lifeline (U.S.).</p>
         <h3 className={h3}>Related Reading</h3>

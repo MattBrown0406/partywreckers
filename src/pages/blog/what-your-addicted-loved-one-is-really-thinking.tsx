@@ -245,7 +245,7 @@ const WhatYourAddictedLovedOneIsReallyThinking = () => {
               <Link to="/episodes" className="text-primary hover:underline">
                 The Party Wreckers podcast
               </Link>{" "}
-              — new episodes weekly, wherever you get your podcasts. And if your family is ready for help now, reach out through{" "}
+              — wherever you get your podcasts. And if your family is ready for help now, reach out through{" "}
               <a
                 href="https://freedominterventions.com"
                 target="_blank"

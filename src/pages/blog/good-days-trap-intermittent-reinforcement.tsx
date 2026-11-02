@@ -211,7 +211,7 @@ const GoodDaysTrapIntermittentReinforcement = () => {
           <div className="bg-muted/50 border border-border rounded-lg p-6 my-8">
             <h3 className="text-xl font-bold mb-2">Listen, Follow, and Reach Out</h3>
             <p>
-              If this resonated, the Party Wreckers podcast goes deeper on all of it every week — real talk about addiction, family, and intervention with no fluff and no judgment. Subscribe wherever you listen to podcasts.
+              If this resonated, the Party Wreckers podcast goes deeper on all of it — real talk about addiction, family, and intervention with no fluff and no judgment. Subscribe wherever you listen to podcasts.
             </p>
             <p className="mt-3">
               If your family is caught in this cycle right now and you're wondering whether an intervention is the right move, visit{" "}

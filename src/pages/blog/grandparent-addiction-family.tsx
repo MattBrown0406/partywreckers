@@ -237,7 +237,7 @@ const GrandparentAddictionFamily = () => {
               <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 FreedomInterventions.com
               </a>{" "}
-              to learn more about professional intervention services or to reach out directly. You can also listen to The Party Wreckers podcast wherever you get your podcasts — new episodes every week, built for families who are in the middle of all of this and need a straight, honest voice.
+              to learn more about professional intervention services or to reach out directly. You can also listen to The Party Wreckers podcast wherever you get your podcasts — built for families who are in the middle of all of this and need a straight, honest voice.
             </p>
             <p className="mt-3">The conversation you've been avoiding? It's worth having.</p>
           </div>

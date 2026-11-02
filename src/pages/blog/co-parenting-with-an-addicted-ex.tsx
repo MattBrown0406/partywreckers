@@ -250,7 +250,7 @@ const CoParentingWithAnAddictedEx = () => {
               <Link to="/episodes" className="text-primary hover:underline">
                 The Party Wreckers podcast
               </Link>{" "}
-              is where I talk through situations exactly like this one — weekly episodes for families who are done pretending things are fine. Follow along wherever you listen. And if your family needs real help now,{" "}
+              is where I talk through situations exactly like this one — episodes for families who are done pretending things are fine. Follow along wherever you listen. And if your family needs real help now,{" "}
               <a
                 href="https://freedominterventions.com"
                 target="_blank"

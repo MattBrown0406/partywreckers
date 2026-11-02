@@ -92,7 +92,7 @@ const HowToGoToAPartySober = () => (
       <FaqSection title="Frequently Asked Questions About Going to Parties Sober" faqs={faqs} />
       <section className="prose prose-lg max-w-none text-foreground/90 space-y-6 mt-10">
         <h2 className={h2}>Listen, Follow, and Reach Out</h2>
-        <p>If this hit home, there's more where it came from. Listen to <Link to="/episodes" className={linkClass}>The Party Wreckers podcast</Link> wherever you get your podcasts, where I talk honestly about addiction, intervention, and recovery with people who've lived it. Follow me, Matt Brown, for new episodes and stories every week.</p>
+        <p>If this hit home, there's more where it came from. Listen to <Link to="/episodes" className={linkClass}>The Party Wreckers podcast</Link> wherever you get your podcasts, where I talk honestly about addiction, intervention, and recovery with people who've lived it. Follow me, Matt Brown, for new episodes and stories.</p>
         <p>And if your family is stuck, waiting, and hoping things will just get better on their own, please don't wait. <a href="https://freedominterventions.com/contact" target="_blank" rel="noopener noreferrer" className={linkClass}>Reach out to my team at FreedomInterventions.com</a>. We'll help you figure out the next right step.</p>
         <h3 className={h3}>Related Reading</h3>
         <ul className="list-disc pl-6 space-y-2">

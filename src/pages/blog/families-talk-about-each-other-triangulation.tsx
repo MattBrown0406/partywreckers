@@ -297,7 +297,7 @@ const FamiliesTalkAboutEachOther = () => {
               <Link to="/episodes" className="text-primary hover:underline">
                 The Party Wreckers podcast
               </Link>{" "}
-              digs into exactly these patterns with families and people in recovery — new episodes every week. And if you are ready to stop routing the truth through three people, reach out at{" "}
+              digs into exactly these patterns with families and people in recovery. And if you are ready to stop routing the truth through three people, reach out at{" "}
               <a
                 href="https://freedominterventions.com"
                 target="_blank"

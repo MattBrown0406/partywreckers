@@ -208,7 +208,7 @@ const FirstYearOfSobrietyYearOfFirsts = () => {
           </div>
 
           <p className="text-foreground font-medium italic mt-8">
-            The <Link to="/episodes" className="text-primary hover:text-primary/80">Party Wreckers podcast</Link> is where I tell the stories that do not fit in a blog post. New episodes drop weekly wherever you get your podcasts. And if your family is staring down a first and not sure how to handle it, reach out at <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">FreedomInterventions.com</a>. You do not have to figure out the year of firsts on your own.
+            The <Link to="/episodes" className="text-primary hover:text-primary/80">Party Wreckers podcast</Link> is where I tell the stories that do not fit in a blog post. Listen wherever you get your podcasts. And if your family is staring down a first and not sure how to handle it, reach out at <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">FreedomInterventions.com</a>. You do not have to figure out the year of firsts on your own.
           </p>
         </article>
 
