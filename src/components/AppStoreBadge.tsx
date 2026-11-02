@@ -28,6 +28,8 @@ const AppStoreBadge = ({ className = "", height = 48 }: AppStoreBadgeProps) => {
           width={iosWidth}
           height={height}
           style={{ height: `${height}px`, width: "auto" }}
+          loading="lazy"
+          decoding="async"
         />
       </a>
       <div className="inline-flex flex-col items-center gap-0.5">
@@ -38,6 +40,8 @@ const AppStoreBadge = ({ className = "", height = 48 }: AppStoreBadgeProps) => {
             width={androidWidth}
             height={androidHeight}
             style={{ height: `${androidHeight}px`, width: "auto" }}
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">

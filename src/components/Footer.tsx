@@ -169,7 +169,8 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-muted-foreground text-xs sm:text-sm">
-            © {new Date().getFullYear()} The Party Wreckers Podcast. All rights reserved.
+            {/* The prerendered year is frozen at build time; let the client correct it without a hydration error. */}
+            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> The Party Wreckers Podcast. All rights reserved.
           </p>
         </div>
       </div>

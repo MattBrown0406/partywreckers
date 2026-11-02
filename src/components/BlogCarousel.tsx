@@ -66,6 +66,8 @@ const BlogCarousel = () => {
                 src={article.image}
                 alt={article.imageAlt}
                 className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </Link>
           ))}

@@ -19,7 +19,9 @@ import {
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
+// The 1024px PNG (2.3 MB) is only for the press-kit download; the page shows the 512px WebP.
 import logo from "@/assets/party-wreckers-logo-2026.png";
+import logoDisplay from "@/assets/party-wreckers-logo-512.webp";
 import mattHeadshot from "@/assets/matt-headshot.jpg";
 
 const Press = () => {
@@ -137,9 +139,11 @@ const Press = () => {
                 
                 <div className="bg-card border border-border rounded-2xl p-8 text-center">
                   <img 
-                    src={logo} 
-                    alt="The Party Wreckers Podcast Logo" 
+                    src={logoDisplay} width={512} height={512}
+                    alt="The Party Wreckers Podcast Logo"
                     className="w-full max-w-xs mx-auto mb-6"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <p className="text-sm text-muted-foreground mb-4">Official Podcast Logo</p>
                   <Button variant="outline" size="sm" asChild>
@@ -164,6 +168,8 @@ const Press = () => {
                     src={mattHeadshot} 
                     alt="Matt Brown - Interventionist and Host of The Party Wreckers Podcast" 
                     className="w-48 h-48 rounded-full mx-auto mb-6 object-cover border-4 border-primary/20"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <h3 className="font-semibold text-xl text-foreground mb-1">Matt Brown</h3>
                   <p className="text-muted-foreground mb-4">Host & Interventionist</p>

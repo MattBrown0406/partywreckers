@@ -56,7 +56,7 @@ const BlogIndex = () => {
         
         {/* Article Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto mb-12">
-          {sortedArticles.map((article) => (
+          {sortedArticles.map((article, index) => (
             <Link 
               key={article.id}
               to={`/blog/${article.id}`}
@@ -68,7 +68,9 @@ const BlogIndex = () => {
                     src={article.image} 
                     alt={article.imageAlt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
+                    // The first row of cards is above the fold; everything below it waits for scroll.
+                    loading={index < 3 ? "eager" : "lazy"}
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
                 </div>
