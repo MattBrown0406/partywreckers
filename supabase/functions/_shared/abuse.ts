@@ -45,6 +45,9 @@ export const verifyTurnstile = async (
   const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
   if (!secret) return "skipped";
   if (typeof token !== "string" || !token) return "missing";
+  if (token.length > 2048) {
+    throw new BadRequestError("Please complete the verification check and try again.");
+  }
 
   const reject = () => {
     throw new BadRequestError("Please complete the verification check and try again.");
@@ -119,7 +122,8 @@ export const reserveSubmission = async (
   options: ReservationOptions,
 ) => {
   const windowMinutes = options.windowMinutes ?? 60;
-  const unverified = options.verification === "missing";
+  // No token, or Cloudflare's verify API unreachable: either way the visitor isn't verified.
+  const unverified = options.verification === "missing" || options.verification === "unavailable";
   const { data, error } = await supabase
     .from("party_wreckers_funnel_events")
     .insert({

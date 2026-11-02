@@ -78,7 +78,13 @@ const VoiceRecorder = ({ onChange, disabled, resetKey }: VoiceRecorderProps) => 
     if (recorder && recorder.state !== "inactive") recorder.stop();
   }, []);
 
+  // Bumped whenever a pending mic request should be abandoned (discard, reset, unmount),
+  // so a permission prompt answered after the visitor moved on never starts recording.
+  const requestRef = useRef(0);
+  const mountedRef = useRef(true);
+
   const discard = useCallback(() => {
+    requestRef.current += 1;
     discardRef.current = true;
     stop();
     releaseStream();
@@ -91,17 +97,19 @@ const VoiceRecorder = ({ onChange, disabled, resetKey }: VoiceRecorderProps) => 
   }, [stop]);
 
   // Stop the mic and free the recording if the component goes away mid-recording.
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      requestRef.current += 1;
       discardRef.current = true;
       stopTimer();
       const recorder = recorderRef.current;
       if (recorder && recorder.state !== "inactive") recorder.stop();
       releaseStream();
       if (urlRef.current) URL.revokeObjectURL(urlRef.current);
-    },
-    [],
-  );
+    };
+  }, []);
 
   useEffect(() => {
     if (resetKey) discard();
@@ -114,11 +122,13 @@ const VoiceRecorder = ({ onChange, disabled, resetKey }: VoiceRecorderProps) => 
     onChangeRef.current(null);
     setElapsed(0);
     setState("requesting");
+    const requestId = ++requestRef.current;
 
     let stream: MediaStream;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
     } catch (error) {
+      if (!mountedRef.current || requestId !== requestRef.current) return;
       const name = error instanceof DOMException ? error.name : "";
       setProblem(
         name === "NotAllowedError" || name === "SecurityError"
@@ -128,6 +138,12 @@ const VoiceRecorder = ({ onChange, disabled, resetKey }: VoiceRecorderProps) => 
             : "The microphone couldn't be started. You can type your question instead.",
       );
       setState("idle");
+      return;
+    }
+
+    if (!mountedRef.current || requestId !== requestRef.current) {
+      // The form went away (or the recording was discarded) while the prompt was open.
+      stream.getTracks().forEach((track) => track.stop());
       return;
     }
 

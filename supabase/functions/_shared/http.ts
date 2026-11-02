@@ -14,11 +14,49 @@ export const jsonResponse = (body: unknown, status = 200) =>
 export class BadRequestError extends Error {}
 export class RateLimitError extends Error {}
 
-/** Parse the request body as a JSON object, or throw BadRequestError. */
-export const readJsonObject = async (req: Request): Promise<Record<string, unknown>> => {
+export const DEFAULT_MAX_BODY_BYTES = 64 * 1024;
+
+/**
+ * Read the request body as text, refusing anything over `maxBytes` before it is fully
+ * buffered: a declared Content-Length is checked up front, and the stream is counted as
+ * it arrives so a chunked body without Content-Length is capped too.
+ */
+const readBodyText = async (req: Request, maxBytes: number) => {
+  const declared = Number(req.headers.get("content-length") || "0");
+  if (declared > maxBytes) throw new BadRequestError("Request is too large");
+  if (!req.body) return "";
+
+  const reader = req.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > maxBytes) {
+      await reader.cancel();
+      throw new BadRequestError("Request is too large");
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
+};
+
+/** Parse the request body as a JSON object (at most `maxBytes`), or throw BadRequestError. */
+export const readJsonObject = async (
+  req: Request,
+  options: { maxBytes?: number } = {},
+): Promise<Record<string, unknown>> => {
+  const text = await readBodyText(req, options.maxBytes ?? DEFAULT_MAX_BODY_BYTES);
   let body: unknown;
   try {
-    body = await req.json();
+    body = JSON.parse(text);
   } catch {
     throw new BadRequestError("Request body must be valid JSON");
   }

@@ -46,7 +46,7 @@ serve(async (req) => {
 
     let query = supabase
       .from(TABLE)
-      .select("public_question, topic, display_name, answered_at, episode_slug")
+      .select("public_question, topic, answered_at, episode_slug")
       .eq("is_public", true)
       .eq("status", "answered")
       .not("public_question", "is", null);
@@ -62,7 +62,9 @@ serve(async (req) => {
       .map((row) => ({
         public_question: (row.public_question as string).trim(),
         topic: row.topic,
-        display_name: row.display_name?.trim() || "A listener",
+        // Never publish the name a listener typed: the form only promises Matt may use
+        // a first name on air, not that it will appear on the website.
+        display_name: "A listener",
         answered_at: row.answered_at,
         episode_slug: row.episode_slug,
       }));

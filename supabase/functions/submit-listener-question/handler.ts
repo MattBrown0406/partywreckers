@@ -108,6 +108,12 @@ const readAudio = (body: Record<string, unknown>): ListenerAudio | null => {
   if (raw === undefined || raw === null || raw === "") return null;
   if (typeof raw !== "string") throw new BadRequestError("audio_base64 must be a string");
 
+  // Reject an oversized string before any regex/whitespace work touches it
+  // (the request body itself is already capped by readJsonObject).
+  if (raw.length > Math.ceil(MAX_AUDIO_BYTES / 3) * 4 + 1024) {
+    throw new BadRequestError("That recording is too long. Please keep it under 2 minutes.");
+  }
+
   // Accept a bare base64 string or a data: URL, and a full type like "audio/webm;codecs=opus".
   const dataUrl = /^data:([^;,]+)[^,]*,/.exec(raw);
   const base64 = (dataUrl ? raw.slice(dataUrl[0].length) : raw).replace(/\s+/g, "");
@@ -118,12 +124,12 @@ const readAudio = (body: Record<string, unknown>): ListenerAudio | null => {
 
   // Check the encoded length before decoding so an oversized body is rejected cheaply.
   if (base64.length > Math.ceil(MAX_AUDIO_BYTES / 3) * 4) {
-    throw new BadRequestError("That recording is too long. Please keep it under 90 seconds.");
+    throw new BadRequestError("That recording is too long. Please keep it under 2 minutes.");
   }
   const bytes = decodeBase64(base64);
   if (bytes.length === 0) throw new BadRequestError("The recording is empty. Please record it again.");
   if (bytes.length > MAX_AUDIO_BYTES) {
-    throw new BadRequestError("That recording is too long. Please keep it under 90 seconds.");
+    throw new BadRequestError("That recording is too long. Please keep it under 2 minutes.");
   }
   if (!looksLikeAudio(bytes, mime)) {
     throw new BadRequestError("The recording couldn't be read. Please record it again.");
@@ -136,7 +142,7 @@ const readAudio = (body: Record<string, unknown>): ListenerAudio | null => {
       throw new BadRequestError("Invalid audio_duration_seconds");
     }
     if (duration > MAX_AUDIO_SECONDS) {
-      throw new BadRequestError("That recording is too long. Please keep it under 90 seconds.");
+      throw new BadRequestError("That recording is too long. Please keep it under 2 minutes.");
     }
     durationSeconds = Math.round(duration);
   }
@@ -254,7 +260,8 @@ export const handleListenerQuestion = async (req: Request, deps: HandlerDeps): P
   if (req.method !== "POST") return jsonResponse({ error: "Method not allowed" }, 405);
 
   try {
-    const body = await readJsonObject(req);
+    // A 3 MB recording is ~4 MB as base64, plus the rest of the form.
+    const body = await readJsonObject(req, { maxBytes: 4.5 * 1024 * 1024 });
 
     // Bots that fill the hidden field get a normal-looking success and nothing is stored or sent.
     if (isHoneypotFilled(body)) return jsonResponse({ success: true });
