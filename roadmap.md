@@ -1,4 +1,4 @@
 # Current task
-- [ ] Add the November 2 service-in-recovery article with five FAQs and adults-only photo.
-- [ ] Register the article in the blog list, answer summaries, sitemap, and prerender routes.
-- [ ] Verify article links and the reading experience.
+- [x] Add the November 2 service-in-recovery article with five FAQs and adults-only photo.
+- [x] Register the article in the blog list, answer summaries, sitemap, and prerender routes.
+- [x] Verify article links and the reading experience.
