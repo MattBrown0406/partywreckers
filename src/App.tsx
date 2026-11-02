@@ -21,6 +21,8 @@ import Press from "./pages/Press";
 import StartHere from "./pages/StartHere";
 import HelpNow from "./pages/HelpNow";
 import GetHelp from "./pages/GetHelp";
+import First72Hours from "./pages/First72Hours";
+import FamilyCheckIn from "./pages/FamilyCheckIn";
 import NextStep from "./pages/NextStep";
 import FromPartyWreckers from "./pages/FromPartyWreckers";
 import FamilyAddictionHelp from "./pages/FamilyAddictionHelp";
@@ -61,6 +63,8 @@ export const App = ({ Router = DefaultRouter }: AppProps) => (
           <Route path="/" element={<Index />} />
           <Route path="/help-now" element={<HelpNow />} />
           <Route path="/get-help" element={<GetHelp />} />
+          <Route path="/first-72-hours" element={<First72Hours />} />
+          <Route path="/family-check-in" element={<FamilyCheckIn />} />
           <Route path="/from-party-wreckers" element={<FromPartyWreckers />} />
           <Route path="/start-here" element={<StartHere />} />
           <Route path="/next-step" element={<NextStep />} />

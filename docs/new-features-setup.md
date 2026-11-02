@@ -48,6 +48,22 @@ opt-in). They're tagged `partywreckers.com` and `source:<form>`. Until these are
 signups keep being emailed to `NEWSLETTER_FORWARD_TO` as before. To get both, set
 `NEWSLETTER_NOTIFY=true`.
 
+## Lead magnet and family check-in (`/first-72-hours`, `/family-check-in`)
+
+- The checklist form signs people up with source `lead_72_hours` and the Mailchimp tag
+  `lead:72-hours`; the quiz's "Email me my results" form uses `quiz_<result>` and the tag
+  `quiz:<result>` (`watching`, `stuck`, `ready`, `crisis`). Quiz answers never leave the
+  browser; only the result id is sent.
+- With `AUTO_REPLY_FROM` set (see the auto-reply section above) and Turnstile verifying
+  the visitor, newsletter-signup also sends one email through Resend: the checklist link,
+  or the fixed result summary and links. Nothing the visitor typed is included. The text
+  lives in `supabase/functions/_shared/family-check-in.ts`; `npm run test:quiz` checks its
+  article and episode links. Mailchimp's confirmation email still decides list membership.
+- The 5-day welcome series and the exact Customer Journey setup are in
+  `docs/welcome-email-series.md`.
+- The quiz sends `quiz_started` and `quiz_completed` (metadata: `result`) to the tracker.
+  Deploy `track-party-wreckers-event` and `newsletter-signup` together with this release.
+
 ## Admin report login
 
 See `docs/admin-login.md` (`ADMIN_EMAILS`, Supabase Auth email sign-in and redirect URLs).
