@@ -10,7 +10,7 @@ import blogImage from "@/assets/blog-signs-loved-one-needs-help.jpg";
 
 const SignsLovedOneNeedsHelpWithAlcohol = () => {
   const articleUrl = "https://partywreckers.com/blog/signs-loved-one-needs-help-with-alcohol";
-  const articleTitle = "11 Signs Your Loved One Needs Help With Drinking | PartyWreckers";
+  const articleTitle = "11 Signs Your Loved One Needs Help With Drinking";
   const articleDescription = "Is your family member's drinking starting to feel less funny and more scary? Here are the real signs someone needs help — explained with honesty, a little humor, and zero judgment.";
 
   const faqs = [
@@ -35,7 +35,7 @@ const SignsLovedOneNeedsHelpWithAlcohol = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={articleTitle}
+        title={`${articleTitle} | PartyWreckers`}
         description={articleDescription}
         ogType="article"
         ogImage={blogImage}

@@ -1,9 +1,30 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import {
+  corsHeaders,
+  errorResponse,
+  escapeHtml,
+  escapeMultiline,
+  jsonResponse,
+  optionalString,
+  readJsonObject,
+  requiredEmail,
+  requiredString,
+} from "../_shared/http.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+// Only these metadata keys may come from the public form. Admin-only keys such as
+// sponsor_slot_status, sold_amount or owner_added_target must never be settable here.
+const readPublicMetadata = (raw: unknown) => {
+  const metadata = raw && typeof raw === "object" && !Array.isArray(raw) ? (raw as Record<string, unknown>) : {};
+  const pick = (key: string) => {
+    const value = metadata[key];
+    return typeof value === "string" && value.trim() ? value.trim().slice(0, 200) : null;
+  };
+  return {
+    source: pick("source"),
+    package_interest: pick("package_interest"),
+    inventory_interest: pick("inventory_interest"),
+  };
 };
 
 serve(async (req) => {
@@ -12,14 +33,15 @@ serve(async (req) => {
   }
 
   try {
-    const { name, email, company, packageInterest, inventoryInterest, message, source_path, metadata } = await req.json();
-
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Name, email, and message are required" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const body = await readJsonObject(req);
+    const name = requiredString(body, "name", 120);
+    const email = requiredEmail(body);
+    const message = requiredString(body, "message", 5000);
+    const company = optionalString(body, "company", 200);
+    const sourcePath = optionalString(body, "source_path", 500);
+    const publicMetadata = readPublicMetadata(body.metadata);
+    const packageInterest = optionalString(body, "packageInterest", 200) || publicMetadata.package_interest;
+    const inventoryInterest = optionalString(body, "inventoryInterest", 200) || publicMetadata.inventory_interest;
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -34,13 +56,13 @@ serve(async (req) => {
     const { error: insertError } = await supabase.from("party_wreckers_advertiser_inquiries").insert({
       name,
       email,
-      company: company || null,
+      company,
       message,
-      source_path: source_path || null,
+      source_path: sourcePath,
       metadata: {
-        ...(metadata || {}),
-        package_interest: packageInterest || metadata?.package_interest || null,
-        inventory_interest: inventoryInterest || metadata?.inventory_interest || null,
+        source: publicMetadata.source,
+        package_interest: packageInterest,
+        inventory_interest: inventoryInterest,
       },
     });
 
@@ -55,35 +77,29 @@ serve(async (req) => {
       body: JSON.stringify({
         from: "Party Wreckers Sponsors <onboarding@resend.dev>",
         to: [sponsorInquiryTo],
-        subject: `Sponsor inquiry: ${company || name}`,
+        subject: `Sponsor inquiry: ${(company || name).replace(/[\r\n]+/g, " ")}`,
         reply_to: email,
         html: `
           <h2>New Party Wreckers sponsor inquiry</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Company:</strong> ${company || "Not provided"}</p>
-          <p><strong>Package interest:</strong> ${packageInterest || metadata?.package_interest || "Not provided"}</p>
-          <p><strong>Inventory interest:</strong> ${inventoryInterest || metadata?.inventory_interest || "Not provided"}</p>
-          <p><strong>Source path:</strong> ${source_path || "Not provided"}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Company:</strong> ${escapeHtml(company || "Not provided")}</p>
+          <p><strong>Package interest:</strong> ${escapeHtml(packageInterest || "Not provided")}</p>
+          <p><strong>Inventory interest:</strong> ${escapeHtml(inventoryInterest || "Not provided")}</p>
+          <p><strong>Source path:</strong> ${escapeHtml(sourcePath || "Not provided")}</p>
           <hr />
           <p><strong>Message:</strong></p>
-          <p>${String(message).replace(/\n/g, "<br>")}</p>
+          <p>${escapeMultiline(message)}</p>
         `,
       }),
     });
 
     if (!emailResult.ok) {
-      throw new Error(`Failed to send sponsor email: ${await emailResult.text()}`);
+      throw new Error(`Failed to send sponsor email ${emailResult.status}: ${await emailResult.text()}`);
     }
 
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return jsonResponse({ success: true });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return errorResponse(error, "send-advertiser-inquiry");
   }
 });

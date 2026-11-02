@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { toIsoDate } from "@/lib/dates";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -10,6 +11,11 @@ import BlogConversionPanel from "@/components/BlogConversionPanel";
 import SourcePageLinks from "@/components/SourcePageLinks";
 
 const BlogIndex = () => {
+  // Newest first regardless of the order entries were added to blogData.
+  const sortedArticles = [...blogArticles].sort(
+    (a, b) => (toIsoDate(b.date) ?? "").localeCompare(toIsoDate(a.date) ?? ""),
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
@@ -50,7 +56,7 @@ const BlogIndex = () => {
         
         {/* Article Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto mb-12">
-          {blogArticles.map((article) => (
+          {sortedArticles.map((article) => (
             <Link 
               key={article.id}
               to={`/blog/${article.id}`}

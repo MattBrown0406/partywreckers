@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,21 @@ const StickyContactForm = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = null;
+  };
+
+  useEffect(() => clearCloseTimer, []);
+
+  const setPanelOpen = (open: boolean) => {
+    // A pending auto-close from a previous submission must not close a panel the user just reopened.
+    clearCloseTimer();
+    if (open && status === "success") setStatus("idle");
+    setIsOpen(open);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +49,9 @@ const StickyContactForm = () => {
 
     setStatus("success");
     setForm({ name: "", email: "", message: "" });
-    setTimeout(() => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      closeTimerRef.current = null;
       setStatus("idle");
       setIsOpen(false);
     }, 2500);
@@ -47,7 +64,9 @@ const StickyContactForm = () => {
           <div className="bg-primary px-4 py-3 flex items-center justify-between">
             <h3 className="text-primary-foreground font-semibold text-sm">Get in Touch</h3>
             <button
-              onClick={() => setIsOpen(false)}
+              type="button"
+              onClick={() => setPanelOpen(false)}
+              aria-label="Close contact form"
               className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               <X className="w-4 h-4" />
@@ -103,9 +122,11 @@ const StickyContactForm = () => {
       )}
 
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+        onClick={() => setPanelOpen(!isOpen)}
+        aria-expanded={isOpen}
         className="ml-auto flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-        aria-label="Open contact form"
+        aria-label={isOpen ? "Close contact form" : "Open contact form"}
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
       </button>

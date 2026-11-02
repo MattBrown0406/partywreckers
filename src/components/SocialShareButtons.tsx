@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Facebook, Twitter, Linkedin, Link as LinkIcon, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "react-router-dom";
+import { SITE_URL } from "@/lib/site";
 
 interface SocialShareButtonsProps {
   title: string;
@@ -19,7 +21,9 @@ const SocialShareButtons = ({
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
-  const shareUrl = url || (typeof window !== "undefined" ? window.location.href : "https://partywreckers.com");
+  const { pathname } = useLocation();
+  // Built from the route (not window.location) so prerendered HTML shares the article, not the homepage.
+  const shareUrl = url || `${SITE_URL}${pathname === "/" ? "" : pathname.replace(/\/+$/, "")}`;
   const encodedTitle = encodeURIComponent(title);
   const encodedUrl = encodeURIComponent(shareUrl);
 

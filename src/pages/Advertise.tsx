@@ -399,10 +399,10 @@ const Advertise = () => {
                   ) : (
                     <form onSubmit={handleSubmit} onFocus={trackInquiryStart} className="space-y-4">
                       <div className="grid gap-4 sm:grid-cols-2">
-                        <Input required placeholder="Your name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
-                        <Input required type="email" placeholder="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
+                        <Input required maxLength={120} placeholder="Your name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
+                        <Input required type="email" maxLength={254} placeholder="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
                       </div>
-                      <Input required placeholder="Company or organization" value={form.company} onChange={(event) => setForm({ ...form, company: event.target.value })} />
+                      <Input required maxLength={200} placeholder="Company or organization" value={form.company} onChange={(event) => setForm({ ...form, company: event.target.value })} />
                       <label className="block">
                         <span className="mb-2 block text-sm font-medium text-foreground">Available inventory</span>
                         <select
@@ -417,8 +417,8 @@ const Advertise = () => {
                           ))}
                         </select>
                       </label>
-                      <Input placeholder="Package interest" value={form.packageInterest} onChange={(event) => setForm({ ...form, packageInterest: event.target.value })} />
-                      <Textarea required placeholder="Tell us what you offer and what kind of audience you want to reach." className="min-h-[140px]" value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} />
+                      <Input maxLength={200} placeholder="Package interest" value={form.packageInterest} onChange={(event) => setForm({ ...form, packageInterest: event.target.value })} />
+                      <Textarea required maxLength={4000} placeholder="Tell us what you offer and what kind of audience you want to reach." className="min-h-[140px]" value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} />
                       <Button type="submit" disabled={status === "loading"} className="w-full">
                         {status === "loading" ? "Sending..." : "Send Sponsor Inquiry"}
                       </Button>

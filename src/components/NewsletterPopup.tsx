@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Video, Calendar, Users } from "lucide-react";
@@ -10,7 +11,7 @@ const NewsletterPopup = () => {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    const dismissed = localStorage.getItem('family-squares-popup-dismissed');
+    const dismissed = safeGetItem('family-squares-popup-dismissed');
     if (dismissed) {
       setIsDismissed(true);
       return;
@@ -26,7 +27,7 @@ const NewsletterPopup = () => {
   const handleClose = () => {
     setIsOpen(false);
     setIsDismissed(true);
-    localStorage.setItem('family-squares-popup-dismissed', 'true');
+    safeSetItem('family-squares-popup-dismissed', 'true');
   };
 
   if (isDismissed) {

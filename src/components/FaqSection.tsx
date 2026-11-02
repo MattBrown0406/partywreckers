@@ -24,11 +24,19 @@ const FaqSection = ({
           <h2 className="font-script text-4xl text-burgundy sm:text-5xl">{title}</h2>
           {description && <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{description}</p>}
         </div>
-        <Accordion type="single" collapsible className="rounded-lg border border-border bg-card px-4 sm:px-6">
+        <Accordion
+          type="single"
+          collapsible
+          className="rounded-lg border border-border bg-card px-4 sm:px-6 [&_[role=region][data-state=closed]]:hidden"
+        >
           {faqs.map((faq, index) => (
             <AccordionItem key={faq.question} value={`faq-${index}`}>
               <AccordionTrigger className="text-left text-base font-semibold">{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">{faq.answer}</AccordionContent>
+              {/* forceMount keeps answers in the prerendered HTML so crawlers see the answers the FAQ
+                  schema advertises; closed panels are hidden by the Accordion's class above. */}
+              <AccordionContent forceMount className="text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

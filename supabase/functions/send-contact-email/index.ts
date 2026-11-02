@@ -1,10 +1,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { enqueueSpineEvent } from "../_shared/spine.ts";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import {
+  corsHeaders,
+  errorResponse,
+  escapeHtml,
+  escapeMultiline,
+  jsonResponse,
+  readJsonObject,
+  requiredEmail,
+  requiredString,
+} from "../_shared/http.ts";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -12,14 +17,10 @@ serve(async (req) => {
   }
 
   try {
-    const { name, email, message } = await req.json();
-
-    if (!name || !email || !message) {
-      return new Response(
-        JSON.stringify({ error: "Name, email, and message are required" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+    const body = await readJsonObject(req);
+    const name = requiredString(body, "name", 120);
+    const email = requiredEmail(body);
+    const message = requiredString(body, "message", 5000);
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     const CONTACT_FORWARD_TO = Deno.env.get("CONTACT_FORWARD_TO") || "matt@freedominterventions.com";
@@ -36,42 +37,33 @@ serve(async (req) => {
       body: JSON.stringify({
         from: "Party Wreckers Contact <onboarding@resend.dev>",
         to: [CONTACT_FORWARD_TO],
-        subject: `Contact Form: ${name}`,
+        subject: `Contact Form: ${name.replace(/[\r\n]+/g, " ")}`,
         reply_to: email,
         html: `
           <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
           <hr />
           <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, "<br>")}</p>
+          <p>${escapeMultiline(message)}</p>
         `,
       }),
     });
 
     if (!res.ok) {
-      const errorData = await res.text();
-      console.error("Resend error:", errorData);
-      throw new Error(`Failed to send email: ${errorData}`);
+      throw new Error(`Resend error ${res.status}: ${await res.text()}`);
     }
 
     const data = await res.json();
 
     await enqueueSpineEvent("lead_captured", {
-      email: email.trim().toLowerCase(),
-      name: name.trim(),
+      email,
+      name,
       props: { source: "contact_form" },
     });
 
-    return new Response(
-      JSON.stringify({ success: true, id: data.id }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return jsonResponse({ success: true, id: data.id });
   } catch (error) {
-    console.error("Error:", error.message);
-    return new Response(
-      JSON.stringify({ error: error.message }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return errorResponse(error, "send-contact-email");
   }
 });

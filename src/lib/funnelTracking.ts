@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
 
 type FunnelEventMetadata = Record<string, string | number | boolean | null | undefined>;
 
@@ -15,11 +16,11 @@ const anonymousIdKey = "party_wreckers_anonymous_id";
 const getAnonymousId = () => {
   if (typeof window === "undefined") return "server";
 
-  const existingId = window.localStorage.getItem(anonymousIdKey);
+  const existingId = safeGetItem(anonymousIdKey);
   if (existingId) return existingId;
 
   const newId = window.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  window.localStorage.setItem(anonymousIdKey, newId);
+  safeSetItem(anonymousIdKey, newId);
   return newId;
 };
 

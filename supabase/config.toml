@@ -23,3 +23,12 @@ verify_jwt = false
 
 [functions.drain-spine-outbox]
 verify_jwt = false
+
+# Public form endpoints: called from the browser with the publishable key, so the
+# gateway JWT check is off like the other public functions (a publishable key that
+# isn't a JWT would otherwise be rejected with 401 before the function runs).
+[functions.newsletter-signup]
+verify_jwt = false
+
+[functions.send-contact-email]
+verify_jwt = false

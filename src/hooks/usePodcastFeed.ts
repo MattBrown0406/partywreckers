@@ -83,7 +83,9 @@ export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   if (Number.isNaN(date.getTime())) return "";
 
+  // Fixed timezone so prerendered HTML (built in UTC) shows the same date as browsers.
   return date.toLocaleDateString("en-US", {
+    timeZone: "America/Los_Angeles",
     year: "numeric",
     month: "short",
     day: "numeric",

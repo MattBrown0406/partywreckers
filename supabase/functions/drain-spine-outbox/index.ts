@@ -8,6 +8,7 @@ const corsHeaders = {
 
 const MAX_ATTEMPTS = 6;
 const BATCH_SIZE = 50;
+const HUB_TIMEOUT_MS = 10_000;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -18,12 +19,14 @@ serve(async (req) => {
   const hubKey = Deno.env.get("HUB_INGEST_KEY");
 
   if (!supabaseUrl || !serviceKey) {
-    return new Response(JSON.stringify({ error: "Supabase env missing" }), {
+    console.error("[drain-spine-outbox] Supabase env missing");
+    return new Response(JSON.stringify({ error: "Not configured" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
   if (!hubUrl || !hubKey) {
-    return new Response(JSON.stringify({ error: "HUB_INGEST_URL / HUB_INGEST_KEY not configured" }), {
+    console.error("[drain-spine-outbox] HUB_INGEST_URL / HUB_INGEST_KEY not configured");
+    return new Response(JSON.stringify({ error: "Not configured" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
@@ -38,31 +41,54 @@ serve(async (req) => {
     .limit(BATCH_SIZE);
 
   if (fetchError) {
-    return new Response(JSON.stringify({ error: fetchError.message }), {
+    console.error("[drain-spine-outbox] fetch failed:", fetchError.message);
+    return new Response(JSON.stringify({ error: "Fetch failed" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 
-  const results = { processed: 0, sent: 0, failed: 0 };
+  const results = { processed: 0, sent: 0, failed: 0, skipped: 0 };
 
   for (const row of rows ?? []) {
+    const attempts = (row.attempts ?? 0) + 1;
+
+    // Claim the row before sending: the update only matches while the row still has
+    // the status and attempt count we read, so if two drains overlap (cron + manual
+    // call, or a slow run spilling into the next tick) only one of them sends it.
+    const { data: claimed, error: claimError } = await supabase
+      .from("spine_outbox")
+      .update({ attempts })
+      .eq("id", row.id)
+      .eq("status", row.status)
+      .eq("attempts", row.attempts ?? 0)
+      .select("id");
+
+    if (claimError || !claimed?.length) {
+      results.skipped++;
+      continue;
+    }
+
     results.processed++;
     try {
       const resp = await fetch(hubUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${hubKey}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${hubKey}`,
+          "Idempotency-Key": `partywreckers-spine-${row.id}`,
+        },
         body: JSON.stringify({ event: row.event_name, ...row.payload }),
+        signal: AbortSignal.timeout(HUB_TIMEOUT_MS),
       });
       if (resp.ok) {
         await supabase.from("spine_outbox").update({
-          status: "sent", sent_at: new Date().toISOString(),
-          attempts: (row.attempts ?? 0) + 1, last_error: null,
+          status: "sent", sent_at: new Date().toISOString(), last_error: null,
         }).eq("id", row.id);
         results.sent++;
       } else {
         const text = await resp.text().catch(() => "");
         await supabase.from("spine_outbox").update({
-          status: "failed", attempts: (row.attempts ?? 0) + 1,
+          status: "failed",
           last_error: `HTTP ${resp.status}: ${text.slice(0, 500)}`,
         }).eq("id", row.id);
         results.failed++;
@@ -70,7 +96,7 @@ serve(async (req) => {
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       await supabase.from("spine_outbox").update({
-        status: "failed", attempts: (row.attempts ?? 0) + 1,
+        status: "failed",
         last_error: message.slice(0, 500),
       }).eq("id", row.id);
       results.failed++;

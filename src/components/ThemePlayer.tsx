@@ -7,13 +7,16 @@ const ThemePlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
     }
   };
 
@@ -23,7 +26,7 @@ const ThemePlayer = () => {
 
   return (
     <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-secondary/70 border border-border backdrop-blur-sm">
-      <audio ref={audioRef} src={themeAudio} onEnded={handleEnded} />
+      <audio ref={audioRef} src={themeAudio} preload="none" onEnded={handleEnded} onPause={() => setIsPlaying(false)} />
       <Music className="w-4 h-4 text-primary" />
       <span className="text-sm text-muted-foreground font-medium">The Party Wreckers Theme</span>
       <button

@@ -3,8 +3,25 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import FaqSection from "@/components/FaqSection";
+import { FAQJsonLd } from "@/components/JsonLd";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-recovery-roadmap.jpg";
+
+const pageFaqs = [
+  {
+    question: "What is the Recovery Roadmap?",
+    answer: "The Recovery Roadmap is a free, stage-based action plan on SoberHelpline.com that identifies which of eight addiction stages a family is in and provides specific weekly action steps, things to avoid, and guidance on when to call a professional.",
+  },
+  {
+    question: "How is the Recovery Roadmap different from other addiction resources?",
+    answer: "Unlike treatment center blogs designed to sell programs or generic AI chatbots, the Recovery Roadmap is built from 20 years of real intervention experience. It provides personalized, stage-specific action plans rather than one-size-fits-all advice.",
+  },
+  {
+    question: "How do I use the Recovery Roadmap?",
+    answer: "Go to SoberHelpline.com/roadmap, take a five-minute assessment to identify your stage, and receive a personalized action plan with specific steps to take this week.",
+  },
+];
 
 const RecoveryRoadmap = () => {
   const articleUrl = "https://partywreckers.com/blog/recovery-roadmap";
@@ -44,39 +61,8 @@ const RecoveryRoadmap = () => {
             "mainEntityOfPage": articleUrl
           })}
         </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the Recovery Roadmap?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "The Recovery Roadmap is a free, stage-based action plan on SoberHelpline.com that identifies which of eight addiction stages a family is in and provides specific weekly action steps, things to avoid, and guidance on when to call a professional."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How is the Recovery Roadmap different from other addiction resources?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Unlike treatment center blogs designed to sell programs or generic AI chatbots, the Recovery Roadmap is built from 20 years of real intervention experience. It provides personalized, stage-specific action plans rather than one-size-fits-all advice."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I use the Recovery Roadmap?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Go to SoberHelpline.com/roadmap, take a five-minute assessment to identify your stage, and receive a personalized action plan with specific steps to take this week."
-                }
-              }
-            ]
-          })}
-        </script>
       </SEOHead>
+      <FAQJsonLd faqs={pageFaqs} />
 
       <Navbar />
 
@@ -292,6 +278,7 @@ const RecoveryRoadmap = () => {
           </Link>
         </div>
       </article>
+      <FaqSection faqs={pageFaqs} />
 
       <Footer />
     </div>

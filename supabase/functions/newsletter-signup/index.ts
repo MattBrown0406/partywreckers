@@ -1,10 +1,14 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { enqueueSpineEvent } from "../_shared/spine.ts";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import {
+  corsHeaders,
+  errorResponse,
+  escapeHtml,
+  jsonResponse,
+  optionalString,
+  readJsonObject,
+  requiredEmail,
+} from "../_shared/http.ts";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -12,24 +16,9 @@ serve(async (req) => {
   }
 
   try {
-    const { email, source } = await req.json();
-
-    if (!email || typeof email !== "string") {
-      return new Response(JSON.stringify({ error: "Email is required" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
-    const normalizedEmail = email.trim().toLowerCase();
-    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
-
-    if (!emailIsValid) {
-      return new Response(JSON.stringify({ error: "Invalid email address" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const body = await readJsonObject(req);
+    const normalizedEmail = requiredEmail(body);
+    const source = optionalString(body, "source", 80) || "website";
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     const NEWSLETTER_FORWARD_TO = Deno.env.get("NEWSLETTER_FORWARD_TO") || "matt@freedominterventions.com";
@@ -51,30 +40,23 @@ serve(async (req) => {
         reply_to: normalizedEmail,
         html: `
           <h2>New Party Wreckers newsletter signup</h2>
-          <p><strong>Email:</strong> ${normalizedEmail}</p>
-          <p><strong>Source:</strong> ${source || "website"}</p>
+          <p><strong>Email:</strong> ${escapeHtml(normalizedEmail)}</p>
+          <p><strong>Source:</strong> ${escapeHtml(source)}</p>
         `,
       }),
     });
 
     if (!result.ok) {
-      const body = await result.text();
-      throw new Error(`Failed to forward signup: ${body}`);
+      throw new Error(`Failed to forward signup ${result.status}: ${await result.text()}`);
     }
 
     await enqueueSpineEvent("lead_captured", {
       email: normalizedEmail,
-      props: { source: source || "website" },
+      props: { source },
     });
 
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return jsonResponse({ success: true });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return errorResponse(error, "newsletter-signup");
   }
 });

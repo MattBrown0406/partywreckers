@@ -3,8 +3,29 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import FaqSection from "@/components/FaqSection";
+import { FAQJsonLd } from "@/components/JsonLd";
 import { ArrowLeft } from "lucide-react";
 import blogImage from "@/assets/blog-bad-night-myth.jpg";
+
+const pageFaqs = [
+  {
+    question: "Why do families believe 'it was just a bad night' when addiction is involved?",
+    answer: "The 'bad night' explanation provides emotional relief after conflict or fear. Families want reassurance that the problem is contained and won't happen again. Accepting the explanation lowers tension and restores temporary peace, which addiction systems often rely on.",
+  },
+  {
+    question: "What is the difference between an isolated incident and an addiction pattern?",
+    answer: "An isolated incident is a single event that doesn't repeat. An addiction pattern involves increasing frequency of incidents, growing secrecy, emotional volatility, defensive reactions to concern, and repeated broken promises. Each event alone can be rationalized, but together they tell a story.",
+  },
+  {
+    question: "How does minimization work as a defense mechanism in addiction?",
+    answer: "Instead of denying something happened, minimization reframes the behavior as smaller than it actually is — phrases like 'it wasn't that bad' or 'everyone drinks like that sometimes.' The goal is often emotional protection rather than deliberate manipulation, as admitting the full truth feels overwhelming.",
+  },
+  {
+    question: "How can families shift from evaluating events to recognizing patterns?",
+    answer: "Instead of asking 'was this a bad night,' families can ask 'is this part of a pattern?' Look for increasing frequency of incidents, growing secrecy, emotional volatility, defensive reactions, and repeated broken promises. An experienced intervention professional can also help evaluate whether a pattern is developing.",
+  },
+];
 
 const BadNightMyth = () => {
   const articleUrl = "https://partywreckers.com/blog/bad-night-myth";
@@ -44,47 +65,8 @@ const BadNightMyth = () => {
             "mainEntityOfPage": articleUrl
           })}
         </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Why do families believe 'it was just a bad night' when addiction is involved?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "The 'bad night' explanation provides emotional relief after conflict or fear. Families want reassurance that the problem is contained and won't happen again. Accepting the explanation lowers tension and restores temporary peace, which addiction systems often rely on."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the difference between an isolated incident and an addiction pattern?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "An isolated incident is a single event that doesn't repeat. An addiction pattern involves increasing frequency of incidents, growing secrecy, emotional volatility, defensive reactions to concern, and repeated broken promises. Each event alone can be rationalized, but together they tell a story."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How does minimization work as a defense mechanism in addiction?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Instead of denying something happened, minimization reframes the behavior as smaller than it actually is — phrases like 'it wasn't that bad' or 'everyone drinks like that sometimes.' The goal is often emotional protection rather than deliberate manipulation, as admitting the full truth feels overwhelming."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How can families shift from evaluating events to recognizing patterns?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Instead of asking 'was this a bad night,' families can ask 'is this part of a pattern?' Look for increasing frequency of incidents, growing secrecy, emotional volatility, defensive reactions, and repeated broken promises. An experienced intervention professional can also help evaluate whether a pattern is developing."
-                }
-              }
-            ]
-          })}
-        </script>
       </SEOHead>
+      <FAQJsonLd faqs={pageFaqs} />
       <Navbar />
       
       <main className="container mx-auto px-4 py-8 max-w-4xl">
@@ -231,6 +213,7 @@ const BadNightMyth = () => {
             </ul>
           </div>
         </article>
+        <FaqSection faqs={pageFaqs} />
 
         <div className="mt-12 pt-8 border-t">
           <Link 

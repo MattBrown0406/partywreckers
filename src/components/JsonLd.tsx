@@ -1,4 +1,5 @@
 import mattHeadshot from "@/assets/matt-headshot.jpg";
+import { toIsoDate } from "@/lib/dates";
 import { Helmet } from "react-helmet";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -208,8 +209,8 @@ export const ArticleJsonLd = ({
     "headline": title,
     "description": description,
     "image": new URL(image, SITE_URL).href,
-    "datePublished": datePublished,
-    "dateModified": dateModified || datePublished,
+    "datePublished": toIsoDate(datePublished) ?? datePublished,
+    "dateModified": toIsoDate(dateModified || datePublished) ?? dateModified ?? datePublished,
     "author": {
       "@type": "Person",
       "name": "Matt Brown",

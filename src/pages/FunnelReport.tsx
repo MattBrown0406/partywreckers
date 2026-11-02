@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
 import { BarChart3, CalendarDays, CheckSquare, ClipboardList, Download, DollarSign, FileText, Lock, Mail, Plus, Printer, RefreshCw, Save, Trash2, Upload } from "lucide-react";
 
 import Footer from "@/components/Footer";
@@ -149,7 +150,7 @@ const weeklyFunnelRhythm = [
 
 const FunnelReport = () => {
   const [secret, setSecret] = useState(() =>
-    typeof window === "undefined" ? "" : window.localStorage.getItem(reportTokenKey) || "",
+    safeGetItem(reportTokenKey) || "",
   );
   const [data, setData] = useState<FunnelReportData | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
@@ -162,7 +163,7 @@ const FunnelReport = () => {
   const loadReport = async () => {
     setStatus("loading");
     if (typeof window !== "undefined") {
-      window.localStorage.setItem(reportTokenKey, secret);
+      safeSetItem(reportTokenKey, secret);
     }
 
     const { data: report, error } = await supabase.functions.invoke("party-wreckers-funnel-report", {
@@ -332,8 +333,10 @@ const FunnelReport = () => {
 
   const printSponsorReport = () => {
     if (!data || typeof window === "undefined") return;
-    const printWindow = window.open("", "_blank", "noopener,noreferrer");
+    // Passing "noopener" makes window.open return null, so open normally and drop the opener after.
+    const printWindow = window.open("", "_blank");
     if (!printWindow) return;
+    printWindow.opener = null;
 
     printWindow.document.write(buildSponsorPrintHtml(data));
     printWindow.document.close();
@@ -443,7 +446,9 @@ const FunnelReport = () => {
                     <Card key={label} className="border-border bg-card">
                       <CardContent className="p-5">
                         <p className="text-xs uppercase tracking-widest text-muted-foreground">{label.replace(/_/g, " ")}</p>
-                        <p className="text-3xl font-semibold text-foreground mt-2">{value}</p>
+                        <p className="text-3xl font-semibold text-foreground mt-2">
+                          {label === "sponsor_click_through_rate" ? formatPercent(Number(value)) : value}
+                        </p>
                       </CardContent>
                     </Card>
                   ))}
@@ -802,7 +807,7 @@ const SponsorProspectCard = ({
   const soldAmount = getMetadataString(prospect.metadata, "sold_amount");
   const slotType = getMetadataString(prospect.metadata, "sponsor_slot_type");
   const slotMonth = getMetadataString(prospect.metadata, "sponsor_slot_month") || getCurrentSponsorMonth();
-  const slotStatus = getMetadataString(prospect.metadata, "sponsor_slot_status") || "available";
+  const slotStatus = getMetadataString(prospect.metadata, "sponsor_slot_status") || getEffectiveSlotStatus(prospect);
   const proposalHref = buildProposalEmailHref(prospect);
 
   return (
@@ -982,7 +987,7 @@ const buildProspectMetadataPatch = (prospect: SponsorProspect) => {
     sold_amount: getMetadataString(prospect.metadata, "sold_amount"),
     sponsor_slot_type: slotType,
     sponsor_slot_month: slotType ? slotMonth || getCurrentSponsorMonth() : slotMonth,
-    sponsor_slot_status: slotType ? slotStatus || "available" : slotStatus,
+    sponsor_slot_status: slotType ? slotStatus || getEffectiveSlotStatus(prospect) : slotStatus,
     logo_received: getMetadataString(prospect.metadata, "logo_received"),
     link_received: getMetadataString(prospect.metadata, "link_received"),
     copy_approved: getMetadataString(prospect.metadata, "copy_approved"),
@@ -1009,7 +1014,7 @@ const buildSponsorCsv = (data: FunnelReportData) => {
     ["Section", "Name", "Count"],
     ["Total", "Sponsor impressions", String(data.totals.sponsor_impressions || 0)],
     ["Total", "Sponsor clicks", String(data.totals.sponsor_clicks || 0)],
-    ["Total", "Sponsor click through rate", String(data.totals.sponsor_click_through_rate || 0)],
+    ["Total", "Sponsor click through rate", formatPercent(data.totals.sponsor_click_through_rate)],
   ];
 
   appendCsvSection(rows, "Sponsor impressions", data.sponsor_impressions_by_sponsor || []);
@@ -1046,7 +1051,14 @@ const appendCsvSection = (rows: string[][], section: string, items: Array<{ name
   items.forEach((item) => rows.push([section, item.name, String(item.count)]));
 };
 
-const escapeCsv = (value: string) => `"${value.replace(/"/g, '""')}"`;
+// Cells starting with = + - @ are run as formulas by spreadsheet apps; prospect names and
+// notes can come from the public inquiry form, so neutralise them with a leading quote.
+const escapeCsv = (value: string) => {
+  const safeValue = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+  return `"${safeValue.replace(/"/g, '""')}"`;
+};
+
+const formatPercent = (rate: number | undefined) => `${((rate || 0) * 100).toFixed(1)}%`;
 
 const buildSponsorPrintHtml = (data: FunnelReportData) => {
   const sponsorRows = [
@@ -1080,7 +1092,7 @@ const buildSponsorPrintHtml = (data: FunnelReportData) => {
         <div class="metrics">
           <div class="metric"><div class="label">Impressions</div><div class="value">${data.totals.sponsor_impressions || 0}</div></div>
           <div class="metric"><div class="label">Clicks</div><div class="value">${data.totals.sponsor_clicks || 0}</div></div>
-          <div class="metric"><div class="label">Click Rate</div><div class="value">${data.totals.sponsor_click_through_rate || 0}</div></div>
+          <div class="metric"><div class="label">Click Rate</div><div class="value">${formatPercent(data.totals.sponsor_click_through_rate)}</div></div>
         </div>
         ${sponsorRows
           .map(
@@ -1184,11 +1196,7 @@ const getWeeklySponsorActions = (prospects: SponsorProspect[]) => ({
 });
 
 const parseSponsorCsv = (csv: string) => {
-  const rows = csv
-    .split(/\r?\n/)
-    .map((row) => row.trim())
-    .filter(Boolean)
-    .map(parseCsvRow);
+  const rows = parseCsvRows(csv);
 
   if (rows.length < 2) return [];
 
@@ -1216,30 +1224,48 @@ const parseSponsorCsv = (csv: string) => {
   });
 };
 
-const parseCsvRow = (row: string) => {
-  const values: string[] = [];
+// Quote-aware CSV parser over the whole text, so a quoted cell can contain commas and line breaks.
+const parseCsvRows = (csv: string) => {
+  const rows: string[][] = [];
+  let row: string[] = [];
   let currentValue = "";
   let isQuoted = false;
 
-  for (let index = 0; index < row.length; index += 1) {
-    const character = row[index];
-    const nextCharacter = row[index + 1];
+  const endRow = () => {
+    row.push(currentValue.trim());
+    if (row.some((value) => value !== "")) rows.push(row);
+    row = [];
+    currentValue = "";
+  };
 
-    if (character === "\"" && nextCharacter === "\"") {
-      currentValue += "\"";
-      index += 1;
+  for (let index = 0; index < csv.length; index += 1) {
+    const character = csv[index];
+    const nextCharacter = csv[index + 1];
+
+    if (isQuoted) {
+      if (character === "\"" && nextCharacter === "\"") {
+        currentValue += "\"";
+        index += 1;
+      } else if (character === "\"") {
+        isQuoted = false;
+      } else {
+        currentValue += character;
+      }
     } else if (character === "\"") {
-      isQuoted = !isQuoted;
-    } else if (character === "," && !isQuoted) {
-      values.push(currentValue.trim());
+      isQuoted = true;
+    } else if (character === ",") {
+      row.push(currentValue.trim());
       currentValue = "";
+    } else if (character === "\n" || character === "\r") {
+      if (character === "\r" && nextCharacter === "\n") index += 1;
+      endRow();
     } else {
       currentValue += character;
     }
   }
 
-  values.push(currentValue.trim());
-  return values;
+  endRow();
+  return rows;
 };
 
 const parseMoney = (value: string) => {
@@ -1283,6 +1309,18 @@ const getCurrentSponsorMonth = () => {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 };
 
+// The slot status used everywhere (inventory counts, the prospect card, and saves).
+// Lost prospects never hold a slot; "sold" on either field wins; with no explicit slot
+// status, an active proposal or negotiation holds the slot as reserved.
+const getEffectiveSlotStatus = (prospect: SponsorProspect): "available" | "reserved" | "sold" => {
+  if (prospect.status === "lost") return "available";
+  const slotStatus = getMetadataString(prospect.metadata, "sponsor_slot_status");
+  if (slotStatus === "sold" || prospect.status === "sold") return "sold";
+  if (slotStatus === "reserved") return "reserved";
+  if (!slotStatus && ["proposal_sent", "negotiating"].includes(prospect.status)) return "reserved";
+  return "available";
+};
+
 const getSponsorInventory = (prospects: SponsorProspect[], month: string) =>
   sponsorSlotTypes.map((slot) => {
     const matchedProspects = prospects.filter((prospect) => {
@@ -1291,15 +1329,10 @@ const getSponsorInventory = (prospects: SponsorProspect[], month: string) =>
       return prospectSlot === slot.id && prospectMonth === month;
     });
 
-    const sold = matchedProspects.filter((prospect) => {
-      const slotStatus = getMetadataString(prospect.metadata, "sponsor_slot_status");
-      return slotStatus === "sold" || prospect.status === "sold";
-    }).length;
-
-    const reserved = matchedProspects.filter((prospect) => {
-      const slotStatus = getMetadataString(prospect.metadata, "sponsor_slot_status");
-      return slotStatus === "reserved" || (!slotStatus && ["proposal_sent", "negotiating"].includes(prospect.status));
-    }).length;
+    // One effective status per prospect, so nobody is counted as both sold and reserved.
+    const statuses = matchedProspects.map(getEffectiveSlotStatus);
+    const sold = statuses.filter((status) => status === "sold").length;
+    const reserved = statuses.filter((status) => status === "reserved").length;
 
     const available = Math.max(slot.capacity - sold - reserved, 0);
 
@@ -1324,14 +1357,14 @@ const buildProposalEmailHref = (prospect: SponsorProspect) => {
     "https://partywreckers.com/advertise/packages",
     "",
     "The page lays out the Episode Sponsor, Monthly Site Sponsor, and Bundle Sponsor options, along with how monthly reporting works.",
-    expectedValue ? `\nI also marked your expected monthly range around ${expectedValue}, so we can shape the placement around the right level of visibility.` : "",
+    ...(expectedValue
+      ? ["", `I also marked your expected monthly range around ${expectedValue}, so we can shape the placement around the right level of visibility.`]
+      : []),
     "",
     "If it looks like a fit, reply with the package that feels closest and I can send over available inventory and next steps.",
     "",
     "Matt",
-  ]
-    .filter(Boolean)
-    .join("\n");
+  ].join("\n");
 
   return `mailto:${encodeURIComponent(prospect.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 };

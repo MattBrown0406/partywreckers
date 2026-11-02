@@ -11,7 +11,7 @@ const jsonLdArticle = {
   "@type": "Article",
   headline: "Tough Love Isn't What You Think — And I've Got the Bruises to Prove It",
   description: "Tough love for addiction families isn't about punishment — it's about holding compassionate boundaries. Matt Brown shares what works, what doesn't, and the line between firmness and cruelty.",
-  image: "https://partywreckers.com/og-image.jpg",
+  image: new URL(blogImage, "https://partywreckers.com").href,
   author: { "@type": "Person", name: "Matt Brown", url: "https://partywreckers.com/host" },
   publisher: { "@type": "Organization", name: "The Party Wreckers Podcast", url: "https://partywreckers.com" },
   datePublished: "2026-03-18",
@@ -91,6 +91,7 @@ const ToughLoveAddictionFamilies = () => {
         title="Tough Love Isn't What You Think — Party Wreckers"
         description="Tough love for addiction families isn't about punishment — it's about holding compassionate boundaries. Matt Brown shares what works, what doesn't, and the line between firmness and cruelty."
         ogType="article"
+        ogImage={blogImage}
         keywords="tough love addiction families, boundaries addiction, enabling vs tough love, addiction family support, setting boundaries with addicted loved one"
         author="Matt Brown"
         publishedTime="2026-03-18"

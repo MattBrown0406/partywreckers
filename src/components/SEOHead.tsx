@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import { blogArticles } from "@/data/blogData";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
+import { toIsoDate } from "@/lib/dates";
 
 interface SEOHeadProps {
   title: string;
@@ -45,8 +46,9 @@ const ROUTE_DESCRIPTIONS: Record<string, string> = {
 const trimToLength = (value: string, max = 155) =>
   value.length > max ? `${value.slice(0, max).trimEnd()}…` : value;
 
+// Routes match case-insensitively, so lowercase the path to keep one canonical URL per page.
 const normalizePath = (pathname: string) =>
-  pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+  pathname === "/" ? "/" : pathname.replace(/\/+$/, "").toLowerCase();
 
 const SEOHead = ({
   title,
@@ -80,6 +82,9 @@ const SEOHead = ({
   const socialImageUrl = new URL(ogImage, SITE_URL).href;
 
   const resolvedOgType = normalizedPath.startsWith("/blog/") ? "article" : ogType;
+  // article:published_time must be ISO 8601; many articles pass "Month D, YYYY".
+  const publishedIso = toIsoDate(publishedTime) ?? toIsoDate(matchedBlogPost?.date);
+  const modifiedIso = toIsoDate(modifiedTime);
 
   return (
     <Helmet>
@@ -104,11 +109,11 @@ const SEOHead = ({
       <meta property="og:locale" content="en_US" />
 
       {/* Article-specific Open Graph */}
-      {resolvedOgType === "article" && publishedTime && (
-        <meta property="article:published_time" content={publishedTime} />
+      {resolvedOgType === "article" && publishedIso && (
+        <meta property="article:published_time" content={publishedIso} />
       )}
-      {resolvedOgType === "article" && modifiedTime && (
-        <meta property="article:modified_time" content={modifiedTime} />
+      {resolvedOgType === "article" && modifiedIso && (
+        <meta property="article:modified_time" content={modifiedIso} />
       )}
       {resolvedOgType === "article" && (
         <meta property="article:author" content={author} />

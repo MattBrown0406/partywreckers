@@ -12,7 +12,7 @@ const jsonLdArticle = {
   "@type": "Article",
   headline: "Are You Helping or Enabling? How Families Accidentally Fuel Addiction",
   description: "Think you're helping your addicted loved one? Learn how enabling addiction actually fuels it — and what families can do differently, from someone who's been on both sides.",
-  image: "https://partywreckers.com/og-image.jpg",
+  image: new URL(blogImage, "https://partywreckers.com").href,
   author: { "@type": "Person", name: "Matt Brown", url: "https://partywreckers.com/host" },
   publisher: { "@type": "Organization", name: "The Party Wreckers Podcast", url: "https://partywreckers.com" },
   datePublished: "2026-03-16",

@@ -12,7 +12,7 @@ const jsonLdArticle = {
   "@type": "Article",
   headline: "When to Stop Waiting and Consider an Intervention",
   description: "Seven clear signs it's time to stop waiting and consider an addiction intervention. Matt Brown explains what intervention actually is, when it's appropriate, and how families can take the first step.",
-  image: "https://partywreckers.com/og-image.jpg",
+  image: new URL(blogImage, "https://partywreckers.com").href,
   author: { "@type": "Person", name: "Matt Brown", url: "https://partywreckers.com/host" },
   publisher: { "@type": "Organization", name: "The Party Wreckers Podcast", url: "https://partywreckers.com" },
   datePublished: "2026-03-22",
@@ -77,6 +77,7 @@ const WhenToConsiderIntervention = () => {
         description="Seven clear signs it's time to stop waiting and consider an addiction intervention. Matt Brown explains what intervention actually is, when it's appropriate, and how families can take the first step."
         keywords="addiction intervention, when to intervene, signs of addiction, family intervention, rock bottom myth, enabling addiction, professional interventionist"
         ogType="article"
+        ogImage={blogImage}
         publishedTime="2026-03-22"
         modifiedTime="2026-03-22"
       />

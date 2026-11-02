@@ -57,7 +57,6 @@ import blogImageRelapseFirst24 from "@/assets/blog-relapse-first-24-hours.jpg";
 import blogImageSecondYearSobriety from "@/assets/blog-second-year-sobriety.jpg";
 import blogImageComingHomeFromRehab from "@/assets/blog-coming-home-from-rehab.jpg";
 import blogImageExerciseNutrition from "@/assets/blog-exercise-nutrition-recovery.jpg";
-import blogImageEnabling from "@/assets/blog-family-support-enabling.jpg";
 import blogImageConversation from "@/assets/blog-right-moment-conversation.jpg";
 import blogImageBrainReward from "@/assets/blog-brain-reward-pathways.jpg";
 import blogImageEducation from "@/assets/blog-understanding-addiction-education.jpg";
@@ -1570,8 +1569,8 @@ export const blogArticles: BlogArticle[] = [
     id: "family-support-enabling",
     title: "When Family Support Accidentally Becomes Enabling",
     date: "December 25, 2025",
-    image: blogImageEnabling,
-    imageAlt: "Family member giving money to someone while addiction lurks behind, showing unintended enabling",
+    image: blogImageFamilySupport,
+    imageAlt: "Family standing together supportively in recovery",
     excerpt: "\"We're just trying to help.\" Family support comes from love, but it can inadvertently enable continued addiction. Paying bills, making excuses, or providing housing without accountability can remove the natural consequences that motivate change. Understanding how love can enable helps families support recovery without supporting the addiction."
   },
   {

@@ -3,8 +3,29 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import FaqSection from "@/components/FaqSection";
+import { FAQJsonLd } from "@/components/JsonLd";
 import { ArrowLeft } from "lucide-react";
 import blogImageLivingInTheStorm from "@/assets/blog-living-in-the-storm.jpg";
+
+const pageFaqs = [
+  {
+    question: "What does active addiction look like for families?",
+    answer: "Active addiction slowly erodes family normalcy through hypervigilance, enabling patterns, codependency, repeated relapse cycles, and chronic emotional exhaustion. Family members often reorganize their entire lives around the addicted person's illness without realizing it.",
+  },
+  {
+    question: "What is the difference between helping and enabling in addiction?",
+    answer: "Helping supports a person's recovery while enabling removes natural consequences of addictive behavior. Paying rent, making excuses, and covering for absences—however lovingly—can remove the pressure that sometimes motivates change. Enabling describes how love gets tangled with survival instincts.",
+  },
+  {
+    question: "What is compassion fatigue in addiction families?",
+    answer: "Compassion fatigue occurs after multiple relapse cycles when family members develop a protective numbness—a reluctance to invest in hope because hope has become painful. It manifests as hypervigilance, elevated cortisol, disrupted sleep, and impaired immune function.",
+  },
+  {
+    question: "Where can families of addicted loved ones find support?",
+    answer: "Resources include SAMHSA's National Helpline (1-800-662-4357), Al-Anon (al-anon.org), Nar-Anon (nar-anon.org), individual therapy with clinicians experienced in substance use disorders, and peer support groups. Family members deserve care in their own right.",
+  },
+];
 
 const LivingInTheStorm = () => {
   const articleUrl = "https://partywreckers.com/blog/living-in-the-storm";
@@ -44,47 +65,8 @@ const LivingInTheStorm = () => {
             "mainEntityOfPage": articleUrl
           })}
         </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What does active addiction look like for families?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Active addiction slowly erodes family normalcy through hypervigilance, enabling patterns, codependency, repeated relapse cycles, and chronic emotional exhaustion. Family members often reorganize their entire lives around the addicted person's illness without realizing it."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the difference between helping and enabling in addiction?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Helping supports a person's recovery while enabling removes natural consequences of addictive behavior. Paying rent, making excuses, and covering for absences—however lovingly—can remove the pressure that sometimes motivates change. Enabling describes how love gets tangled with survival instincts."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is compassion fatigue in addiction families?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Compassion fatigue occurs after multiple relapse cycles when family members develop a protective numbness—a reluctance to invest in hope because hope has become painful. It manifests as hypervigilance, elevated cortisol, disrupted sleep, and impaired immune function."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Where can families of addicted loved ones find support?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Resources include SAMHSA's National Helpline (1-800-662-4357), Al-Anon (al-anon.org), Nar-Anon (nar-anon.org), individual therapy with clinicians experienced in substance use disorders, and peer support groups. Family members deserve care in their own right."
-                }
-              }
-            ]
-          })}
-        </script>
       </SEOHead>
+      <FAQJsonLd faqs={pageFaqs} />
       <Navbar />
       
       <main className="container mx-auto px-4 py-8 max-w-4xl">
@@ -219,6 +201,7 @@ const LivingInTheStorm = () => {
             </ul>
           </div>
         </article>
+        <FaqSection faqs={pageFaqs} />
 
         <div className="mt-12 pt-8 border-t">
           <Link 

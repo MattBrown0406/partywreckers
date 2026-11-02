@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -28,18 +28,31 @@ const TranscriptDialog = ({
   episodeTitle,
   transcripts,
 }: TranscriptDialogProps) => {
-  const [content, setContent] = useState<string>("");
+  const [content, setContentState] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+
+  // Each fetch gets an id; only the latest one may write to state, so a slow
+  // response for a previously opened episode can't replace the current transcript.
+  const requestIdRef = useRef(0);
 
   useEffect(() => {
     if (isOpen && transcripts.length > 0) {
       fetchTranscript();
     }
+    return () => {
+      requestIdRef.current += 1;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, transcripts]);
 
   const fetchTranscript = async () => {
+    const requestId = ++requestIdRef.current;
+    const isCurrent = () => requestIdRef.current === requestId;
+    const setContent = (value: string) => {
+      if (isCurrent()) setContentState(value);
+    };
     setIsLoading(true);
     setError(null);
     setContent("");
@@ -69,6 +82,7 @@ const TranscriptDialog = ({
       }
 
       const text = await response.text();
+      if (!isCurrent()) return;
 
       // Parse based on format
       if (transcript.type === "text/html") {
@@ -109,10 +123,11 @@ const TranscriptDialog = ({
         setContent(redactContent(text));
       }
     } catch (err) {
+      if (!isCurrent()) return;
       console.error("Error fetching transcript:", err);
       setError("Unable to load transcript. Please try again later.");
     } finally {
-      setIsLoading(false);
+      if (isCurrent()) setIsLoading(false);
     }
   };
 

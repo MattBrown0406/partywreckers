@@ -1,10 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders, errorResponse, jsonResponse, readJsonObject } from "../_shared/http.ts";
 
 const allowedEvents = new Set([
   "party_wreckers_arrival",
@@ -20,7 +16,20 @@ const allowedEvents = new Set([
   "advertiser_inquiry_click",
   "advertiser_email_click",
   "openclaw_phone_click",
+  "aeo_answer_cta_click",
+  "aeo_source_cta_click",
 ]);
+
+const MAX_TEXT_LENGTH = 1000;
+const MAX_METADATA_BYTES = 4000;
+
+const text = (value: unknown) =>
+  typeof value === "string" && value ? value.slice(0, MAX_TEXT_LENGTH) : null;
+
+const readMetadata = (value: unknown) => {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return JSON.stringify(value).length <= MAX_METADATA_BYTES ? value : {};
+};
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -28,14 +37,11 @@ serve(async (req) => {
   }
 
   try {
-    const payload = await req.json();
+    const payload = await readJsonObject(req);
     const eventName = String(payload.event_name || "");
 
     if (!allowedEvents.has(eventName)) {
-      return new Response(JSON.stringify({ error: "Unsupported event" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return jsonResponse({ error: "Unsupported event" }, 400);
     }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -49,26 +55,20 @@ serve(async (req) => {
 
     const { error } = await supabase.from("party_wreckers_funnel_events").insert({
       event_name: eventName,
-      source_path: payload.source_path || null,
-      destination_url: payload.destination_url || null,
-      cta_label: payload.cta_label || null,
-      page_title: payload.page_title || null,
-      referrer: payload.referrer || null,
-      anonymous_id: payload.anonymous_id || null,
-      user_agent: payload.user_agent || null,
-      metadata: payload.metadata || {},
+      source_path: text(payload.source_path),
+      destination_url: text(payload.destination_url),
+      cta_label: text(payload.cta_label),
+      page_title: text(payload.page_title),
+      referrer: text(payload.referrer),
+      anonymous_id: text(payload.anonymous_id),
+      user_agent: text(payload.user_agent),
+      metadata: readMetadata(payload.metadata),
     });
 
     if (error) throw error;
 
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return jsonResponse({ success: true });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return errorResponse(error, "track-party-wreckers-event");
   }
 });

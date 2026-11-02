@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePodcastFeed, formatDuration, formatDate, Episode } from "@/hooks/usePodcastFeed";
@@ -88,7 +88,7 @@ const getCategoryLabel = (category: Category): string => {
 const Episodes = () => {
   const { data, isLoading, error } = usePodcastFeed();
   const [playingId, setPlayingId] = useState<string | null>(null);
-  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
   const [transcriptEpisode, setTranscriptEpisode] = useState<(Episode & { category: Category }) | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -135,23 +135,39 @@ const Episodes = () => {
     ? filteredEpisodes
     : filteredEpisodes.slice(1);
 
+  const stopAudio = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.onended = null;
+      audio.pause();
+    }
+    audioRef.current = null;
+    setPlayingId(null);
+  };
+
+  // Stop playback when leaving the page so audio never keeps playing with no control.
+  useEffect(() => () => {
+    audioRef.current?.pause();
+    audioRef.current = null;
+  }, []);
+
   const handlePlay = (episodeId: string, audioUrl: string) => {
     if (playingId === episodeId) {
-      audioElement?.pause();
-      setPlayingId(null);
-      setAudioElement(null);
-    } else {
-      audioElement?.pause();
-
-      const audio = new Audio(audioUrl);
-      audio.play();
-      audio.onended = () => {
-        setPlayingId(null);
-        setAudioElement(null);
-      };
-      setPlayingId(episodeId);
-      setAudioElement(audio);
+      stopAudio();
+      return;
     }
+
+    stopAudio();
+    const audio = new Audio(audioUrl);
+    audioRef.current = audio;
+    audio.onended = () => {
+      if (audioRef.current === audio) stopAudio();
+    };
+    setPlayingId(episodeId);
+    audio.play().catch(() => {
+      // Blocked, missing or failed audio: don't leave the button stuck on "Pause".
+      if (audioRef.current === audio) stopAudio();
+    });
   };
 
   // AEO-optimized FAQs for episodes page

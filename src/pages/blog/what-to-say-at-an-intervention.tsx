@@ -3,9 +3,29 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import FaqSection from "@/components/FaqSection";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
 import blogImage from "@/assets/blog-intervention-what-to-say.jpg";
+
+const pageFaqs = [
+  {
+    question: "What should I say at an intervention?",
+    answer: "Prepare a personal impact statement that includes one or two specific incidents, how they made you feel using 'I' statements, a statement of love and belief in recovery, and a direct ask to accept treatment."
+  },
+  {
+    question: "What should I avoid saying at an intervention?",
+    answer: "Avoid accusatory 'you' statements, relitigating old arguments, making ultimatums you won't follow through on, and improvising instead of reading a prepared statement."
+  },
+  {
+    question: "Do I need a professional interventionist?",
+    answer: "Consider a professional if there's a history of violence, co-occurring mental health conditions, previous failed attempts, significant family conflict, or severe physical dependence requiring medical supervision."
+  },
+  {
+    question: "How long should an intervention last?",
+    answer: "A well-run intervention typically lasts 45 to 90 minutes. Rehearsing beforehand helps ensure it stays focused and doesn't run too long."
+  }
+];
 
 const WhatToSayAtAnIntervention = () => {
   return (
@@ -37,26 +57,7 @@ const WhatToSayAtAnIntervention = () => {
         ]}
       />
 
-      <FAQJsonLd
-        faqs={[
-          {
-            question: "What should I say at an intervention?",
-            answer: "Prepare a personal impact statement that includes one or two specific incidents, how they made you feel using 'I' statements, a statement of love and belief in recovery, and a direct ask to accept treatment."
-          },
-          {
-            question: "What should I avoid saying at an intervention?",
-            answer: "Avoid accusatory 'you' statements, relitigating old arguments, making ultimatums you won't follow through on, and improvising instead of reading a prepared statement."
-          },
-          {
-            question: "Do I need a professional interventionist?",
-            answer: "Consider a professional if there's a history of violence, co-occurring mental health conditions, previous failed attempts, significant family conflict, or severe physical dependence requiring medical supervision."
-          },
-          {
-            question: "How long should an intervention last?",
-            answer: "A well-run intervention typically lasts 45 to 90 minutes. Rehearsing beforehand helps ensure it stays focused and doesn't run too long."
-          }
-        ]}
-      />
+      <FAQJsonLd faqs={pageFaqs} />
 
       <Navbar />
 
@@ -317,6 +318,7 @@ const WhatToSayAtAnIntervention = () => {
             <li>Johnson, V.E. – Intervention: How to Help Someone Who Doesn't Want Help (1986, Johnson Institute)</li>
           </ul>
         </article>
+        <FaqSection faqs={pageFaqs} />
 
         <div className="mt-8">
           <SocialShareButtons

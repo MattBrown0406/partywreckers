@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { countAdvertiserInquiriesSince, fetchFunnelEventsSince } from "../_shared/report-queries.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -59,23 +60,11 @@ serve(async (req) => {
     const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    const [{ data, error }, { count: advertiserCount, error: advertiserError }] = await Promise.all([
-      supabase
-        .from("party_wreckers_funnel_events")
-        .select("event_name, source_path, destination_url, cta_label, created_at, metadata")
-        .gte("created_at", since)
-        .order("created_at", { ascending: false })
-        .limit(5000),
-      supabase
-        .from("party_wreckers_advertiser_inquiries")
-        .select("id", { count: "exact", head: true })
-        .gte("created_at", since),
+    const [rows, advertiserCount] = await Promise.all([
+      fetchFunnelEventsSince<EventRow>(supabase, since),
+      countAdvertiserInquiriesSince(supabase, since),
     ]);
 
-    if (error) throw error;
-    if (advertiserError) throw advertiserError;
-
-    const rows = (data || []) as EventRow[];
     const getAnswers = rows.filter((row) => row.event_name === "get_answers_now_click").length;
     const readiness = rows.filter((row) => row.event_name === "intervention_readiness_click").length;
     const familySquares = rows.filter((row) => row.event_name === "family_squares_click").length;
