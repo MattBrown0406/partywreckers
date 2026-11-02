@@ -32,3 +32,14 @@ verify_jwt = false
 
 [functions.send-contact-email]
 verify_jwt = false
+
+# "Ask Matt" listener questions: a public form endpoint, a public read-only list of
+# answered questions, and the owner-only queue (checked by requireAdmin in the function).
+[functions.submit-listener-question]
+verify_jwt = false
+
+[functions.get-answered-questions]
+verify_jwt = false
+
+[functions.listener-questions-admin]
+verify_jwt = false

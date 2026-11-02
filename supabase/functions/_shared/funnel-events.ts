@@ -47,6 +47,8 @@ export const BROWSER_TRACKABLE_EVENTS = new Set<string>([
 export const HELP_REQUEST_EVENT = "help_request_submitted";
 export const NEWSLETTER_SIGNUP_EVENT = "newsletter_signup_submitted";
 export const ADVERTISER_INQUIRY_EVENT = "advertiser_inquiry_submitted";
+/** Recorded server-side by submit-listener-question ("Ask Matt"): topic and flags only. */
+export const LISTENER_QUESTION_EVENT = "listener_question_submitted";
 
 export const inSet = (names: readonly string[]) => {
   const set = new Set<string>(names);

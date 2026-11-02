@@ -6,6 +6,7 @@ import { ArrowDownRight, ArrowUpRight, BarChart3, CalendarDays, CheckSquare, Cli
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
+import ListenerQuestionsAdmin from "@/components/ListenerQuestionsAdmin";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -573,6 +574,13 @@ const FunnelReport = () => {
             {data ? (
               <div className="space-y-6">
                 {data.north_star && <NorthStarSection northStar={data.north_star} />}
+
+                <ListenerQuestionsAdmin
+                  accessHeaders={accessHeaders}
+                  describeError={(error) =>
+                    describeAccessError(error, { signedIn: Boolean(session), usingKey: Boolean(accessKey) })
+                  }
+                />
 
                 <div className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
