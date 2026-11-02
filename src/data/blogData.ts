@@ -1,3 +1,4 @@
+import blogImageServiceInRecovery from "@/assets/blog-service-in-recovery.jpg";
 import blogImageResentment from "@/assets/blog-resentment-in-recovery.jpg";
 import blogImageMorningAfter from "@/assets/blog-morning-after-drinking-episode.jpg";
 import blogImagePayForTreatment from "@/assets/blog-how-to-pay-for-addiction-treatment.jpg";
@@ -177,6 +178,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "service-in-recovery",
+    title: "Service in Recovery: The Year I Made the Coffee (and Why It Kept Me Sober)",
+    date: "November 2, 2026",
+    image: blogImageServiceInRecovery,
+    imageAlt: "A young adult man in a flannel shirt pouring coffee from a large urn into cups in a church basement meeting room",
+    excerpt: "At 90 days sober I got handed the coffee job. How service in recovery got me out of my own head, and why helping others keeps me sober 22 years later.",
+    category: "Recovery"
+  },
   {
     id: "resentment-in-recovery",
     title: "Resentment in Recovery: The List I Didn't Want to Write",
