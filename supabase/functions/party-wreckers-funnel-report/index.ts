@@ -1,6 +1,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { countAdvertiserInquiriesSince, fetchFunnelEventsSince } from "../_shared/report-queries.ts";
+import { buildNorthStar, countAdvertiserInquiriesSince, fetchFunnelEventsSince } from "../_shared/report-queries.ts";
+import {
+  ADVERTISER_INTENT_EVENTS,
+  HELP_REQUEST_EVENT,
+  LISTENER_LEAD_EVENTS,
+  PAGE_VIEW_EVENT,
+  REVENUE_INTENT_EVENTS,
+  SPONSOR_EVENTS,
+  inSet,
+} from "../_shared/funnel-events.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -60,10 +69,17 @@ serve(async (req) => {
     const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    const [rows, advertiserCount] = await Promise.all([
+    const [allRows, advertiserCount, northStar] = await Promise.all([
       fetchFunnelEventsSince<EventRow>(supabase, since),
       countAdvertiserInquiriesSince(supabase, since),
+      buildNorthStar(supabase),
     ]);
+
+    // Page views are counted on their own; the click/activity breakdowns below use the
+    // remaining events so one page view per visit doesn't drown them out.
+    const pageViewRows = allRows.filter((row) => row.event_name === PAGE_VIEW_EVENT);
+    const rows = allRows.filter((row) => row.event_name !== PAGE_VIEW_EVENT);
+    const helpRequests = rows.filter((row) => row.event_name === HELP_REQUEST_EVENT).length;
 
     const getAnswers = rows.filter((row) => row.event_name === "get_answers_now_click").length;
     const readiness = rows.filter((row) => row.event_name === "intervention_readiness_click").length;
@@ -73,19 +89,10 @@ serve(async (req) => {
     const packageClicks = rows.filter((row) => row.event_name === "advertiser_package_click").length;
     const emailClicks = rows.filter((row) => row.event_name === "advertiser_email_click").length;
 
-    const listenerLeadEvents = rows.filter((row) =>
-      ["family_squares_click", "get_answers_now_click", "intervention_readiness_click", "freedom_bridge_click"].includes(
-        row.event_name || "",
-      ),
-    );
-    const advertiserEvents = rows.filter((row) =>
-      ["advertiser_package_click", "advertiser_inquiry_start", "advertiser_inquiry_click", "advertiser_email_click"].includes(
-        row.event_name || "",
-      ),
-    );
-    const sponsorEvents = rows.filter((row) =>
-      ["sponsor_impression", "sponsor_click"].includes(row.event_name || ""),
-    );
+    const listenerLeadEvents = rows.filter((row) => inSet(LISTENER_LEAD_EVENTS)(row.event_name));
+    const advertiserEvents = rows.filter((row) => inSet(ADVERTISER_INTENT_EVENTS)(row.event_name));
+    const revenueIntentClicks = rows.filter((row) => inSet(REVENUE_INTENT_EVENTS)(row.event_name)).length;
+    const sponsorEvents = rows.filter((row) => inSet(SPONSOR_EVENTS)(row.event_name));
     const sponsorImpressionRows = rows.filter((row) => row.event_name === "sponsor_impression");
     const sponsorClickRows = rows.filter((row) => row.event_name === "sponsor_click");
     const pickPackage = (row: Record<string, unknown>) => {
@@ -112,7 +119,9 @@ serve(async (req) => {
       JSON.stringify({
         window_days: 30,
         totals: {
-          events: rows.length,
+          help_requests: helpRequests,
+          page_views: pageViewRows.length,
+          events: allRows.length,
           family_squares_clicks: familySquares,
           get_answers_now_clicks: getAnswers,
           intervention_readiness_clicks: readiness,
@@ -124,8 +133,10 @@ serve(async (req) => {
           sponsor_impressions: sponsorImpressionRows.length,
           sponsor_clicks: sponsorClickRows.length,
           sponsor_click_through_rate: sponsorClickThroughRate,
-          revenue_intent_clicks: getAnswers + readiness + advertiserClicks + packageClicks + emailClicks,
+          revenue_intent_clicks: revenueIntentClicks,
         },
+        north_star: northStar,
+        top_viewed_pages: countBy(pageViewRows as unknown as Array<Record<string, unknown>>, "source_path"),
         by_event: countBy(rows, "event_name"),
         top_pages: countBy(rows, "source_path"),
         top_destinations: countBy(rows, "destination_url"),

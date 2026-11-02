@@ -1,24 +1,9 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { corsHeaders, errorResponse, jsonResponse, readJsonObject } from "../_shared/http.ts";
+import { BROWSER_TRACKABLE_EVENTS } from "../_shared/funnel-events.ts";
 
-const allowedEvents = new Set([
-  "party_wreckers_arrival",
-  "family_squares_click",
-  "get_answers_now_click",
-  "intervention_readiness_click",
-  "freedom_bridge_click",
-  "podcast_platform_click",
-  "sponsor_impression",
-  "sponsor_click",
-  "advertiser_package_click",
-  "advertiser_inquiry_start",
-  "advertiser_inquiry_click",
-  "advertiser_email_click",
-  "openclaw_phone_click",
-  "aeo_answer_cta_click",
-  "aeo_source_cta_click",
-]);
+const allowedEvents = BROWSER_TRACKABLE_EVENTS;
 
 const MAX_TEXT_LENGTH = 1000;
 const MAX_METADATA_BYTES = 4000;

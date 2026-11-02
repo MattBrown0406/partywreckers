@@ -811,11 +811,11 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: "good-days-trap-intermittent-reinforcement",
-    title: "The Good Days Are Part of the Problem: Intermittent Reinforcement in Addiction Families",
+    title: "The Good Days Are Part of the Problem: How Intermittent Reinforcement Keeps Families Stuck",
     date: "May 18, 2026",
     image: blogImageGoodDaysTrap,
     imageAlt: "Soft morning fog over rolling green hills with a single tree silhouette in a quiet contemplative landscape",
-    excerpt: "The good days keep families stuck in a loved one's addiction cycle. Interventionist Matt Brown explains intermittent reinforcement and how to break the pattern.",
+    excerpt: "Discover why the good days keep families trapped in a loved one's addiction cycle — and what to do when hope becomes a trap. Expert insight from interventionist Matt Brown.",
     category: "Family"
   },
   {
@@ -829,7 +829,7 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: "grandparent-addiction-family",
-    title: "When Grandpa Won't Admit He Has a Problem: Older Adult Addiction",
+    title: "When Grandpa Won't Admit He Has a Problem: What Families Need to Know About Older Adult Addiction",
     date: "May 14, 2026",
     image: blogImageGrandparentAddiction,
     imageAlt: "An elderly man sitting alone at a dimly lit study with an empty whiskey tumbler beside him",
@@ -1117,7 +1117,7 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: "signs-loved-one-needs-help-with-alcohol",
-    title: "11 Signs Your Loved One Needs Help With Drinking (And What To Do Next)",
+    title: "11 Signs Your Loved One Needs Help With Drinking",
     date: "March 9, 2026",
     image: blogImageSignsLovedOneNeedsHelp,
     imageAlt: "Concerned family member worrying about a loved one's drinking late at night",
@@ -1126,7 +1126,7 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: "what-to-say-at-an-intervention",
-    title: "What to Say at an Intervention: Scripts & Steps That Actually Work",
+    title: "What to Say at an Intervention: Scripts and Steps That Actually Work",
     date: "March 8, 2026",
     image: blogImageInterventionWhatToSay,
     imageAlt: "Family gathered in a warm living room preparing for an addiction intervention conversation with notes on a table",
@@ -1191,363 +1191,363 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: "stress-addiction-excuse",
-    title: "Why \"I Only Drink Because I'm Stressed\" Isn't the Full Story",
-    date: "February 10, 2026",
+    title: "Why \"They're Just Stressed\" Becomes the Go-To Excuse for Everything",
+    date: "February 8, 2026",
     image: blogImageStressAddictionExcuse,
     imageAlt: "Professional woman in business attire sitting at desk with wine glass and laptop open, evening lighting suggests after-work drinking routine",
-    excerpt: "\"I'm not drinking because I'm addicted. I'm drinking because I'm stressed.\" This explanation sounds reasonable. Life is stressful. People deserve to unwind. But when stress becomes the primary justification for regular substance use, families need to understand what's happening. Stress can trigger drinking, but it's rarely the complete explanation. Understanding the difference between stress-related drinking and stress-justified drinking helps families respond appropriately."
+    excerpt: "If you've lived around addiction long enough, you've probably heard it: 'They're just stressed.' Work stress. Financial stress. Relationship stress...."
   },
   {
     id: "busy-not-recovery",
-    title: "Why Being Busy Isn't the Same as Being in Recovery",
-    date: "February 9, 2026",
+    title: "Why Being \"Busy\" Is Not the Same as Being in Recovery",
+    date: "February 7, 2026",
     image: blogImageBusyNotRecovery,
     imageAlt: "Person surrounded by work papers and to-do lists looking productive but overwhelmed, suggesting busy-ness masking underlying issues",
-    excerpt: "\"I'm doing great. Look how busy I am.\" They point to work projects, social commitments, family obligations. The schedule is packed. The productivity looks impressive. But families sometimes confuse activity with recovery. Being busy can mask underlying struggles. It can delay necessary internal work. Understanding the difference between productive distraction and sustainable recovery helps families recognize when professional support is still needed."
+    excerpt: "Families love seeing momentum. A new job. A packed calendar. Early mornings. Late nights. Productivity feels like progress. When someone in early..."
   },
   {
     id: "this-time-feels-different",
-    title: "When \"This Time Feels Different\" Actually Means Something",
-    date: "February 8, 2026",
+    title: "Why \"This Time Feels Different\" Keeps Families Stuck in the Same Cycle",
+    date: "February 6, 2026",
     image: blogImageThisTimeFeelsDifferent,
     imageAlt: "Person sitting thoughtfully by window with recovery books and phone showing AA meeting app, suggesting genuine change attempt",
-    excerpt: "Families have heard it before: \"This time is different.\" Previous attempts at sobriety failed. Promises were broken. Trust was damaged. But sometimes, this time actually is different. Families need to know how to distinguish between emotional promises and structural change. Real change includes concrete actions, professional support, and sustained behavioral shifts. Understanding the markers of genuine change helps families respond appropriately to recovery attempts."
+    excerpt: "If you've lived with addiction long enough, you've probably said it—or thought it—at least once: 'This time feels different.' The apology sounded..."
   },
   {
     id: "high-functioning-cocaine-use",
-    title: "The Hidden Danger of High-Functioning Cocaine Use",
-    date: "February 7, 2026",
+    title: "High-Functioning Cocaine Use: Why It Looks Controlled—Until It Isn't",
+    date: "February 5, 2026",
     image: blogImageHighFunctioningCocaine,
     imageAlt: "Professional businessman in suit checking phone with powder traces visible on dark surface, suggesting functional addiction",
-    excerpt: "\"I'm not like other drug users. I have a job, pay my bills, and function normally.\" High-functioning cocaine use can be particularly deceptive. The person maintains professional success while engaging in regular substance use. Performance may actually improve initially. But functioning doesn't eliminate addiction risk. Understanding high-functioning substance use helps families recognize warning signs and understand when professional intervention is necessary."
+    excerpt: "Cocaine has a reputation problem—and a camouflage advantage. Unlike substances that sedate or visibly impair, cocaine often makes people look..."
   },
   {
     id: "communication-addiction-families",
-    title: "How to Talk About Addiction When Every Word Feels Wrong",
-    date: "February 6, 2026",
+    title: "Why \"We Just Need Better Communication\" Misses the Point in Addiction",
+    date: "February 4, 2026",
     image: blogImageCommunicationAddiction,
     imageAlt: "Family sitting around dinner table with one empty chair, expressions showing concern and careful conversation",
-    excerpt: "Talking about addiction feels impossible. Say too much, and you're attacking. Say too little, and you're enabling. Use the wrong tone, and the conversation ends. Use the right tone, and still nothing changes. Families struggle with communication because addiction systems resist direct conversation. Understanding how to approach these discussions—and when to step back—helps families navigate this challenging dynamic."
+    excerpt: "When addiction takes over a family system, communication becomes the go-to solution. Talk more. Explain better. Use calmer words. Say it differently..."
   },
   {
     id: "effort-vs-change-addiction",
-    title: "Why Trying Hard Isn't the Same as Getting Better",
-    date: "February 5, 2026",
+    title: "Why \"They're Trying\" Becomes the Most Dangerous Sentence in Addiction",
+    date: "February 3, 2026",
     image: blogImageEffortVsChange,
     imageAlt: "Person looking exhausted while organizing pills and self-help books on table, suggesting effortful but ineffective attempts",
-    excerpt: "\"But they're really trying.\" Families see the effort. The self-help books. The attempts to cut back. The promises to do better. Effort feels meaningful because it suggests hope. But in addiction, effort without structure often leads to repeated cycles. Understanding the difference between trying and changing helps families maintain support without enabling ineffective patterns."
+    excerpt: "'They're trying.' Families say it with hope, relief, and a little exhaustion. Trying sounds like progress. It feels unfair to question effort when..."
   },
   {
     id: "false-stability-rebound",
-    title: "When Things Get Worse Right After They Get Better",
-    date: "February 4, 2026",
+    title: "Why \"They Seem More Like Themselves Again\" Can Be a False Signal",
+    date: "February 2, 2026",
     image: blogImageFalseStabilityRebound,
     imageAlt: "Graph showing improvement followed by sharp decline, representing the rebound effect in recovery attempts",
-    excerpt: "They were doing well. Really well. For weeks, maybe months. Then suddenly, everything collapsed. The drinking came back worse than before. The behavior became more destructive. Families are confused and heartbroken. This pattern—temporary stability followed by escalation—is common in early recovery attempts. Understanding rebound effects helps families prepare for setbacks and maintain appropriate expectations."
+    excerpt: "Families often breathe a sigh of relief when their loved one starts acting 'like themselves again.' They're more present. Kinder. Engaged. Maybe even..."
   },
   {
     id: "apologies-dont-equal-change",
-    title: "Why Heartfelt Apologies Don't Automatically Create Change",
-    date: "February 3, 2026",
+    title: "Why Apologies Don't Equal Change—and Why Families Keep Falling for Them",
+    date: "February 1, 2026",
     image: blogImageApologiesDontEqualChange,
     imageAlt: "Person with head in hands looking remorseful while family member listens with mixed emotions of hope and skepticism",
-    excerpt: "The apology feels real. Deep remorse. Genuine tears. Sincere promises. But apologies in addiction systems can become substitutes for structural change. Families want to believe that feeling sorry equals getting better. Understanding why emotional remorse doesn't automatically create behavioral change helps families maintain compassionate boundaries while requiring concrete action."
+    excerpt: "Families hear apologies all the time. Sincere ones. Emotional ones. Tearful ones. And for a moment, things feel different. Relief sets in. Hope..."
   },
   {
     id: "knowledge-vs-behavior-addiction",
-    title: "Why Understanding Your Problem Isn't the Same as Solving It",
-    date: "February 2, 2026",
+    title: "Why \"They Know Better\" Is a Dangerous Assumption in Addiction",
+    date: "January 31, 2026",
     image: blogImageKnowledgeVsBehavior,
     imageAlt: "Person reading addiction recovery books with highlighter while empty bottles remain on nearby table, showing knowledge without action",
-    excerpt: "\"I know I have a problem.\" They can articulate the issue perfectly. They understand the consequences. They recognize the pattern. They read books about recovery. But knowledge doesn't equal behavior change. Insight doesn't automatically create sobriety. Families often confuse understanding with recovery. Recognizing this gap helps families support actual change rather than intellectual awareness."
+    excerpt: "Families often reach a breaking point and say, 'They know better.' They've been educated. They've heard the warnings. They've seen the consequences...."
   },
   {
     id: "fear-avoidance-paralysis",
-    title: "When Fear of Making Things Worse Prevents Making Things Better",
-    date: "February 1, 2026",
+    title: "Why \"Let's Not Make It Worse\" Is Often the Reason Nothing Gets Better",
+    date: "January 29, 2026",
     image: blogImageFearAvoidanceParalysis,
     imageAlt: "Person sitting paralyzed between two doors marked 'action' and 'inaction', looking overwhelmed by choices",
-    excerpt: "\"What if I make it worse?\" This fear paralyzes families. Setting boundaries might trigger more drinking. Confronting the issue might create conflict. Seeking professional help might damage relationships. But avoiding action also creates consequences. Understanding how fear keeps families stuck helps identify when professional guidance is necessary to break through paralysis."
+    excerpt: "'Let's not make it worse' sounds reasonable. Calm. Mature. And in families dealing with addiction, it often becomes the guiding principle. The..."
   },
   {
     id: "addiction-control-illusion",
-    title: "The Dangerous Myth of Controlled Drinking in Recovery",
-    date: "January 31, 2026",
+    title: "Why \"I've Got It Under Control\" Is the Most Misunderstood Sentence in Addiction",
+    date: "January 28, 2026",
     image: blogImageAddictionControlIllusion,
     imageAlt: "Person carefully measuring alcohol into small glass with timer and notebook nearby, suggesting attempts at controlled consumption",
-    excerpt: "\"I can handle just one drink now.\" They've been sober for months. They feel confident. They believe they've learned control. But controlled drinking after addiction is often an illusion. The brain's reward pathways remain altered. Understanding why moderation attempts frequently fail helps families recognize relapse warning signs and maintain realistic expectations."
+    excerpt: "Few sentences calm families faster—or mislead them more—than 'I've got it under control.' It sounds confident. Responsible. Adult. And in addiction,..."
   },
   {
     id: "addiction-loopholes",
-    title: "How Addiction Finds Loopholes in Every Agreement",
-    date: "January 30, 2026",
+    title: "Why Addiction Loves Loopholes—and How Families Accidentally Create Them",
+    date: "January 27, 2026",
     image: blogImageAddictionLoopholes,
     imageAlt: "Contract with sections crossed out and annotations in margins, suggesting attempts to find ways around agreements",
-    excerpt: "You agree on boundaries. Clear rules. Specific consequences. But somehow, the addiction finds ways around every agreement. Technical interpretations. Semantic arguments. Exceptions for special circumstances. Understanding how addiction systems exploit loopholes helps families create clearer, more effective boundaries that resist manipulation."
+    excerpt: "Families don't mean to create loopholes. They're trying to be fair, compassionate, and reasonable. But addiction thrives on exceptions—just this..."
   },
   {
     id: "addiction-ambiguity-clarity",
-    title: "Why Addiction Thrives in Gray Areas and Families Need Black and White",
-    date: "January 29, 2026",
+    title: "Why Addiction Thrives on Ambiguity—and Why Clear Rules Make Everyone Uncomfortable",
+    date: "January 26, 2026",
     image: blogImageAmbiguityClarity,
     imageAlt: "Split image showing foggy gray confusion on one side and clear black and white clarity on the other",
-    excerpt: "Addiction loves ambiguity. \"Maybe,\" \"sometimes,\" \"it depends\"—these create space for negotiation and rationalization. Families often try to be understanding by allowing gray areas. But clarity creates safety. Understanding when to eliminate ambiguity helps families establish clear expectations and consequences that support recovery rather than enable continued use."
+    excerpt: "Families dealing with addiction often live in the gray. Rules are flexible. Expectations are situational. Decisions get made case by case. This..."
   },
   {
     id: "sliding-baseline-addiction",
-    title: "How Families Slowly Accept the Unacceptable",
-    date: "January 28, 2026",
+    title: "Why \"At Least It's Not As Bad\" Is the Most Dangerous Sentence in Addiction",
+    date: "January 25, 2026",
     image: blogImageSlidingBaseline,
     imageAlt: "Thermometer showing gradually increasing temperature levels, representing slowly escalating tolerance for problematic behavior",
-    excerpt: "It starts small. Missing dinner occasionally. Coming home late sometimes. Drinking a little more than usual. But gradually, \"occasional\" becomes regular. \"Sometimes\" becomes often. \"A little more\" becomes a lot more. Families adapt to incremental changes without noticing the overall shift. Understanding this sliding baseline helps families recognize when normal has become harmful."
+    excerpt: "Families dealing with addiction often comfort themselves with a familiar phrase: 'At least it's not as bad as it used to be.' Fewer crises. Fewer..."
   },
   {
     id: "insight-vs-recovery-addiction",
-    title: "Why Self-Awareness Isn't the Same as Self-Change",
-    date: "January 27, 2026",
+    title: "Why Apologies, Insight, and Self-Awareness Don't Equal Recovery (No Matter How Convincing They Sound)",
+    date: "January 24, 2026",
     image: blogImageInsightVsRecovery,
     imageAlt: "Mirror reflection showing person looking thoughtful and self-aware while still holding drink in background",
-    excerpt: "\"I'm very aware of my drinking patterns.\" They can describe their triggers perfectly. They understand their emotional patterns. They recognize their behaviors. This insight feels encouraging to families. But self-awareness without behavioral change is common in addiction. Understanding the difference between insight and recovery helps families maintain realistic expectations and appropriate support."
+    excerpt: "Families often feel hopeful when a loved one shows insight, takes responsibility, and offers sincere apologies. It sounds like progress—and..."
   },
   {
     id: "moderation-addiction-loophole",
-    title: "Why \"I'm Cutting Back\" Often Becomes \"I'm Still Drinking\"",
-    date: "January 26, 2026",
+    title: "\"They're Cutting Back\"… Why Moderation Becomes Addiction's Favorite Loophole",
+    date: "January 22, 2026",
     image: blogImageModerationLoophole,
     imageAlt: "Calendar with some days marked with drinks crossed out but many more days still marked with multiple drinks",
-    excerpt: "\"I don't need to quit completely. I just need to drink less.\" Moderation sounds reasonable. It feels less extreme than total abstinence. But for many people with substance use disorders, moderation becomes a loophole that maintains access while appearing to address the problem. Understanding why moderation often fails helps families set appropriate expectations and boundaries."
+    excerpt: "Families often feel relieved when a loved one says they're 'cutting back.' Fewer blowups. Fewer arguments. Less chaos. It sounds like progress. This..."
   },
   {
     id: "functional-addiction-hiding",
-    title: "How High-Functioning Addiction Hides Behind Success",
-    date: "January 25, 2026",
+    title: "\"They've Got It Under Control\"… Until They Don't: How Addiction Hides in Plain Sight",
+    date: "January 21, 2026",
     image: blogImageFunctionalAddictionHiding,
     imageAlt: "Professional awards and diplomas on wall with hidden alcohol bottles behind books on shelf",
-    excerpt: "\"Look at everything I've accomplished.\" Career success, financial stability, maintained relationships—these achievements can mask underlying addiction. High-functioning addiction is particularly dangerous because external success becomes evidence against the problem. Understanding how addiction can coexist with achievement helps families recognize warning signs that others might miss."
+    excerpt: "One of the most common reasons families miss addiction is because things still look mostly fine. Jobs are kept. Responsibilities are handled...."
   },
   {
     id: "just-a-phase-addiction-myths",
-    title: "Why \"They'll Grow Out of It\" Can Be Dangerous Thinking",
-    date: "January 24, 2026",
+    title: "\"It's Just a Phase\"… and Other Lies Addiction Loves to Hear",
+    date: "January 20, 2026",
     image: blogImageJustAPhaseMyths,
     imageAlt: "Young adult drinking heavily at party while older relatives watch dismissively in background",
-    excerpt: "\"It's just a phase. They'll outgrow it.\" This thinking is common with younger people, especially in college or early career years. Heavy drinking can seem normal in certain environments. But addiction doesn't always resolve with age. Understanding when substance use patterns require intervention—regardless of age—helps families respond appropriately rather than waiting for natural resolution."
+    excerpt: "Most families don't deny addiction outright—they soften it. 'It's just a phase,' 'Everyone does this,' or 'They'll grow out of it' become comforting..."
   },
   {
     id: "comparison-trap-minimizing-addiction",
-    title: "How \"At Least I'm Not Like...\" Minimizes Real Problems",
-    date: "January 23, 2026",
+    title: "Why \"At Least It's Not As Bad As Before\" Is a Dangerous Comparison",
+    date: "February 9, 2026",
     image: blogImageComparisonTrapAddiction,
     imageAlt: "Person looking at worse examples of addiction while ignoring their own reflection, suggesting downward comparison",
-    excerpt: "\"At least I'm not drinking in the morning.\" \"At least I still have my job.\" \"At least I'm not homeless.\" These comparisons to worse situations can minimize legitimate concerns. Addiction uses downward comparisons to avoid confronting current problems. Understanding this pattern helps families maintain perspective on actual behavior rather than relative behavior."
+    excerpt: "When addiction slightly improves, families often breathe a sigh of relief. Fewer blowups. Fewer missed days. Less visible chaos. And then comes the..."
   },
   {
     id: "gambling-addiction-hidden-damage",
-    title: "The Financial and Emotional Devastation Families Don't See Coming",
-    date: "January 22, 2026",
+    title: "Gambling Addiction Doesn't Look Like Addiction—Until the Damage Is Already Done",
+    date: "January 17, 2026",
     image: blogImageGamblingAddiction,
     imageAlt: "Multiple screens showing online gambling sites with empty wallet and overdue bills scattered on desk",
-    excerpt: "Gambling addiction can be nearly invisible until the damage is catastrophic. No physical symptoms. No obvious impairment. Just increasing financial secrecy and emotional distance. By the time families recognize the problem, significant damage may have occurred. Understanding gambling addiction helps families recognize warning signs and understand the unique challenges of this behavioral addiction."
+    excerpt: "Gambling addiction is one of the easiest addictions for families to miss—and one of the fastest to destabilize a household. There's no smell, no..."
   },
   {
     id: "family-questions-addiction",
-    title: "The Most Important Questions Families Should Be Asking",
-    date: "January 21, 2026",
+    title: "The Questions Families Are Really Asking About Addiction (And Honest Answers)",
+    date: "January 16, 2026",
     image: blogImageFamilyQuestionsAddiction,
     imageAlt: "Family members looking thoughtful with question marks floating around their heads, suggesting contemplation",
-    excerpt: "Families spend time wondering: \"Why won't they stop?\" \"Don't they care about us?\" \"What did we do wrong?\" But these questions often lead to guilt and confusion. More productive questions focus on practical next steps and family responses. Understanding which questions help versus which questions hurt redirects energy toward useful action."
+    excerpt: "From repeated relapses to finding quality treatment, from starting difficult conversations to navigating teenage denial—these are the real questions..."
   },
   {
     id: "minimizing-addiction",
-    title: "How \"It's Not That Bad\" Prevents Getting Help",
-    date: "January 20, 2026",
+    title: "\"It's Not That Bad\"… Until It Is: How Families Get Stuck Minimizing Addiction",
+    date: "January 14, 2026",
     image: blogImageMinimizingAddiction,
     imageAlt: "Iceberg diagram showing small visible problems above water with massive hidden issues below surface",
-    excerpt: "\"Things aren't that bad yet.\" This minimization can come from families or from the person struggling. Comparing current problems to imagined worse scenarios creates false reassurance. But waiting for \"bad enough\" often means waiting for preventable damage. Understanding how minimization delays intervention helps families recognize when professional help is appropriate."
+    excerpt: "If you've ever said, 'It's not that bad,' about someone you love and later wondered how things got so out of hand, you're not alone. Families don't..."
   },
   {
     id: "negotiating-with-addiction",
-    title: "Why Bargaining with Addiction Never Works Long-Term",
-    date: "January 19, 2026",
+    title: "Why Families Start Negotiating With Addiction (and Lose Every Time)",
+    date: "January 11, 2026",
     image: blogImageNegotiatingWithAddiction,
     imageAlt: "Two people at table shaking hands while addiction demon lurks behind one person, suggesting false negotiations",
-    excerpt: "\"If you promise to only drink on weekends...\" \"What if we limit it to two drinks...\" \"Can we agree on no drinking before 5pm...\" These negotiations feel reasonable. They represent compromise. But addiction doesn't honor agreements the way people do. Understanding why bargaining typically fails helps families move toward clearer boundaries and expectations."
+    excerpt: "At some point, almost every family starts negotiating with addiction. Not formally, of course — it's more subtle than that. Negotiation feels..."
   },
   {
     id: "guilt-vs-responsibility",
-    title: "The Difference Between Guilt and Responsibility in Family Addiction",
-    date: "January 18, 2026",
+    title: "Why Families Confuse Guilt With Responsibility—and How That Keeps Them Stuck",
+    date: "January 11, 2026",
     image: blogImageGuiltVsResponsibility,
     imageAlt: "Scale with 'guilt' and 'responsibility' on opposite sides, showing the balance families need to find",
-    excerpt: "\"If only I had done something different.\" Families carry enormous guilt about addiction. They replay decisions, wonder about missed opportunities, blame themselves for outcomes. But guilt about causation is different from responsibility for response. Understanding this distinction helps families process emotions while taking appropriate action moving forward."
+    excerpt: "One of the most powerful forces keeping families trapped in enabling patterns isn't love, fear, or even habit. It's guilt. Quiet, persistent,..."
   },
   {
     id: "patience-alone-fails",
-    title: "Why Patience Without Boundaries Enables Continued Use",
-    date: "January 17, 2026",
+    title: "Why Families Are Told to \"Just Be Patient\"—and Why Patience Alone Rarely Fixes Addiction",
+    date: "January 10, 2026",
     image: blogImagePatienceAloneFails,
     imageAlt: "Clock showing long passage of time while situation remains unchanged in background",
-    excerpt: "\"We need to be patient with them.\" Patience feels compassionate. It acknowledges that change takes time. Recovery is a process. But patience without structure can become enabling. Indefinite patience without consequences may actually prevent necessary change. Understanding when patience helps versus when it hurts guides families toward more effective support."
+    excerpt: "If patience were enough to fix addiction, most families wouldn't need podcasts, therapists, or interventionists. They'd just need a really good..."
   },
   {
     id: "stop-enabling-meaning",
-    title: "What \"Stop Enabling\" Actually Means in Practice",
-    date: "January 16, 2026",
+    title: "Why Families Are Told to \"Stop Enabling\" Without Being Told What That Actually Means",
+    date: "January 8, 2026",
     image: blogImageStopEnablingMeaning,
     imageAlt: "Person removing supportive props from someone else while maintaining emotional connection, showing healthy boundary setting",
-    excerpt: "\"You need to stop enabling them.\" This advice sounds clear until you try to implement it. What exactly is enabling? What's supporting versus carrying? How do you help without helping the addiction? Understanding the practical difference between enabling and supporting helps families maintain relationships while encouraging recovery."
+    excerpt: "If families were paid for every time they were told to 'stop enabling,' most of them wouldn't need financial support anymore. It's one of the most..."
   },
   {
     id: "advice-sounds-wise-fails",
-    title: "Why Advice That Sounds Wise Often Fails Families",
-    date: "January 15, 2026",
+    title: "Why Families Are Given Advice About Addiction That Sounds Wise but Fails in Real Life",
+    date: "January 7, 2026",
     image: blogImageAdviceSoundsWiseFails,
     imageAlt: "Person sharing advice that looks profound but recipient looking confused and frustrated in response",
-    excerpt: "\"Just love them through it.\" \"Give it time.\" \"They have to want to change.\" This advice sounds wise and compassionate. It feels meaningful. But families need practical guidance, not philosophical concepts. Understanding why generic advice often fails helps families seek more specific, actionable support for their particular situation."
+    excerpt: "If addiction came with an instruction manual, families wouldn't be drowning in bad advice. Unfortunately, most families are handed slogans instead of..."
   },
   {
     id: "just-let-go-advice",
-    title: "The Problem with \"Just Let Go and Let God\"",
-    date: "January 14, 2026",
+    title: "Why Families Are Told to \"Just Let Go\"—And Why That Advice Rarely Works",
+    date: "January 6, 2026",
     image: blogImageJustLetGoAdvice,
     imageAlt: "Person looking up at sky with hands raised in surrender while chaos continues around them",
-    excerpt: "\"You can't control their drinking. Just let go and let God.\" This spiritual advice can be meaningful for some families. But \"letting go\" without clear boundaries can become passive enabling. Understanding the difference between spiritual surrender and practical boundaries helps families maintain faith while taking appropriate action."
+    excerpt: "If I had a dollar for every time a family was told to 'just let go,' I could probably retire and record the podcast from a beach somewhere. It's one..."
   },
   {
     id: "enabling-fear-household",
-    title: "When Fear of Conflict Keeps the Whole House Walking on Eggshells",
-    date: "January 13, 2026",
+    title: "Enabling Isn't Weakness — It's What Happens When Fear Runs the Household",
+    date: "January 3, 2026",
     image: blogImageEnablingFearHousehold,
     imageAlt: "Family members tiptoeing around house while broken eggshells scattered on floor around one person",
-    excerpt: "The whole house adjusts to avoid triggering their anger. Conversations become careful. Plans change last-minute. Everyone walks on eggshells to prevent conflict. This adaptation feels like peace-keeping, but it's actually enabling emotional volatility. Understanding how fear shapes family dynamics helps identify when professional intervention is needed."
+    excerpt: "Families often recoil from the word 'enabling.' It sounds accusatory, as if they are intentionally supporting destructive behavior. In reality,..."
   },
   {
     id: "advice-fails-spectacularly",
-    title: "When Well-Meaning Advice Makes Everything Worse",
-    date: "January 12, 2026",
+    title: "Why the Advice Families Get About Addiction Sounds Great—and Fails Spectacularly in Real Life",
+    date: "January 2, 2026",
     image: blogImageAdviceFailsSpectacularly,
     imageAlt: "Advice columnist or therapist looking confident while family situation explodes chaotically in background",
-    excerpt: "\"Have you tried just talking to them?\" \"Maybe you're being too harsh.\" \"They probably just need more support.\" Well-meaning friends, relatives, and even professionals can offer advice that backfires spectacularly in addiction situations. Understanding why standard relationship advice often fails in addiction helps families seek specialized guidance."
+    excerpt: "After years in recovery and working with families, I've noticed something almost comical if it weren't so damaging: the advice families get about..."
   },
   {
     id: "family-roles",
-    title: "How Everyone in the Family Gets Assigned a Role They Never Asked For",
-    date: "January 11, 2026",
+    title: "How Substance Use Changes Family Roles Without Anyone Noticing",
+    date: "January 1, 2026",
     image: blogImageFamilyRoles,
     imageAlt: "Family members wearing different masks representing their assigned roles: enabler, hero, scapegoat, mascot",
-    excerpt: "Addiction systems create roles for everyone: the enabler, the hero, the scapegoat, the mascot. These roles develop unconsciously as families adapt to addiction's chaos. Everyone gets assigned a part they never auditioned for. Understanding these roles helps families recognize how addiction shapes relationships and behavior patterns beyond the person who drinks or uses."
+    excerpt: "Addiction doesn't just affect the person using substances—it reorganizes the entire family system. This reorganization happens quietly, often without..."
   },
   {
     id: "supporting-vs-carrying",
-    title: "The Fine Line Between Supporting Someone and Carrying Them",
-    date: "January 10, 2026",
+    title: "The Difference Between Supporting Recovery and Carrying the Consequences",
+    date: "December 31, 2025",
     image: blogImageSupportingVsCarrying,
     imageAlt: "Two people where one is genuinely helping the other walk versus one person completely carrying another",
-    excerpt: "\"I'm just being supportive.\" Support feels loving and necessary. But there's a difference between supporting someone's efforts and carrying their responsibilities. Support encourages growth. Carrying prevents it. Understanding this distinction helps families maintain appropriate boundaries while still showing love and concern."
+    excerpt: "Families often believe they must absorb consequences to protect their loved one. They fear that letting consequences happen is cruel, unsafe, or..."
   },
   {
     id: "advice-doesnt-help",
-    title: "Why \"Have You Tried Just Talking to Them?\" Doesn't Work",
-    date: "January 9, 2026",
+    title: "What Families Are Told About Addiction That Sounds Good—but Doesn't Actually Help",
+    date: "December 31, 2025",
     image: blogImageAdviceDoesntHelp,
     imageAlt: "Two people attempting to have conversation while addiction creates static interference between them",
-    excerpt: "\"Have you tried just talking to them about it?\" This suggestion assumes the problem is lack of communication. That families just need to find the right words. But addiction creates communication barriers that conversation alone cannot overcome. Understanding why talking isn't always the solution helps families recognize when other interventions are necessary."
+    excerpt: "After two decades in recovery and intervention work, one thing has become painfully clear: families are surrounded by advice that sounds comforting..."
   },
   {
     id: "enabling-survival",
-    title: "How Enabling Often Starts as Survival, Not Love",
-    date: "January 8, 2026",
+    title: "Enabling Isn't About Weakness—It's About Survival",
+    date: "December 28, 2025",
     image: blogImageEnablingSurvival,
     imageAlt: "Person shielding others from chaos while looking exhausted and overwhelmed, suggesting protective enabling",
-    excerpt: "Families don't wake up one day and decide to enable addiction. It starts as protection. Covering for someone to prevent consequences. Making excuses to avoid conflict. Providing help to prevent crisis. This behavior begins as survival strategy, not conscious choice. Understanding enabling's origins helps families recognize patterns without self-blame."
+    excerpt: "Many families recoil at the word 'enabling.' It sounds accusatory, as if someone is choosing to make addiction worse. In reality, enabling behaviors..."
   },
   {
     id: "addiction-stops-being-funny",
-    title: "The Moment When Drinking Jokes Stop Being Funny",
-    date: "January 7, 2026",
+    title: "When Addiction Stops Being Funny and Starts Being Familiar",
+    date: "December 27, 2025",
     image: blogImageAddictionStopsBeingFunny,
     imageAlt: "Person forcing laughter at drinking joke while others look concerned, showing shift from humor to worry",
-    excerpt: "There's a moment when drinking stories shift from funny to concerning. When \"I was so drunk\" stops getting laughs and starts getting worried looks. Families notice this transition before the person drinking does. Understanding this shift helps families trust their instincts about escalating problems."
+    excerpt: "We live in a culture that jokes about substance use constantly. Drinking memes. Stories about wild weekends. Humor makes excess feel normal, even..."
   },
   {
     id: "family-constant-alert",
-    title: "Why Families Live in Constant State of Alert",
-    date: "January 6, 2026",
+    title: "When Addiction Turns Family Life Into a Constant State of Alert",
+    date: "December 26, 2025",
     image: blogImageFamilyConstantAlert,
     imageAlt: "Family members with heightened alert expressions constantly scanning for signs of problems or crisis",
-    excerpt: "Living with addiction means constant vigilance. Scanning for signs of intoxication. Monitoring mood changes. Preparing for crises. This hypervigilance becomes exhausting. Families exist in survival mode without realizing it. Understanding this stress response helps families recognize the need for their own support and recovery."
+    excerpt: "Families living with addiction often describe their lives using the same language reserved for emergencies. They are always watching, always..."
   },
   {
     id: "humor-hides-addiction",
-    title: "How Self-Deprecating Humor About Drinking Masks Real Problems",
-    date: "January 5, 2026",
+    title: "How Addiction Hides Behind Humor Until Nobody's Laughing Anymore",
+    date: "December 25, 2025",
     image: blogImageHumorHidesAddiction,
     imageAlt: "Person making jokes about drinking while serious concerns are literally masked behind comedy mask",
-    excerpt: "\"I'm such an alcoholic, haha.\" \"I need a drink after this day.\" \"Wine o'clock somewhere!\" Humor about drinking can normalize concerning patterns. Self-deprecating jokes deflect serious conversations. Understanding how humor masks addiction helps families recognize when someone is hiding behind comedy rather than addressing real problems."
+    excerpt: "We joke about substance use constantly. It's part of our culture. Wine memes. Party stories. Laughter makes excess feel harmless, even relatable...."
   },
   {
     id: "jokes-about-drinking",
-    title: "When \"Mommy Juice\" and Wine Jokes Stop Being Harmless",
-    date: "January 4, 2026",
+    title: "When the Jokes About Drinking Stop Being Funny",
+    date: "December 24, 2025",
     image: blogImageJokesAboutDrinking,
     imageAlt: "Wine glass with 'mommy juice' text overlay while concerned children play in blurred background",
-    excerpt: "\"Mommy needs her wine.\" \"It's wine o'clock somewhere.\" These jokes are everywhere—on shirts, social media, coffee mugs. They normalize daily drinking and make it harder to recognize when consumption becomes problematic. Understanding how cultural humor affects perception helps families identify concerning patterns earlier."
+    excerpt: "There's a moment most families can identify in hindsight. The jokes that used to land start feeling uncomfortable. What once felt harmless now..."
   },
   {
     id: "everyone-drinks-like-this",
-    title: "The Dangerous Comfort of \"Everyone Drinks Like This\"",
-    date: "January 3, 2026",
+    title: "When \"Everyone Drinks Like This\" Stops Being Funny",
+    date: "December 23, 2025",
     image: blogImageEveryoneDrinks,
     imageAlt: "Group of people all drinking heavily while one person points to them as justification for their own drinking",
-    excerpt: "\"All my friends drink like this.\" \"This is normal for our social circle.\" \"Everyone needs to unwind after work.\" When heavy drinking is normalized within social groups, it becomes harder to recognize individual problems. Understanding how social drinking culture can mask addiction helps families maintain perspective on concerning patterns."
+    excerpt: "There's a moment in a lot of families where the jokes stop landing. What used to be funny—stories, memes, eye-rolling—starts feeling uncomfortable...."
   },
   {
     id: "wine-oclock-humor-addiction",
-    title: "How \"Wine O'Clock\" Culture Normalizes Daily Drinking",
-    date: "January 2, 2026",
+    title: "\"It's Just Wine O'Clock\"…Until It's Not: How We Joke About Addiction Right Up Until We Can't",
+    date: "December 22, 2025",
     image: blogImageWineOclock,
     imageAlt: "Clock showing 5 PM with wine glass replacing numbers, surrounded by social media posts about wine o'clock",
-    excerpt: "\"It's 5 o'clock somewhere.\" \"Mommy needs her wine.\" \"Wine helps me relax.\" Social media is filled with wine culture that makes daily drinking seem normal, even necessary. This cultural acceptance can mask developing problems and make families hesitate to express concerns. Understanding how cultural normalization affects addiction recognition helps families trust their instincts."
+    excerpt: "Addiction has a strange relationship with humor. We laugh about it, normalize it, and minimize it right up until someone crosses an invisible..."
   },
   {
     id: "rock-bottom-myth-addiction",
-    title: "The Myth That People Must Hit Rock Bottom Before Getting Help",
-    date: "January 1, 2026",
+    title: "The Rock Bottom Myth in Addiction Recovery",
+    date: "December 20, 2025",
     image: blogImageRockBottom,
     imageAlt: "Person standing at cliff edge labeled 'rock bottom' while ladder showing intervention opportunities extends downward",
-    excerpt: "\"They have to hit rock bottom first.\" This belief keeps families waiting for some mythical moment when their loved one will suddenly want help. But rock bottom is subjective and dangerous. People can get help at any stage of addiction. Understanding why waiting for rock bottom can be harmful helps families take action earlier."
+    excerpt: "Waiting for rock bottom can prolong addiction. Learn why the myth persists and what families can do instead."
   },
   {
     id: "dry-drunk-syndrome-family",
-    title: "What Families Need to Know About Dry Drunk Syndrome",
-    date: "December 31, 2025",
+    title: "Why Sobriety Alone Isn't Enough: Understanding \"Dry Drunk\" Behavior in Early Recovery",
+    date: "December 19, 2025",
     image: blogImageDryDrunk,
     imageAlt: "Person not drinking alcohol but displaying same irritable, withdrawn behaviors as when drinking",
-    excerpt: "They stopped drinking, but the behavior patterns remain. Irritability, emotional distance, blame, and negativity continue without alcohol. This \"dry drunk\" syndrome confuses families who expected sobriety to solve relationship problems. Understanding that stopping drinking is just the first step helps families maintain realistic expectations and appropriate boundaries during early recovery."
+    excerpt: "Sobriety doesn't automatically heal addiction behaviors. Learn what 'dry drunk' behavior looks like, why it happens, and how families can respond."
   },
   {
     id: "addiction-personality-changes-loved-one",
-    title: "Understanding the Personality Changes That Come with Addiction",
-    date: "December 30, 2025",
+    title: "When Addiction Hijacks Personality: Why Your Loved One Feels Like a Stranger",
+    date: "December 18, 2025",
     image: blogImagePersonalityChanges,
     imageAlt: "Split image showing same person before addiction (warm, engaged) and during addiction (distant, angry)",
-    excerpt: "\"This isn't the person I married.\" \"My child has become someone I don't recognize.\" Addiction changes personality in profound ways. The warm, caring person becomes distant and defensive. Understanding these changes as symptoms rather than permanent character flaws helps families maintain hope while protecting themselves from harmful behavior."
+    excerpt: "Addiction can radically change behavior and personality. Learn why this happens, what's temporary, what's not, and how families can cope."
   },
   {
     id: "enabling-vs-supporting-boundaries",
-    title: "The Difference Between Enabling and Supporting: A Family Guide",
-    date: "December 29, 2025",
+    title: "Enabling vs Supporting—A Boundary Blueprint for Families",
+    date: "December 17, 2025",
     image: blogImageEnablingVsSupporting,
     imageAlt: "Two paths diverging, one showing enabling (person being carried) and other showing support (person being helped to walk)",
-    excerpt: "\"Am I helping or am I enabling?\" This question torments families dealing with addiction. The line between support and enabling can seem invisible, but it's crucial for recovery. Support encourages growth and accountability. Enabling removes consequences and prevents learning. Understanding this difference helps families love effectively without contributing to the problem."
+    excerpt: "Learn the difference between enabling and supporting. Get a step-by-step boundary plan, examples of enabling behaviors, and what to do instead."
   },
   {
     id: "medical-detox-critical-first-step",
-    title: "Why Medical Detox Is Often the Critical First Step",
-    date: "December 28, 2025",
+    title: "Why Medical Detox Is a Critical First Step in Addiction Treatment",
+    date: "December 16, 2025",
     image: blogImageMedicalDetoxImportance,
     imageAlt: "Medical professional monitoring patient during detox process with vital signs chart showing stabilization",
-    excerpt: "\"They can just quit cold turkey.\" This assumption is dangerous with many substances. Alcohol and benzodiazepine withdrawal can be life-threatening. Even seemingly safer substances can cause medical complications during withdrawal. Understanding when medical supervision is necessary helps families prioritize safety and increase success rates for recovery attempts."
+    excerpt: "Detoxification is often misunderstood as a simple process of 'getting substances out of the body.' In reality, detox is a medically sensitive phase..."
   },
   {
     id: "depression-and-addiction",
@@ -1559,59 +1559,59 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: "medical-detox-matters",
-    title: "Why Medical Detox Matters More Than Willpower",
-    date: "December 26, 2025",
+    title: "Why Medical Detox Matters: The Serious Risks of Detoxing at Home Without Supervision",
+    date: "December 13, 2025",
     image: blogImageMedicalDetox,
     imageAlt: "Medical facility with professional staff and monitoring equipment showing safe detox environment",
-    excerpt: "\"If they really wanted to quit, they could just stop.\" This belief ignores the physical realities of addiction. Some substances create dangerous withdrawal symptoms that require medical management. Understanding the medical component of early recovery helps families support safe, effective treatment rather than expecting willpower alone to be sufficient."
+    excerpt: "For families facing addiction, the urge to act quickly is understandable. Unfortunately, detoxing without medical supervision can be not only..."
   },
   {
     id: "family-support-enabling",
-    title: "When Family Support Accidentally Becomes Enabling",
-    date: "December 25, 2025",
+    title: "The Fine Line Between Family Support and Enabling in Addiction Recovery",
+    date: "December 8, 2025",
     image: blogImageFamilySupport,
     imageAlt: "Family standing together supportively in recovery",
-    excerpt: "\"We're just trying to help.\" Family support comes from love, but it can inadvertently enable continued addiction. Paying bills, making excuses, or providing housing without accountability can remove the natural consequences that motivate change. Understanding how love can enable helps families support recovery without supporting the addiction."
+    excerpt: "Families often struggle to distinguish between love and enabling. Real support empowers a loved one to grow; enabling keeps them stuck."
   },
   {
     id: "helping-vs-enabling",
-    title: "The Fine Line: Helping vs. Enabling in Addiction",
-    date: "December 24, 2025",
+    title: "Helping vs. Enabling: The Fine Line Families Struggle to See",
+    date: "December 10, 2025",
     image: blogImageHelpingVsEnabling,
     imageAlt: "Scales of justice weighing helping hand against enabling hand, showing the balance families must find",
-    excerpt: "\"I don't know if I'm helping or making it worse.\" This confusion paralyzes many families. The desire to help is natural and loving. But help can become enabling when it shields someone from consequences or removes their responsibility. Understanding this distinction is crucial for families who want to support recovery without prolonging addiction."
+    excerpt: "When love and fear blur into protection that unintentionally feeds the disease. Understanding the difference between helping and enabling can be..."
   },
   {
     id: "understanding-addiction-education",
-    title: "Why Understanding Addiction Is the First Step for Families",
-    date: "December 23, 2025",
+    title: "Why Families Must Understand Addiction Before Confronting It",
+    date: "December 10, 2025",
     image: blogImageEducation,
     imageAlt: "Open book with brain diagram showing addiction pathways and family members learning together",
-    excerpt: "\"Why can't they just stop?\" This question reflects a fundamental misunderstanding of addiction as a brain disease. Education about addiction helps families shift from moral judgments to medical understanding. This knowledge reduces blame, increases compassion, and leads to more effective responses. Understanding addiction as a disease changes everything about how families approach treatment and recovery."
+    excerpt: "Without a solid understanding of addiction, well-intentioned efforts can backfire. Education is the foundation every family needs before taking that..."
   },
   {
     id: "brain-reward-pathways",
-    title: "How Addiction Changes the Brain's Reward System",
-    date: "December 22, 2025",
+    title: "Food and Exercise Addictions: Understanding the Brain's Reward Circuitry",
+    date: "December 10, 2025",
     image: blogImageBrainReward,
     imageAlt: "Brain diagram highlighting reward pathways with addiction substances creating stronger signals than natural rewards",
-    excerpt: "\"They choose drugs over everything that matters.\" This seems incomprehensible until you understand how addiction rewires the brain. Substances hijack the reward system, making drugs feel more important than food, family, or survival. Understanding these neurological changes helps families recognize addiction as a medical condition requiring treatment, not a moral failing requiring judgment."
+    excerpt: "Food and exercise addictions tap into the same reward circuitry as substance use disorders. Understanding the brain science helps families recognize..."
   },
   {
     id: "right-moment-conversation",
-    title: "Is There Ever a Right Moment to Talk About Addiction?",
-    date: "December 21, 2025",
+    title: "Creating the Right Moment: How to Talk to a Loved One About Addiction",
+    date: "December 9, 2025",
     image: blogImageConversation,
     imageAlt: "Clock and calendar showing various times with family members waiting for the 'right moment' to talk",
-    excerpt: "\"I'll talk to them when they're sober.\" \"I'll wait until after the holidays.\" \"Maybe when they're in a good mood.\" Families often wait for the perfect moment to address addiction, but that moment rarely comes. Understanding when and how to have these difficult conversations helps families move from waiting to acting."
+    excerpt: "Few conversations are as difficult — or as important — as talking to a loved one about addiction. Creating the right moment is about balance:..."
   },
   {
     id: "exercise-nutrition-recovery",
-    title: "The Role of Exercise and Nutrition in Sustainable Recovery",
-    date: "December 20, 2025",
+    title: "Rebuilding from the Inside Out: How Exercise and Nutrition Support Early Addiction Recovery",
+    date: "December 11, 2025",
     image: blogImageExerciseNutrition,
     imageAlt: "Person exercising and healthy foods arranged together, showing holistic approach to recovery",
-    excerpt: "\"I'm eating better and working out—that should be enough.\" Physical health improvements are important in recovery, but they're not sufficient alone. Exercise and nutrition support recovery but can't replace addiction treatment. Understanding the role of lifestyle changes helps families maintain perspective on what constitutes comprehensive recovery planning."
+    excerpt: "Early recovery is often described as a journey back to life — but it's rarely an easy one. Discover how exercise and nutrition can transform the..."
   }
 ];
 

@@ -12,6 +12,7 @@ export const jsonResponse = (body: unknown, status = 200) =>
   });
 
 export class BadRequestError extends Error {}
+export class RateLimitError extends Error {}
 
 /** Parse the request body as a JSON object, or throw BadRequestError. */
 export const readJsonObject = async (req: Request): Promise<Record<string, unknown>> => {
@@ -82,6 +83,9 @@ export const escapeMultiline = (value: unknown): string => escapeHtml(value).rep
 export const errorResponse = (error: unknown, context: string) => {
   if (error instanceof BadRequestError) {
     return jsonResponse({ error: error.message }, 400);
+  }
+  if (error instanceof RateLimitError) {
+    return jsonResponse({ error: error.message }, 429);
   }
   console.error(`[${context}]`, error instanceof Error ? error.message : error);
   return jsonResponse({ error: "Something went wrong. Please try again." }, 500);

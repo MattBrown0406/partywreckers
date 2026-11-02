@@ -13,6 +13,52 @@ const HUB_TIMEOUT_MS = 10_000;
 // always finishes well before the next 5-minute cron tick starts another one.
 const RUN_BUDGET_MS = 120_000;
 
+const unauthorized = () =>
+  new Response(JSON.stringify({ error: "Unauthorized" }), {
+    status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+
+const constantTimeEqual = (a: string, b: string) => {
+  const left = new TextEncoder().encode(a);
+  const right = new TextEncoder().encode(b);
+  let diff = left.length ^ right.length;
+  for (let i = 0; i < Math.max(left.length, right.length); i += 1) {
+    diff |= (left[i] ?? 0) ^ (right[i] ?? 0);
+  }
+  return diff === 0;
+};
+
+/**
+ * Only the scheduled pg_cron job (or someone holding a service-level key) may drain the
+ * outbox. The cron job sends the service role key it reads from Vault. That is normally
+ * byte-identical to this function's SUPABASE_SERVICE_ROLE_KEY, but Vault can hold the
+ * other key format (legacy JWT vs sb_secret_...), so when the fast comparison fails we
+ * ask Supabase Auth's admin API whether the presented key has service-level access:
+ * it answers 200 only for a service key and 401/403 for the public anon/publishable key.
+ * A DRAIN_SECRET env var is also accepted for manual runs.
+ */
+const isAuthorized = async (req: Request, supabaseUrl: string, serviceKey: string) => {
+  const token = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "").trim();
+  if (!token) return false;
+
+  const drainSecret = Deno.env.get("DRAIN_SECRET");
+  if (constantTimeEqual(token, serviceKey) || (drainSecret && constantTimeEqual(token, drainSecret))) {
+    return true;
+  }
+
+  try {
+    const response = await fetch(`${supabaseUrl}/auth/v1/admin/users?page=1&per_page=1`, {
+      headers: { apikey: token, Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(5000),
+    });
+    await response.body?.cancel();
+    return response.ok;
+  } catch (error) {
+    console.error("[drain-spine-outbox] key check failed:", error instanceof Error ? error.message : error);
+    return false;
+  }
+};
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
@@ -27,6 +73,11 @@ serve(async (req) => {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+  if (!(await isAuthorized(req, supabaseUrl, serviceKey))) {
+    console.warn("[drain-spine-outbox] rejected an unauthorized request");
+    return unauthorized();
+  }
+
   if (!hubUrl || !hubKey) {
     console.error("[drain-spine-outbox] HUB_INGEST_URL / HUB_INGEST_KEY not configured");
     return new Response(JSON.stringify({ error: "Not configured" }), {

@@ -1,6 +1,16 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { countAdvertiserInquiriesSince, fetchFunnelEventsSince } from "../_shared/report-queries.ts";
+import {
+  ADVERTISER_INTENT_EVENTS,
+  HELP_REQUEST_EVENT,
+  LISTENER_LEAD_EVENTS,
+  PAGE_VIEW_EVENT,
+  READINESS_EVENTS,
+  REVENUE_INTENT_EVENTS,
+  SPONSOR_EVENTS,
+  inSet,
+} from "../_shared/funnel-events.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,29 +26,6 @@ type EventRow = {
   created_at: string;
   metadata: Record<string, unknown> | null;
 };
-
-const REVENUE_INTENT_EVENTS = new Set([
-  "get_answers_now_click",
-  "intervention_readiness_click",
-  "advertiser_inquiry_click",
-  "family_squares_click",
-  "sober_helpline_click",
-  "family_bridge_click",
-  "freedom_interventions_click",
-  "consultation_click",
-  "assessment_click",
-  "phone_click",
-  "phone_intent",
-  "advertiser_package_click",
-  "advertiser_inquiry_start",
-  "advertiser_email_click",
-]);
-
-const READINESS_EVENTS = new Set([
-  "intervention_readiness_click",
-  "readiness_click",
-  "intervention_cta_click",
-]);
 
 const countBy = (
   rows: Array<Record<string, unknown>>,
@@ -82,31 +69,19 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, serviceRoleKey);
     const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
-    const [rows, advertiserCount] = await Promise.all([
+    const [allRows, advertiserCount] = await Promise.all([
       fetchFunnelEventsSince<EventRow>(supabase, since),
       countAdvertiserInquiriesSince(supabase, since),
     ]);
+    const pageViews = allRows.filter((r) => r.event_name === PAGE_VIEW_EVENT).length;
+    const rows = allRows.filter((r) => r.event_name !== PAGE_VIEW_EVENT);
+    const helpRequests = rows.filter((r) => r.event_name === HELP_REQUEST_EVENT).length;
 
-    const pageViews = rows.filter((r) => r.event_name === "page_view").length;
-    const revenueIntent = rows.filter((r) =>
-      r.event_name ? REVENUE_INTENT_EVENTS.has(r.event_name) : false,
-    ).length;
-    const readiness = rows.filter((r) =>
-      r.event_name ? READINESS_EVENTS.has(r.event_name) : false,
-    ).length;
-    const advertiserIntent = rows.filter((r) =>
-      ["advertiser_package_click", "advertiser_inquiry_start", "advertiser_inquiry_click", "advertiser_email_click"].includes(
-        r.event_name || "",
-      ),
-    );
-    const listenerLeadEvents = rows.filter((r) =>
-      ["family_squares_click", "get_answers_now_click", "intervention_readiness_click", "freedom_bridge_click"].includes(
-        r.event_name || "",
-      ),
-    );
-    const sponsorEvents = rows.filter((r) =>
-      ["sponsor_impression", "sponsor_click"].includes(r.event_name || ""),
-    );
+    const revenueIntent = rows.filter((r) => inSet(REVENUE_INTENT_EVENTS)(r.event_name)).length;
+    const readiness = rows.filter((r) => inSet(READINESS_EVENTS)(r.event_name)).length;
+    const advertiserIntent = rows.filter((r) => inSet(ADVERTISER_INTENT_EVENTS)(r.event_name));
+    const listenerLeadEvents = rows.filter((r) => inSet(LISTENER_LEAD_EVENTS)(r.event_name));
+    const sponsorEvents = rows.filter((r) => inSet(SPONSOR_EVENTS)(r.event_name));
     const sponsorImpressionRows = rows.filter((r) => r.event_name === "sponsor_impression");
     const sponsorClickRows = rows.filter((r) => r.event_name === "sponsor_click");
 
@@ -160,10 +135,11 @@ serve(async (req) => {
       JSON.stringify({
         window_days: 30,
         totals: {
-          events: rows.length,
+          events: allRows.length,
           page_views: pageViews,
+          help_requests: helpRequests,
           revenue_intent_clicks: revenueIntent,
-          consultation_requests: 0,
+          consultation_requests: helpRequests,
           intervention_readiness_clicks: readiness,
           advertiser_intent_events: advertiserIntent.length,
           advertiser_inquiries: advertiserCount || 0,
