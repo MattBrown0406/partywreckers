@@ -121,6 +121,9 @@ const HelpNow = () => {
                   <Button className="h-auto min-h-11 w-full whitespace-normal py-3" asChild>
                     <TrackedExternalLink href={funnelLinks.freedomContact} target="_blank" rel="noopener noreferrer" eventName="get_answers_now_click" ctaLabel="Help Now card Get Answers Now">Get Answers Now</TrackedExternalLink>
                   </Button>
+                  <Button variant="outline" className="h-auto min-h-11 w-full whitespace-normal py-3" asChild>
+                    <Link to="/get-help">Send Matt a message</Link>
+                  </Button>
                 </CardContent>
               </Card>
             </div>

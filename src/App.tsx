@@ -19,6 +19,7 @@ import ConversationStarters from "./pages/ConversationStarters";
 import Press from "./pages/Press";
 import StartHere from "./pages/StartHere";
 import HelpNow from "./pages/HelpNow";
+import GetHelp from "./pages/GetHelp";
 import NextStep from "./pages/NextStep";
 import FromPartyWreckers from "./pages/FromPartyWreckers";
 import FamilyAddictionHelp from "./pages/FamilyAddictionHelp";
@@ -50,14 +51,15 @@ export const App = ({ Router = DefaultRouter }: AppProps) => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <NewsletterPopup />
-      <StickyContactForm />
       <Router>
+        <NewsletterPopup />
+        <StickyContactForm />
         <FunnelRouteTracker />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/help-now" element={<HelpNow />} />
+          <Route path="/get-help" element={<GetHelp />} />
           <Route path="/from-party-wreckers" element={<FromPartyWreckers />} />
           <Route path="/start-here" element={<StartHere />} />
           <Route path="/next-step" element={<NextStep />} />

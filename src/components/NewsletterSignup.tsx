@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/integrations/supabase/client";
+import HoneypotField from "@/components/HoneypotField";
+import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
+import { submitForm } from "@/lib/formSubmit";
 import { Mail, CheckCircle, AlertCircle } from "lucide-react";
 
 interface NewsletterSignupProps {
@@ -20,6 +22,10 @@ const NewsletterSignup = ({
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
+  // Load the bot check only once someone starts filling in the form (it's in every footer).
+  const [engaged, setEngaged] = useState(false);
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,26 +43,35 @@ const NewsletterSignup = ({
     }
 
     setStatus("loading");
-    
-    try {
-      const { error } = await supabase.functions.invoke("newsletter-signup", {
-        body: {
-          email: email.trim(),
-          source: variant,
-        },
-      });
 
-      if (error) {
-        throw error;
-      }
-
-      setStatus("success");
-      setMessage("You’re in. Matt will get your signup and we can wire this into a full email platform next.");
-      setEmail("");
-    } catch (error) {
+    const token = (await turnstileRef.current?.getToken()) ?? null;
+    if (isTurnstileEnabled && !token) {
       setStatus("error");
-      setMessage("Something went wrong. Try again in a minute.");
+      setMessage("The verification check didn't finish. Please try again.");
+      return;
     }
+
+    const result = await submitForm<{ confirmation_required?: boolean }>("newsletter-signup", {
+      email: email.trim(),
+      source: variant,
+      website,
+      turnstile_token: token ?? undefined,
+    });
+    turnstileRef.current?.reset();
+
+    if (!result.ok) {
+      setStatus("error");
+      setMessage(result.message || "Something went wrong. Try again in a minute.");
+      return;
+    }
+
+    setStatus("success");
+    setMessage(
+      result.data?.confirmation_required
+        ? "Almost done: check your inbox and confirm your subscription."
+        : "You're in. Thanks for signing up.",
+    );
+    setEmail("");
   };
 
   if (status === "success") {
@@ -69,7 +84,8 @@ const NewsletterSignup = ({
   }
 
   const formContent = (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} onFocus={() => setEngaged(true)} className="space-y-3">
+      <HoneypotField value={website} onChange={setWebsite} />
       <div className="flex flex-col sm:flex-row gap-2">
         <Input
           type="email"
@@ -98,6 +114,7 @@ const NewsletterSignup = ({
           )}
         </Button>
       </div>
+      {engaged && <TurnstileWidget ref={turnstileRef} action="newsletter" />}
       {status === "error" && (
         <div className="flex items-center gap-2 text-sm text-destructive">
           <AlertCircle className="w-4 h-4" />

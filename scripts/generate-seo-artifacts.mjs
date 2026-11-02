@@ -34,6 +34,7 @@ const routeEntries = [
 const priorities = new Map([
   ["/", "1.0"],
   ["/start-here", "0.95"],
+  ["/get-help", "0.95"],
   ["/from-party-wreckers", "0.95"],
   ["/family-resources", "0.9"],
   ["/family-addiction-help", "0.95"],

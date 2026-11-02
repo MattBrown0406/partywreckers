@@ -697,9 +697,7 @@ const FamilyResources = () => {
                   <Link to="/next-step">Find My Next Step</Link>
                 </Button>
                 <Button variant="ghost" size="lg" asChild>
-                  <a href="mailto:matt@partywreckers.com?subject=Need%20Help%20With%20Our%20Family">
-                    Email Matt
-                  </a>
+                  <Link to="/get-help">Send Matt a message</Link>
                 </Button>
               </div>
             </div>

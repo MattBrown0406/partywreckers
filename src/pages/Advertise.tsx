@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { BarChart3, CheckCircle, FileText, Mail, Megaphone, Radio, ShieldCheck, Target, TrendingUp, Users } from "lucide-react";
 
@@ -13,7 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { supabase } from "@/integrations/supabase/client";
+import HoneypotField from "@/components/HoneypotField";
+import TurnstileWidget, { isTurnstileEnabled, type TurnstileHandle } from "@/components/TurnstileWidget";
+import { submitForm } from "@/lib/formSubmit";
 import { coreFaqs, primaryAeoAnswers } from "@/lib/aeoContent";
 import { trackPartyWreckersEvent } from "@/lib/funnelTracking";
 import { advertiserFit, inventoryOptions, proofPoints, sponsorPackages } from "@/lib/sponsorPackages";
@@ -51,6 +53,9 @@ const Advertise = () => {
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [hasTrackedStart, setHasTrackedStart] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [website, setWebsite] = useState("");
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   const trackInquiryStart = () => {
     if (hasTrackedStart) return;
@@ -86,34 +91,57 @@ const Advertise = () => {
       },
     });
 
+    setErrorMessage("");
+    const verificationFailed = () => {
+      setStatus("error");
+      setErrorMessage("The verification check didn't finish. Please try again.");
+    };
+
+    const token = (await turnstileRef.current?.getToken()) ?? null;
+    if (isTurnstileEnabled && !token) return verificationFailed();
+
     const sourcePath = `${window.location.pathname}${window.location.search}`;
-    const { error } = await supabase.functions.invoke("send-advertiser-inquiry", {
-      body: {
-        ...form,
-        source_path: sourcePath,
-        metadata: {
-          source: "party_wreckers_advertise_page",
-          package_interest: form.packageInterest,
-          inventory_interest: form.inventoryInterest,
-        },
+    const result = await submitForm("send-advertiser-inquiry", {
+      ...form,
+      source_path: sourcePath,
+      website,
+      turnstile_token: token ?? undefined,
+      metadata: {
+        source: "party_wreckers_advertise_page",
+        package_interest: form.packageInterest,
+        inventory_interest: form.inventoryInterest,
       },
     });
+    turnstileRef.current?.reset();
 
-    const fallbackResult = error ? await supabase.functions.invoke("send-contact-email", {
-      body: {
+    if (!result.ok && (result.status === 400 || result.status === 429)) {
+      // A validation, verification or rate-limit answer: retrying elsewhere won't help.
+      setStatus("error");
+      setErrorMessage(result.message || "");
+      return;
+    }
+
+    if (!result.ok) {
+      // Server problem: fall back to the plain contact email so the lead isn't lost.
+      // Bot-check tokens are single-use, so wait for a fresh one first.
+      const fallbackToken = (await turnstileRef.current?.getToken()) ?? null;
+      if (isTurnstileEnabled && !fallbackToken) return verificationFailed();
+      const fallback = await submitForm("send-contact-email", {
         name: form.name,
         email: form.email,
         message: `Advertiser inquiry\n\nCompany: ${form.company}\nPackage interest: ${form.packageInterest || "Not provided"}\nInventory interest: ${form.inventoryInterest}\n\n${form.message}`,
-        metadata: {
-          package_interest: form.packageInterest,
-          inventory_interest: form.inventoryInterest,
-        },
-      },
-    }) : { error: null };
+        form: "advertise_fallback",
+        source_path: sourcePath,
+        website,
+        turnstile_token: fallbackToken ?? undefined,
+      });
+      turnstileRef.current?.reset();
 
-    if (fallbackResult.error) {
-      setStatus("error");
-      return;
+      if (!fallback.ok) {
+        setStatus("error");
+        setErrorMessage(fallback.message || "");
+        return;
+      }
     }
 
     setStatus("success");
@@ -398,6 +426,7 @@ const Advertise = () => {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} onFocus={trackInquiryStart} className="space-y-4">
+                      <HoneypotField value={website} onChange={setWebsite} />
                       <div className="grid gap-4 sm:grid-cols-2">
                         <Input required maxLength={120} placeholder="Your name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
                         <Input required type="email" maxLength={254} placeholder="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
@@ -419,11 +448,12 @@ const Advertise = () => {
                       </label>
                       <Input maxLength={200} placeholder="Package interest" value={form.packageInterest} onChange={(event) => setForm({ ...form, packageInterest: event.target.value })} />
                       <Textarea required maxLength={4000} placeholder="Tell us what you offer and what kind of audience you want to reach." className="min-h-[140px]" value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} />
+                      {hasTrackedStart && <TurnstileWidget ref={turnstileRef} action="advertise" />}
                       <Button type="submit" disabled={status === "loading"} className="w-full">
                         {status === "loading" ? "Sending..." : "Send Sponsor Inquiry"}
                       </Button>
                       {status === "error" && (
-                        <p className="text-sm text-destructive">Something went wrong. Please email matt@partywreckers.com directly.</p>
+                        <p className="text-sm text-destructive" role="alert">{errorMessage || "Something went wrong. Please email matt@partywreckers.com directly."}</p>
                       )}
                     </form>
                   )}

@@ -1,6 +1,7 @@
 import { Instagram, Youtube, Facebook, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import NewsletterSignup from "./NewsletterSignup";
+import ArticleHelpSection from "./ArticleHelpSection";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -52,6 +53,8 @@ export const SocialLinks = ({ size = "default" }: { size?: "default" | "small" }
 
 const Footer = () => {
   return (
+    <>
+    <ArticleHelpSection />
     <footer className="py-8 sm:py-12 bg-card border-t border-border" role="contentinfo">
       <div className="container px-4">
         <div className="flex flex-col items-center gap-8 text-center">
@@ -171,6 +174,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
