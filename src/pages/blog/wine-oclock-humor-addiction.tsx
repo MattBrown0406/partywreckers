@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageWineOclock from "@/assets/blog-wine-oclock-humor.jpg";
 
@@ -41,6 +42,8 @@ const WineOclockHumorAddiction = () => {
             "It's Just Wine O'Clock"…Until It's Not: How We Joke About Addiction Right Up Until We Can't
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="wine-oclock-humor-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

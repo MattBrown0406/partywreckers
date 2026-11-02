@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageJustLetGoAdvice from "@/assets/blog-just-let-go-advice.jpg";
 
@@ -41,6 +42,8 @@ const JustLetGoAdvice = () => {
             Why Families Are Told to "Just Let Go"—And Why That Advice Rarely Works
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="just-let-go-advice" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

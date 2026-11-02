@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import SocialShareButtons from "@/components/SocialShareButtons";
 import { ArrowLeft } from "lucide-react";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQJsonLd } from "@/components/JsonLd";
@@ -98,6 +99,8 @@ const DepressionAndAddiction = () => {
             title="Depression and Addiction: What Families Need to Know"
           />
         </div>
+
+        <ArticleAnswerSummary slug="depression-and-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

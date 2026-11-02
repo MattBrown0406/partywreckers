@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImagePersonalityChanges from "@/assets/blog-addiction-personality-changes.jpg";
 
@@ -41,6 +42,8 @@ const AddictionPersonalityChangesLovedOne = () => {
             When Addiction Hijacks Personality: Why Your Loved One Feels Like a Stranger
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="addiction-personality-changes-loved-one" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

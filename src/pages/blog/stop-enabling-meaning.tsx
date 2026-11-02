@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageStopEnablingMeaning from "@/assets/blog-stop-enabling-meaning.jpg";
 
@@ -41,6 +42,8 @@ const StopEnablingMeaning = () => {
             Why Families Are Told to "Stop Enabling" Without Being Told What That Actually Means
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="stop-enabling-meaning" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

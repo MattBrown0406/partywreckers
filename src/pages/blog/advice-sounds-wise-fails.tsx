@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageAdviceSoundsWiseFails from "@/assets/blog-advice-sounds-wise-fails.jpg";
 
@@ -41,6 +42,8 @@ const AdviceSoundsWiseFails = () => {
             Why Families Are Given Advice About Addiction That Sounds Wise but Fails in Real Life
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="advice-sounds-wise-fails" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

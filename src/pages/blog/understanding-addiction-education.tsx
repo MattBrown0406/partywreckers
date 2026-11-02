@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageEducation from "@/assets/blog-understanding-addiction-education.jpg";
 
@@ -41,6 +42,8 @@ const UnderstandingAddictionEducation = () => {
             Why Families Must Understand Addiction Before Confronting It
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="understanding-addiction-education" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

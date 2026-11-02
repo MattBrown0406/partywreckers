@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 import { ArrowLeft } from "lucide-react";
 import blogImageDryDrunk from "@/assets/blog-dry-drunk-syndrome.jpg";
 
@@ -41,6 +42,8 @@ const DryDrunkSyndromeFamily = () => {
             Why Sobriety Alone Isn't Enough: Understanding "Dry Drunk" Behavior in Early Recovery
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="dry-drunk-syndrome-family" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
