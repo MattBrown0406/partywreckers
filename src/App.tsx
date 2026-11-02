@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import type { PropsWithChildren, ReactNode } from "react";
 import Index from "./pages/Index";
 import Episodes from "./pages/Episodes";
+import EpisodePage from "./pages/EpisodePage";
 import Sponsors from "./pages/Sponsors";
 import Advertise from "./pages/Advertise";
 import SponsorProposal from "./pages/SponsorProposal";
@@ -70,6 +71,7 @@ export const App = ({ Router = DefaultRouter }: AppProps) => (
           <Route path="/sponsor-info" element={<SponsorInfo />} />
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/episodes" element={<Episodes />} />
+          <Route path="/episodes/:slug" element={<EpisodePage />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/advertise" element={<Advertise />} />
           <Route path="/advertise/packages" element={<SponsorProposal />} />

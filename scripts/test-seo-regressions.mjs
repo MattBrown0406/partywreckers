@@ -65,4 +65,25 @@ for (const [route, slugs] of Object.entries(related)) {
     assert(html.includes(`href="/blog/${slug}"`), `${route}: missing related article ${slug}`);
   }
 }
-console.log(`SEO regressions passed: ${routes.length} routes, ${articleImages} Article image URLs, 12 contextual links and footer press discovery.`);
+// Episode pages: one per snapshot episode, each a crawlable PodcastEpisode with audio, breadcrumbs,
+// and a link from the episode list. (H1 count and canonical are checked by validate-seo.mjs.)
+const episodeRoutes = routes.filter(route => route.startsWith("/episodes/"));
+assert(episodeRoutes.length > 0, "No episode pages in the prerender manifest");
+const episodesIndex = read("/episodes");
+for (const route of episodeRoutes) {
+  const html = read(route);
+  const schemas = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map(m => JSON.parse(m[1]));
+  const episodes = schemas.filter(schema => schema["@type"] === "PodcastEpisode");
+  assert.equal(episodes.length, 1, `${route}: PodcastEpisode JSON-LD count`);
+  assert.equal(episodes[0].url, `https://partywreckers.com${route}`, `${route}: PodcastEpisode url`);
+  assert(/^https:\/\//.test(episodes[0].associatedMedia?.contentUrl ?? ""), `${route}: PodcastEpisode audio URL`);
+  assert(!Number.isNaN(Date.parse(episodes[0].datePublished)), `${route}: PodcastEpisode datePublished`);
+  const breadcrumb = schemas.find(schema => schema["@type"] === "BreadcrumbList");
+  assert.equal(breadcrumb?.itemListElement?.length, 3, `${route}: breadcrumb trail`);
+  assert(/<audio[^>]*controls[^>]*preload="none"/.test(html), `${route}: audio player`);
+  assert(html.includes('id="episode-transcript"'), `${route}: transcript section`);
+  assert(episodesIndex.includes(`href="${route}"`), `/episodes: missing link to ${route}`);
+}
+const unknownEpisode = fs.readFileSync(path.join(dist, "404", "index.html"), "utf8");
+assert(!unknownEpisode.includes("PodcastEpisode"), "404 template must not carry episode schema");
+console.log(`SEO regressions passed: ${routes.length} routes, ${articleImages} Article image URLs, ${episodeRoutes.length} episode pages, 12 contextual links and footer press discovery.`);

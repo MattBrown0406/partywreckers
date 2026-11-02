@@ -1,8 +1,12 @@
-import { writeFile, rename } from "node:fs/promises";
+import { mkdir, writeFile, rename } from "node:fs/promises";
 import { resolve } from "node:path";
+import { assignEpisodeSlugs } from "../src/lib/episodeSlug.js";
+import { sortTranscriptsByPreference, transcriptToText } from "../src/lib/transcriptText.js";
 
 const RSS_URL = "https://feeds.buzzsprout.com/1941777.rss";
 const OUTPUT_PATH = resolve(process.cwd(), "src/data/podcastFeedSnapshot.ts");
+const TRANSCRIPTS_DIR = resolve(process.cwd(), "src/data/episode-transcripts");
+const TRANSCRIPT_CONCURRENCY = 6;
 
 const decodeXml = (value = "") =>
   value
@@ -108,3 +112,42 @@ export const podcastFeedSnapshot = ${JSON.stringify(podcastInfo, null, 2)} satis
 await writeFile(`${OUTPUT_PATH}.tmp`, file, "utf8");
 await rename(`${OUTPUT_PATH}.tmp`, OUTPUT_PATH);
 console.log(`Generated ${podcastInfo.episodes.length} podcast episodes at ${OUTPUT_PATH}`);
+
+// Transcripts are best-effort: a failure is logged and the existing file (if any) is kept,
+// so an unreachable transcript never blocks a deploy. The feed itself must succeed (above).
+const downloadTranscript = async (episode, slug) => {
+  const failures = [];
+  for (const transcript of sortTranscriptsByPreference(episode.transcripts)) {
+    try {
+      const response = await fetch(transcript.url, { signal: AbortSignal.timeout(20000) });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const text = transcriptToText(await response.text(), transcript.type).trim();
+      if (!text) throw new Error("empty transcript");
+      const output = resolve(TRANSCRIPTS_DIR, `${slug}.txt`);
+      await writeFile(`${output}.tmp`, `${text}\n`, "utf8");
+      await rename(`${output}.tmp`, output);
+      return true;
+    } catch (error) {
+      failures.push(`${transcript.type}: ${error instanceof Error ? error.message : error}`);
+    }
+  }
+  console.warn(`Transcript unavailable for "${slug}" (keeping any existing file): ${failures.join("; ")}`);
+  return false;
+};
+
+try {
+  await mkdir(TRANSCRIPTS_DIR, { recursive: true });
+  const slugs = assignEpisodeSlugs(podcastInfo.episodes);
+  const queue = podcastInfo.episodes.filter((episode) => episode.transcripts.length > 0);
+  let saved = 0;
+  const workers = Array.from({ length: TRANSCRIPT_CONCURRENCY }, async () => {
+    while (queue.length) {
+      const episode = queue.shift();
+      if (await downloadTranscript(episode, slugs.get(episode.id))) saved++;
+    }
+  });
+  await Promise.all(workers);
+  console.log(`Saved ${saved} episode transcripts to ${TRANSCRIPTS_DIR}`);
+} catch (error) {
+  console.warn("Transcript download step failed; continuing with existing transcript files.", error);
+}

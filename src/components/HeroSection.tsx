@@ -8,6 +8,7 @@ import ThemePlayer from "@/components/ThemePlayer";
 import TrackedExternalLink from "@/components/TrackedExternalLink";
 import { usePodcastFeed } from "@/hooks/usePodcastFeed";
 import { funnelLinks } from "@/lib/funnelLinks";
+import { episodePath, getEpisodeSlugs } from "@/lib/episodes";
 import { SITE_PHONE_DISPLAY, SITE_PHONE_HREF } from "@/lib/site";
 
 const listenerPaths = [
@@ -19,7 +20,9 @@ const listenerPaths = [
 const HeroSection = () => {
   const { data: podcastInfo } = usePodcastFeed();
   const episodeCount = podcastInfo?.episodes?.length || 75;
-  const latestEpisodeTitle = podcastInfo?.episodes?.[0]?.title || "Latest episode";
+  const latestEpisode = podcastInfo?.episodes?.[0];
+  const latestEpisodeTitle = latestEpisode?.title || "Latest episode";
+  const latestEpisodeSlug = latestEpisode ? getEpisodeSlugs(podcastInfo.episodes).get(latestEpisode.id) : undefined;
 
   return (
     <section className="relative min-h-[92vh] overflow-hidden bg-background pt-24">
@@ -107,7 +110,7 @@ const HeroSection = () => {
               </div>
 
               <Link
-                to="/episodes"
+                to={latestEpisodeSlug ? episodePath(latestEpisodeSlug) : "/episodes"}
                 className="block rounded-lg border border-white/15 bg-white/[0.06] p-5 transition-colors hover:border-primary/50 hover:bg-white/[0.09]"
               >
                 <div className="mb-3 flex items-center gap-2 text-xs uppercase text-primary">

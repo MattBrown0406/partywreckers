@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { formatDuration, type Episode } from "@/hooks/usePodcastFeed";
 import { getStarterEpisodes } from "@/lib/episodeGuides";
+import { episodePath, getEpisodeSlugs } from "@/lib/episodes";
 
 type EpisodeStarterPathProps = {
   episodes: Episode[];
@@ -11,6 +12,7 @@ type EpisodeStarterPathProps = {
 
 const EpisodeStarterPath = ({ episodes, compact = false }: EpisodeStarterPathProps) => {
   const starterEpisodes = getStarterEpisodes(episodes);
+  const slugs = getEpisodeSlugs(episodes);
 
   return (
     <section className={compact ? "py-10" : "border-y border-border bg-card py-14 sm:py-20"}>
@@ -36,7 +38,15 @@ const EpisodeStarterPath = ({ episodes, compact = false }: EpisodeStarterPathPro
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
                 {episode && (
                   <div className="mt-4 border-t border-border pt-4">
-                    <p className="text-sm font-semibold leading-snug text-foreground">{episode.title}</p>
+                    <p className="text-sm font-semibold leading-snug text-foreground">
+                      {slugs.get(episode.id) ? (
+                        <Link to={episodePath(slugs.get(episode.id) as string)} className="transition-colors hover:text-burgundy hover:underline">
+                          {episode.title}
+                        </Link>
+                      ) : (
+                        episode.title
+                      )}
+                    </p>
                     <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">
                       {episode.episodeNumber > 0 && <span>EP {episode.episodeNumber}</span>}
                       <span className="inline-flex items-center gap-1">
