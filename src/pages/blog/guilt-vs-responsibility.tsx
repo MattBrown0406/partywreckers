@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageGuiltVsResponsibility from "@/assets/blog-guilt-vs-responsibility.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const GuiltVsResponsibility = () => {
   return (
@@ -41,6 +42,8 @@ const GuiltVsResponsibility = () => {
             Why Families Confuse Guilt With Responsibility—and How That Keeps Them Stuck
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="guilt-vs-responsibility" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

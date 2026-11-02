@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImagePromisesCycle from "@/assets/blog-addiction-promises-cycle.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const AddictionPromisesCycle = () => {
   return (
@@ -41,6 +42,8 @@ const AddictionPromisesCycle = () => {
             Why "They Promise It Won't Happen Again" Keeps Working on Families
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="addiction-promises-cycle" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

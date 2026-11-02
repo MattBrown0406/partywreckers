@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageModerationLoophole from "@/assets/blog-moderation-loophole.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const ModerationAddictionLoophole = () => {
   return (
@@ -41,6 +42,8 @@ const ModerationAddictionLoophole = () => {
             "They're Cutting Back"… Why Moderation Becomes Addiction's Favorite Loophole
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="moderation-addiction-loophole" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

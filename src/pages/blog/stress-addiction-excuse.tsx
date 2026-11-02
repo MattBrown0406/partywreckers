@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageStressAddictionExcuse from "@/assets/blog-stress-addiction-excuse.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const StressAddictionExcuse = () => {
   return (
@@ -41,6 +42,8 @@ const StressAddictionExcuse = () => {
             Why "They're Just Stressed" Becomes the Go-To Excuse for Everything
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="stress-addiction-excuse" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

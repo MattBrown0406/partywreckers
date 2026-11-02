@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageGamblingAddiction from "@/assets/blog-gambling-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const GamblingAddictionHiddenDamage = () => {
   return (
@@ -41,6 +42,8 @@ const GamblingAddictionHiddenDamage = () => {
             Gambling Addiction Doesn't Look Like Addiction—Until the Damage Is Already Done
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="gambling-addiction-hidden-damage" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

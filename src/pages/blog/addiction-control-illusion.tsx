@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageAddictionControlIllusion from "@/assets/blog-addiction-control-illusion.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const AddictionControlIllusion = () => {
   return (
@@ -41,6 +42,8 @@ const AddictionControlIllusion = () => {
             Why "I've Got It Under Control" Is the Most Misunderstood Sentence in Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="addiction-control-illusion" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageHighFunctioningCocaine from "@/assets/blog-high-functioning-cocaine.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const HighFunctioningCocaineUse = () => {
   return (
@@ -41,6 +42,8 @@ const HighFunctioningCocaineUse = () => {
             High-Functioning Cocaine Use: Why It Looks Controlled—Until It Isn't
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="high-functioning-cocaine-use" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

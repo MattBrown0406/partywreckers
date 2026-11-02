@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageJustAPhaseMyths from "@/assets/blog-just-a-phase-myths.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const JustAPhaseAddictionMyths = () => {
   return (
@@ -41,6 +42,8 @@ const JustAPhaseAddictionMyths = () => {
             "It's Just a Phase"… and Other Lies Addiction Loves to Hear
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="just-a-phase-addiction-myths" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

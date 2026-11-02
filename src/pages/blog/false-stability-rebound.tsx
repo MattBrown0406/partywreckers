@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageFalseStabilityRebound from "@/assets/blog-false-stability-rebound.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const FalseStabilityRebound = () => {
   return (
@@ -41,6 +42,8 @@ const FalseStabilityRebound = () => {
             Why "They Seem More Like Themselves Again" Can Be a False Signal
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="false-stability-rebound" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

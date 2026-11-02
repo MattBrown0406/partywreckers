@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageBlameShifting from "@/assets/blog-blame-shifting-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const BlameShiftingAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const BlameShiftingAddiction = () => {
             Why Every Conversation About Drinking Somehow Turns Into Your Fault
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="blame-shifting-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

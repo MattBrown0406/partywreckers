@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageNegotiatingWithAddiction from "@/assets/blog-negotiating-with-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const NegotiatingWithAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const NegotiatingWithAddiction = () => {
             Why Families Start Negotiating With Addiction (and Lose Every Time)
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="negotiating-with-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

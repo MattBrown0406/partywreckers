@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageFearAvoidanceParalysis from "@/assets/blog-fear-avoidance-paralysis.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const FearAvoidanceParalysis = () => {
   return (
@@ -41,6 +42,8 @@ const FearAvoidanceParalysis = () => {
             Why "Let's Not Make It Worse" Is Often the Reason Nothing Gets Better
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="fear-avoidance-paralysis" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

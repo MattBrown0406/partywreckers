@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageEffortVsChange from "@/assets/blog-effort-vs-change-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const EffortVsChangeAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const EffortVsChangeAddiction = () => {
             Why "They're Trying" Becomes the Most Dangerous Sentence in Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="effort-vs-change-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageFunctionalAddictionHiding from "@/assets/blog-functional-addiction-hiding.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const FunctionalAddictionHiding = () => {
   return (
@@ -41,6 +42,8 @@ const FunctionalAddictionHiding = () => {
             "They've Got It Under Control"… Until They Don't: How Addiction Hides in Plain Sight
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="functional-addiction-hiding" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageKnowledgeVsBehavior from "@/assets/blog-knowledge-vs-behavior-addiction.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const KnowledgeVsBehaviorAddiction = () => {
   return (
@@ -41,6 +42,8 @@ const KnowledgeVsBehaviorAddiction = () => {
             Why "They Know Better" Is a Dangerous Assumption in Addiction
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="knowledge-vs-behavior-addiction" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">

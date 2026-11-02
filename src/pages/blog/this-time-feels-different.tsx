@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { ArrowLeft } from "lucide-react";
 import blogImageThisTimeFeelsDifferent from "@/assets/blog-this-time-feels-different.jpg";
+import ArticleAnswerSummary from "@/components/ArticleAnswerSummary";
 
 const ThisTimeFeelsDifferent = () => {
   return (
@@ -41,6 +42,8 @@ const ThisTimeFeelsDifferent = () => {
             Why "This Time Feels Different" Keeps Families Stuck in the Same Cycle
           </h1>
         </header>
+
+        <ArticleAnswerSummary slug="this-time-feels-different" />
 
         {/* Article Content */}
         <article className="prose prose-lg max-w-none text-foreground/90 space-y-6">
