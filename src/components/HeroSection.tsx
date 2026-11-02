@@ -265,13 +265,13 @@ const HeroSection = () => {
 
             {/* On-air card and latest episode */}
             <div className="lg:col-start-2 lg:row-start-2 lg:self-start">
-              <div className="hero-rise relative z-20 mx-auto max-w-[23rem] lg:-mt-14 lg:ml-auto lg:mr-0 lg:w-[88%] lg:max-w-none" style={rise(0.9)}>
+              <div className="hero-rise relative z-20 mx-auto max-w-[23rem] lg:w-[76%] lg:max-w-none" style={rise(0.9)}>
                 <OnAirCard />
               </div>
 
               <Link
                 to={latestEpisodeSlug ? episodePath(latestEpisodeSlug) : "/episodes"}
-                className="hero-rise group mx-auto mt-4 block max-w-[23rem] rounded-2xl border border-white/15 bg-white/[0.06] p-4 transition-colors hover:border-primary/50 hover:bg-white/[0.09] lg:ml-auto lg:mr-0 lg:max-w-none lg:w-[88%]"
+                className="hero-rise group mx-auto mt-4 block max-w-[23rem] rounded-2xl border border-white/15 bg-white/[0.06] p-4 transition-colors hover:border-primary/50 hover:bg-white/[0.09] lg:max-w-none lg:w-[76%]"
                 style={rise(1)}
               >
                 <div className="mb-2 flex items-center gap-2 text-xs uppercase text-primary">
