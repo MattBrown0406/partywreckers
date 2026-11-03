@@ -94,7 +94,7 @@ const GetHelp = () => (
               <div className="mt-8 rounded-lg border border-primary/30 bg-primary/[0.06] p-4">
                 <p className="font-semibold text-foreground">Rather just talk it through?</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Pick a time that works for you. It's a free, no-pressure 30-minute call.
+                  Pick a time that works for you. It's a free, no-pressure 15-minute consultation.
                 </p>
                 <BookCallButton placement="get_help_page" className="mt-3" />
               </div>

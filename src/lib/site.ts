@@ -9,7 +9,7 @@ export const SITE_PHONE_TEL = "+14582988004";
 export const SITE_PHONE_HREF = `tel:${SITE_PHONE_TEL}`;
 
 /**
- * Self-serve booking page for a free 30-minute call with Matt (Calendly). It's a public
+ * Self-serve booking page for a free 15-minute consultation with Matt (Calendly). It's a public
  * link, so it lives in code; VITE_BOOKING_URL overrides it. An empty value hides the buttons.
  */
 export const BOOKING_URL = (
