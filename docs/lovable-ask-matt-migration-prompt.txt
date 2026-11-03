@@ -1,0 +1,110 @@
+Please apply a database migration and deploy edge functions for the new "Ask Matt" listener-questions feature. All the code is already in this project (pulled from GitHub); you only need to apply and deploy it. Please don't rewrite or "improve" any of the function code.
+
+1) APPLY THIS MIGRATION
+The file is supabase/migrations/20261102120000_listener_questions.sql. Run it exactly as written below. It is safe to run more than once, and it only creates new things: it doesn't change any existing table.
+
+----- BEGIN SQL -----
+-- "Ask Matt" listener questions (typed and voice) for the podcast.
+-- Written only by the submit-listener-question edge function and read/edited only by
+-- the admin + public read functions, all with the service role. RLS is on with no
+-- anon/authenticated policies, so the publishable key can't read or write this table.
+-- Safe to run more than once.
+
+create table if not exists public.party_wreckers_listener_questions (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  question text not null,
+  topic text,
+  -- null = the listener chose to stay anonymous
+  display_name text,
+  email text,
+  wants_reply boolean not null default false,
+  on_air_ok boolean not null,
+  audio_path text,
+  audio_duration_seconds integer,
+  source_path text,
+  status text not null default 'new',
+  episode_slug text,
+  -- the edited wording Matt approves for display on the site
+  public_question text,
+  is_public boolean not null default false,
+  answered_at timestamptz,
+  admin_notes text,
+  metadata jsonb not null default '{}'::jsonb
+);
+
+do $$
+begin
+  if not exists (
+    select 1 from pg_constraint
+    where conname = 'party_wreckers_listener_questions_status_check'
+      and conrelid = 'public.party_wreckers_listener_questions'::regclass
+  ) then
+    alter table public.party_wreckers_listener_questions
+      add constraint party_wreckers_listener_questions_status_check
+      check (status in ('new', 'shortlisted', 'answered', 'declined'));
+  end if;
+end $$;
+
+create index if not exists party_wreckers_listener_questions_created_at_idx
+  on public.party_wreckers_listener_questions (created_at desc);
+
+create index if not exists party_wreckers_listener_questions_status_idx
+  on public.party_wreckers_listener_questions (status, created_at desc);
+
+-- The public "answered on the show" lookups (per episode, and the latest few).
+create index if not exists party_wreckers_listener_questions_public_idx
+  on public.party_wreckers_listener_questions (episode_slug, answered_at desc)
+  where is_public and status = 'answered';
+
+alter table public.party_wreckers_listener_questions enable row level security;
+
+revoke all on public.party_wreckers_listener_questions from anon, authenticated;
+grant all on public.party_wreckers_listener_questions to service_role;
+
+-- Private bucket for voice questions. Objects are only ever read through short-lived
+-- signed URLs created by the service role (no storage.objects policies for anon users).
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'listener-question-audio',
+  'listener-question-audio',
+  false,
+  3145728,
+  array['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/mpeg', 'audio/wav']
+)
+on conflict (id) do update set
+  public = false,
+  file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;
+----- END SQL -----
+
+After running it, please confirm:
+- the table public.party_wreckers_listener_questions exists, with row level security ENABLED and no policies for anon or authenticated users (only the service role can use it),
+- the storage bucket "listener-question-audio" exists and is PRIVATE (public = false), with a 3 MB file size limit.
+
+2) DEPLOY THESE EDGE FUNCTIONS
+New functions:
+- submit-listener-question
+- listener-questions-admin
+- get-answered-questions
+
+Updated functions (shared code changed, so please redeploy them too):
+- send-contact-email
+- newsletter-signup
+- send-advertiser-inquiry
+- track-party-wreckers-event
+- party-wreckers-funnel-report
+- party-wreckers-revenue-report
+- party-wreckers-advertiser-admin
+- drain-spine-outbox
+
+All three new functions must keep verify_jwt = false, as set in supabase/config.toml. They do their own checks: the admin function only accepts a signed-in admin or the existing report access key.
+
+3) SECRETS (no new secrets are required)
+- Optional: LISTENER_QUESTION_TO, the email address that receives new questions. If it isn't set, questions go to CONTACT_FORWARD_TO, and then to matt@freedominterventions.com.
+- The existing RESEND_API_KEY, TURNSTILE_SECRET_KEY and Supabase keys are used as they are.
+
+4) QUICK CHECK AFTER DEPLOYING
+- Open /ask-matt on the site and send a short typed test question. It should show a success message, and an email should arrive.
+- Open /funnel-report, sign in, and confirm the test question appears under "Listener questions". You can delete it there.
+- Calling get-answered-questions with no parameters should return an empty list [] (nothing is published yet).
