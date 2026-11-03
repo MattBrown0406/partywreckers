@@ -13,12 +13,12 @@ interface BookCallButtonProps {
 }
 
 /**
- * "Book a free 15-minute call" — lets families pick a time instead of having to
+ * "Book a free 30-minute call" — lets families pick a time instead of having to
  * dial a number. Renders nothing until BOOKING_URL is configured.
  */
 const BookCallButton = ({
   placement,
-  label = "Book a free 15-minute call",
+  label = "Book a free 30-minute call",
   variant = "outline",
   size = "lg",
   className,

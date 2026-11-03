@@ -54,12 +54,11 @@ signups keep being emailed to `NEWSLETTER_FORWARD_TO` as before. To get both, se
 
 ## Book a free call (self-serve scheduling)
 
-Set `VITE_BOOKING_URL` to your public booking page (Calendly, Cal.com, etc., must start
-with `https://`) in `.env` or Lovable's environment settings, then publish. "Book a free
-15-minute call" buttons then appear on `/get-help`, Help Now, the help section at the end
-of every article, and after a help request is sent. Clicks are recorded as
-`booking_click` (counted as a family lead in the reports). Until it's set, the buttons
-are hidden.
+The "Book a free 30-minute call" buttons link to Matt's Calendly page,
+https://calendly.com/matt-freedominterventions/30min (set in `src/lib/site.ts`;
+`VITE_BOOKING_URL` overrides it). They appear on `/get-help`, Help Now, the help section
+at the end of every article, and after a help request is sent. Clicks are recorded as
+`booking_click` and counted as a family lead in the reports.
 
 ## Lead magnet and family check-in (`/first-72-hours`, `/family-check-in`)
 
