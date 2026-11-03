@@ -92,6 +92,69 @@ export type Database = {
         }
         Relationships: []
       }
+      party_wreckers_listener_questions: {
+        Row: {
+          admin_notes: string | null
+          answered_at: string | null
+          audio_duration_seconds: number | null
+          audio_path: string | null
+          created_at: string
+          display_name: string | null
+          email: string | null
+          episode_slug: string | null
+          id: string
+          is_public: boolean
+          metadata: Json
+          on_air_ok: boolean
+          public_question: string | null
+          question: string
+          source_path: string | null
+          status: string
+          topic: string | null
+          wants_reply: boolean
+        }
+        Insert: {
+          admin_notes?: string | null
+          answered_at?: string | null
+          audio_duration_seconds?: number | null
+          audio_path?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          episode_slug?: string | null
+          id?: string
+          is_public?: boolean
+          metadata?: Json
+          on_air_ok: boolean
+          public_question?: string | null
+          question: string
+          source_path?: string | null
+          status?: string
+          topic?: string | null
+          wants_reply?: boolean
+        }
+        Update: {
+          admin_notes?: string | null
+          answered_at?: string | null
+          audio_duration_seconds?: number | null
+          audio_path?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          episode_slug?: string | null
+          id?: string
+          is_public?: boolean
+          metadata?: Json
+          on_air_ok?: boolean
+          public_question?: string | null
+          question?: string
+          source_path?: string | null
+          status?: string
+          topic?: string | null
+          wants_reply?: boolean
+        }
+        Relationships: []
+      }
       party_wreckers_podcast_feed_cache: {
         Row: {
           id: string
