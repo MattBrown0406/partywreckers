@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "patience-in-recovery": {
+    eyebrow: "Article answer",
+    title: "How do you build patience in recovery?",
+    answer: "Build patience in recovery by shrinking the timeline, measuring daily actions instead of outcomes, and letting other people heal at their own speed. Physical improvements may begin in weeks, while relationships, finances, and trust can take much longer. Families can give recovery time without abandoning boundaries or accepting harmful behavior.",
+    bullets: [
+      "Addiction trains the brain to expect instant relief; sobriety asks you to tolerate slower change.",
+      "Track meetings, calls, and kept commitments rather than demanding immediate results.",
+      "Forgiveness belongs to the other person and cannot be put on your schedule.",
+      "Patience is not enabling: consistent action and firm boundaries still matter.",
+    ],
+    nextSteps: [
+      "Write a monthly then-and-now list to notice small changes.",
+      "Talk with a sponsor, counselor, or someone with long-term sobriety when you feel stuck.",
+      "Families: get your own support while your loved one rebuilds.",
+    ],
+    links: [
+      { label: "First Year of Sobriety: What to Expect", href: "/blog/first-year-sobriety-what-to-expect" },
+      { label: "Rebuilding Trust in Recovery", href: "/blog/rebuilding-trust-in-recovery-families" },
+    ],
+  },
   "service-in-recovery": {
     eyebrow: "Article answer",
     title: "What is service in recovery, and why does it help people stay sober?",
