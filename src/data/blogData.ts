@@ -1,3 +1,4 @@
+import blogImagePatienceInRecovery from "@/assets/blog-patience-in-recovery.jpg";
 import blogImageServiceInRecovery from "@/assets/blog-service-in-recovery.jpg";
 import blogImageResentment from "@/assets/blog-resentment-in-recovery.jpg";
 import blogImageMorningAfter from "@/assets/blog-morning-after-drinking-episode.jpg";
@@ -177,6 +178,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "patience-in-recovery",
+    title: "Patience in Recovery: I Wanted My Whole Life Fixed by Friday",
+    date: "November 4, 2026",
+    image: blogImagePatienceInRecovery,
+    imageAlt: "A young adult man pausing with a notebook and pen in a parked car outside a community meeting building",
+    excerpt: "Patience in recovery doesn't come naturally. Matt Brown, 22 years sober, shares why he wanted his life fixed by Friday and what slow healing taught him.",
+    category: "Recovery"
+  },
   {
     id: "service-in-recovery",
     title: "Service in Recovery: The Year I Made the Coffee (and Why It Kept Me Sober)",
