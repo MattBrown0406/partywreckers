@@ -1,3 +1,4 @@
+import blogImageHumilityInRecovery from "@/assets/blog-humility-in-recovery.jpg";
 import blogImagePatienceInRecovery from "@/assets/blog-patience-in-recovery.jpg";
 import blogImageServiceInRecovery from "@/assets/blog-service-in-recovery.jpg";
 import blogImageResentment from "@/assets/blog-resentment-in-recovery.jpg";
@@ -178,6 +179,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "humility-in-recovery",
+    title: "Humility in Recovery: I Was the Smartest Guy in a Room Full of People Who Were Staying Sober",
+    date: "November 5, 2026",
+    image: blogImageHumilityInRecovery,
+    imageAlt: "A young adult man listening thoughtfully to an older adult in a church basement recovery meeting with other adults seated nearby",
+    excerpt: "Humility in recovery isn't thinking less of yourself. Interventionist Matt Brown shares how being the smartest guy in the room almost kept him drinking.",
+    category: "Recovery"
+  },
   {
     id: "patience-in-recovery",
     title: "Patience in Recovery: I Wanted My Whole Life Fixed by Friday",
