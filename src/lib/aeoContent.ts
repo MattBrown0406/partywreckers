@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "humility-in-recovery": {
+    eyebrow: "Article answer",
+    title: "What does humility in recovery mean?",
+    answer: "Humility in recovery means seeing your strengths, defects, and limits accurately while staying willing to learn. It is neither grandiosity nor shame: being right-sized makes it possible to accept help. Practice it by asking early, listening, admitting mistakes, and trying suggestions even before you understand them. Families can practice it by inviting outside support without blaming themselves for the addiction.",
+    bullets: [
+      "Humility is not humiliation or believing you are worthless.",
+      "Terminal uniqueness is the belief that you are the exception and do not need help.",
+      "Being teachable matters in early sobriety and after decades of recovery.",
+      "Families did not cause the addiction and do not have to solve it alone.",
+    ],
+    nextSteps: [
+      "Call a sponsor or trusted support person before things become a crisis.",
+      "Listen more than you talk, admit mistakes quickly, and try a suggestion.",
+      "Families: let someone outside the family see the whole picture.",
+    ],
+    links: [
+      { label: "I Didn't Want to Get Sober. I Got Sober Anyway.", href: "/blog/i-didnt-want-to-get-sober" },
+      { label: "Service in Recovery", href: "/blog/service-in-recovery" },
+    ],
+  },
   "patience-in-recovery": {
     eyebrow: "Article answer",
     title: "How do you build patience in recovery?",
