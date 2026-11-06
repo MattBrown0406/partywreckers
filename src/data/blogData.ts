@@ -1,3 +1,4 @@
+import blogImageInterventionForSpouse from "@/assets/blog-intervention-for-a-spouse.jpg";
 import blogImageHumilityInRecovery from "@/assets/blog-humility-in-recovery.jpg";
 import blogImagePatienceInRecovery from "@/assets/blog-patience-in-recovery.jpg";
 import blogImageServiceInRecovery from "@/assets/blog-service-in-recovery.jpg";
@@ -179,6 +180,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "intervention-for-a-spouse",
+    title: "Intervention for a Spouse: What I Tell Husbands and Wives Who Are Scared to Wreck the Marriage",
+    date: "November 6, 2026",
+    image: blogImageInterventionForSpouse,
+    imageAlt: "A worried woman in her late thirties whispering on the phone from the driver's seat of her car parked in a dark garage at night",
+    excerpt: "Thinking about an intervention for a spouse? Interventionist Matt Brown shares how to plan it, stay safe, and what really happens to the marriage after.",
+    category: "Family"
+  },
   {
     id: "humility-in-recovery",
     title: "Humility in Recovery: I Was the Smartest Guy in a Room Full of People Who Were Staying Sober",
