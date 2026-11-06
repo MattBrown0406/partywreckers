@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "intervention-for-a-spouse": {
+    eyebrow: "Article answer",
+    title: "How do you plan an intervention for a spouse?",
+    answer: "An intervention for a spouse is a planned, guided conversation asking your husband or wife to accept help for addiction. Plan it quietly with safety and finances handled first: be honest about any violence risk, know your financial picture, decide your bottom line before the meeting, line up treatment in advance, get your own support, and don't tip your hand. Keep the group small, with people your spouse respects.",
+    bullets: [
+      "Loyalty to your partner and loyalty to their addiction are not the same thing.",
+      "Young children should not be in the room; a letter can be just as powerful.",
+      "Untreated addiction is far more likely to end a marriage than an intervention is.",
+      "A no in the living room often becomes a yes days later once your bottom line is real.",
+    ],
+    nextSteps: [
+      "Tell your interventionist about any safety concerns on the very first call.",
+      "Hold a treatment bed and pack a bag before the conversation starts.",
+      "Get your own support through Al-Anon, a therapist, or a trusted friend.",
+    ],
+    links: [
+      { label: "Who Should Be at an Intervention?", href: "/blog/who-should-be-at-an-intervention" },
+      { label: "The Intervention Objections I Hear Every Week", href: "/blog/intervention-objections-ill-go-monday" },
+    ],
+  },
   "humility-in-recovery": {
     eyebrow: "Article answer",
     title: "What does humility in recovery mean?",
