@@ -11,6 +11,6 @@
 - [x] Playwright verify (desktop + mobile)
 
 ## Blog: Taking Someone to Rehab (2026-11-07)
-- [ ] Add the complete uploaded article, five FAQs, and an adults-only photo.
-- [ ] Register in blog data, answer summaries, sitemap, and prerender routes.
-- [ ] Verify article navigation, links, and desktop/mobile reading; leave unpublished.
+- [x] Add the complete uploaded article, five FAQs, and an adults-only photo.
+- [x] Register in blog data, answer summaries, sitemap, and prerender routes (282 routes).
+- [x] Verify article navigation, original document text, five FAQs, related links, canonical, and desktop/mobile reading; build OK; left unpublished.
