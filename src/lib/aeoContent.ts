@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "taking-someone-to-rehab": {
+    eyebrow: "Article answer",
+    title: "How do you help someone get safely to rehab after they say yes?",
+    answer: "Confirm the treatment bed, pack ahead, choose a calm driver, and ask medical staff whether detox or specialized transport is needed. The ride is a vulnerable window: respond to fear without arguing, avoid unnecessary detours, and never force someone into a car. After admission, follow the center's contact guidance and get support for yourself.",
+    bullets: [
+      "Confirm admission and the arrival time before leaving.",
+      "Alcohol or benzodiazepine withdrawal can be dangerous; ask a doctor about medical detox.",
+      "If someone refuses, stop somewhere safe and call your interventionist or treatment center.",
+      "Call 911 immediately if there are signs of a medical emergency.",
+    ],
+    nextSteps: [
+      "Ask the treatment center for its packing list and confirm the bed.",
+      "Plan safe transport with a calm driver or a professional escort.",
+      "Rest after admission and seek family support through Al-Anon, a family program, or a counselor.",
+    ],
+    links: [
+      { label: "What happens after someone says yes", href: "/blog/you-said-yes-intervention" },
+      { label: "How interventionists choose a treatment center", href: "/blog/how-interventionists-choose-treatment-center" },
+    ],
+  },
   "intervention-for-a-spouse": {
     eyebrow: "Article answer",
     title: "How do you plan an intervention for a spouse?",

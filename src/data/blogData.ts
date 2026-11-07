@@ -1,3 +1,4 @@
+import blogImageTakingSomeoneToRehab from "@/assets/blog-taking-someone-to-rehab.jpg";
 import blogImageInterventionForSpouse from "@/assets/blog-intervention-for-a-spouse.jpg";
 import blogImageHumilityInRecovery from "@/assets/blog-humility-in-recovery.jpg";
 import blogImagePatienceInRecovery from "@/assets/blog-patience-in-recovery.jpg";
@@ -180,6 +181,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "taking-someone-to-rehab",
+    title: "Taking Someone to Rehab: What Really Happens on the Longest Car Ride of Your Life",
+    date: "November 7, 2026",
+    image: blogImageTakingSomeoneToRehab,
+    imageAlt: "A young adult man sitting beside a calm older adult driver in a car, with a packed travel bag behind them",
+    excerpt: "Taking someone to rehab after they say yes? Interventionist Matt Brown shares what happens on the ride to treatment and how families can help it go right.",
+    category: "Intervention"
+  },
   {
     id: "intervention-for-a-spouse",
     title: "Intervention for a Spouse: What I Tell Husbands and Wives Who Are Scared to Wreck the Marriage",
