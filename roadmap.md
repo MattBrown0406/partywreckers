@@ -9,3 +9,8 @@
 - [x] Register in blogData.ts, aeoContent.ts, sitemap.xml, prerender-routes.json
 - [x] Run generate-seo-artifacts.mjs (281 routes; regression test needs dist, unavailable in sandbox)
 - [x] Playwright verify (desktop + mobile)
+
+## Blog: Taking Someone to Rehab (2026-11-07)
+- [ ] Add the complete uploaded article, five FAQs, and an adults-only photo.
+- [ ] Register in blog data, answer summaries, sitemap, and prerender routes.
+- [ ] Verify article navigation, links, and desktop/mobile reading; leave unpublished.
