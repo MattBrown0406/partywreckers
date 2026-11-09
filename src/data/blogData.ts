@@ -1,3 +1,4 @@
+import blogImageLeavingRehabEarly from "@/assets/blog-loved-one-wants-to-leave-rehab-early.jpg";
 import blogImageTakingSomeoneToRehab from "@/assets/blog-taking-someone-to-rehab.jpg";
 import blogImageInterventionForSpouse from "@/assets/blog-intervention-for-a-spouse.jpg";
 import blogImageHumilityInRecovery from "@/assets/blog-humility-in-recovery.jpg";
@@ -181,6 +182,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "loved-one-wants-to-leave-rehab-early",
+    title: "The 2 A.M. Phone Call: What to Do When Your Loved One Wants to Leave Rehab Early",
+    date: "November 8, 2026",
+    image: blogImageLeavingRehabEarly,
+    imageAlt: "An adult mother taking a difficult late-night phone call beside a bedside clock reading 2:14",
+    excerpt: "Your loved one wants to leave rehab early and begs you to come get them. Interventionist Matt Brown shares what to say, what to avoid, and how to hold the line.",
+    category: "Intervention"
+  },
   {
     id: "taking-someone-to-rehab",
     title: "Taking Someone to Rehab: What Really Happens on the Longest Car Ride of Your Life",

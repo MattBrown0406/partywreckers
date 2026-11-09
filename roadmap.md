@@ -14,3 +14,8 @@
 - [x] Add the complete uploaded article, five FAQs, and an adults-only photo.
 - [x] Register in blog data, answer summaries, sitemap, and prerender routes (282 routes).
 - [x] Verify article navigation, original document text, five FAQs, related links, canonical, and desktop/mobile reading; build OK; left unpublished.
+
+## Blog: Loved One Wants to Leave Rehab Early (2026-11-08)
+- [x] Add the complete uploaded article, five FAQs, and an adults-only photo.
+- [x] Register in blog data, answer summaries, sitemap, and prerender routes (283 routes).
+- [x] Verify article navigation, links, canonical, FAQs, and desktop/mobile reading; build OK; left unpublished. Intervention-letter link omitted because the suggested article is unavailable; deployment-output regression tests require dist, unavailable in sandbox.
