@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "loved-one-wants-to-leave-rehab-early": {
+    eyebrow: "Article answer",
+    title: "What should you do when your loved one wants to leave rehab early?",
+    answer: "Stay calm, keep the call short, express love, and encourage your loved one to speak with their counselor. Contact the clinical team or your interventionist, keep the boundaries your family agreed on, and focus on safety if they leave. Adults in voluntary treatment generally can leave against medical advice; families can control their own response, not force someone to stay.",
+    bullets: [
+      "Early withdrawal, fear, and shame can drive the urge to leave.",
+      "Agree on one family response before the late-night call happens.",
+      "Check in with the treatment team rather than debating for an hour.",
+      "Tolerance can drop during treatment; keep naloxone available if opioids are involved.",
+    ],
+    nextSteps: [
+      "Save the treatment center's and interventionist's phone numbers.",
+      "Choose one point person and write down your family's agreed script.",
+      "Get support for yourself through Al-Anon, a family program, or a trusted friend.",
+    ],
+    links: [
+      { label: "Taking Someone to Rehab", href: "/blog/taking-someone-to-rehab" },
+      { label: "Contact Freedom Interventions", href: "https://freedominterventions.com/contact", external: true },
+    ],
+  },
   "taking-someone-to-rehab": {
     eyebrow: "Article answer",
     title: "How do you help someone get safely to rehab after they say yes?",
