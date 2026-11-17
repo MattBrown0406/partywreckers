@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "believing-an-addicts-promises": {
+    eyebrow: "Article answer",
+    title: "Why do families keep believing an addict's promises?",
+    answer: "Families keep believing an addict's promises because hope is easier than a hard decision, and each promise is usually followed by a short stretch of relief. The promise is often sincere, but without a concrete plan it rarely holds. Respond with love and a request for a specific next step, and let privileges follow action rather than apologies.",
+    bullets: [
+      "The cycle repeats: crisis, promise, relief, relapse.",
+      "A promise with no scheduled step is really a request for more time.",
+      "Real change shows up as action before trust is asked for.",
+      "Rewarding the promise itself with money or rescue keeps the cycle going.",
+    ],
+    nextSteps: [
+      "Ask: \"What's the first step, and when are you taking it?\"",
+      "Agree as a family on your if/then consequences before the next crisis.",
+      "Talk to a professional interventionist if the same promise keeps breaking.",
+    ],
+    links: [
+      { label: "The Good Days Trap", href: "/blog/good-days-trap-intermittent-reinforcement" },
+      { label: "Contact Freedom Interventions", href: "https://freedominterventions.com/contact", external: true },
+    ],
+  },
   "loved-one-wants-to-leave-rehab-early": {
     eyebrow: "Article answer",
     title: "What should you do when your loved one wants to leave rehab early?",

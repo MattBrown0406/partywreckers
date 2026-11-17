@@ -1,3 +1,4 @@
+import blogImageBelievingPromises from "@/assets/blog-believing-an-addicts-promises.jpg";
 import blogImageLeavingRehabEarly from "@/assets/blog-loved-one-wants-to-leave-rehab-early.jpg";
 import blogImageTakingSomeoneToRehab from "@/assets/blog-taking-someone-to-rehab.jpg";
 import blogImageInterventionForSpouse from "@/assets/blog-intervention-for-a-spouse.jpg";
@@ -182,6 +183,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "believing-an-addicts-promises",
+    title: "\u201CThis Time Is Different\u201D: Why Families Keep Believing an Addict's Promises",
+    date: "November 17, 2026",
+    image: blogImageBelievingPromises,
+    imageAlt: "A weary mother reading a text at her kitchen table while her adult son stands apologetically in the doorway",
+    excerpt: "Why do families keep believing an addict's promises? 22-years-sober interventionist Matt Brown on the \"this time is different\" cycle and what to trust.",
+    category: "Family Support"
+  },
   {
     id: "loved-one-wants-to-leave-rehab-early",
     title: "The 2 A.M. Phone Call: What to Do When Your Loved One Wants to Leave Rehab Early",
