@@ -1,5 +1,5 @@
 import soberHelplineLogo from "@/assets/sober-helpline-logo.png";
-import familybridgeLogo from "@/assets/familybridge-logo.png";
+import familybridgeLogo from "@/assets/familybridge-logo.png.asset.json";
 import betterhelpLogo from "@/assets/betterhelp-logo.png";
 import { funnelLinks } from "@/lib/funnelLinks";
 
@@ -37,7 +37,7 @@ export const sponsors: Sponsor[] = [
     label: "Family recovery technology",
     description: "A connection-focused platform for families working to rebuild trust and communicate more safely.",
     url: "https://familybridgeapp.com",
-    image: familybridgeLogo,
+    image: familybridgeLogo.url,
     imageAlt: "FamilyBridge logo",
     cta: "Visit FamilyBridge",
     fit: ["Recovery communication", "Family connection", "Digital support"],

@@ -1,5 +1,6 @@
-import { Smartphone, MessageSquare, Shield, BookOpen, Users } from "lucide-react";
+import { MessageSquare, Shield, BookOpen, Users } from "lucide-react";
 import AppStoreBadge from "@/components/AppStoreBadge";
+import familybridgeLogo from "@/assets/familybridge-logo.png.asset.json";
 
 const FamilyBridgeBanner = () => {
   return (
@@ -8,9 +9,17 @@ const FamilyBridgeBanner = () => {
         <div className="bg-gradient-to-r from-[#0d4a4a] via-[#0f5f5f] to-[#0d4a4a] rounded-xl border border-[#2a9d8f]/30 shadow-lg overflow-hidden max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-5 md:gap-8 p-5 md:p-7">
 
-            {/* Icon */}
-            <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-white/10 border border-[#2a9d8f]/40 flex items-center justify-center shadow-inner">
-              <Smartphone className="w-10 h-10 text-[#2a9d8f]" />
+            {/* Logo */}
+            <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-white/10 border border-[#2a9d8f]/40 flex items-center justify-center shadow-inner overflow-hidden">
+              <img
+                src={familybridgeLogo.url}
+                alt="FamilyBridge logo"
+                className="h-full w-full rounded-xl object-cover"
+                width={80}
+                height={80}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             {/* Content + Features + Badge */}

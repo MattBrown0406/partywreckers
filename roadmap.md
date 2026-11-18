@@ -1,4 +1,10 @@
 # Current task
+## FamilyBridge logo update (2026-11-18)
+- [x] Upload the new FamilyBridge logo and replace every FamilyBridge promotional image.
+- [x] Add the new logo to the homepage FamilyBridge promotion and update the site icon.
+- [x] Verify the homepage and both Sponsors-page placements on desktop and phone; build OK; left unpublished.
+
+## Previous task
 ## Blog: Codependency and Addiction (2026-11-18)
 - [x] Add the complete uploaded article, five FAQs, and an adults-only photo.
 - [x] Register in blog data, answer summaries, sitemap, and prerender routes (285 routes).

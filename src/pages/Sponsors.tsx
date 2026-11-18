@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink, Phone, Users, BookOpen, Shield, CheckCircle, MessageCircle, Headphones, Clock, Video, HeartHandshake, Target, Calendar, Zap, Smile, MessageSquare, Laptop, UserCheck, BadgePercent, Globe, Mic, Sparkles, DollarSign, Gift, TrendingUp, Radio, Mail, Brain, Eye, MapPin, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import soberHelplineLogo from "@/assets/sober-helpline-logo.png";
-import familybridgeLogo from "@/assets/familybridge-logo.png";
+import familybridgeLogo from "@/assets/familybridge-logo.png.asset.json";
 import betterhelpLogo from "@/assets/betterhelp-logo.png";
 import SEOHead from "@/components/SEOHead";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
@@ -331,9 +331,11 @@ const Sponsors = () => {
                       >
                         <div className="bg-white rounded-xl p-4 shadow-xl">
                           <img 
-                            src={familybridgeLogo} 
+                            src={familybridgeLogo.url}
                             alt="FamilyBridge - Healing Starts with Connection"
-                            className="w-48 h-auto"
+                            className="w-48 h-auto rounded-xl"
+                            width={1024}
+                            height={1024}
                             loading="lazy"
                             decoding="async"
                           />
