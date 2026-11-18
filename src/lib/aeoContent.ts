@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "codependency-and-addiction": {
+    eyebrow: "Article answer",
+    title: "What is codependency in addiction?",
+    answer: "Codependency in addiction is when your well-being becomes tied to managing someone else's using. Your mood, schedule, and sense of worth rise and fall with theirs. It can look like love and loyalty, but rescuing often absorbs consequences that might otherwise move the addicted person toward help. Recovery for the family starts by handing back responsibilities, getting independent support, and reclaiming a life of your own.",
+    bullets: [
+      "You feel responsible for their choices and cannot relax until you know where they are.",
+      "You cancel your own plans, hide consequences, and answer questions about yourself with updates about them.",
+      "Detaching with love means stopping the rescue, not withdrawing affection or safety.",
+      "Family healing can begin even before your loved one accepts help.",
+    ],
+    nextSteps: [
+      "Write down every responsibility you have taken on for your loved one.",
+      "Choose one job to hand back this week and communicate the change calmly once.",
+      "Reclaim one hour for yourself and find support through Al-Anon, Nar-Anon, a family program, or a therapist.",
+    ],
+    links: [
+      { label: "Giving Money to an Addicted Loved One", href: "/blog/giving-money-to-an-addicted-loved-one" },
+      { label: "The Party Wreckers Podcast", href: "/episodes" },
+    ],
+  },
   "believing-an-addicts-promises": {
     eyebrow: "Article answer",
     title: "Why do families keep believing an addict's promises?",

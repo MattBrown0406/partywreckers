@@ -1,4 +1,10 @@
 # Current task
+## Blog: Codependency and Addiction (2026-11-18)
+- [x] Add the complete uploaded article, five FAQs, and an adults-only photo.
+- [x] Register in blog data, answer summaries, sitemap, and prerender routes (285 routes).
+- [x] Verify article navigation, links, canonical, FAQs, and desktop/mobile reading; build OK; left unpublished. Browser checks passed; deployment-output catalog validation requires dist, unavailable in the sandbox.
+
+## Previous tasks
 - [x] Add the November 5 humility-in-recovery article with five FAQs and an adults-only photo.
 - [x] Register the article in the blog list, answer summaries, sitemap, and prerender routes.
 - [x] Verify article links and the desktop and mobile reading experience; leave unpublished (browser checks passed; deployment-output validation unavailable in the sandbox).

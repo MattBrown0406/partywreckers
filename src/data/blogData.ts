@@ -1,3 +1,4 @@
+import blogImageCodependencyAndAddiction from "@/assets/blog-codependency-and-addiction.jpg";
 import blogImageBelievingPromises from "@/assets/blog-believing-an-addicts-promises.jpg";
 import blogImageLeavingRehabEarly from "@/assets/blog-loved-one-wants-to-leave-rehab-early.jpg";
 import blogImageTakingSomeoneToRehab from "@/assets/blog-taking-someone-to-rehab.jpg";
@@ -183,6 +184,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "codependency-and-addiction",
+    title: "Codependency and Addiction: \u201CI Used to Paint\u201D",
+    date: "November 18, 2026",
+    image: blogImageCodependencyAndAddiction,
+    imageAlt: "A mother quietly painting a watercolor of her backyard at her kitchen table, with her phone face down nearby",
+    excerpt: "Codependency and addiction feed each other. Interventionist Matt Brown shares the signs, why rescuing backfires, and how families can get their lives back.",
+    category: "Family Support"
+  },
   {
     id: "believing-an-addicts-promises",
     title: "\u201CThis Time Is Different\u201D: Why Families Keep Believing an Addict's Promises",
