@@ -319,6 +319,26 @@ export const glossaryTerms = [
 ];
 
 export const articleAnswerSummaries: Record<string, AnswerBlockContent> = {
+  "grandparents-enabling-addiction": {
+    eyebrow: "Article answer",
+    title: "What does grandparents enabling addiction look like?",
+    answer: "Grandparents enabling addiction usually looks like quiet, private rescue: when parents hold a boundary, a grandparent softens the consequences with money, a place to stay, a ride, or a secret. It comes from love, but it builds a second support system that keeps addiction comfortable and makes the parents' boundaries meaningless. The fix is to bring grandparents into the plan instead of around it.",
+    bullets: [
+      "Small gifts like grocery money or paying a phone bill free up resources for using.",
+      "Addiction targets the softest landing spot in the family, often a grandparent.",
+      "Secret help undercuts parents' boundaries and divides the family.",
+      "Grandparents can help pay for treatment, write an intervention letter, or attend family programs instead.",
+    ],
+    nextSteps: [
+      "Talk with grandparents in person, without blame, and explain why the boundary matters.",
+      "Give them a simple script for saying no with love.",
+      "Agree as adults to share every call, visit, or request for money.",
+    ],
+    links: [
+      { label: "Enabling vs. Supporting: Setting Boundaries", href: "/blog/enabling-vs-supporting-boundaries" },
+      { label: "The Party Wreckers Podcast", href: "/episodes" },
+    ],
+  },
   "codependency-and-addiction": {
     eyebrow: "Article answer",
     title: "What is codependency in addiction?",

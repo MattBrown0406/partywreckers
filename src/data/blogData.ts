@@ -1,3 +1,4 @@
+import blogImageGrandparentsEnabling from "@/assets/blog-grandparents-enabling-addiction.jpg";
 import blogImageCodependencyAndAddiction from "@/assets/blog-codependency-and-addiction.jpg";
 import blogImageBelievingPromises from "@/assets/blog-believing-an-addicts-promises.jpg";
 import blogImageLeavingRehabEarly from "@/assets/blog-loved-one-wants-to-leave-rehab-early.jpg";
@@ -184,6 +185,15 @@ export interface BlogArticle {
 }
 
 export const blogArticles: BlogArticle[] = [
+  {
+    id: "grandparents-enabling-addiction",
+    title: "Grandparents Enabling Addiction: When Grandma Is the Back Door",
+    date: "November 20, 2026",
+    image: blogImageGrandparentsEnabling,
+    imageAlt: "A worried grandmother sitting in a dim living room armchair holding cash and her purse, with the back door ajar behind her",
+    excerpt: "When parents set boundaries and Grandma quietly opens the back door, addiction wins. Interventionist Matt Brown on grandparents enabling addiction and what to do.",
+    category: "Family Support"
+  },
   {
     id: "codependency-and-addiction",
     title: "Codependency and Addiction: \u201CI Used to Paint\u201D",
